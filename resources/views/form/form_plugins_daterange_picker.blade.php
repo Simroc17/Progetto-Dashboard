@@ -9,38 +9,9 @@
 @section('content')
 <main id="js-page-content" role="main" class="page-content">
 
-    @component('common-components.breadcrumb')
-    @slot('item1') Form Plugins @endslot
-    @slot('item2') Date Range Picker @endslot
-    @endcomponent
-    <div class="subheader">
-        <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-credit-card-front'></i> Date Range Picker<sup class='badge badge-primary fw-500'>ADDON</sup>
-            <small>
-                A JavaScript component for choosing date ranges, dates and times.
-            </small>
-        </h1>
-    </div>
-    <div class="alert alert-primary">
-        <div class="d-flex flex-start w-100">
-            <div class="mr-2 hidden-md-down">
-                <span class="icon-stack icon-stack-lg">
-                    <i class="base base-6 icon-stack-3x opacity-100 color-primary-500"></i>
-                    <i class="base base-10 icon-stack-2x opacity-100 color-primary-300 fa-flip-vertical"></i>
-                    <i class="ni ni-blog-read icon-stack-1x opacity-100 color-white"></i>
-                </span>
-            </div>
-            <div class="d-flex flex-fill">
-                <div class="flex-fill">
-                    <span class="h5">About</span>
-                    <p>This date range picker component creates a dropdown menu from which a user can select a range of dates. I created it while building the UI for Improvely, which needed a way to select date ranges for reports. Features include limiting the selectable date range, localizable strings and date formats, a single date picker mode, a time picker, and predefined date ranges.</p>
-                    <p class="m-0">
-                        Find in-depth, guidelines, tutorials and more on Addon's <a href="http://www.daterangepicker.com/" target="_blank">Official Documentation</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+    
+   
+   
     <div class="row">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
@@ -56,9 +27,7 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <div class="panel-tag">
-                            Below you will find various date picker examples which you can use for your project
-                        </div>
+                        
                         <div class="form-group row">
                             <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Minimum Setup</label>
                             <div class="col-12 col-lg-6 ">
@@ -78,32 +47,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Single Date Picker</label>
-                            <div class="col-12 col-lg-6">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" value="07/17/2020" id="datepicker-3">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text fs-xl">
-                                            <i class="fal fa-calendar-alt"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <span class="help-block">Enable clear and today helper buttons</span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Predefined Ranges</label>
-                            <div class="col-12 col-lg-6">
-                                <input type="text" class="form-control " value="07/17/2020" id="datepicker-4">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Advanced Options</label>
-                            <div class="col-12 col-lg-6">
-                                <input type="text" class="form-control" id="custom-range">
-                            </div>
-                        </div>
+                        
+                       
+                       
                         <div class="form-group row">
                             <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Modal Demos</label>
                             <div class="col-12 col-lg-6">
