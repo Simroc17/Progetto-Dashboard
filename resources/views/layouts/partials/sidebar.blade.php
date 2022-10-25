@@ -4,7 +4,7 @@ $menuJson = '{
       {
         "title": "Application Intel",
         "filterTag": "application intel",
-        "icon": "fal fa-info-circle",
+        "icon": "",
         "i18n": "nav.application_intel",
         "child": [
           
@@ -23,7 +23,7 @@ $menuJson = '{
       {
         "title": "Welcome",
         "link": "/laravel",
-        "icon": "fal fa-graduation-cap",
+        "icon": "",
         "filterTag": "Welcome",
         "i18n": "nav.laravel"
       },
@@ -39,7 +39,7 @@ $menuJson = '{
      {
         "title": "Datatables",
         "filterTag": "datatables datagrid",
-        "icon": "fal fa-table",
+        "icon": "",
         "i18n": "nav.datatables",
         "spanText": "235 KB",
         "spanClass": "dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top",
@@ -83,7 +83,7 @@ $menuJson = '{
       {
         "title": "Statistics",
         "filterTag": "statistics chart graphs",
-        "icon": "fal fa-chart-pie",
+        "icon": "",
         "i18n": "nav.statistics",
         "child": 
          [
@@ -99,27 +99,11 @@ $menuJson = '{
         
       },
       
-      {
-        "title": "Form Plugins",
-        "filterTag": "form plugins",
-        "icon": "fal fa-credit-card-front",
-        "i18n": "nav.form_plugins",
-        "child": [
-         
-         
-          {
-            "link": "/form/form_plugins_daterange_picker",
-            "title": "Date Range Picker",
-            "filterTag": "form plugins date range picker",
-            "i18n": "nav.form_plugins_date_range_picker"
-          }
-          
-        ]
-      },
+     
       {
         "title": "Miscellaneous",
         "filterTag": "miscellaneous",
-        "icon": "fal fa-globe",
+        "icon": "",
         "i18n": "nav.miscellaneous",
         "child": [
          
@@ -137,7 +121,7 @@ $menuJson = '{
       {
         "title": "Page Views",
         "filterTag": "pages",
-        "icon": "fal fa-plus-circle",
+        "icon": "",
         "i18n": "nav.pages",
         "child": [
           

@@ -7,9 +7,14 @@
 @stop
 
 @section('content')
+
 <main id="js-page-content" role="main" class="page-content">
 
-    
+<div class="subheader">
+        <h1 class="subheader-title">
+          Ricerca Promozioni
+        </h1>
+    </div>
    
    
     <div class="row">
@@ -17,23 +22,22 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Datepicker Range Picker<span class="fw-300"><i>Examples</i></span>
-                    </h2>
+                        Filtra per risultati                    </h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                        <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                        <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                        <!-- <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                        <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button> -->
                     </div>
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
                         
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Minimum Setup</label>
                             <div class="col-12 col-lg-6 ">
                                 <input type="text" class="form-control" id="datepicker-1" placeholder="Select date" value="01/01/2018 - 01/15/2018">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group row">
                             <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Date Range Picker With Times</label>
                             <div class="col-12 col-lg-6">
@@ -50,14 +54,14 @@
                         
                        
                        
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Modal Demos</label>
                             <div class="col-12 col-lg-6">
                                 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#default-example-modal">Show inside datepicker</a>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- modal -->
-                        <div class="modal fade" id="default-example-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <!-- <div class="modal fade" id="default-example-modal" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -96,7 +100,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- modal end -->
                     </div>
                 </div>

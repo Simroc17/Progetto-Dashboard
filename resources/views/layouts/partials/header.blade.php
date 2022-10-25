@@ -57,13 +57,13 @@ $profileJson='{ "profileList":[{"dataAction":"app-reset","i18n" : "drpdwn.reset_
             </a>
         </div>
         <!-- app settings -->
-        <div class="hidden-md-down">
+        <!-- <div class="hidden-md-down">
             <a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-settings">
                 <i class="fal fa-cog"></i>
             </a>
-        </div>
+        </div> -->
         <!-- app shortcuts -->
-        <div>
+        <!-- <div>
             <a href="#" class="header-icon" data-toggle="dropdown" title="My Apps">
                 <i class="fal fa-cube"></i>
             </a>
@@ -123,7 +123,7 @@ $profileJson='{ "profileList":[{"dataAction":"app-reset","i18n" : "drpdwn.reset_
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- app message -->
         <!-- <a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-messenger">
             <i class="fal fa-globe"></i>
@@ -437,7 +437,7 @@ $profileJson='{ "profileList":[{"dataAction":"app-reset","i18n" : "drpdwn.reset_
         <!-- app user menu -->
         <div>
             <a href="#" data-toggle="dropdown" title="drlantern@gotbootstrap.com" class="header-icon d-flex align-items-center justify-content-center ml-2">
-                <img src="{{ URL::asset('/img/demo/avatars/avatar-admin.png') }}" class="profile-image rounded-circle" alt="Dr. Codex Lantern">
+               Logout
             </a>
             <div class="dropdown-menu dropdown-menu-animated dropdown-lg">
                 <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
