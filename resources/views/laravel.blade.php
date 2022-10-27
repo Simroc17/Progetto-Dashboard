@@ -39,7 +39,7 @@
                                 <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Date Range Picker With Times</label>
                                 <div class="col-12 col-lg-6">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Select date" id="datepicker-2">
+                                        <input onchange="selezionaData()" type="text" class="form-control" placeholder="Select date" id="datepicker-2">
                                         <div class="input-group-append">
                                             <span class="input-group-text fs-xl">
                                                 <i class="fal fa-calendar"></i>
@@ -51,22 +51,32 @@
 
 
                             <div class="row">
-                                <div class="col-6">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                <div class="col-4">
+
+                                    <select id="s1" onchange="selezionaValore()" class="form-select " style="height: 35px; border-radius: 5px;">
+                                        <option selected>Seleziona un'opzione</option>
+                                        @foreach ($markets as $market )
+                                        
+                                        <option value="{{$market->id}}">
+                                            {{$market->nome}}
+                                        </option>
+                                        
+                                        @endforeach
                                     </select>
                                 </div>
-                                <div class="col-6">
-                                    <select class="form-select" aria-label="Default select example">
+                                <div class="col-4">
+                                    <select id="s2" class="form-select" style="height: 35px; border-radius: 5px;" aria-label="Default select example">
                                         <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        @foreach ($marketsAll as $market )
+                                        <option value="{{$market->id_parent}}" style="display:none;">
+                                            {{$market->nome}}
+                                        </option>
+
+                                        @endforeach
+
                                     </select>
                                 </div>
+                                <button class="btn btn-primary col-1" type="submit">cerca</button>
                             </div>
                         </form>
 
@@ -87,7 +97,7 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                    Promozioni attive nell'intervallo....
+                        Promozioni attive nell'intervallo....
                     </h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -97,121 +107,56 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        
+
                         <!-- datatable start -->
                         <div id="dt-basic-example_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                           
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100 dataTable dtr-inline" role="grid" aria-describedby="dt-basic-example_info" style="width: 1546px;">
                                         <thead class="bg-primary-600">
                                             <tr role="row" style="background-color: red;">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 261px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 385px;" aria-label="Position: activate to sort column ascending">Position</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office: activate to sort column ascending">Office</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 105px;" aria-label="Age: activate to sort column ascending">Age</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 183px;" aria-label="Start date: activate to sort column ascending">Start date</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 157px;" aria-label="Salary: activate to sort column ascending">Salary</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 261px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Promo</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 385px;" aria-label="Position: activate to sort column ascending">Descrizione</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office: activate to sort column ascending">Data inizio</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 105px;" aria-label="Age: activate to sort column ascending">Data fine</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 183px;" aria-label="Start date: activate to sort column ascending">Age</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 157px;" aria-label="Salary: activate to sort column ascending">Age</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tbody">
+
+                                            @if (count($arrayPromo)>0)
+                                            @foreach ($arrayPromo as $promozione )
+                                            <tr>
+                                                <td>{{ $promozione['nome'] }}</td>
+                                                <td>{{ $promozione['descrizione'] }}</td>
+                                                <td>{{ $promozione['date_start'] }}</td>
+                                                <td>{{ $promozione['date_end'] }}</td>
+                                                <td>cancellare</td>
+                                                <td>cancellare</td>
+                                            </tr>
+
+                                            @endforeach
+
+                                            @endif
 
 
-                                            <tr role="row" class="odd">
-                                                <td class="dtr-control sorting_1" tabindex="0">Airi Satou</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>33</td>
-                                                <td>2008/11/28</td>
-                                                <td>$162,700</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1 dtr-control">Angelica Ramos</td>
-                                                <td>Chief Executive Officer (CEO)</td>
-                                                <td>London</td>
-                                                <td>47</td>
-                                                <td>2009/10/09</td>
-                                                <td>$1,200,000</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="dtr-control sorting_1" tabindex="0">Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
-                                                <td>2009/01/12</td>
-                                                <td>$86,000</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1 dtr-control">Bradley Greer</td>
-                                                <td>Software Engineer</td>
-                                                <td>London</td>
-                                                <td>41</td>
-                                                <td>2012/10/13</td>
-                                                <td>$132,000</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1 dtr-control">Brenden Wagner</td>
-                                                <td>Software Engineer</td>
-                                                <td>San Francisco</td>
-                                                <td>28</td>
-                                                <td>2011/06/07</td>
-                                                <td>$206,850</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="dtr-control sorting_1" tabindex="0">Brielle Williamson</td>
-                                                <td>Integration Specialist</td>
-                                                <td>New York</td>
-                                                <td>61</td>
-                                                <td>2012/12/02</td>
-                                                <td>$372,000</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1 dtr-control">Bruno Nash</td>
-                                                <td>Software Engineer</td>
-                                                <td>London</td>
-                                                <td>38</td>
-                                                <td>2011/05/03</td>
-                                                <td>$163,500</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1 dtr-control">Caesar Vance</td>
-                                                <td>Pre-Sales Support</td>
-                                                <td>New York</td>
-                                                <td>21</td>
-                                                <td>2011/12/12</td>
-                                                <td>$106,450</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1 dtr-control">Cara Stevens</td>
-                                                <td>Sales Assistant</td>
-                                                <td>New York</td>
-                                                <td>46</td>
-                                                <td>2011/12/06</td>
-                                                <td>$145,600</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="dtr-control sorting_1" tabindex="0">Cedric Kelly</td>
-                                                <td>Senior Javascript Developer</td>
-                                                <td>Edinburgh</td>
-                                                <td>22</td>
-                                                <td>2012/03/29</td>
-                                                <td>$433,060</td>
-                                            </tr>
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th rowspan="1" colspan="1">Name</th>
-                                                <th rowspan="1" colspan="1">Position</th>
-                                                <th rowspan="1" colspan="1">Office</th>
-                                                <th rowspan="1" colspan="1">Age</th>
-                                                <th rowspan="1" colspan="1">Start date</th>
-                                                <th rowspan="1" colspan="1">Salary</th>
+                                                <th rowspan="1" colspan="1">Promo</th>
+                                                <th rowspan="1" colspan="1">Descrizione</th>
+                                                <th rowspan="1" colspan="1">Data inizio</th>
+                                                <th rowspan="1" colspan="1">Data fine</th>
+                                                <th rowspan="1" colspan="1">age</th>
+                                                <th rowspan="1" colspan="1">age</th>
                                             </tr>
                                         </tfoot>
                                     </table>
                                 </div>
                             </div>
-                           
+
                         </div>
                         <!-- datatable end -->
                     </div>
@@ -231,9 +176,86 @@
 <script src="{{ URL::asset('js/dependency/moment/moment.js') }}"></script>
 <script src="{{ URL::asset('js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js') }}"></script>
 <script>
+    
+    var promozione = <?php echo json_encode($promozioni) ?>;
+    console.log(promozione);
+
+    function selezionaValore() {
+        var valoreSelezionato = document.getElementById("s1").value;
+
+        var secondoValore = document.getElementById("s2");
+        //console.log(secondoValore);
+        for (var i = 0; i < secondoValore.length; i++) {
+            var option = secondoValore.options[i];
+            option.style.display = "none";
+            if (option.value == valoreSelezionato) {
+                option.style.display = "block";
+            }
+        }
+    }
+
+    function selezionaData() {
+        var dataSelezionata = document.getElementById("datepicker-2").value;
+        console.log(dataSelezionata);
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        $('#s1').on('change', function() {
+            var category = $(this).val();
+            $.ajax({
+                url: "/{filename}",
+                type: "GET",
+                data: {
+                    'category': category
+                },
+                success: function(data) {
+                    var promozioni = data.promozioni;
+                    var html = '';
+                    if (promozioni.length > 0) {
+                        for (let i = 0; i < promozioni.length; i++) {
+                            html += '<tr>\
+                                 <td> ' + promozioni[i]['nome'] + ' </td>\
+                                 <td> ' + promozioni[i]['descrizione'] + ' </td>\
+                                 <td> ' + promozioni[i]['date_start'] + ' </td>\
+                                 <td> ' + promozioni[i]['date_end'] + ' </td>\
+                                 <td> cancellare </td>\
+                                 <td> cancellare </td>\
+                                 </tr>';
+                        }
+                    } else {
+                        html += '<tr>\
+                                 <td> Nessuna promozione trovata</td>\
+                                 </tr>';
+                    }
+
+                    $("#tbody").html(html);
+
+                }
+            });
+        });
+    });
+</script>
+<script>
     $(document).ready(function() {
 
+      
 
+
+        // $('#s1').mouseup(function() {
+        //     console.log("CIAO")
+        // for (var i = 0; i <nomeNegozio.length; i++) {
+        //     if (nomeNegozio[i] == 15){
+        //     console.log("OK");
+        // }
+        // }
+
+        // var open = $(this).data("isopen");
+        // if (open) {
+        //     console.log("ciao")
+        // }
+        // $(this).data("isopen", !open);
+        // });
 
         $('#datepicker-1, #datepicker-modal-2').daterangepicker({
             opens: 'left'
@@ -243,10 +265,10 @@
 
         $('#datepicker-2, #datepicker-modal-3').daterangepicker({
             timePicker: true,
-            startDate: moment().startOf('hour'),
-            endDate: moment().startOf('hour').add(32, 'hour'),
+            startDate: moment(),
+            endDate: moment(),
             locale: {
-                format: 'M/DD hh:mm A'
+                format: 'YYYY-M-DD'
             }
         });
 
@@ -363,20 +385,21 @@
                     titleAttr: 'Generate CSV',
                     className: 'btn-outline-primary btn-sm mr-1'
                 },
-                {
-                    extend: 'copyHtml5',
-                    text: 'Copy',
-                    titleAttr: 'Copy to clipboard',
-                    className: 'btn-outline-primary btn-sm mr-1'
-                },
-                {
-                    extend: 'print',
-                    text: 'Print',
-                    titleAttr: 'Print Table',
-                    className: 'btn-outline-primary btn-sm'
-                }
+                // {
+                //     extend: 'copyHtml5',
+                //     text: 'Copy',
+                //     titleAttr: 'Copy to clipboard',
+                //     className: 'btn-outline-primary btn-sm mr-1'
+                // },
+                // {
+                //     extend: 'print',
+                //     text: 'Print',
+                //     titleAttr: 'Print Table',
+                //     className: 'btn-outline-primary btn-sm'
+                // }
             ]
         });
+
 
 
     });

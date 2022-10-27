@@ -22,7 +22,7 @@ $menuJson = '{
       
       {
         "title": "Welcome",
-        "link": "/laravel",
+        "link": "/dati",
         "icon": "",
         "filterTag": "Welcome",
         "i18n": "nav.laravel"
