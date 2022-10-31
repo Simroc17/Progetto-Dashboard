@@ -107,7 +107,7 @@
                         
                         <table id="test-list" style="display: none;" class ="table table-bordered table-hover table-striped w-100">
                             <thead>
-                                <tr role="row" style="background-color: red;">
+                                <tr class="text-white" role="row" style="background-color: red;">
                                     <th  tabindex="0"  rowspan="1" colspan="1" style="width: 261px;"  >Promo</th>
                                     <th  tabindex="0"  rowspan="1" colspan="1" style="width: 385px;" aria-label="Position: activate to sort column ascending">Descrizione</th>
                                     <th  tabindex="0"  rowspan="1" colspan="1" style="width: 197px;" aria-label="Office: activate to sort column ascending">Data inizio</th>
