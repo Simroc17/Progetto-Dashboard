@@ -108,10 +108,10 @@
                         <table id="test-list" style="display: none;" class ="table table-bordered table-hover table-striped w-100">
                             <thead>
                                 <tr class="text-white" role="row" style="background-color: red;">
-                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 261px;"  >Promo</th>
-                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 385px;" aria-label="Position: activate to sort column ascending">Descrizione</th>
-                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 197px;" aria-label="Office: activate to sort column ascending">Data inizio</th>
-                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 105px;" aria-label="Age: activate to sort column ascending">Data fine</th>
+                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 30%;"  >Promo</th>
+                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 40%;" aria-label="Position: activate to sort column ascending">Descrizione</th>
+                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 15%;" aria-label="Office: activate to sort column ascending">Data inizio</th>
+                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 15%;" aria-label="Age: activate to sort column ascending">Data fine</th>
                                     
                                 </tr>
                             </thead>
