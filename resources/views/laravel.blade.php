@@ -76,15 +76,9 @@
 
                                     </select>
                                 </div>
-                                <button class="btn btn-primary col-1" type="submit">cerca</button>
+                                <button class="btn btn-primary col-1" type="submit" style="background-color: red; border-color: red;">cerca</button>
                             </div>
                         </form>
-
-
-
-
-
-
                     </div>
                 </div>
 
@@ -108,77 +102,28 @@
                 <div class="panel-container show">
                     <div class="panel-content" id="users">
                         <input class="search" placeholder="Search" />
-                        <button class="sort" data-sort="nome">
-                            Sort by name
+                        <button class="sort " data-sort="nome">
+                            Ordina per data
                         </button>
                         <!-- datatable start -->
-                        <!-- <div id="dt-basic-example_wrapper0" class="dataTables_wrapper dt-bootstrap4">
-
-                            <div class="row">
-                                <div class="col-sm-12">
-
-                                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100 dataTable dtr-inline" role="grid" aria-describedby="dt-basic-example_info" style="width: 1546px;">
-                                        <div class="input-group">
-                                            <thead class="bg-primary-600">
-                                                <tr role="row" style="background-color: red;">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 261px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Promo</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 385px;" aria-label="Position: activate to sort column ascending">Descrizione</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office: activate to sort column ascending">Data inizio</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 105px;" aria-label="Age: activate to sort column ascending">Data fine</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 183px;" aria-label="Start date: activate to sort column ascending">Age</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 157px;" aria-label="Salary: activate to sort column ascending">Age</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tbody">
-
-                                                @if (count($arrayPromo)>0)
-                                                @foreach ($arrayPromo as $promozione )
-                                                <tr>
-                                                    <td>{{ $promozione['nome'] }}</td>
-                                                    <td>{{ $promozione['descrizione'] }}</td>
-                                                    <td>{{ $promozione['date_start'] }}</td>
-                                                    <td>{{ $promozione['date_end'] }}</td>
-                                                    <td>cancellare</td>
-                                                    <td>cancellare</td>
-                                                </tr>
-
-                                                @endforeach
-
-                                                @endif
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th rowspan="1" colspan="1">Promo</th>
-                                                    <th rowspan="1" colspan="1">Descrizione</th>
-                                                    <th rowspan="1" colspan="1">Data inizio</th>
-                                                    <th rowspan="1" colspan="1">Data fine</th>
-                                                    <th rowspan="1" colspan="1">age</th>
-                                                    <th rowspan="1" colspan="1">age</th>
-                                                </tr>
-                                            </tfoot>
-                                        </div>
-                                    </table>
-                                </div>
-                            </div>
-                        </div> -->
-                        <table>
+                        
+                        <table id="test-list" style="display: none;" class ="table table-bordered table-hover table-striped w-100">
                             <thead>
                                 <tr role="row" style="background-color: red;">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 261px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Promo</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 385px;" aria-label="Position: activate to sort column ascending">Descrizione</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office: activate to sort column ascending">Data inizio</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 105px;" aria-label="Age: activate to sort column ascending">Data fine</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 183px;" aria-label="Start date: activate to sort column ascending">Age</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 157px;" aria-label="Salary: activate to sort column ascending">Age</th>
+                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 261px;"  >Promo</th>
+                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 385px;" aria-label="Position: activate to sort column ascending">Descrizione</th>
+                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 197px;" aria-label="Office: activate to sort column ascending">Data inizio</th>
+                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 105px;" aria-label="Age: activate to sort column ascending">Data fine</th>
+                                    
                                 </tr>
                             </thead>
-                            <tbody id="tbody" class="list">
+                            <tbody id="tbody" class="list" >
                                 @if (count($arrayPromo)>0)
                                 @foreach ($arrayPromo as $promozione )
                                 <tr>
                                     <td class="name">{{ $promozione['nome'] }}</td>
-                                    <td>{{ $promozione['descrizione'] }}</td>
-                                    <td>{{ $promozione['date_start'] }}</td>
+                                    <td class="descrizione">{{ $promozione['descrizione'] }}</td>
+                                    <td >{{ $promozione['date_start'] }}</td>
                                     <td>{{ $promozione['date_end'] }}</td>
                                     <td>cancellare</td>
                                     <td>cancellare</td>
@@ -188,6 +133,7 @@
 
                                 @endif
                             </tbody>
+                            <tfoot class="pagination"></tfoot>
                         </table>
                         <!-- datatable end -->
                     </div>
@@ -208,7 +154,7 @@
 @stop
 
 @section('footerScript')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js" referrerpolicy="no-referrer"></script>
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
 
@@ -238,18 +184,36 @@
         var dataSelezionata = document.getElementById("datepicker-2").value;
         console.log(dataSelezionata);
     }
-
+    // Prova ricerca
     var options = {
-        valueNames: ['name']
+        valueNames: ['name', 'descrizione']
     };
 
     var userList = new List('users', options);
+    // Prova Pagination
+    var monkeyList = new List('test-list', {
+        valueNames: ['name'],
+        page: 10,
+        pagination: true
+    });
 </script>
 <script>
     $(document).ready(function() {
+        // Funzione calendario
+        $('#datepicker-2, #datepicker-modal-3').daterangepicker({
+            timePicker: true,
+            startDate: moment(),
+            endDate: moment(),
+            locale: {
+                format: 'YYYY-M-DD'
+            }
+        });
 
+        var tabella = document.getElementById('test-list');
+
+        // Funzione Ajax al change dell'option
         $('#s1').on('change', function() {
-
+            tabella.style.display = 'block';
             var category = $(this).val();
             $.ajax({
                 url: "/{filename}",
@@ -265,11 +229,9 @@
                         for (let i = 0; i < promozioni.length; i++) {
                             html += '`<tr>\
                                  <td class="nome"> ' + promozioni[i]['nome'] + ' </td>\
-                                 <td> ' + promozioni[i]['descrizione'] + ' </td>\
-                                 <td> ' + promozioni[i]['date_start'] + ' </td>\
+                                 <td class="descrizione"> ' + promozioni[i]['descrizione'] + ' </td>\
+                                 <td class="date_start"> ' + promozioni[i]['date_start'] + ' </td>\
                                  <td> ' + promozioni[i]['date_end'] + ' </td>\
-                                 <td> cancellare </td>\
-                                 <td> cancellare </td>\
                             </tr>`'
                         }
                     } else {
@@ -279,251 +241,94 @@
                     }
 
                     $("#tbody").html(html);
+                    // Ricerca
                     var options = {
-                        valueNames: ['nome']
+                        valueNames: ['nome', 'descrizione']
                     };
 
                     var userList = new List('users', options);
+                    //Prova pagination
+                    var monkeyList = new List('test-list', {
+                        valueNames: ['name'],
+                        page: 10,
+                        pagination: true
+                    });
                 }
             });
         });
     });
 </script>
-<script>
-    $(document).ready(function() {
 
+<style>
+    .pagination li a {
 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        padding: 0;
+        margin: 0 3px;
+        border-radius: 50% !important;
+        width: 36px;
+        height: 36px;
+        font-size: 0.875rem;
+        background-color: #5e72e4;
+    }
 
+    .sort {
+        margin: 0 !important;
+        padding: 8px 30px;
+        border-radius: 6px;
+        border: none;
+        display: inline-block;
+        color: white;
+        text-decoration: none;
+        background-color: red;
+    }
 
-        // $('#s1').mouseup(function() {
-        //     console.log("CIAO")
-        // for (var i = 0; i <nomeNegozio.length; i++) {
-        //     if (nomeNegozio[i] == 15){
-        //     console.log("OK");
-        // }
-        // }
+    .sort:hover {
+        text-decoration: none;
+        background-color: #ff5050;
+    }
 
-        // var open = $(this).data("isopen");
-        // if (open) {
-        //     console.log("ciao")
-        // }
-        // $(this).data("isopen", !open);
-        // });
+    .sort:focus {
+        outline: none;
+    }
 
-        $('#datepicker-1, #datepicker-modal-2').daterangepicker({
-            opens: 'left'
-        }, function(start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-        });
+    .sort:after {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        content: "";
+        position: relative;
+        top: -10px;
+        right: -5px;
+    }
 
-        $('#datepicker-2, #datepicker-modal-3').daterangepicker({
-            timePicker: true,
-            startDate: moment(),
-            endDate: moment(),
-            locale: {
-                format: 'YYYY-M-DD'
-            }
-        });
+    .sort.asc:after {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #fff;
+        content: "";
+        position: relative;
+        top: 13px;
+        right: -5px;
+    }
 
-        $('#datepicker-3').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true
-        });
-
-        $(function() {
-
-            var start = moment().subtract(29, 'days');
-            var end = moment();
-
-            function cb(start, end) {
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-            }
-
-            $('#datepicker-4').daterangepicker({
-                startDate: start,
-                endDate: end,
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                }
-            }, cb);
-
-            cb(start, end);
-
-        });
-
-        $('#custom-range').daterangepicker({
-            "showDropdowns": true,
-            "showWeekNumbers": true,
-            "showISOWeekNumbers": true,
-            "timePicker": true,
-            "timePicker24Hour": true,
-            "timePickerSeconds": true,
-            "autoApply": true,
-            "maxSpan": {
-                "days": 7
-            },
-            ranges: {
-                'Today': [moment(), moment()],
-                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-            },
-            "alwaysShowCalendars": true,
-            "startDate": "05/12/2019",
-            "endDate": "05/18/2019",
-            "applyButtonClasses": "btn-default shadow-0",
-            "cancelClass": "btn-success shadow-0"
-        }, function(start, end, label) {
-            console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-        });
-
-        $('#dt-basic-example').dataTable({
-
-            responsive: true,
-            lengthChange: false,
-            dom:
-                /*  --- Layout Structure
-                    --- Options
-                    l   -   length changing input control
-                    f   -   filtering input
-                    t   -   The table!
-                    i   -   Table information summary
-                    p   -   pagination control
-                    r   -   processing display element
-                    B   -   buttons
-                    R   -   ColReorder
-                    S   -   Select
-
-                    --- Markup
-                    < and >             - div element
-                    <"class" and >      - div with a class
-                    <"#id" and >        - div with an ID
-                    <"#id.class" and >  - div with an ID and a class
-
-                    --- Further reading
-                    https://datatables.net/reference/option/dom
-                    --------------------------------------
-                 */
-                "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            buttons: [
-                /*{
-                    extend:    'colvis',
-                    text:      'Column Visibility',
-                    titleAttr: 'Col visibility',
-                    className: 'mr-sm-3'
-                },*/
-                {
-                    extend: 'pdfHtml5',
-                    text: 'PDF',
-                    titleAttr: 'Generate PDF',
-                    className: 'btn-outline-danger btn-sm mr-1'
-                },
-                {
-                    extend: 'excelHtml5',
-                    text: 'Excel',
-                    titleAttr: 'Generate Excel',
-                    className: 'btn-outline-success btn-sm mr-1'
-                },
-                {
-                    extend: 'csvHtml5',
-                    text: 'CSV',
-                    titleAttr: 'Generate CSV',
-                    className: 'btn-outline-primary btn-sm mr-1'
-                },
-                // {
-                //     extend: 'copyHtml5',
-                //     text: 'Copy',
-                //     titleAttr: 'Copy to clipboard',
-                //     className: 'btn-outline-primary btn-sm mr-1'
-                // },
-                // {
-                //     extend: 'print',
-                //     text: 'Print',
-                //     titleAttr: 'Print Table',
-                //     className: 'btn-outline-primary btn-sm'
-                // }
-            ]
-        });
-        $('#dt-basic-example1').dataTable({
-            responsive: true,
-            lengthChange: false,
-            dom:
-                /*  --- Layout Structure
-                    --- Options
-                    l   -   length changing input control
-                    f   -   filtering input
-                    t   -   The table!
-                    i   -   Table information summary
-                    p   -   pagination control
-                    r   -   processing display element
-                    B   -   buttons
-                    R   -   ColReorder
-                    S   -   Select
-
-                    --- Markup
-                    < and >             - div element
-                    <"class" and >      - div with a class
-                    <"#id" and >        - div with an ID
-                    <"#id.class" and >  - div with an ID and a class
-
-                    --- Further reading
-                    https://datatables.net/reference/option/dom
-                    --------------------------------------
-                 */
-                "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            buttons: [
-                /*{
-                    extend:    'colvis',
-                    text:      'Column Visibility',
-                    titleAttr: 'Col visibility',
-                    className: 'mr-sm-3'
-                },*/
-                {
-                    extend: 'pdfHtml5',
-                    text: 'PDF',
-                    titleAttr: 'Generate PDF',
-                    className: 'btn-outline-danger btn-sm mr-1'
-                },
-                {
-                    extend: 'excelHtml5',
-                    text: 'Excel',
-                    titleAttr: 'Generate Excel',
-                    className: 'btn-outline-success btn-sm mr-1'
-                },
-                {
-                    extend: 'csvHtml5',
-                    text: 'CSV',
-                    titleAttr: 'Generate CSV',
-                    className: 'btn-outline-primary btn-sm mr-1'
-                },
-                // {
-                //     extend: 'copyHtml5',
-                //     text: 'Copy',
-                //     titleAttr: 'Copy to clipboard',
-                //     className: 'btn-outline-primary btn-sm mr-1'
-                // },
-                // {
-                //     extend: 'print',
-                //     text: 'Print',
-                //     titleAttr: 'Print Table',
-                //     className: 'btn-outline-primary btn-sm'
-                // }
-            ]
-        });
-
-
-
-    });
-</script>
+    .sort.desc:after {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #fff;
+        content: "";
+        position: relative;
+        top: -10px;
+        right: -5px;
+    }
+</style>
 @stop
