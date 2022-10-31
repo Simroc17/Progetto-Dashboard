@@ -41,14 +41,15 @@ $profileJson='{ "profileList":[{"dataAction":"app-reset","i18n" : "drpdwn.reset_
             <i class="ni ni-menu"></i>
         </a>
     </div>
-    <div class="search">
+    <!-- <div class="search">
         <form class="app-forms hidden-xs-down" role="search" action="/#" autocomplete="off">
             <input type="text" id="search-field" placeholder="Search for anything" class="form-control" tabindex="1">
             <a href="#" onclick="return false;" class="btn-danger btn-search-close js-waves-off d-none" data-action="toggle" data-class="mobile-search-on">
                 <i class="fal fa-times"></i>
             </a>
         </form>
-    </div>
+    </div> -->
+    <div> <img src="./volantinopiu_logo.png" alt="" style="width: 157px;/* margin-block: auto; *//* display: block; */max-width: 191px;height: 39px;"> </div>
     <div class="ml-auto d-flex">
         <!-- activate app search icon (mobile) -->
         <div class="hidden-sm-up">

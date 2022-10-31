@@ -56,129 +56,18 @@ $menuJson = '{
             "title": "Buttons",
             "filterTag": "datatables datagrid buttons",
             "i18n": "nav.datatables_buttons"
-          },
-          {
-            "link": "/datatables/datatables_export",
-            "title": "Export",
-            "filterTag": "datatables datagrid export tables pdf excel print csv",
-            "i18n": "nav.datatables_export"
-          },
-         
-          {
-            "link": "/datatables/datatables_columnfilter",
-            "title": "ColumnFilter",
-            "filterTag": "datatables datagrid columnfilter",
-            "i18n": "nav.datatables_columnfilter"
-          },
-        
-          {
-            "link": "/datatables/datatables_fixedheader",
-            "title": "FixedHeader",
-            "filterTag": "datatables datagrid fixedheader",
-            "i18n": "nav.datatables_fixedheader"
           }
-         
-        ]
-      },
-      {
-        "title": "Statistics",
-        "filterTag": "statistics chart graphs",
-        "icon": "",
-        "i18n": "nav.statistics",
-        "child": 
-         [
-          {
-            "link": "/statistics/statistics_chartjs",
-            "title": "Chart.js",
-            "filterTag": "statistics chart graphs chart.js bar pie",
-            "i18n": "nav.statistics_chart.js",
-            "spanText": "205 KB",
-            "spanClass": "dl-ref label bg-primary-500 ml-2"
-          }
-         ]
-        
-      },
-      
-     
-      {
-        "title": "Miscellaneous",
-        "filterTag": "miscellaneous",
-        "icon": "",
-        "i18n": "nav.miscellaneous",
-        "child": [
-         
-          {
-            "link": "/miscalleneous/miscellaneous_lightgallery",
-            "title": "Light Gallery",
-            "filterTag": "miscellaneous light gallery",
-            "i18n": "nav.miscellaneous_light_gallery",
-            "spanText": "61 KB",
-            "spanClass": "dl-ref label bg-primary-500 ml-2"
-          }
-        ]
-      },
-     
-      {
-        "title": "Page Views",
-        "filterTag": "pages",
-        "icon": "",
-        "i18n": "nav.pages",
-        "child": [
           
-         
-          
-          
-         
-          {
-            "link": "javascript:void(0);",
-            "title": "Authentication",
-            "filterTag": "pages authentication",
-            "icon": "",
-            "i18n": "nav.pages_authentication",
-            "subChild": [
-              {
-                "link": "/page/page_forget",
-                "title": "Forget Password",
-                "filterTag": "pages authentication forget password",
-                "i18n": "nav.pages_authentication_forget_password"
-              },
-              {
-                "link": "/page/page_locked",
-                "title": "Locked Screen",
-                "filterTag": "pages authentication locked screen",
-                "i18n": "nav.pages_authentication_locked_screen"
-              },
-              {
-                "link": "/page/page_login_alt",
-                "title": "Login Alt",
-                "filterTag": "pages authentication login alt",
-                "i18n": "nav.pages_authentication_login_alt"
-              },
-              {
-                "link": "/page/page_register",
-                "title": "Register",
-                "filterTag": "pages authentication register",
-                "i18n": "nav.pages_authentication_register"
-              },
-              {
-                "link": "/page/page_confirmation",
-                "title": "Confirmation",
-                "filterTag": "pages authentication confirmation",
-                "i18n": "nav.pages_authentication_confirmation"
-              }
-            ]
-          }
-         
-        
-        
         ]
       }
+      
+       
     ]
   }';
 ?>
 
 <!-- BEGIN Left Aside -->
-<aside class="page-sidebar" style="background-color: white;">
+<aside class="page-sidebar" style="background-color: #343a40;">
   <div class="page-logo" style="background-color: white !important;">
     <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
       <img src="{{ URL::asset('/img/volantinopiu_logo.png') }}" alt="SmartAdmin Laravel" aria-roledescription="logo" style="width: 150px;
@@ -199,16 +88,16 @@ $menuJson = '{
       </div>
     </div>
     <div class="info-card">
-      <img src="{{ URL::asset('/img/demo/avatars/avatar-admin.png') }}" class="profile-image rounded-circle" alt="Dr. Codex Lantern">
-      <div class="info-card-text">
+      <!-- <img src="{{ URL::asset('/img/demo/avatars/avatar-admin.png') }}" class="profile-image rounded-circle" alt="Dr. Codex Lantern"> -->
+      <!-- <div class="info-card-text">
         <a href="#" class="d-flex align-items-center text-white">
           <span class="text-truncate text-truncate-sm d-inline-block">
-            {{ ucfirst(auth()->user()->name) }}
+            
           </span>
         </a>
         <span class="d-inline-block text-truncate text-truncate-sm">Toronto, Canada</span>
-      </div>
-      <img src="{{ URL::asset('/img/card-backgrounds/cover-1-lg.png') }}" class="cover" alt="cover">
+      </div> -->
+      <!-- <img src="{{ URL::asset('/img/card-backgrounds/cover-1-lg.png') }}" class="cover" alt="cover"> -->
       <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
         <i class="fal fa-angle-down"></i>
       </a>
