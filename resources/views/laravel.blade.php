@@ -102,9 +102,7 @@
                 <div class="panel-container show">
                     <div class="panel-content" id="users">
                         <input class="search" placeholder="Search" />
-                        <button class="sort " data-sort="nome">
-                            Ordina per data
-                        </button>
+                        <button class="sort " data-sort="nome"> Ordina per data </button>
                         <!-- datatable start -->
                         
                         <table id="test-list" style="display: none;" class ="table table-bordered table-hover table-striped w-100">
@@ -121,7 +119,7 @@
                                 @if (count($arrayPromo)>0)
                                 @foreach ($arrayPromo as $promozione )
                                 <tr>
-                                    <td class="name">{{ $promozione['nome'] }}</td>
+                                    <td class="nome">{{ $promozione['nome'] }}</td>
                                     <td class="descrizione">{{ $promozione['descrizione'] }}</td>
                                     <td >{{ $promozione['date_start'] }}</td>
                                     <td>{{ $promozione['date_end'] }}</td>
@@ -132,6 +130,7 @@
                                 @endforeach
 
                                 @endif
+                               
                             </tbody>
                             <tfoot class="pagination"></tfoot>
                         </table>
@@ -186,13 +185,13 @@
     }
     // Prova ricerca
     var options = {
-        valueNames: ['name', 'descrizione']
+        valueNames: ['nome', 'descrizione']
     };
 
     var userList = new List('users', options);
     // Prova Pagination
     var monkeyList = new List('test-list', {
-        valueNames: ['name'],
+        valueNames: ['nome'],
         page: 10,
         pagination: true
     });
@@ -234,22 +233,23 @@
                                  <td> ' + promozioni[i]['date_end'] + ' </td>\
                             </tr>`'
                         }
+                        
                     } else {
                         html += '<tr>\
                                  <td> Nessuna promozione trovata</td>\
                                  </tr>';
                     }
-
+                    
                     $("#tbody").html(html);
                     // Ricerca
                     var options = {
-                        valueNames: ['nome', 'descrizione']
+                        valueNames: ['nome', 'descrizione', 'date_start']
                     };
 
                     var userList = new List('users', options);
                     //Prova pagination
                     var monkeyList = new List('test-list', {
-                        valueNames: ['name'],
+                        valueNames: ['nome'],
                         page: 10,
                         pagination: true
                     });
@@ -272,7 +272,7 @@
         width: 36px;
         height: 36px;
         font-size: 0.875rem;
-        background-color: #5e72e4;
+        background-color: red;
     }
 
     .sort {
