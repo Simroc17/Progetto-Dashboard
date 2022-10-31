@@ -56,11 +56,11 @@
                                     <select id="s1" onchange="selezionaValore()" class="form-select " style="height: 35px; border-radius: 5px;">
                                         <option selected>Seleziona un'opzione</option>
                                         @foreach ($markets as $market )
-                                        
+
                                         <option value="{{$market->id}}">
                                             {{$market->nome}}
                                         </option>
-                                        
+
                                         @endforeach
                                     </select>
                                 </div>
@@ -106,69 +106,110 @@
                     </div>
                 </div>
                 <div class="panel-container show">
-                    <div class="panel-content">
-
+                    <div class="panel-content" id="users">
+                        <input class="search" placeholder="Search" />
+                        <button class="sort" data-sort="nome">
+                            Sort by name
+                        </button>
                         <!-- datatable start -->
-                        <div id="dt-basic-example_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <!-- <div id="dt-basic-example_wrapper0" class="dataTables_wrapper dt-bootstrap4">
 
                             <div class="row">
                                 <div class="col-sm-12">
+
                                     <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100 dataTable dtr-inline" role="grid" aria-describedby="dt-basic-example_info" style="width: 1546px;">
-                                        <thead class="bg-primary-600">
-                                            <tr role="row" style="background-color: red;">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 261px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Promo</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 385px;" aria-label="Position: activate to sort column ascending">Descrizione</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office: activate to sort column ascending">Data inizio</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 105px;" aria-label="Age: activate to sort column ascending">Data fine</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 183px;" aria-label="Start date: activate to sort column ascending">Age</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 157px;" aria-label="Salary: activate to sort column ascending">Age</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tbody">
+                                        <div class="input-group">
+                                            <thead class="bg-primary-600">
+                                                <tr role="row" style="background-color: red;">
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 261px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Promo</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 385px;" aria-label="Position: activate to sort column ascending">Descrizione</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office: activate to sort column ascending">Data inizio</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 105px;" aria-label="Age: activate to sort column ascending">Data fine</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 183px;" aria-label="Start date: activate to sort column ascending">Age</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 157px;" aria-label="Salary: activate to sort column ascending">Age</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody">
 
-                                            @if (count($arrayPromo)>0)
-                                            @foreach ($arrayPromo as $promozione )
-                                            <tr>
-                                                <td>{{ $promozione['nome'] }}</td>
-                                                <td>{{ $promozione['descrizione'] }}</td>
-                                                <td>{{ $promozione['date_start'] }}</td>
-                                                <td>{{ $promozione['date_end'] }}</td>
-                                                <td>cancellare</td>
-                                                <td>cancellare</td>
-                                            </tr>
+                                                @if (count($arrayPromo)>0)
+                                                @foreach ($arrayPromo as $promozione )
+                                                <tr>
+                                                    <td>{{ $promozione['nome'] }}</td>
+                                                    <td>{{ $promozione['descrizione'] }}</td>
+                                                    <td>{{ $promozione['date_start'] }}</td>
+                                                    <td>{{ $promozione['date_end'] }}</td>
+                                                    <td>cancellare</td>
+                                                    <td>cancellare</td>
+                                                </tr>
 
-                                            @endforeach
+                                                @endforeach
 
-                                            @endif
-
-
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">Promo</th>
-                                                <th rowspan="1" colspan="1">Descrizione</th>
-                                                <th rowspan="1" colspan="1">Data inizio</th>
-                                                <th rowspan="1" colspan="1">Data fine</th>
-                                                <th rowspan="1" colspan="1">age</th>
-                                                <th rowspan="1" colspan="1">age</th>
-                                            </tr>
-                                        </tfoot>
+                                                @endif
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th rowspan="1" colspan="1">Promo</th>
+                                                    <th rowspan="1" colspan="1">Descrizione</th>
+                                                    <th rowspan="1" colspan="1">Data inizio</th>
+                                                    <th rowspan="1" colspan="1">Data fine</th>
+                                                    <th rowspan="1" colspan="1">age</th>
+                                                    <th rowspan="1" colspan="1">age</th>
+                                                </tr>
+                                            </tfoot>
+                                        </div>
                                     </table>
                                 </div>
                             </div>
+                        </div> -->
+                        <table>
+                            <thead>
+                                <tr role="row" style="background-color: red;">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 261px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Promo</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 385px;" aria-label="Position: activate to sort column ascending">Descrizione</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 197px;" aria-label="Office: activate to sort column ascending">Data inizio</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 105px;" aria-label="Age: activate to sort column ascending">Data fine</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 183px;" aria-label="Start date: activate to sort column ascending">Age</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dt-basic-example" rowspan="1" colspan="1" style="width: 157px;" aria-label="Salary: activate to sort column ascending">Age</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody" class="list">
+                                @if (count($arrayPromo)>0)
+                                @foreach ($arrayPromo as $promozione )
+                                <tr>
+                                    <td class="name">{{ $promozione['nome'] }}</td>
+                                    <td>{{ $promozione['descrizione'] }}</td>
+                                    <td>{{ $promozione['date_start'] }}</td>
+                                    <td>{{ $promozione['date_end'] }}</td>
+                                    <td>cancellare</td>
+                                    <td>cancellare</td>
+                                </tr>
 
-                        </div>
+                                @endforeach
+
+                                @endif
+                            </tbody>
+                        </table>
                         <!-- datatable end -->
                     </div>
                 </div>
+
             </div>
         </div>
+
+
+
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
 
 </main>
 @stop
 
 @section('footerScript')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js" referrerpolicy="no-referrer"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
 
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.export.js') }}"></script>
@@ -176,7 +217,6 @@
 <script src="{{ URL::asset('js/dependency/moment/moment.js') }}"></script>
 <script src="{{ URL::asset('js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js') }}"></script>
 <script>
-    
     var promozione = <?php echo json_encode($promozioni) ?>;
     console.log(promozione);
 
@@ -198,10 +238,18 @@
         var dataSelezionata = document.getElementById("datepicker-2").value;
         console.log(dataSelezionata);
     }
+
+    var options = {
+        valueNames: ['name']
+    };
+
+    var userList = new List('users', options);
 </script>
 <script>
     $(document).ready(function() {
+
         $('#s1').on('change', function() {
+
             var category = $(this).val();
             $.ajax({
                 url: "/{filename}",
@@ -211,17 +259,18 @@
                 },
                 success: function(data) {
                     var promozioni = data.promozioni;
+                    console.log(promozioni)
                     var html = '';
                     if (promozioni.length > 0) {
                         for (let i = 0; i < promozioni.length; i++) {
-                            html += '<tr>\
-                                 <td> ' + promozioni[i]['nome'] + ' </td>\
+                            html += '`<tr>\
+                                 <td class="nome"> ' + promozioni[i]['nome'] + ' </td>\
                                  <td> ' + promozioni[i]['descrizione'] + ' </td>\
                                  <td> ' + promozioni[i]['date_start'] + ' </td>\
                                  <td> ' + promozioni[i]['date_end'] + ' </td>\
                                  <td> cancellare </td>\
                                  <td> cancellare </td>\
-                                 </tr>';
+                            </tr>`'
                         }
                     } else {
                         html += '<tr>\
@@ -230,7 +279,11 @@
                     }
 
                     $("#tbody").html(html);
+                    var options = {
+                        valueNames: ['nome']
+                    };
 
+                    var userList = new List('users', options);
                 }
             });
         });
@@ -239,7 +292,7 @@
 <script>
     $(document).ready(function() {
 
-      
+
 
 
         // $('#s1').mouseup(function() {
@@ -332,6 +385,75 @@
         });
 
         $('#dt-basic-example').dataTable({
+
+            responsive: true,
+            lengthChange: false,
+            dom:
+                /*  --- Layout Structure
+                    --- Options
+                    l   -   length changing input control
+                    f   -   filtering input
+                    t   -   The table!
+                    i   -   Table information summary
+                    p   -   pagination control
+                    r   -   processing display element
+                    B   -   buttons
+                    R   -   ColReorder
+                    S   -   Select
+
+                    --- Markup
+                    < and >             - div element
+                    <"class" and >      - div with a class
+                    <"#id" and >        - div with an ID
+                    <"#id.class" and >  - div with an ID and a class
+
+                    --- Further reading
+                    https://datatables.net/reference/option/dom
+                    --------------------------------------
+                 */
+                "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: [
+                /*{
+                    extend:    'colvis',
+                    text:      'Column Visibility',
+                    titleAttr: 'Col visibility',
+                    className: 'mr-sm-3'
+                },*/
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF',
+                    titleAttr: 'Generate PDF',
+                    className: 'btn-outline-danger btn-sm mr-1'
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel',
+                    titleAttr: 'Generate Excel',
+                    className: 'btn-outline-success btn-sm mr-1'
+                },
+                {
+                    extend: 'csvHtml5',
+                    text: 'CSV',
+                    titleAttr: 'Generate CSV',
+                    className: 'btn-outline-primary btn-sm mr-1'
+                },
+                // {
+                //     extend: 'copyHtml5',
+                //     text: 'Copy',
+                //     titleAttr: 'Copy to clipboard',
+                //     className: 'btn-outline-primary btn-sm mr-1'
+                // },
+                // {
+                //     extend: 'print',
+                //     text: 'Print',
+                //     titleAttr: 'Print Table',
+                //     className: 'btn-outline-primary btn-sm'
+                // }
+            ]
+        });
+        $('#dt-basic-example1').dataTable({
             responsive: true,
             lengthChange: false,
             dom:

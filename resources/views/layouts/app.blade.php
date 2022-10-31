@@ -29,6 +29,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     <link rel="stylesheet" media="screen, print" href="{{ URL::asset('css/app.bundle.css') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ URL::asset('/img/favicon/apple-touch-icon.png') }}">
     <link id="mytheme" rel="stylesheet" media="screen, print" href="{{ URL::asset('css/themes/cust-theme-4.css')}}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js" referrerpolicy="no-referrer"></script>
     @yield('headerStyle')
     
 </head>

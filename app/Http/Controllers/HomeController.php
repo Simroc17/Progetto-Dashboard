@@ -81,6 +81,7 @@ class HomeController extends Controller
             return response()->json(['promozioni'=>$promozioni]);
         }
         $promozioni = $query->get();
+       
         
 
         
