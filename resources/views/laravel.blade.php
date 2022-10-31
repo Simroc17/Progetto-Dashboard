@@ -239,13 +239,15 @@
                                  <td> Nessuna promozione trovata</td>\
                                  </tr>';
                     }
-                    
-                    $("#tbody").html(html);
-                    // Ricerca
                     var options = {
                         valueNames: ['nome', 'descrizione', 'date_start']
                     };
 
+                    var userList = new List('users', options);
+                   
+                    $("#tbody").html(html);
+                    // Ricerca
+                   
                     var userList = new List('users', options);
                     //Prova pagination
                     var monkeyList = new List('test-list', {

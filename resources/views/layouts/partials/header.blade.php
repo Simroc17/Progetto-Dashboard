@@ -49,7 +49,7 @@ $profileJson='{ "profileList":[{"dataAction":"app-reset","i18n" : "drpdwn.reset_
             </a>
         </form>
     </div> -->
-    <div> <img src="./volantinopiu_logo.png" alt="" style="width: 157px;/* margin-block: auto; *//* display: block; */max-width: 191px;height: 39px;"> </div>
+    <div> <img src="img/volantinopiu_logo.png" alt="" style="width: 157px;/* margin-block: auto; *//* display: block; */max-width: 191px;height: 39px;"> </div>
     <div class="ml-auto d-flex">
         <!-- activate app search icon (mobile) -->
         <div class="hidden-sm-up">
