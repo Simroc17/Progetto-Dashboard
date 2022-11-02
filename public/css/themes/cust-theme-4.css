@@ -166,8 +166,8 @@
 }
 .dropdown-icon-menu > ul > li .btn:hover,
 .header-btn:hover {
-    border-color: #2198f3;
-    background: #51aef6;
+    border-color: white;
+    background: white;
     color: #fff;
 }
 .mod-hide-nav-icons #mnl:after,
@@ -1273,7 +1273,7 @@ label.menu-open-button:hover {
     background: #ccc;
 }
 .bg-trans-gradient {
-    background: linear-gradient(250deg, #ad39d6, #2d96e7);
+    background: linear-gradient(250deg, #3b4e62, #343a40);
 }
 .notes {
     background: #f9f4b5;

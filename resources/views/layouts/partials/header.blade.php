@@ -4,7 +4,7 @@ $headerMenuJson = '{ "quickShortcutJson":[{"title" : "Services","item1" : "base-
 
 $notificationMenuJson = '{ "notificationJson":[{"liClass" : "unread","avatar" : "/img/demo/avatars/avatar-a.png","title" : "Adison Lee","desc" : "Msed quia non numquam eius","min":"2 minutes ago" },{"liClass" : "","avatar" : "/img/demo/avatars/avatar-b.png","title" : "Oliver Kopyuv","desc" : "Msed quia non numquam eius","min":"3 minutes ago" },{"liClass" : "","avatar" : "/img/demo/avatars/avatar-e.png","title" : "Dr. John Cook PhD","desc" : "Msed quia non numquam eius","min":"2 minutes ago" },{"liClass" : "","avatar" : "/img/demo/avatars/avatar-h.png","title" : "Sarah McBrook","desc" : "Msed quia non numquam eius","min":"3 minutes ago" },{"liClass" : "","avatar" : "/img/demo/avatars/avatar-m.png","title" : "Anothony Bezyeth","desc" : "Msed quia non numquam eius","min":"one minutes ago" },{"liClass" : "","avatar" : "/img/demo/avatars/avatar-j.png","title" : "Lisa Hatchensen","desc" : "Msed quia non numquam eius","min":"one minutes ago" }] }';
 
-$profileJson='{ "profileList":[{"dataAction":"app-reset","i18n" : "drpdwn.reset_layout","title" : "Reset Layout" },{ "isModal" : "true", "dataTarget":".js-modal-settings","i18n" : "drpdwn.settings","title" : "Settings" },{ "isDivider" : "true" },{"dataAction":"app-fullscreen","i18n" : "drpdwn.fullscreen","title" : "Fullscreen", "iClass" : "float-right text-muted fw-n", "iText" : "F11" },{"dataAction":"app-print","i18n" : "drpdwn.print","title" : "Print", "iClass" : "float-right text-muted fw-n", "iText" : "Ctrl + P" }] }';
+$profileJson='{ "profileList":[{ "isDivider" : "true" },{"dataAction":"app-fullscreen","i18n" : "drpdwn.fullscreen","title" : "Fullscreen", "iClass" : "float-right text-muted fw-n", "iText" : "F11" },{"dataAction":"app-print","i18n" : "drpdwn.print","title" : "Print", "iClass" : "float-right text-muted fw-n", "iText" : "Ctrl + P" }] }';
  ?>
 <!-- BEGIN Page Header -->
 <header class="page-header" role="banner">
@@ -438,13 +438,13 @@ $profileJson='{ "profileList":[{"dataAction":"app-reset","i18n" : "drpdwn.reset_
         <!-- app user menu -->
         <div>
             <a href="#" data-toggle="dropdown" title="drlantern@gotbootstrap.com" class="header-icon d-flex align-items-center justify-content-center ml-2">
-               Logout
+            {{auth()->user()->nome}}
             </a>
             <div class="dropdown-menu dropdown-menu-animated dropdown-lg">
                 <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
                     <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
                         <span class="mr-2">
-                            <img src="{{ URL::asset('/img/demo/avatars/avatar-admin.png') }}" class="rounded-circle profile-image" alt="Dr. Codex Lantern">
+                            <!-- <img src="{{ URL::asset('/img/demo/avatars/avatar-admin.png') }}" class="rounded-circle profile-image" alt="Dr. Codex Lantern"> -->
                         </span>
                         <div class="info-card-text">
                             <div class="fs-lg text-truncate text-truncate-lg">
@@ -473,7 +473,7 @@ $profileJson='{ "profileList":[{"dataAction":"app-reset","i18n" : "drpdwn.reset_
                 </a>
                 @endif
                 @endforeach
-                <div class="dropdown-multilevel dropdown-multilevel-left">
+                <!-- <div class="dropdown-multilevel dropdown-multilevel-left">
                     <div class="dropdown-item">
                         Language
                     </div>
@@ -485,11 +485,11 @@ $profileJson='{ "profileList":[{"dataAction":"app-reset","i18n" : "drpdwn.reset_
                         <a href="#?lang=jp" class="dropdown-item" data-action="lang" data-lang="jp">日本語</a>
                         <a href="#?lang=ch" class="dropdown-item" data-action="lang" data-lang="ch">中文</a>
                     </div>
-                </div>
+                </div> -->
                 <div class="dropdown-divider m-0"></div>
                 <a class="dropdown-item fw-500 pt-3 pb-3" href="{{ route('logout') }}">
                     <span data-i18n="drpdwn.page-logout">Logout</span>
-                    <span class="float-right fw-n">&commat;codexlantern</span>
+                    <span class="float-right fw-n">&commat;volantinopiu.it</span>
                 </a>
             </div>
         </div>

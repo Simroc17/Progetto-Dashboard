@@ -250,12 +250,7 @@
                     
                     $("#tbody").html(html);
                     // Ricerca dopo filtro supermercato
-                    var monkeyList = new List('test-list', {
-                        valueNames: ['nome'],
-                        page: 10,
-                        pagination: true
-                    });
-                   
+                
                     var userList = new List('users', options);
                     //Prova pagination
                     var monkeyList = new List('test-list', {
