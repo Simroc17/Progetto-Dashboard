@@ -18,9 +18,8 @@ Auth::routes();
 Route::get('/logout', 'SmartAdmin@logout');
 
 // Render perticular view file by foldername and filename and all passed in only one controller at a time
-Route::get('{folder}/{file}', 'SmartAdmin@index');
-Route::get('/home', 'SmartAdmin@root');
-Route::get('/{filename}', 'SmartAdmin@welcome');
+
+
 
 
 
@@ -37,7 +36,11 @@ Route::get('/', function () {
 
 // ROTTE CONTROLER
 // Route::get('/dati', [App\Http\Controllers\SmartAdmin::class, 'welcome'])->name('dati');
-Route::get('/{filename}', [App\Http\Controllers\HomeController::class, 'mostraDati'])->name('dati');
+Route::get('/{filename}', [App\Http\Controllers\HomeController::class, 'mostraDati']);
+Route::get('/dashboard/intel_marketing_dashboard', [App\Http\Controllers\HomeController::class, 'benvenuto'])->name('grafici');
+
+
+
 
 
 

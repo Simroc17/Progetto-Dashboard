@@ -21,10 +21,10 @@ $menuJson = '{
      
       
       {
-        "title": "Promozioni",
-        "link": "/dati",
+        "title": "Welcome",
+        "link": "/promozioni",
         "icon": "",
-        "filterTag": "Promozioni",
+        "filterTag": "Welcome",
         "i18n": "nav.laravel"
       },
      

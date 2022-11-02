@@ -43,18 +43,18 @@
         </div>
     </div>
     <div class="row">
-
+       
         @component('common-components.colorful-widget')
         @slot('colorClass') bg-primary-300 @endslot
-        @slot('price') Nome ID @endslot
+        @slot('price') {{auth()->user()->nome}} @endslot
         @slot('description') users signed up @endslot
         @slot('icon') fa-user @endslot
         @endcomponent
 
         @component('common-components.colorful-widget')
         @slot('colorClass') bg-warning-400 @endslot
-        @slot('price') $10,203 @endslot
-        @slot('description') Visual Index Figure @endslot
+        @slot('price') {{count($promozioni)}} @endslot
+        @slot('description') Numero Promo {{auth()->user()->nome}} @endslot
         @slot('icon') fa-gem @endslot
         @endcomponent
 

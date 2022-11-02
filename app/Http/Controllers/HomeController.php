@@ -38,7 +38,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-
+    public function benvenuto(){
+        $id = Auth::id();
+        //dd($id);
+        $negozi = Negozio::all();
+        $markets = Market::where(['id_parent' => $id])->get();
+        $marketsAll= Market::all();
+        //dd($markets);
+        $arrayPromo = [];
+        //dd($arrayPromo);
+        $promozioni = Promo::all();
+        return view('/dashboard/intel_marketing_dashboard', compact('negozi', 'markets','id', 'promozioni','arrayPromo','marketsAll'));
+    }
 
 
     /**
@@ -46,7 +57,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function mostraDati(Request $request, $fileName)
+    public function mostraDati(Request $request, )
     {
         $id = Auth::id();
         //dd($id);
@@ -96,6 +107,7 @@ class HomeController extends Controller
         for ($i = 0; $i < count($markets); $i++) {
             $arrayMarketId[$i] = $markets[$i]->id;
         }  // dd($arrayMarketId);
+      
         return view('laravel', compact('negozi', 'markets','id', 'promozioni','arrayPromo','marketsAll'));
     }
 }
