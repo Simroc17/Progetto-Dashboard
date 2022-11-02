@@ -102,10 +102,10 @@
                 <div class="panel-container show">
                     <div class="panel-content" id="users">
                         <input class="search" placeholder="Search" />
-                        <button class="sort " data-sort="nome"> Ordina per data </button>
+                        <button class="sort btn btn-primary col-2 " data-sort="nome" style="background-color: red; border-color: red;"> Ordina per data </button>
                         <!-- datatable start -->
                         
-                        <table id="test-list" style="display: none;" class ="table table-bordered table-hover table-striped w-100 ">
+                        <table id="test-list" style="display: none;" class ="table table-bordered table-hover table-striped w-100 mt-1">
                             <thead>
                                 <tr class="text-white" role="row" style="background-color: red;">
                                     <th  tabindex="0"  rowspan="1" colspan="1" style="width: 30%;"  >Promo</th>

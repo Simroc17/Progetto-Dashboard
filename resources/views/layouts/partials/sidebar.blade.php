@@ -69,13 +69,14 @@ $menuJson = '{
 <!-- BEGIN Left Aside -->
 <aside class="page-sidebar" style="background-color: #343a40;">
   <div class="page-logo" style="background-color: white !important;">
-    <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
-      <img src="{{ URL::asset('/img/volantinopiu_logo.png') }}" alt="SmartAdmin Laravel" aria-roledescription="logo" style="width: 150px;
+  <img src="{{ URL::asset('/img/volantinopiu_logo.png') }}" alt="SmartAdmin Laravel" aria-roledescription="logo" style="width: 150px;
     height: 40px; background-color: white;" >
+    <!-- <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
+      
       
       <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2">Laravel 9.0</span>
       <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
-    </a>
+    </a> -->
   </div>
   <!-- BEGIN PRIMARY NAVIGATION -->
   <nav id="js-primary-nav" class="primary-nav" role="navigation">
