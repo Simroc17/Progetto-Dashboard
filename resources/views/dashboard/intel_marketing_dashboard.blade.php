@@ -20,7 +20,7 @@
 
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-chart-area'></i> Marketing <span class='fw-300'>Dashboard</span>
+            <i class='subheader-icon fal fa-chart-area'></i> Andamento <span class='fw-300'>Promozioni</span>
         </h1>
 
         <div class="subheader-block d-lg-flex align-items-center">
@@ -46,7 +46,7 @@
 
         @component('common-components.colorful-widget')
         @slot('colorClass') bg-primary-300 @endslot
-        @slot('price') 21.5k @endslot
+        @slot('price') Nome ID @endslot
         @slot('description') users signed up @endslot
         @slot('icon') fa-user @endslot
         @endcomponent
