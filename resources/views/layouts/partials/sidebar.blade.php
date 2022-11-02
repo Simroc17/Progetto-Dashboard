@@ -2,7 +2,7 @@
 $menuJson = '{
     "menuList": [
       {
-        "title": "Application Intel",
+        "title": "Andamento",
         "filterTag": "application intel",
         "icon": "",
         "i18n": "nav.application_intel",
@@ -10,7 +10,7 @@ $menuJson = '{
           
           {
             "link": "/dashboard/intel_marketing_dashboard",
-            "title": "Marketing Dashboard",
+            "title": "Home",
             "filterTag": "application intel marketing dashboard",
             "i18n": "nav.application_intel_marketing_dashboard"
           }
@@ -21,10 +21,10 @@ $menuJson = '{
      
       
       {
-        "title": "Welcome",
+        "title": "Promozioni",
         "link": "/promozioni",
         "icon": "",
-        "filterTag": "Welcome",
+        "filterTag": "Promozioni",
         "i18n": "nav.laravel"
       },
      

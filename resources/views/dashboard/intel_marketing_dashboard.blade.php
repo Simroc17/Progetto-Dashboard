@@ -53,22 +53,22 @@
 
         @component('common-components.colorful-widget')
         @slot('colorClass') bg-warning-400 @endslot
-        @slot('price') {{count($promozioni)}} @endslot
+        @slot('price') {{count($arrayPromo)}} @endslot
         @slot('description') Numero Promo {{auth()->user()->nome}} @endslot
         @slot('icon') fa-gem @endslot
         @endcomponent
 
         @component('common-components.colorful-widget')
         @slot('colorClass') bg-success-200 @endslot
-        @slot('price') - 103.72 @endslot
-        @slot('description') Offset Balance Ratio @endslot
+        @slot('price') {{count($markets)}} @endslot
+        @slot('description') Numero negozi   @endslot
         @slot('icon') fa-lightbulb @endslot
         @endcomponent
 
         @component('common-components.colorful-widget')
         @slot('colorClass') bg-info-200 @endslot
-        @slot('price') +40% @endslot
-        @slot('description') Product level increase @endslot
+        @slot('price') {{count($negozi)}} @endslot
+        @slot('description') Negozi @endslot
         @slot('icon') fa-globe @endslot
         @endcomponent
 

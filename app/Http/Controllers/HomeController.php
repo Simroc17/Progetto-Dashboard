@@ -48,6 +48,17 @@ class HomeController extends Controller
         $arrayPromo = [];
         //dd($arrayPromo);
         $promozioni = Promo::all();
+        foreach ($markets as $market) 
+        {
+            foreach ($promozioni as $promozione) 
+            {
+                if ($market->id == $promozione->id_canale) 
+                {
+                    array_push($arrayPromo, $promozione);
+                }
+            }
+            
+        }//dd($arrayPromo);
         return view('/dashboard/intel_marketing_dashboard', compact('negozi', 'markets','id', 'promozioni','arrayPromo','marketsAll'));
     }
 
