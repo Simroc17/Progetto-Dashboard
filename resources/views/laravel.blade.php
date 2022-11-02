@@ -105,7 +105,7 @@
                         <button class="sort " data-sort="nome"> Ordina per data </button>
                         <!-- datatable start -->
                         
-                        <table id="test-list" style="display: none;" class ="table table-bordered table-hover table-striped w-100">
+                        <table id="test-list" style="display: none;" class ="table table-bordered table-hover table-striped w-100 ">
                             <thead>
                                 <tr class="text-white" role="row" style="background-color: red;">
                                     <th  tabindex="0"  rowspan="1" colspan="1" style="width: 30%;"  >Promo</th>
@@ -115,7 +115,7 @@
                                     
                                 </tr>
                             </thead>
-                            <tbody id="tbody" class="list" >
+                            <tbody id="tbody" class="list " >
                                 @if (count($arrayPromo)>0)
                                 @foreach ($arrayPromo as $promozione )
                                 <tr>
@@ -213,6 +213,8 @@
         // Funzione Ajax al change dell'option
         $('#s1').on('change', function() {
             tabella.style.display = 'block';
+            tabella.style='col-12';
+            
             var category = $(this).val();
             $.ajax({
                 url: "/{filename}",
@@ -244,9 +246,15 @@
                     };
 
                     var userList = new List('users', options);
-                   
+                    
+                    
                     $("#tbody").html(html);
-                    // Ricerca
+                    // Ricerca dopo filtro supermercato
+                    var monkeyList = new List('test-list', {
+                        valueNames: ['nome'],
+                        page: 10,
+                        pagination: true
+                    });
                    
                     var userList = new List('users', options);
                     //Prova pagination

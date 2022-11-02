@@ -283,10 +283,10 @@ html body a:hover {
     color: red;
 }
 .nav-menu li.active > a {
-    color: red;
+    color: white;
     background-color: rgba(255, 255, 255, 0.04);
-    -webkit-box-shadow: inset 3px 0 0 #2198f3;
-    box-shadow: inset 3px 0 0 #2198f3;
+    
+    box-shadow: inset 3px 0 0 rgba(255, 255, 255, 0.04);
 }
 .nav-menu li.active > a:hover > .ni,
 .nav-menu li.active > a:hover > [class*="fa-"] {
@@ -296,17 +296,17 @@ html body a:hover {
     display: block;
 }
 .nav-menu li.active:not(.open) > a:before {
-    color: #24b3a4;
+    color: red;
 }
 .nav-menu li a {
-    color: red;
+    color: white;
 }
 .nav-menu li a .dl-ref.label {
     color: rgba(255, 255, 255, 0.7);
 }
 .nav-menu li a > .ni,
 .nav-menu li a > [class*="fa-"] {
-    color: #2595ea;
+    color:red;
 }
 .nav-menu li a.collapsed .nav-menu-btn-sub-collapse {
     -webkit-transform: rotate(180deg);
@@ -335,13 +335,13 @@ html body a:hover {
     color: red;
 }
 .nav-menu li b.collapse-sign {
-    color: #39a3f4;
+    color: white;
 }
 .nav-menu li > ul {
     background-color: rgba(0, 0, 0, 0.1);
 }
 .nav-menu li > ul li a {
-    color: #6ab7f1;
+    color: white;
 }
 .nav-menu li > ul li a > .ni,
 .nav-menu li > ul li a > [class*="fa-"] {
@@ -983,12 +983,12 @@ html body a:hover {
 }
 .menu-item,
 label.menu-open-button {
-    background: #2198f3;
+    background: red;
     color: #fff !important;
 }
 .menu-item:hover,
 label.menu-open-button:hover {
-    background: #0c7ed5;
+    background: red;
 }
 .app-shortcut-icon {
     background: #ecf0f1;
@@ -1452,7 +1452,7 @@ code {
     ul.nav-menu:not(.nav-menu-compact)
     > li
     > ul:before {
-    border-left: 1px solid #116cb2;
+    border-left: 1px solid white;
 }
 .mod-nav-link:not(.nav-function-top):not(.nav-function-minify):not(.mod-hide-nav-icons)
     ul.nav-menu:not(.nav-menu-compact)
@@ -1460,17 +1460,17 @@ code {
     > ul
     > li
     a:after {
-    background-color: #2595ea;
+    background-color:white;
 }
 .bg-primary-50 {
-    background-color: #9ad0fa;
+    background-color: white;
     color: rgba(0, 0, 0, 0.8);
 }
 .bg-primary-50:hover {
     color: rgba(0, 0, 0, 0.8);
 }
 .bg-primary-100 {
-    background-color: #82c5f8;
+    background-color: white;
     color: rgba(0, 0, 0, 0.8);
 }
 .bg-primary-100:hover {
