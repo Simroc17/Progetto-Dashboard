@@ -15,12 +15,15 @@
             Ricerca Promozioni
         </h1>
     </div>
-
+    <div class="row" style="margin-left: 1300px;">
+    <li class="mb-3 ">
+    <span class="js-get-date  " style="color:#ff5050" ></span>
+    </li></div>
 
     <div class="row">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
-                <div class="panel-hdr justify-content-between">
+                <div class="panel-hdr justify-content-between  text-white" style="background-color: red;">
                     <h1>
                         Filtra per risultati
                     </h1>
@@ -36,7 +39,7 @@
 
                         <form action="">
                             <div class="form-group row">
-                                <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Date Range Picker With Times</label>
+                                <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Seleziona intervallo data</label>
                                 <div class="col-12 col-lg-6">
                                     <div class="input-group">
                                         <input onchange="selezionaData()" type="text" class="form-control" placeholder="Select date" id="datepicker-2">
@@ -54,7 +57,7 @@
                                 <div class="col-4">
 
                                     <select id="s1" onchange="selezionaValore()" class="form-select " style="height: 35px; border-radius: 5px;">
-                                        <option selected>Seleziona un'opzione</option>
+                                        <option selected>Scegli supermercato</option>
                                         @foreach ($markets as $market )
 
                                         <option value="{{$market->id}}">
@@ -99,10 +102,10 @@
                         <button class="btn btn-panel waves-effect waves-themed" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
                     </div>
                 </div>
-                <div class="panel-container show">
-                    <div class="panel-content" id="users">
-                        <input class="search" placeholder="Search" />
-                        <button class="sort btn btn-primary col-2 " data-sort="nome" style="background-color: red; border-color: red;"> Ordina per data </button>
+                <div class="panel-container show ">
+                    <div class="panel-content " id="users">
+                        <input class="search " placeholder="Search" />
+                        <button class="  sort btn btn-primary col-2  " data-sort="nome" style="background-color: red; border-color: red; "> Aggiorna </button>
                         <!-- datatable start -->
                         
                         <table id="test-list" style="display: none;" class ="table table-bordered table-hover table-striped w-100 mt-1">
