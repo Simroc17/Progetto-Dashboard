@@ -37,7 +37,7 @@
                     <div class="panel-content">
 
 
-                        <form action="">
+                        
                             <div class="form-group row">
                                 <label class="col-form-label col-12 col-lg-3 form-label text-lg-right">Seleziona intervallo data</label>
                                 <div class="col-12 col-lg-6">
@@ -79,9 +79,9 @@
 
                                     </select>
                                 </div>
-                                <button class="btn btn-primary col-1" type="submit" style="background-color: red; border-color: red;">cerca</button>
+                                <button id ="bottone" class="btn btn-primary col-1"  style="background-color: red; border-color: red;">cerca</button>
                             </div>
-                        </form>
+                        
                     </div>
                 </div>
 
@@ -166,7 +166,7 @@
 <script src="{{ URL::asset('js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js') }}"></script>
 <script>
     var promozione = <?php echo json_encode($promozioni) ?>;
-    console.log(promozione);
+    // console.log(promozione);
 
     function selezionaValore() {
         var valoreSelezionato = document.getElementById("s1").value;
@@ -181,10 +181,18 @@
             }
         }
     }
+    
 
     function selezionaData() {
         var dataSelezionata = document.getElementById("datepicker-2").value;
         console.log(dataSelezionata);
+        // Spezzare la data e salvarla in un array QUI
+        let myArray = dataSelezionata.split(" - ");
+        // console.log(myArray);
+        
+        // console.log(dateStart);
+        // console.log(dateEnd);
+        return myArray;
     }
     // Prova ricerca
     var options = {
@@ -207,7 +215,7 @@
             startDate: moment(),
             endDate: moment(),
             locale: {
-                format: 'YYYY-M-DD'
+                format: 'YYYY-MM-DD'
             }
         });
 
@@ -215,19 +223,31 @@
 
         // Funzione Ajax al change dell'option
         $('#s1').on('change', function() {
+            var category = $(this).val();
+            $('#bottone').on('click', function() {
+            let arrayDate =selezionaData();
+            // console.log(arrayDate);
+            let dateStart = arrayDate[0];
+            let dateEnd = arrayDate[1];
+            console.log(typeof(dateStart), dateStart);
+            // console.log(dateEnd);
             tabella.style.display = 'block';
             tabella.style='col-12';
             
-            var category = $(this).val();
+            
             $.ajax({
                 url: "/{filename}",
                 type: "GET",
                 data: {
-                    'category': category
+                    'category': category,
+                    'dateStart': dateStart,
+                    'dateEnd': dateEnd
+                    
+                    
                 },
                 success: function(data) {
                     var promozioni = data.promozioni;
-                    console.log(promozioni)
+                    // console.log(promozioni)
                     var html = '';
                     if (promozioni.length > 0) {
                         for (let i = 0; i < promozioni.length; i++) {
@@ -263,6 +283,7 @@
                     });
                 }
             });
+           });
         });
     });
 </script>

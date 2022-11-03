@@ -79,6 +79,7 @@ class HomeController extends Controller
         $arrayPromo = [];
         //dd($arrayPromo);
         $promozioni = Promo::all();
+        // dd($promozioni[2]->date_start);
         foreach ($markets as $market) 
         {
             foreach ($promozioni as $promozione) 
@@ -97,7 +98,11 @@ class HomeController extends Controller
             if(empty($request->category)){
                 $promozioni = $query->get();
             }else{
-                $promozioni = $query->where(['id_canale'=>$request->category])->get();
+                $promozioni = $query->where(['id_canale' => $request->category])
+                ->whereDate('date_start', '<=', $request->dateEnd)
+                ->whereDate('date_end', '>=', $request->dateStart)
+                ->get(); 
+               
             }
             
             return response()->json(['promozioni'=>$promozioni]);
