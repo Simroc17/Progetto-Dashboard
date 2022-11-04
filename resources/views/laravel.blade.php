@@ -111,8 +111,9 @@
                         <table id="test-list" style="display: none;" class ="table table-bordered table-hover table-striped w-100 mt-1">
                             <thead>
                                 <tr class="text-white" role="row" style="background-color: red;">
+                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 5%;"  >Loghi</th>
                                     <th  tabindex="0"  rowspan="1" colspan="1" style="width: 30%;"  >Promo</th>
-                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 40%;" aria-label="Position: activate to sort column ascending">Descrizione</th>
+                                    <th  tabindex="0"  rowspan="1" colspan="1" style="width: 35%;" aria-label="Position: activate to sort column ascending">Descrizione</th>
                                     <th  tabindex="0"  rowspan="1" colspan="1" style="width: 15%;" aria-label="Office: activate to sort column ascending">Data inizio</th>
                                     <th  tabindex="0"  rowspan="1" colspan="1" style="width: 15%;" aria-label="Age: activate to sort column ascending">Data fine</th>
                                     
@@ -122,18 +123,37 @@
                                 @if (count($arrayPromo)>0)
                                 @foreach ($arrayPromo as $promozione )
                                 <tr>
+                                     <td>
+
+                                    @if ($promozione->id_canale==75) 
+                                            <img src="img\deco.png" alt="" style="width: 50px;">
+
+                                         @elseif ($promozione->id_canale==92) 
+                                            <img src="img\sebon.png" alt="" style="width: 50px;">
+
+                                         @elseif ($promozione->id_canale==141) 
+                                            <img src="img\ayoka.png" alt="" style="width: 50px;">
+
+                                         @else($promozione->id_canale==143)
+                                            <img src="" alt="" style="width: 50px;">
+
+
+
+
+                                    @endif
+                                     </td>
                                     <td class="nome">{{ $promozione['nome'] }}</td>
                                     <td class="descrizione">{{ $promozione['descrizione'] }}</td>
                                     <td >{{ $promozione['date_start'] }}</td>
                                     <td>{{ $promozione['date_end'] }}</td>
-                                    <td>cancellare</td>
-                                    <td>cancellare</td>
+
+
                                 </tr>
 
                                 @endforeach
 
                                 @endif
-                               
+
                             </tbody>
                             <tfoot class="pagination"></tfoot>
                         </table>
@@ -185,7 +205,7 @@
 
     function selezionaData() {
         var dataSelezionata = document.getElementById("datepicker-2").value;
-        console.log(dataSelezionata);
+        // console.log(dataSelezionata);
         // Spezzare la data e salvarla in un array QUI
         let myArray = dataSelezionata.split(" - ");
         // console.log(myArray);
@@ -224,12 +244,16 @@
         // Funzione Ajax al change dell'option
         $('#s1').on('change', function() {
             var category = $(this).val();
-            $('#bottone').on('click', function() {
+            
+            // $('#bottone').on('click', function() {
+
+                // $("#tbody").empty();  ///Parti da qui  
+
             let arrayDate =selezionaData();
             // console.log(arrayDate);
             let dateStart = arrayDate[0];
             let dateEnd = arrayDate[1];
-            console.log(typeof(dateStart), dateStart);
+            // console.log(typeof(dateStart), dateStart);
             // console.log(dateEnd);
             tabella.style.display = 'block';
             tabella.style='col-12';
@@ -249,9 +273,11 @@
                     var promozioni = data.promozioni;
                     // console.log(promozioni)
                     var html = '';
+                     
                     if (promozioni.length > 0) {
                         for (let i = 0; i < promozioni.length; i++) {
                             html += '`<tr>\
+                                 <td class="img' + promozioni[i]['id_canale'] +'">  </td>\
                                  <td class="nome"> ' + promozioni[i]['nome'] + ' </td>\
                                  <td class="descrizione"> ' + promozioni[i]['descrizione'] + ' </td>\
                                  <td class="date_start"> ' + promozioni[i]['date_start'] + ' </td>\
@@ -285,10 +311,37 @@
             });
            });
         });
-    });
+    // });
 </script>
 
 <style>
+
+    .img75{
+        background-image: url("img/deco.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        border: 2px solid;
+        
+    }.img92{
+        background-image: url("img/sebon.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        border: 2px solid;
+        
+    }.img141{
+        background-image: url("img/ayoka.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        border: 2px solid;
+        
+    }
+
     .pagination li a {
 
         display: flex;
