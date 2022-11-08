@@ -106,8 +106,8 @@
                 </div>
                 <div class="panel-container show ">
                     <div class="panel-content " id="users">
-                        <input class="search " placeholder="Search" />
-                        <button class="  sort btn btn-primary col-2  " data-sort="nome" style="background-color: red; border-color: red; "> Aggiorna </button>
+                        <input type="text" class="search " placeholder="Search" />
+                        <button class="  sort btn btn-primary col-2  " data-sort="nome" style="background-color: red; border-color: red; "> Ordina per data </button>
                         <!-- datatable start -->
 
                         <table id="test-list" style="display: none;" class="table table-bordered table-hover table-striped w-100 mt-1">
@@ -144,11 +144,20 @@
                                 @endforeach
                                 @endif
                             </tbody>
-                            <div>
-                                <tfoot class="pagination" style="width:50px"></tfoot>
-                            </div>
                         </table>
+                        <table class="table-footer">
+                            <tr>
+                                <td class="table-pagination">
 
+                                    <ul class="pagination"></ul>
+
+                                </td>
+                                <td></td>
+                                <td class="table-search">
+
+                                </td>
+                            </tr>
+                        </table>
                         <!-- datatable end -->
                     </div>
                 </div>
@@ -185,6 +194,12 @@
 
         var secondoValore = document.getElementById("s2");
         //console.log(secondoValore);
+
+
+
+
+
+        
         for (var i = 0; i < secondoValore.length; i++) {
             var option = secondoValore.options[i];
             option.style.display = "none";
@@ -208,7 +223,14 @@
     }
     // Prova ricerca
     var options = {
-        valueNames: ['nome', 'descrizione']
+        valueNames: ['nome', 'descrizione'],
+        page: 10,
+        pagination: {
+            innerWindow: 1,
+            left: 0,
+            right: 0,
+            paginationClass: "pagination",
+        }
     };
 
     var userList = new List('users', options);
@@ -216,8 +238,14 @@
     var monkeyList = new List('test-list', {
         valueNames: ['nome'],
         page: 10,
-        pagination: true
+        pagination: {
+            innerWindow: 1,
+            left: 0,
+            right: 0,
+            paginationClass: "pagination",
+        }
     });
+    
 </script>
 <script>
     $(document).ready(function() {
@@ -263,12 +291,19 @@
                 },
                 success: function(data) {
 
-                    
+
                     console.log(data)
                     var html = data;
-                   
+
                     var options = {
-                        valueNames: ['nome', 'descrizione', 'date_start']
+                        valueNames: ['nome', 'descrizione', 'date_start'],
+                        page: 10,
+                        pagination: {
+                            innerWindow: 1,
+                            left: 0,
+                            right: 0,
+                            paginationClass: "pagination",
+                        }
                     };
 
                     var userList = new List('users', options);
@@ -282,7 +317,12 @@
                     var monkeyList = new List('test-list', {
                         valueNames: ['nome'],
                         page: 10,
-                        pagination: true
+                        pagination: {
+                            innerWindow: 1,
+                            left: 0,
+                            right: 0,
+                            paginationClass: "pagination",
+                        }
                     });
                 }
             });

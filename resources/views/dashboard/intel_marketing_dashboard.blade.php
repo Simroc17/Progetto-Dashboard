@@ -45,17 +45,22 @@
             </div>
         </div>
     </div>
-    <div style="font-size: 20px;"> <i class="fa-solid fa-bomb"></i> {{$promo->nome}} {{$promo->descrizione}} @if ($promo->id_canale==75)
-                                                                        <img src="{{asset('img/deco.png')}}" alt="" style="width: 50px;margin-left: 70px; float:right;">
-                                                                             @elseif ($promo->id_canale==92)
-                                                                               <img src="{{asset('img\sebon.png')}}" alt="" style="width:90px; margin-left: 70px;">
-                                                                                 @elseif ($promo->id_canale==141)
-                                                                                 <img src="{{asset('img\ayoka.png.png')}}" alt="" style="width:90px;margin-left: 70px;">
-                                                                                  @else($promo->id_canale==143)
-                                                                                  <img src="" alt="" style="width: 50px;">
-                                                                                                      @endif</div>
-    <div style="font-size: 15px;"><i class="fa-regular fa-clock"></i> DAL {{$promo->date_start}} AL {{$promo->date_end}}</div>
-       
+    <div class="row justify-content-between">
+    <div style="font-size: 20px;" class="col-5"> <i class="fa-solid fa-bomb"></i> {{$promo->nome}}: {{$promo->descrizione}}</div>
+        <div class="col-5">
+        @if ($promo->id_canale==75)
+        <img src="{{asset('img/decoNuova.png')}}" alt="" style="width: 50px;margin-left: 70px; float:right;">
+        @elseif ($promo->id_canale==92)
+        <img src="{{asset('img\sebonNuova.png')}}" alt="" style="width:90px; margin-left: 70px; float:right;">
+        @elseif ($promo->id_canale==141)
+        <img src="{{asset('img\ayokaNuova.png')}}" alt="" style="width:90px;margin-left: 70px; float:right;">
+        @else($promo->id_canale==143)
+        <img src="" alt="" style="width: 50px;">
+        @endif
+    </div>
+    </div>
+    <div style="font-size: 15px; margin-bottom:1rem;"><i class="fa-regular fa-clock"></i> DAL {{$promo->date_start}} AL {{$promo->date_end}}</div>
+
     <div class="row">
 
         @component('common-components.colorful-widget')
