@@ -37,7 +37,7 @@ Route::get('/', function () {
 // ROTTE CONTROLER
 // Route::get('/dati', [App\Http\Controllers\SmartAdmin::class, 'welcome'])->name('dati');
 Route::get('/{filename}', [App\Http\Controllers\HomeController::class, 'mostraDati']);
-Route::get('/dashboard/intel_marketing_dashboard', [App\Http\Controllers\HomeController::class, 'benvenuto'])->name('grafici');
+Route::get('/dashboard/intel_marketing_dashboard/{id}', [App\Http\Controllers\HomeController::class, 'benvenuto'])->name('grafici');
 
 
 

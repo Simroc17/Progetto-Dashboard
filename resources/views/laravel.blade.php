@@ -145,10 +145,10 @@
                                 @endif
                             </tbody>
                             <div>
-                            <tfoot class="pagination" style="width:50px"></tfoot>
+                                <tfoot class="pagination" style="width:50px"></tfoot>
                             </div>
                         </table>
-                        
+
                         <!-- datatable end -->
                     </div>
                 </div>
@@ -237,9 +237,9 @@
         $('#bottone').on('click', function() {
             var category = $('#s1').val();
 
-           
 
-            
+
+
 
             let arrayDate = selezionaData();
             // console.log(arrayDate);
@@ -250,7 +250,7 @@
             tabella.style.display = 'block';
             tabella.style = 'col-12';
 
-            
+
             $.ajax({
                 url: "/{filename}",
                 type: "GET",
@@ -262,26 +262,11 @@
 
                 },
                 success: function(data) {
-                    var promozioni = data.promozioni;
-                    // console.log(promozioni)
-                    var html = '';
 
-                    if (promozioni.length > 0) {
-                        for (let i = 0; i < promozioni.length; i++) {
-                            html += '`<tr role="row">\
-                                 <td style="width:5%;" class="img' + promozioni[i]['id_canale'] + ' w3-round-xxlarge">  </td>\
-                                 <td style="width:30%;" class="nome"> ' + promozioni[i]['nome'] + ' </td>\
-                                 <td style="width:35%;" class="descrizione"> ' + promozioni[i]['descrizione'] + ' </td>\
-                                 <td style="width:15%;" class="date_start"> ' + promozioni[i]['date_start'] + ' </td>\
-                                 <td style="width:15%;"> ' + promozioni[i]['date_end'] + ' </td>\
-                            </tr>`'
-                        }
-
-                    } else {
-                        html += '<tr>\
-                                 <td> Nessuna promozione trovata</td>\
-                                 </tr>';
-                    }
+                    
+                    console.log(data)
+                    var html = data;
+                   
                     var options = {
                         valueNames: ['nome', 'descrizione', 'date_start']
                     };
@@ -303,32 +288,39 @@
             });
         });
     });
-   
 </script>
 
 <style>
+    td a {
+        color: black;
+        text-decoration: none;
+        /* no underline */
+    }
+
     /* td img {
         width: 100%;;
     } */
     .img75 {
-        background-image: url("img/ayokaNuova.png");
+        background-image: url("img/decoNuova.png");
         background-size: 60px;
         background-position: center;
         background-repeat: no-repeat;
         background-position-x: center;
         border: 2px solid;
-        width: 100%;;
+        width: 100%;
+        ;
 
     }
 
     .img92 {
-        background-image: url("img/ayokaNuova.png");
+        background-image: url("img/sebonNuova.png");
         background-size: 60px;
         background-position: center;
         background-repeat: no-repeat;
         background-position-x: center;
         border: 2px solid;
-        width: 100%;;
+        width: 100%;
+        ;
     }
 
     .img141 {
@@ -338,8 +330,10 @@
         background-repeat: no-repeat;
         background-position-x: center;
         border: 2px solid;
-        width: 100%;;
+        width: 100%;
+        ;
     }
+
     .img143 {
         background-image: url("img/ayokaNuova.png");
         background-size: 60px;
@@ -347,7 +341,8 @@
         background-repeat: no-repeat;
         background-position-x: center;
         border: 2px solid;
-        width: 100%;;
+        width: 100%;
+        ;
     }
 
     .pagination li a {

@@ -6,6 +6,8 @@ use App\Models\Gruppo;
 use App\Models\Market;
 use App\Models\Negozio;
 use App\Models\Promo;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +40,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function benvenuto(){
+    public function benvenuto($id){
+        $mutable = Carbon::now();
+        
+        $promo = Promo::find($id);
+        // dd($promo);  //Promo su cui ho cliccato
         $id = Auth::id();
         //dd($id);
         $negozi = Negozio::all();
@@ -59,7 +65,8 @@ class HomeController extends Controller
             }
             
         }//dd($arrayPromo);
-        return view('/dashboard/intel_marketing_dashboard', compact('negozi', 'markets','id', 'promozioni','arrayPromo','marketsAll'));
+       
+        return view('/dashboard/intel_marketing_dashboard', compact('negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo'));
     }
 
 
@@ -104,8 +111,29 @@ class HomeController extends Controller
                 ->get(); 
                
             }
-            
-            return response()->json(['promozioni'=>$promozioni]);
+            $mutable = Carbon::now();
+            $result='';
+            foreach ($promozioni as $promozione){
+                if ($promozione->date_end>$mutable){
+                $result.='`<tr role="row">\
+                <td style="width:5%;" class="img'.$promozione->id_canale.' w3-round-xxlarge">  </td>\
+                <td style="width:30%;" class="nome"> <a href="dashboard/intel_marketing_dashboard/'.$promozione->id.'" style="color: black;" > ' .$promozione->nome. ' </a> <button  class="btn btn-primary" style="float:right; background-color:green; border: revert;">In corso</button> </td>\
+                <td style="width:35%;" class="descrizione"> ' .$promozione->descrizione. ' </td>\
+                <td style="width:15%;" class="date_start"> ' .$promozione->date_start. ' </td>\
+                <td style="width:15%;"> ' .$promozione->date_end. ' </td>\
+                </tr>`';
+            }else{
+                $result.='`<tr role="row">\
+                <td style="width:5%;" class="img'.$promozione->id_canale.' w3-round-xxlarge">  </td>\
+                <td style="width:30%;" class="nome"> <a href="dashboard/intel_marketing_dashboard/'.$promozione->id.'" style="color: black;" > ' .$promozione->nome. ' </a> <button  class="btn btn-primary" style="float:right; background-color:red; border: revert;">Terminata</button> </td>\
+                <td style="width:35%;" class="descrizione"> ' .$promozione->descrizione. ' </td>\
+                <td style="width:15%;" class="date_start"> ' .$promozione->date_start. ' </td>\
+                <td style="width:15%;"> ' .$promozione->date_end. ' </td>\
+                </tr>`';
+            } 
+            }
+
+            return response()->json($result);
         }
         $promozioni = $query->get();
        
