@@ -66,7 +66,7 @@ class HomeController extends Controller
             
         }//dd($arrayPromo);
        
-        return view('/dashboard/intel_marketing_dashboard', compact('negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo'));
+        return view('/statistics/statistics_chartjs', compact('negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo'));
     }
 
 
@@ -117,7 +117,7 @@ class HomeController extends Controller
                 if ($promozione->date_end>$mutable){
                 $result.='`<tr role="row">\
                 <td style="width:5%;" class="img'.$promozione->id_canale.' w3-round-xxlarge">  </td>\
-                <td style="width:30%;" class="nome"> <a href="dashboard/intel_marketing_dashboard/'.$promozione->id.'" style="color: black;" > ' .$promozione->nome. ' </a> <i style="float:right" class="bullet-success"></i> </td>\
+                <td style="width:30%;" class="nome"> <a href="statistics/statistics_chartjs/'.$promozione->id.'" style="color: black;" > ' .$promozione->nome. ' </a> <i style="float:right" class="bullet-success"></i> </td>\
                 <td style="width:35%;" class="descrizione"> ' .$promozione->descrizione. ' </td>\
                 <td style="width:15%;" class="date_start"> ' .$promozione->date_start. ' </td>\
                 <td style="width:15%;" class="date_end"> ' .$promozione->date_end. ' </td>\
@@ -125,7 +125,7 @@ class HomeController extends Controller
             }else{
                 $result.='`<tr role="row">\
                 <td style="width:5%;" class="img'.$promozione->id_canale.' w3-round-xxlarge">  </td>\
-                <td style="width:30%;" class="nome"> <a href="dashboard/intel_marketing_dashboard/'.$promozione->id.'" style="color: black;" > ' .$promozione->nome. ' </a><i style="float:right" class="bullet-danger"></i>  </td>\
+                <td style="width:30%;" class="nome"> <a href="statistics/statistics_chartjs/'.$promozione->id.'" style="color: black;" > ' .$promozione->nome. ' </a><i style="float:right" class="bullet-danger"></i>  </td>\
                 <td style="width:35%;" class="descrizione"> ' .$promozione->descrizione. ' </td>\
                 <td style="width:15%;" class="date_start"> ' .$promozione->date_start. ' </td>\
                 <td style="width:15%;" class="date_end"> ' .$promozione->date_end. ' </td>\
