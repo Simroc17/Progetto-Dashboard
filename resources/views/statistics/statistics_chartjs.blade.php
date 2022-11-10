@@ -898,6 +898,195 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xl-12">
+                 <div class="panel-container show ">
+                <div class="panel-content ">
+                    <table id="dt-basic-example2" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-warning-200">
+                            <tr>
+                                <th>Regione</th>
+                                <th>Click Unici</th>
+                                <th>Click Totali</th>
+                                <th>Controls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>268410636</td>
+                                <td>Cooley, Walker J.</td>
+                                <td>03-13-19</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>077610947</td>
+                                <td>Wise, Ruby R.</td>
+                                <td>04-10-19</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>959104621</td>
+                                <td>Orr, Isabella V.</td>
+                                <td>05-14-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>756590147</td>
+                                <td>Schwartz, Xander P.</td>
+                                <td>11-05-18</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>533801387</td>
+                                <td>Gilmore, Cedric O.</td>
+                                <td>01-16-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>403080948</td>
+                                <td>Foley, Cynthia M.</td>
+                                <td>07-14-18</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>114290869</td>
+                                <td>Marshall, Carter V.</td>
+                                <td>08-30-18</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>033182882</td>
+                                <td>Reilly, Jacob K.</td>
+                                <td>09-19-18</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>471026559</td>
+                                <td>Barlow, Jena S.</td>
+                                <td>12-16-19</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>CustomerID</th>
+                                <th>Name</th>
+                                <th>PurchaseDate</th>
+                                <th>Controls</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
         </div>
 </main>
 @stop
@@ -1484,6 +1673,7 @@
             link1.classList.remove('active');
             link3.classList.remove('active');
             link2.classList.add('active');
+            link4.classList.remove('active');
         });
         $('#interattivi').on('click', function() {
             pagina1.style.display = 'none';
@@ -1493,6 +1683,7 @@
             link1.classList.remove('active');
             link2.classList.remove('active');
             link3.classList.add('active');
+            link4.classList.remove('active');
         });
         $('#prodotti').on('click', function() {
             pagina1.style.display = 'none';
@@ -1565,6 +1756,64 @@
 
         });
         $('#dt-basic-example1').dataTable({
+            responsive: true,
+            dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: [{
+                    extend: 'csvHtml5',
+                    text: 'CSV',
+                    titleAttr: 'Generate CSV',
+                    className: 'btn-outline-default'
+                },
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copy',
+                    titleAttr: 'Copy to clipboard',
+                    className: 'btn-outline-default'
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fal fa-print"></i>',
+                    titleAttr: 'Print Table',
+                    className: 'btn-outline-default'
+                }
+
+            ],
+            columnDefs: [{
+                    targets: -1,
+                    title: '',
+                    orderable: false,
+                    render: function(data, type, full, meta) {
+
+                        /*
+                        -- ES6
+                        -- convert using https://babeljs.io online transpiler
+                        return `
+                        <a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>
+                            <i class="fal fa-times"></i>
+                        </a>
+                        <div class='dropdown d-inline-block dropleft '>
+                            <a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>
+                                <i class="fal fa-ellipsis-v"></i>
+                            </a>
+                            <div class='dropdown-menu'>
+                                <a class='dropdown-item' href='javascript:void(0);'>Change Status</a>
+                                <a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>
+                            </div>
+                        </div>`;
+                            
+                        ES5 example below:  
+
+                        */
+                        return "\n\t\t\t\t\t\t<a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>\n\t\t\t\t\t\t\t<i class=\"fal fa-times\"></i>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t<a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>\n\t\t\t\t\t\t\t\t<i class=\"fal fa-ellipsis-v\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Change Status</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
+                    },
+                },
+
+            ]
+
+        });
+        $('#dt-basic-example2').dataTable({
             responsive: true,
             dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
                 "<'row'<'col-sm-12'tr>>" +
