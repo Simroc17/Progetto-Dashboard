@@ -55,10 +55,11 @@
                         </div>
 
 
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-4">
-
+                                <h4 class="text-dark"><b>Gruppo</b></h4>
                                 <select id="s1" onchange="selezionaValore()" class="form-select " style="height: 35px; border-radius: 5px;">
+                                    
                                     <option selected>Scegli supermercato</option>
                                     @foreach ($markets as $market )
 
@@ -71,8 +72,9 @@
                                 </select>
                             </div>
                             <div class="col-4">
+                                <h4 class="text-dark"><b>Canale</b></h4>
                                 <select id="s2" class="form-select" style="height: 35px; border-radius: 5px;" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
+                                    
                                     <option selected>Seleziona tutti</option>
                                     @foreach ($marketsAll as $market )
                                     <option value="{{$market->id_parent}}" style="display:none;">
@@ -82,7 +84,11 @@
 
                                 </select>
                             </div>
-                            <button id="bottone" class="btn  col-1" style="color:white; background-color: red; border-color: red;">cerca</button>
+                            <div class="row">
+                                <div class="col">
+                                    <button id="bottone" class="btn  " style="color:white; background-color: red; border-color: red; ">cerca</button>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

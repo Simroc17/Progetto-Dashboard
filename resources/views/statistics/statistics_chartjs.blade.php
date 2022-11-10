@@ -835,8 +835,8 @@
             </div>
         </div>
     </div>
-        <!-- ////Div PRODOTTI////////////// -->
-        <div id="pagina4" class="row" style="display:none;" >
+    <!-- ////Div PRODOTTI////////////// -->
+    <div id="pagina4" class="row" style="display:none;" >
             <div class="col-xl-12">
                 <div class="row">
                     <div class="col-xl-12">
@@ -1087,6 +1087,8 @@
                 </div>
             </div>
         </div>
+
+
         </div>
 </main>
 @stop
@@ -1100,7 +1102,7 @@
         var horizontalBarChart = {
             labels: ["January", "February", "March", "April"],
             datasets: [{
-                    label: "Red",
+                    label: "Connessioni Totali",
                     backgroundColor: color.success._300,
                     borderColor: color.success._500,
                     borderWidth: 1,
@@ -1110,7 +1112,7 @@
                     ]
                 },
                 {
-                    label: "Blue",
+                    label: "Connessioni Uniche",
                     backgroundColor: color.primary._300,
                     borderColor: color.primary._500,
                     borderWidth: 1,
@@ -1177,7 +1179,7 @@
         var barChartData = {
             labels: ["January", "February", "March", "April", "May", "June", "July"],
             datasets: [{
-                    label: "red",
+                    label: "Connessioni Totali",
                     backgroundColor: color.success._300,
                     borderColor: color.success._500,
                     borderWidth: 1,
@@ -1190,7 +1192,7 @@
                     ]
                 },
                 {
-                    label: "Blue",
+                    label: "Connessioni Uniche",
                     backgroundColor: color.primary._300,
                     borderColor: color.primary._500,
                     borderWidth: 1,
@@ -1260,7 +1262,7 @@
         var barChartData = {
             labels: ["January", "February", "March", "April", "May", "June", "July"],
             datasets: [{
-                    label: "red",
+                    label: "Visualizzazioni",
                     backgroundColor: color.success._300,
                     borderColor: color.success._500,
                     borderWidth: 1,
@@ -1273,7 +1275,7 @@
                     ]
                 },
                 {
-                    label: "Blue",
+                    label: "Pagine Uniche",
                     backgroundColor: color.primary._300,
                     borderColor: color.primary._500,
                     borderWidth: 1,
