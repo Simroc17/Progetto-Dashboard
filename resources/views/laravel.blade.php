@@ -8,7 +8,8 @@
 
 @section('content')
 
-<main id="js-page-content" role="main" class="page-content bg-white">
+<main id="js-page-content" role="main" class="page-content bg-white" style="color: white;
+    background-color: black!important;">
 
     <div class="subheader">
         <h1 class="subheader-title">

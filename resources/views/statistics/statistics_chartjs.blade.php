@@ -135,7 +135,7 @@
             <a class="nav-link " id="pagine">Pagine</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link "  id="interattivi">Interattivi</a>
+            <a class="nav-link " id="interattivi">Interattivi</a>
         </li>
         <li class="nav-item">
             <a class="nav-link " href="" id="prodotti">Prodotti</a>
@@ -147,60 +147,60 @@
 
     <!--/////////// DIV CONNESSIONI //////////-->
     <div class="row" id="pagina1">
-            <div class="col-xl-12">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div id="panel-2" class="panel">
-                            <div class="panel-hdr">
-                                <h2>
-                                    Visite Geografiche
-                                </h2>
-                                <div class="panel-toolbar">
-                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
-                                </div>
-                            </div>
-                            <div class="panel-container show">
-                                <div class="panel-content">
-                                    <div class="panel-tag">
-                                        A horizontal bar chart provides a way of showing data values represented as horizontal bars. It is sometimes used to show trend data, and the comparison of multiple data sets on top of another
-                                    </div>
-                                    <div id="horizontalBarChart">
-                                        <canvas style="width:100%; height:300px;"></canvas>
-                                    </div>
-                                </div>
+        <div class="col-xl-12">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="panel-2" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Visite Geografiche
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div id="panel-8" class="panel">
-                            <div class="panel-hdr">
-                            <h2>
-                                Andamento giornaliero
-                            </h2>
-                                <div class="panel-toolbar">
-                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    A horizontal bar chart provides a way of showing data values represented as horizontal bars. It is sometimes used to show trend data, and the comparison of multiple data sets on top of another
                                 </div>
-                            </div>
-                            <div class="panel-container show">
-                                <div class="panel-content">
-                                    <div class="panel-tag">
-                                        A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
-                                    </div>
-                                    <div id="barChart">
-                                        <canvas style="width:100%; height:300px;"></canvas>
-                                    </div>
+                                <div id="horizontalBarChart">
+                                    <canvas style="width:100%; height:300px;"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="panel-8" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Andamento giornaliero
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
+                                </div>
+                                <div id="barChart">
+                                    <canvas style="width:100%; height:300px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-xl-12">
             <div class="row">
                 <div class="col-xl-6">
@@ -447,33 +447,33 @@
     <!--//////// DIV PAGINE ////////////-->
     <div id="pagina2" class="row" style="display: none;">
         <div class="col-xl-12">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div id="panel-8" class="panel">
-                            <div class="panel-hdr">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="panel-8" class="panel">
+                        <div class="panel-hdr">
                             <h2>
                                 Andamento giornaliero
                             </h2>
-                                <div class="panel-toolbar">
-                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
-                                </div>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
                             </div>
-                            <div class="panel-container show">
-                                <div class="panel-content">
-                                    <div class="panel-tag">
-                                        A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
-                                    </div>
-                                    <div id="barChart1">
-                                        <canvas style="width:100%; height:300px;"></canvas>
-                                    </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
+                                </div>
+                                <div id="barChart1">
+                                    <canvas style="width:100%; height:300px;"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+            </div>
+            <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-6" class="panel">
                         <div class="panel-hdr">
@@ -550,7 +550,7 @@
                                     A stacked bar chart, is a graph that is used to break down and compare parts of a whole. Each bar in the chart represents a whole, and segments in the bar represent different parts or categories of that whole
                                 </div>
                                 <div id="barStacked">
-                                    <canvas style="width:100%; height:300px;"></canvas>
+                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -558,31 +558,281 @@
                 </div>
             </div>
             <div class="row">
-                    <div class="col-xl-12">
-                        <div id="panel-8" class="panel">
-                            <div class="panel-hdr">
+                <div class="col-xl-12">
+                    <div id="panel-8" class="panel">
+                        <div class="panel-hdr">
                             <h2>
                                 Andamento giornaliero
                             </h2>
-                                <div class="panel-toolbar">
-                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
-                                </div>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
                             </div>
-                            <div class="panel-container show">
-                                <div class="panel-content">
-                                    <div class="panel-tag">
-                                        A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
-                                    </div>
-                                    <div id="barChart2">
-                                        <canvas style="width:100%; height:300px;"></canvas>
-                                    </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
+                                </div>
+                                <div id="barChart2">
+                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card bg-light mb-3" style="max-width: 100%;">
+                        <div class="card-header text-dark">Header</div>
+                        <div class="card-body row">
+
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div class="panel-container show ">
+                <div class="panel-content ">
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-warning-200">
+                            <tr>
+                                <th>Regione</th>
+                                <th>Click Unici</th>
+                                <th>Click Totali</th>
+                                <th>Controls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>268410636</td>
+                                <td>Cooley, Walker J.</td>
+                                <td>03-13-19</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>077610947</td>
+                                <td>Wise, Ruby R.</td>
+                                <td>04-10-19</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>959104621</td>
+                                <td>Orr, Isabella V.</td>
+                                <td>05-14-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>756590147</td>
+                                <td>Schwartz, Xander P.</td>
+                                <td>11-05-18</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>533801387</td>
+                                <td>Gilmore, Cedric O.</td>
+                                <td>01-16-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>403080948</td>
+                                <td>Foley, Cynthia M.</td>
+                                <td>07-14-18</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>114290869</td>
+                                <td>Marshall, Carter V.</td>
+                                <td>08-30-18</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>033182882</td>
+                                <td>Reilly, Jacob K.</td>
+                                <td>09-19-18</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>471026559</td>
+                                <td>Barlow, Jena S.</td>
+                                <td>12-16-19</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>223467911</td>
+                                <td>Huber, Warren Z.</td>
+                                <td>05-30-20</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>CustomerID</th>
+                                <th>Name</th>
+                                <th>PurchaseDate</th>
+                                <th>Controls</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
         </div>
     </div>
 
@@ -593,9 +843,6 @@
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ URL::asset('js/statistics/chartjs/chartjs.bundle.js')}}"></script>
 <script>
-   
-
-
     /* horizontal bar chart */
     var horizontalBarChart = function() {
         var horizontalBarChart = {
@@ -756,8 +1003,8 @@
     }
     /* bar chart -- end */
 
-      /* bar chart */
-      var barChart1 = function() {
+    /* bar chart */
+    var barChart1 = function() {
         var barChartData = {
             labels: ["January", "February", "March", "April", "May", "June", "July"],
             datasets: [{
@@ -839,8 +1086,8 @@
     }
     /* bar chart -- end */
 
-      /* bar chart */
-      var barChart2 = function() {
+    /* bar chart */
+    var barChart2 = function() {
         var barChartData = {
             labels: ["January", "February", "March", "April", "May", "June", "July"],
             datasets: [{
@@ -992,7 +1239,7 @@
             }
         }
         new Chart($("#barStacked > canvas").get(0).getContext("2d"), config);
-    } 
+    }
     /* bar stacked -- end */
 
     /* pie chart */
@@ -1035,7 +1282,7 @@
     /* pie chart -- end */
 
     /* pie chart */
-     var pieChart1 = function() {
+    var pieChart1 = function() {
         var config = {
             type: 'pie',
             data: {
@@ -1114,8 +1361,8 @@
     }
     /* doughnut chart -- end */
 
-     /* doughnut chart */
-     var doughnutChart1 = function() {
+    /* doughnut chart */
+    var doughnutChart1 = function() {
         var config = {
             type: 'pie',
             data: {
@@ -1157,7 +1404,7 @@
 
     /* initialize all charts */
     $(document).ready(function() {
-       
+
         var pagina1 = document.getElementById('pagina1');
         var pagina2 = document.getElementById('pagina2');
         var link1 = document.getElementById('connessioni');
@@ -1181,6 +1428,64 @@
         });
 
         $('#dt-basic-example').dataTable({
+            responsive: true,
+            dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: [{
+                    extend: 'csvHtml5',
+                    text: 'CSV',
+                    titleAttr: 'Generate CSV',
+                    className: 'btn-outline-default'
+                },
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copy',
+                    titleAttr: 'Copy to clipboard',
+                    className: 'btn-outline-default'
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fal fa-print"></i>',
+                    titleAttr: 'Print Table',
+                    className: 'btn-outline-default'
+                }
+
+            ],
+            columnDefs: [{
+                    targets: -1,
+                    title: '',
+                    orderable: false,
+                    render: function(data, type, full, meta) {
+
+                        /*
+                        -- ES6
+                        -- convert using https://babeljs.io online transpiler
+                        return `
+                        <a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>
+                            <i class="fal fa-times"></i>
+                        </a>
+                        <div class='dropdown d-inline-block dropleft '>
+                            <a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>
+                                <i class="fal fa-ellipsis-v"></i>
+                            </a>
+                            <div class='dropdown-menu'>
+                                <a class='dropdown-item' href='javascript:void(0);'>Change Status</a>
+                                <a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>
+                            </div>
+                        </div>`;
+                            
+                        ES5 example below:  
+
+                        */
+                        return "\n\t\t\t\t\t\t<a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>\n\t\t\t\t\t\t\t<i class=\"fal fa-times\"></i>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t<a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>\n\t\t\t\t\t\t\t\t<i class=\"fal fa-ellipsis-v\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Change Status</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
+                    },
+                },
+
+            ]
+
+        });
+        $('#dt-basic-example1').dataTable({
             responsive: true,
             dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
                 "<'row'<'col-sm-12'tr>>" +
