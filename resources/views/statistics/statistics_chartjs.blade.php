@@ -138,10 +138,10 @@
             <a class="nav-link " id="interattivi">Interattivi</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="" id="prodotti">Prodotti</a>
+            <a class="nav-link "  id="prodotti">Prodotti</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="" id="riepilogo">Riepilogo</a>
+            <a class="nav-link "  id="riepilogo">Riepilogo</a>
         </li>
     </ul>
 
@@ -466,7 +466,7 @@
                                     A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
                                 </div>
                                 <div id="barChart1">
-                                    <canvas style="width:100%; height:300px;"></canvas>
+                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -492,7 +492,7 @@
                                     Pie charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data
                                 </div>
                                 <div id="pieChart1">
-                                    <canvas style="width:100%; height:300px;"></canvas>
+                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -516,7 +516,7 @@
                                     Doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data
                                 </div>
                                 <div id="doughnutChart1">
-                                    <canvas style="width:100%; height:300px;"></canvas>
+                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -835,7 +835,70 @@
             </div>
         </div>
     </div>
+        <!-- ////Div PRODOTTI////////////// -->
+        <div id="pagina4" class="row" style="display:none;" >
+            <div class="col-xl-12">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card bg-light mb-3" style="max-width: 100%;">
+                            <div class="card-header text-dark">Header</div>
+                            <div class="card-body row">
 
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </main>
 @stop
 
@@ -1407,13 +1470,17 @@
 
         var pagina1 = document.getElementById('pagina1');
         var pagina2 = document.getElementById('pagina2');
+        var pagina3 = document.getElementById('pagina3');
+        var pagina4 = document.getElementById('pagina4');
         var link1 = document.getElementById('connessioni');
         var link2 = document.getElementById('pagine');
         var link3 = document.getElementById('interattivi');
+        var link4= document.getElementById('prodotti');
         $('#pagine').on('click', function() {
             pagina1.style.display = 'none';
             pagina2.style.display = 'block';
             pagina3.style.display = 'none';
+            pagina4.style.display = 'none';
             link1.classList.remove('active');
             link3.classList.remove('active');
             link2.classList.add('active');
@@ -1422,10 +1489,22 @@
             pagina1.style.display = 'none';
             pagina2.style.display = 'none';
             pagina3.style.display = 'block';
+            pagina4.style.display = 'none';
             link1.classList.remove('active');
             link2.classList.remove('active');
             link3.classList.add('active');
         });
+        $('#prodotti').on('click', function() {
+            pagina1.style.display = 'none';
+            pagina2.style.display = 'none';
+            pagina3.style.display = 'none';
+            pagina4.style.display = 'block';
+            link1.classList.remove('active');
+            link2.classList.remove('active');
+            link3.classList.remove('active');
+            link4.classList.add('active');
+        });
+
 
         $('#dt-basic-example').dataTable({
             responsive: true,
