@@ -52,13 +52,13 @@
                 <div class="row">
                     <div class="col-sm-6 border-right">
                         <div class="description-block">
-                            <h5 class="description-header text-white">2.852</h5>
+                            <h5 class="description-header text-white">{{$sommaDesktop+$sommaMobile}}</h5>
                             <span class="description-text text-white">Totali</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="description-block">
-                            <h5 class="description-header text-white">786</h5>
+                            <h5 class="description-header text-white">{{$sommaUnicaDesktop+$sommaUnicaMobile}}</h5>
                             <span class="description-text text-white">Uniche</span>
                         </div>
                     </div>
@@ -1100,29 +1100,25 @@
     var connessioniUniche = <?php echo json_encode($arrayUniq); ?>;
     var connessioniTotale = <?php echo json_encode($arrayTot); ?>;
     var giorni = <?php echo json_encode($arrayGiorni); ?>;
+   
     /* horizontal bar chart */
     var horizontalBarChart = function() {
         var horizontalBarChart = {
-            labels: ["January", "February", "March", "April"],
+            labels: [],
             datasets: [{
                     label: "Connessioni Totali",
                     backgroundColor: color.success._300,
                     borderColor: color.success._500,
                     borderWidth: 1,
-                    data: [
-                        45,
-                        60, -28, -9
-                    ]
+                    data: []
+                    
                 },
                 {
                     label: "Connessioni Uniche",
                     backgroundColor: color.primary._300,
                     borderColor: color.primary._500,
                     borderWidth: 1,
-                    data: [-10,
-                        29, -34,
-                        64
-                    ]
+                    data: []
                 }
             ]
 
@@ -1488,15 +1484,15 @@
     /* bar stacked -- end */
 
     /* pie chart */
+    var connessioniDesktop=<?php echo json_encode($sommaDesktop); ?>;
+    var connessioniMobile=<?php echo json_encode($sommaMobile); ?>;
     var pieChart = function() {
         var config = {
             type: 'pie',
             data: {
                 datasets: [{
-                    data: [
-                        11,
-                        16,
-                    ],
+                    data: [connessioniDesktop,connessioniMobile]     
+                    ,
                     backgroundColor: [
                         color.primary._200,
                         color.primary._400,
@@ -1519,7 +1515,9 @@
                     labels: {
                         usePointStyle: true,
                     },
-                }
+                },
+                
+            
             }
         };
         new Chart($("#pieChart > canvas").get(0).getContext("2d"), config);
@@ -1564,17 +1562,17 @@
         new Chart($("#pieChart1 > canvas").get(0).getContext("2d"), config);
     }
     /* pie chart -- end */
-
+    var connessioniDesktopU=<?php echo json_encode($sommaUnicaDesktop); ?>;
+    var connessioniMobileU=<?php echo json_encode($sommaUnicaMobile); ?>;
     /* doughnut chart */
     var doughnutChart = function() {
         var config = {
             type: 'pie',
             data: {
                 datasets: [{
-                    data: [
-                        11,
-                        16,
-                    ],
+                    data: [connessioniDesktopU,connessioniMobileU],
+                       
+                    
                     backgroundColor: [
                         color.success._200,
                         color.success._400,

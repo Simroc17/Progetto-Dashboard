@@ -47,12 +47,16 @@ class HomeController extends Controller
         
         $promo = Promo::find($id);
         //dd($promo);  //Promo su cui ho cliccato
-        $visits = Visite::where(['id_promo' => $promo->id])->get();
+        ///////////////////   GRAFICI PARTE CONNESSIONI //////////////////////
+        $visits = Visite::where(['id_promo' => $promo->id])
+        ->orderBy('data_visita', 'ASC')
+        ->get();
         //dd($visit); //Visite
         $arrayTot = [];
         for( $i=0; $i<count($visits); $i++ ){
             $arrayTot[$i] = $visits[$i]->visite_qta;
         }
+        //dd($arrayTot);
         $arrayUniq = [];
         for( $i=0; $i<count($visits); $i++ ){
             $arrayUniq[$i] = $visits[$i]->visite_uniche_qta;
@@ -61,8 +65,62 @@ class HomeController extends Controller
         for( $i=0; $i<count($visits); $i++ ){
             $arrayGiorni[$i] = $visits[$i]->data_visita;
         }
+        $arrayDesktop=[];
+        for( $i=0; $i<count($visits); $i++ ){
+            $arrayDesktop[$i] = $visits[$i]->visite_desktop_qta;
+        }
+        $arrayMobile=[];
+        for( $i=0; $i<count($visits); $i++ ){
+            $arrayMobile[$i] = $visits[$i]->visite_mobile_qta;
+        }
+        $sommaMobile=array_sum($arrayMobile);
+       // dd($sommaMobile);
+        $sommaDesktop=array_sum($arrayDesktop);
+        //dd($sommaDesktop);
+        $arrayDesktopUniq=[];
+        for( $i=0; $i<count($visits); $i++ ){
+            $arrayDesktopUniq[$i] = $visits[$i]->visite_uniche_desktop_qta;
+        }
+        $arrayMobileUniq=[];
+        for( $i=0; $i<count($visits); $i++ ){
+            $arrayMobileUniq[$i] = $visits[$i]->visite_uniche_mobile_qta;
+        } 
+        $sommaUnicaDesktop=array_sum($arrayDesktopUniq);
+        $sommaUnicaMobile=array_sum($arrayMobileUniq);
+       // dd($sommaUnicaMobile);
 
         $geos = Geo::where(['id_promo' => $promo->id])->get();
+        // $regioni = Geo::where(['id_promo' => $promo->id])
+        // ->select('place')
+        // ->groupBy('place')
+        // ->get();
+        //dd($regioni[0]->place);
+        $arrayRegioni = [""];
+        for( $i=0; $i<count($geos); $i++ ){
+                $arrayRegioni[$i] = $geos[$i]->place;
+        }
+        for ($i=0; $i<$arrayRegioni; $i++ ){
+
+        }
+        $arrayTotale = [];
+        for( $i=0; $i<count($geos); $i++ ){
+            // if($geos[$i]->place=='Abruzzo'){
+            $arrayTotale[$i] = $geos[$i]->visite_region_qta;
+            // }
+        }
+        //dd($arrayTotale);
+        $arrayUniche = [];
+        for( $i=0; $i<count($geos); $i++ ){
+            // if($geos[$i]->place=='Abruzzo'){
+            $arrayUniche[$i] = $geos[$i]->visite_uniche_region_qta;
+            // }
+        }
+        //dd($arrayUniche);
+       ////////////////// FINE CONNESSIONI ///////////////////////
+
+       ////////////////// GRAFICI PAGINE ///////////////////
+
+       ////////////////// FINE PAGINE /////////////////////////
         $id = Auth::id();
         //dd($id);
         $negozi = Negozio::all();
@@ -84,7 +142,7 @@ class HomeController extends Controller
             
         }//dd($arrayPromo);
        
-        return view('/statistics/statistics_chartjs', compact('negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni'));
+        return view('/statistics/statistics_chartjs', compact(  'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
     }
 
 
