@@ -72,14 +72,14 @@
                 <div class="row">
                     <div class="col-sm-6 border-right">
                         <div class="description-block">
-                            <h5 class="description-header text-white">2.852</h5>
-                            <span class="description-text text-white">Totali</span>
+                            <h5 class="description-header text-white"></h5>
+                            <span class="description-text text-white">N.VOLANTINI</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="description-block">
-                            <h5 class="description-header text-white">786</h5>
-                            <span class="description-text text-white">Uniche</span>
+                            <h5 class="description-header text-white">{{$sommaDesktopPag+$sommaMobilePag}}</h5>
+                            <span class="description-text text-white">VISUALIZZATE</span>
                         </div>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
                                     A horizontal bar chart provides a way of showing data values represented as horizontal bars. It is sometimes used to show trend data, and the comparison of multiple data sets on top of another
                                 </div>
                                 <div id="horizontalBarChart">
-                                    <canvas style="width:100%; height:300px;"></canvas>
+                                    <canvas style="width:100%; height:800px;"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -1097,20 +1097,20 @@
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ URL::asset('js/statistics/chartjs/chartjs.bundle.js')}}"></script>
 <script>
-    var connessioniUniche = <?php echo json_encode($arrayUniq); ?>;
-    var connessioniTotale = <?php echo json_encode($arrayTot); ?>;
-    var giorni = <?php echo json_encode($arrayGiorni); ?>;
+    
    
     /* horizontal bar chart */
+    var regioni = <?php echo json_encode($arr_regioni); ?>;
+    
     var horizontalBarChart = function() {
         var horizontalBarChart = {
-            labels: [],
+            labels: regioni,
             datasets: [{
                     label: "Connessioni Totali",
                     backgroundColor: color.success._300,
                     borderColor: color.success._500,
                     borderWidth: 1,
-                    data: []
+                    data: [ ]
                     
                 },
                 {
@@ -1174,6 +1174,9 @@
     /* horizontal bar chart -- end */
 
     /* bar chart */
+    var connessioniUniche = <?php echo json_encode($arrayUniq); ?>;
+    var connessioniTotale = <?php echo json_encode($arrayTot); ?>;
+    var giorni = <?php echo json_encode($arrayGiorni); ?>;
     var barChart = function() {
         var barChartData = {
             labels: giorni,
@@ -1245,34 +1248,28 @@
     /* bar chart -- end */
 
     /* bar chart */
+    var visualizzazioni=<?php echo json_encode($arrayTotPag); ?>;
+    var pagineUniche=<?php echo json_encode($arrayUnicPag); ?>;
+    var giorniPag=<?php echo json_encode($arrayGiorniPag); ?>;
     var barChart1 = function() {
         var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: giorniPag,
             datasets: [{
                     label: "Visualizzazioni",
                     backgroundColor: color.success._300,
                     borderColor: color.success._500,
                     borderWidth: 1,
-                    data: [
-                        45,
-                        75,
-                        26,
-                        23,
-                        60, -48, -9
-                    ]
+                    data: visualizzazioni
+                       
+                    
                 },
                 {
                     label: "Pagine Uniche",
                     backgroundColor: color.primary._300,
                     borderColor: color.primary._500,
                     borderWidth: 1,
-                    data: [-10,
-                        16,
-                        72,
-                        93,
-                        29, -74,
-                        64
-                    ]
+                    data: pagineUniche
+                    
                 }
             ]
 
@@ -1494,7 +1491,7 @@
                     data: [connessioniDesktop,connessioniMobile]     
                     ,
                     backgroundColor: [
-                        color.primary._200,
+                        color.success._300,
                         color.primary._400,
                         color.success._50,
                         color.success._300,
@@ -1525,14 +1522,16 @@
     /* pie chart -- end */
 
     /* pie chart */
+    var connessioniDesktopPag=<?php echo json_encode($sommaDesktopPag); ?>;
+    var connessioneMobilePag=<?php echo json_encode($sommaMobilePag); ?>;
     var pieChart1 = function() {
         var config = {
             type: 'pie',
             data: {
                 datasets: [{
-                    data: [
-                        11,
-                        16,
+                    data: [ connessioniDesktopPag,connessioneMobilePag
+                        
+                        
                     ],
                     backgroundColor: [
                         color.primary._200,
@@ -1574,8 +1573,8 @@
                        
                     
                     backgroundColor: [
-                        color.success._200,
-                        color.success._400,
+                        color.primary._300,
+                        color.success._500,
                         color.primary._50,
                         color.primary._300,
                         color.primary._500
@@ -1605,14 +1604,15 @@
     /* doughnut chart -- end */
 
     /* doughnut chart */
+    var connDesktop=<?php echo json_encode($sommaDesktopUnicPag); ?>;
+    var connMobile= <?php echo json_encode($sommaMobileUnicPag); ?>;
     var doughnutChart1 = function() {
         var config = {
             type: 'pie',
             data: {
                 datasets: [{
-                    data: [
-                        11,
-                        16,
+                    data: [connDesktop,connMobile
+                        
                     ],
                     backgroundColor: [
                         color.success._200,

@@ -6,6 +6,7 @@ use App\Models\Geo;
 use App\Models\Gruppo;
 use App\Models\Market;
 use App\Models\Negozio;
+use App\Models\Pagina;
 use App\Models\Promo;
 use App\Models\Visite;
 use Carbon\Carbon;
@@ -47,6 +48,7 @@ class HomeController extends Controller
         
         $promo = Promo::find($id);
         //dd($promo);  //Promo su cui ho cliccato
+
         ///////////////////   GRAFICI PARTE CONNESSIONI //////////////////////
         $visits = Visite::where(['id_promo' => $promo->id])
         ->orderBy('data_visita', 'ASC')
@@ -90,35 +92,79 @@ class HomeController extends Controller
        // dd($sommaUnicaMobile);
 
         $geos = Geo::where(['id_promo' => $promo->id])->get();
-        // $regioni = Geo::where(['id_promo' => $promo->id])
-        // ->select('place')
-        // ->groupBy('place')
-        // ->get();
-        //dd($regioni[0]->place);
-        $arrayRegioni = [""];
-        for( $i=0; $i<count($geos); $i++ ){
-                $arrayRegioni[$i] = $geos[$i]->place;
+        $regioni = Geo::where(['id_promo' => $promo->id])
+        ->select('place')
+        ->groupBy('place')
+        ->get();
+        $arr_regioni=[];
+        for ($i = 0; $i < $regioni->count(); $i ++) {
+            $arr_regioni[$i]=$regioni[$i]->place;
         }
-        for ($i=0; $i<$arrayRegioni; $i++ ){
+        // $arrConnTot=[];
+        // for ($i = 0; $i < $geos->count(); $i  ++) {
+        //     for ($j = 0; $j < $regioni->count(); $i  ++) {
+        //         if ($geos[$i]->place==$regioni[$j]){
+        //             $arrConnTot[$i]=$geos[$i]->visite_region_qta;
+        //         }
+        //     }
+        // }
+        // dd($arrConnTot);
+        $products = Geo::groupBy('place')
+        ->where(['id_promo' => $promo->id])
+        ->select(DB::raw("SUM(visite_region_qta) AS somma, SUM(visite_uniche_region_qta) AS uniche"), 'place')
+        ->get();
+   
 
-        }
-        $arrayTotale = [];
-        for( $i=0; $i<count($geos); $i++ ){
-            // if($geos[$i]->place=='Abruzzo'){
-            $arrayTotale[$i] = $geos[$i]->visite_region_qta;
-            // }
-        }
-        //dd($arrayTotale);
-        $arrayUniche = [];
-        for( $i=0; $i<count($geos); $i++ ){
-            // if($geos[$i]->place=='Abruzzo'){
-            $arrayUniche[$i] = $geos[$i]->visite_uniche_region_qta;
-            // }
-        }
+        
+        
+        
+        
+        
+       
         //dd($arrayUniche);
        ////////////////// FINE CONNESSIONI ///////////////////////
 
+
        ////////////////// GRAFICI PAGINE ///////////////////
+       $pagine = Pagina::where(['id_promo' => $promo->id])
+       ->orderBy('data_visita', 'ASC')
+       ->get();
+       $arrayTotPag=[];
+       for( $i=0; $i<count($pagine); $i++ ){
+        $arrayTotPag[$i] = $pagine[$i]->pagina_qta;
+    }
+        
+        $arrayUnicPag=[];
+        for( $i=0; $i<count($pagine); $i++ ){
+            $arrayUnicPag[$i] = $pagine[$i]->pagina_unica_qta;
+        }
+        $arrayGiorniPag = [];
+        for( $i=0; $i<count($pagine); $i++ ){
+            $arrayGiorniPag[$i] = $pagine[$i]->data_visita;
+        }
+
+        $arrayDesktopPag=[];
+        for( $i=0; $i<count($pagine); $i++ ){
+            $arrayDesktopPag[$i] = $pagine[$i]->pagina_desktop_qta;
+        }
+        $sommaDesktopPag=array_sum($arrayDesktopPag);
+        $arrayMobilePag=[];
+        for( $i=0; $i<count($pagine); $i++ ){
+            $arrayMobilePag[$i] = $pagine[$i]->pagina_mobile_qta;
+        }
+        $sommaMobilePag=array_sum($arrayMobilePag); //
+
+        $arrayDesktopUnicPag=[];
+        for( $i=0; $i<count($pagine); $i++ ){
+            $arrayDesktopUnicPag[$i] = $pagine[$i]->pagina_desktop_unica_qta;
+        }
+            $sommaDesktopUnicPag=array_sum($arrayDesktopUnicPag);
+
+        $arrayMobileUnicPag=[];
+        for( $i=0; $i<count($pagine); $i++ ){
+            $arrayMobileUnicPag[$i] = $pagine[$i]->pagina_mobile_unica_qta;
+        }
+            $sommaMobileUnicPag = array_sum($arrayMobileUnicPag);
 
        ////////////////// FINE PAGINE /////////////////////////
         $id = Auth::id();
@@ -142,7 +188,7 @@ class HomeController extends Controller
             
         }//dd($arrayPromo);
        
-        return view('/statistics/statistics_chartjs', compact(  'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
+        return view('/statistics/statistics_chartjs', compact('arr_regioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
     }
 
 
