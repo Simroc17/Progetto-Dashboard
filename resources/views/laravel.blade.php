@@ -524,8 +524,8 @@
         background-position: center;
         background-repeat: no-repeat;
         background-position-x: center;
-
         width: 100%;
+        border-radius: 35px;
         ;
 
     }
@@ -536,7 +536,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-position-x: center;
-
+        border-radius: 35px;
         width: 100%;
         ;
     }
@@ -547,7 +547,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-position-x: center;
-
+        border-radius: 35px;
         width: 100%;
         ;
     }
@@ -558,7 +558,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-position-x: center;
-
+        border-radius: 35px;
         width: 100%;
         ;
     }

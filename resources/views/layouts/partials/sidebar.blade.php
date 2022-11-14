@@ -10,7 +10,7 @@ $menuJson = '{
           
           {
             "link": "/dashboard/intel_marketing_dashboard",
-            "title": "Home",
+            "title": "Dashboard Andamento",
             "filterTag": "application intel marketing dashboard",
             "i18n": "nav.application_intel_marketing_dashboard"
           }
@@ -37,7 +37,7 @@ $menuJson = '{
       
       
      {
-        "title": "Datatables",
+        "title": "Ricerca",
         "filterTag": "datatables datagrid",
         "icon": "",
         "i18n": "nav.datatables",
@@ -45,15 +45,15 @@ $menuJson = '{
         "spanClass": "dl-ref bg-primary-500 hidden-nav-function-minify hidden-nav-function-top",
         "child": [
           {
-            "link": "/datatables/datatables_basic",
-            "title": "Basic",
+            "link": "/promozioni",
+            "title": "Promozioni",
             "filterTag": "datatables datagrid basic",
             "i18n": "nav.datatables_basic"
           },
          
           {
             "link": "/datatables/datatables_buttons",
-            "title": "Buttons",
+            "title": "Volantini",
             "filterTag": "datatables datagrid buttons",
             "i18n": "nav.datatables_buttons"
           }

@@ -8,7 +8,7 @@
 
 @section('content')
 <main id="js-page-content" role="main" class="page-content" style="color: white;
-    background-color: black;">
+    background-color: black!important;" >
 
 
     <div class="subheader">
@@ -132,16 +132,16 @@
             <a class="nav-link active" href="" aria-current="page" id="connessioni">Connessioni</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " id="pagine">Pagine</a>
+            <a class="nav-link " href="#" id="pagine">Pagine</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link " id="interattivi">Interattivi</a>
+            <a class="nav-link " href="#" id="interattivi">Interattivi</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link "  id="prodotti">Prodotti</a>
+            <a class="nav-link " href="#" id="prodotti">Prodotti</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link "  id="riepilogo">Riepilogo</a>
+            <a class="nav-link " href="#" id="riepilogo">Riepilogo</a>
         </li>
     </ul>
 
@@ -1097,6 +1097,9 @@
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ URL::asset('js/statistics/chartjs/chartjs.bundle.js')}}"></script>
 <script>
+    var connessioniUniche = <?php echo json_encode($arrayUniq); ?>;
+    var connessioniTotale = <?php echo json_encode($arrayTot); ?>;
+    var giorni = <?php echo json_encode($arrayGiorni); ?>;
     /* horizontal bar chart */
     var horizontalBarChart = function() {
         var horizontalBarChart = {
@@ -1177,32 +1180,20 @@
     /* bar chart */
     var barChart = function() {
         var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: giorni,
             datasets: [{
                     label: "Connessioni Totali",
                     backgroundColor: color.success._300,
                     borderColor: color.success._500,
                     borderWidth: 1,
-                    data: [
-                        45,
-                        75,
-                        26,
-                        23,
-                        60, -48, -9
-                    ]
+                    data: connessioniTotale,
                 },
                 {
                     label: "Connessioni Uniche",
                     backgroundColor: color.primary._300,
                     borderColor: color.primary._500,
                     borderWidth: 1,
-                    data: [-10,
-                        16,
-                        72,
-                        93,
-                        29, -74,
-                        64
-                    ]
+                    data: connessioniUniche,
                 }
             ]
 
