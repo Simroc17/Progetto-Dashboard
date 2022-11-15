@@ -4,11 +4,11 @@
 
 @section('headerStyle')
 <link rel="stylesheet" media="screen, print" href="{{ URL::asset('css/statistics/chartjs/chartjs.css')}}">
+
 @stop
 
 @section('content')
-<main id="js-page-content" role="main" class="page-content" style="color: white;
-    background-color: black!important;" >
+<main id="js-page-content" role="main" class="page-content"  >
 
 
     <div class="subheader">
@@ -53,13 +53,13 @@
                     <div class="col-sm-6 border-right">
                         <div class="description-block">
                             <h5 class="description-header text-white">{{$sommaDesktop+$sommaMobile}}</h5>
-                            <span class="description-text text-white">Totali</span>
+                            <span class="description-text text-white">TOTALI</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="description-block">
                             <h5 class="description-header text-white">{{$sommaUnicaDesktop+$sommaUnicaMobile}}</h5>
-                            <span class="description-text text-white">Uniche</span>
+                            <span class="description-text text-white">UNICHE</span>
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-sm-6 border-right">
                         <div class="description-block">
-                            <h5 class="description-header text-white"></h5>
+                            <h5 class="description-header text-white">{{$volantino}}</h5>
                             <span class="description-text text-white">N.VOLANTINI</span>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
                                     A horizontal bar chart provides a way of showing data values represented as horizontal bars. It is sometimes used to show trend data, and the comparison of multiple data sets on top of another
                                 </div>
                                 <div id="horizontalBarChart">
-                                    <canvas style="width:100%; height:800px;"></canvas>
+                                    <canvas style="width:100%; height:500px;"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -255,191 +255,60 @@
         </div>
         <div class="col-xl-12">
             <div class="panel-container show ">
-                <div class="panel-content ">
-                    <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                        <thead class="bg-warning-200">
-                            <tr>
-                                <th>Regione</th>
-                                <th>Click Unici</th>
-                                <th>Click Totali</th>
-                                <th>Controls</th>
+                    <div class="table-list-container " id="users">
+                        <div class="row justify-content-between">
+                            <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
+                               
+                            </div>
+                            
+                        </div>
+
+                       
+                        <table id="intestazione"  class="table table-hover table-striped w-100 mt-1">
+                            <thead>
+                            <tr class="text-white" role="row" style="background-color: red;">
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="regione">Regione</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 30%;" ><button type="button" class="sort" data-sort="click_unici">Click Unici</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="click_totali">Click Totali</button></th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                        </table>
+                        <table id="test-list"  class="table table-hover table-striped w-100 mt-1">
+                           
+                            <tbody id="tbody" class="list ">
+                               
+                                @foreach ($datiGrafico as $dato )
+                                <tr>
+                                    
+                                    <td class="regione" style="width: 35%;" >{{ $dato['place'] }}</td>
+                                    <td class="click_unici" style="width: 30%;">{{ $dato['uniche'] }}</td>
+                                    <td class="click_totali" style="width: 35%;">{{ $dato['somma']}}</td>
+
+
+
+
+
+
+                                    
+                                    
+                                </tr>
+                                @endforeach
+                               
+                            </tbody>
+                        </table>
+                        <table id="tfoot" style="display: block;" class="table-footer">
                             <tr>
-                                <td>268410636</td>
-                                <td>Cooley, Walker J.</td>
-                                <td>03-13-19</td>
-                                <td>1</td>
+                                <td class="table-pagination position-absolute">
+                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
+                                    <ul class="pagination"></ul>
+                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
+                                </td>
+                                
+                                
                             </tr>
-                            <tr>
-                                <td>077610947</td>
-                                <td>Wise, Ruby R.</td>
-                                <td>04-10-19</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>959104621</td>
-                                <td>Orr, Isabella V.</td>
-                                <td>05-14-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>756590147</td>
-                                <td>Schwartz, Xander P.</td>
-                                <td>11-05-18</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>533801387</td>
-                                <td>Gilmore, Cedric O.</td>
-                                <td>01-16-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>403080948</td>
-                                <td>Foley, Cynthia M.</td>
-                                <td>07-14-18</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>114290869</td>
-                                <td>Marshall, Carter V.</td>
-                                <td>08-30-18</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>033182882</td>
-                                <td>Reilly, Jacob K.</td>
-                                <td>09-19-18</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>471026559</td>
-                                <td>Barlow, Jena S.</td>
-                                <td>12-16-19</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>CustomerID</th>
-                                <th>Name</th>
-                                <th>PurchaseDate</th>
-                                <th>Controls</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <!-- datatable end -->
-                </div>
+                        </table>
+                        
+                    </div>
             </div>
         </div>
     </div>
@@ -1091,17 +960,78 @@
 
         </div>
 </main>
+<link rel="stylesheet" href="https://btn.ninja/css/addons.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 @stop
 
 @section('footerScript')
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
+<script src="{{ URL::asset('js/datagrid/datatables/datatables.export.js') }}"></script>
+<script src="{{ URL::asset('js/dependency/moment/moment.js') }}"></script>
+<script src="{{ URL::asset('js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js') }}"></script>
 <script src="{{ URL::asset('js/statistics/chartjs/chartjs.bundle.js')}}"></script>
+
+
 <script>
-    
+     window.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
+
+      // Prova ricerca
+      var options = {
+        valueNames: ['regione', 'click_unici', 'click_totali'],
+        page: 10,
+        pagination: {
+            innerWindow: 1,
+            left: 0,
+            right: 0,
+            paginationClass: "pagination",
+        }
+    };
+
+    var userList = new List('users', options);
+    // Prova Pagination
+    var monkeyList = new List('test-list', {
+        valueNames: ['regione', 'click_unici', 'click_totali',],
+        page: 10,
+        pagination: {
+            innerWindow: 1,
+            left: 0,
+            right: 0,
+            paginationClass: "pagination",
+        }
+    });
+
+    $('.jPaginateNext').on('click', function() {
+            var list = $('.pagination').find('li');
+            $.each(list, function(position, element) {
+                if ($(element).is('.active')) {
+                    $(list[position + 1]).trigger('click');
+                }
+            })
+        });
+
+
+        $('.jPaginateBack').on('click', function() {
+            var list = $('.pagination').find('li');
+            $.each(list, function(position, element) {
+                if ($(element).is('.active')) {
+                    $(list[position - 1]).trigger('click');
+                }
+            })
+        });
+
+
+});
+   
+   
    
     /* horizontal bar chart */
-    var regioni = <?php echo json_encode($arr_regioni); ?>;
-    
+    var regioni = <?php echo json_encode($arrRegioni); ?>;
+    var arrUniche = <?php echo json_encode($arrUniche); ?>;
+    var arrTotali = <?php echo json_encode($arrTotali); ?>;
     var horizontalBarChart = function() {
         var horizontalBarChart = {
             labels: regioni,
@@ -1110,7 +1040,7 @@
                     backgroundColor: color.success._300,
                     borderColor: color.success._500,
                     borderWidth: 1,
-                    data: [ ]
+                    data: arrTotali
                     
                 },
                 {
@@ -1118,7 +1048,7 @@
                     backgroundColor: color.primary._300,
                     borderColor: color.primary._500,
                     borderWidth: 1,
-                    data: []
+                    data: arrUniche
                 }
             ]
 
@@ -1648,6 +1578,8 @@
     /* initialize all charts */
     $(document).ready(function() {
 
+     
+
         var pagina1 = document.getElementById('pagina1');
         var pagina2 = document.getElementById('pagina2');
         var pagina3 = document.getElementById('pagina3');
@@ -1688,64 +1620,7 @@
         });
 
 
-        $('#dt-basic-example').dataTable({
-            responsive: true,
-            dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            buttons: [{
-                    extend: 'csvHtml5',
-                    text: 'CSV',
-                    titleAttr: 'Generate CSV',
-                    className: 'btn-outline-default'
-                },
-                {
-                    extend: 'copyHtml5',
-                    text: 'Copy',
-                    titleAttr: 'Copy to clipboard',
-                    className: 'btn-outline-default'
-                },
-                {
-                    extend: 'print',
-                    text: '<i class="fal fa-print"></i>',
-                    titleAttr: 'Print Table',
-                    className: 'btn-outline-default'
-                }
-
-            ],
-            columnDefs: [{
-                    targets: -1,
-                    title: '',
-                    orderable: false,
-                    render: function(data, type, full, meta) {
-
-                        /*
-                        -- ES6
-                        -- convert using https://babeljs.io online transpiler
-                        return `
-                        <a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>
-                            <i class="fal fa-times"></i>
-                        </a>
-                        <div class='dropdown d-inline-block dropleft '>
-                            <a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>
-                                <i class="fal fa-ellipsis-v"></i>
-                            </a>
-                            <div class='dropdown-menu'>
-                                <a class='dropdown-item' href='javascript:void(0);'>Change Status</a>
-                                <a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>
-                            </div>
-                        </div>`;
-                            
-                        ES5 example below:  
-
-                        */
-                        return "\n\t\t\t\t\t\t<a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>\n\t\t\t\t\t\t\t<i class=\"fal fa-times\"></i>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t<a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>\n\t\t\t\t\t\t\t\t<i class=\"fal fa-ellipsis-v\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Change Status</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
-                    },
-                },
-
-            ]
-
-        });
+        
         $('#dt-basic-example1').dataTable({
             responsive: true,
             dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
@@ -1797,7 +1672,7 @@
                         ES5 example below:  
 
                         */
-                        return "\n\t\t\t\t\t\t<a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>\n\t\t\t\t\t\t\t<i class=\"fal fa-times\"></i>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t<a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>\n\t\t\t\t\t\t\t\t<i class=\"fal fa-ellipsis-v\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Change Status</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
+                        return "\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Change Status</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
                     },
                 },
 
@@ -1834,28 +1709,7 @@
                     title: '',
                     orderable: false,
                     render: function(data, type, full, meta) {
-
-                        /*
-                        -- ES6
-                        -- convert using https://babeljs.io online transpiler
-                        return `
-                        <a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>
-                            <i class="fal fa-times"></i>
-                        </a>
-                        <div class='dropdown d-inline-block dropleft '>
-                            <a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>
-                                <i class="fal fa-ellipsis-v"></i>
-                            </a>
-                            <div class='dropdown-menu'>
-                                <a class='dropdown-item' href='javascript:void(0);'>Change Status</a>
-                                <a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>
-                            </div>
-                        </div>`;
-                            
-                        ES5 example below:  
-
-                        */
-                        return "\n\t\t\t\t\t\t<a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>\n\t\t\t\t\t\t\t<i class=\"fal fa-times\"></i>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t<a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>\n\t\t\t\t\t\t\t\t<i class=\"fal fa-ellipsis-v\"></i>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Change Status</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
+                        return "\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Change Status</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
                     },
                 },
 
@@ -2706,5 +2560,290 @@
 
 </div> -->
 
+<style>
+    
+    .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .table-search {
+        width: 310px;
+        border-left: 1px solid #d2d2d2;
+    }
+
+    .table-search .search {
+        width: 100%;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    /**/
+
+    .table-pagination {
+        white-space: nowrap;
+    }
+
+    .table-pagination:after {
+        display: block;
+        content: "";
+        clear: both;
+    }
+
+    .jPaginateBack,
+    .jPaginateNext,
+    .table-list-container .pagination {
+        float: left;
+    }
+
+    .jPaginateBack,
+    .jPaginateNext {
+        line-height: 1.75rem;
+        width: 1.75rem;
+        text-align: center;
+        user-select: none;
+    }
+
+    .jPaginateBack .material-icons,
+    .jPaginateNext .material-icons {
+        display: block;
+        font-size: 16px;
+        line-height: inherit;
+    }
+
+    .table-footer {
+        background-color: #fff;
+        margin-top: -1px;
+
+        z-index: -1;
+    }
+
+    .table-list {
+        min-height: 176px;
+    }
+
+    .table-list th {
+        border-bottom: 0.6px solid #d2d2d2;
+    }
+
+    .table-list td {
+        white-space: nowrap;
+        height: 1.75rem;
+        vertical-align: top;
+        padding: 10px;
+        border-bottom: 1px solid #d2d2d2;
+    }
+
+    .table-list tr:last-child td {
+        height: auto;
+    }
+
+    .bullet {
+        margin-top: 13px;
+    }
+
+    i.bullet,
+    i.bullet-primary,
+    i.bullet-success,
+    i.bullet-warning,
+    i.bullet-danger {
+        display: inline-table;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+
+    i.bullet {
+        opacity: 0.5;
+    }
+
+    i.bullet-primary {
+        background-color: #33a7d2;
+    }
+
+    i.bullet-success {
+        background-color: #6dad21;
+    }
+
+    i.bullet-warning {
+        background-color: #ef9327;
+    }
+
+    i.bullet-danger {
+        background-color: #db4f4f;
+    }
+
+    td a {
+        color: black;
+        text-decoration: none;
+        /* no underline */
+    }
+
+    /* td img {
+        width: 100%;;
+    } */
+    .img75 {
+        background-image: url("img/decoNuova.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        width: 100%;
+        border-radius: 35px;
+        ;
+
+    }
+
+    .img92 {
+        background-image: url("img/sebonNuova.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        border-radius: 35px;
+        width: 100%;
+        ;
+    }
+
+    .img141 {
+        background-image: url("img/ayokaNuova.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        border-radius: 35px;
+        width: 100%;
+        ;
+    }
+
+    .img143 {
+        background-image: url("img/ayokaNuova.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        border-radius: 35px;
+        width: 100%;
+        ;
+    }
+
+    .pagination {
+        border: 0;
+    }
+
+    .pagination a.page {
+        display: block;
+        line-height: 35px;
+        width: 35px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 12px;
+    }
+
+    .pagination a.page:hover,
+    .pagination a.page:focus {
+        background-color: #33a7d2;
+        color: #fff;
+    }
+
+    .pagination .disabled .page {
+        display: none;
+    }
+
+    .active a.page,
+    .active a.page:hover,
+    .active a.page:focus {
+        color: #a0a0a0;
+        pointer-events: none;
+        cursor: default;
+    }
+
+    .pagination a.page {
+        user-select: none;
+    }
+
+    /* .pagination li a {
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        padding: 0;
+        margin: 0 3px;
+        border-radius: 50% !important;
+        width: 36px;
+        height: 36px;
+        font-size: 0.875rem;
+        background-color: red;
+    } */
+
+    .sort {
+        margin: 0 !important;
+        padding: 8px 30px;
+        border-radius: 6px;
+        border: none;
+        display: inline-block;
+        color: white;
+        text-decoration: none;
+        background-color: red;
+    }
+
+    .sort:hover {
+        text-decoration: none;
+        background-color: #343a40;
+    }
+
+    .sort:focus {
+        outline: none;
+    }
+
+    /* .sort:after {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        content: "";
+        position: relative;
+        top: -10px;
+        right: -5px;
+    } */
+
+    /* .sort.asc:after {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #fff;
+        content: "";
+        position: relative;
+        top: 13px;
+        right: -5px;
+    } */
+
+    /* .sort.desc:after {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #fff;
+        content: "";
+        position: relative;
+        top: -10px;
+        right: -5px;
+    }  */
+</style>
 
 @stop

@@ -9,6 +9,7 @@ use App\Models\Negozio;
 use App\Models\Pagina;
 use App\Models\Promo;
 use App\Models\Visite;
+use App\Models\Volantino;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
@@ -90,40 +91,24 @@ class HomeController extends Controller
         $sommaUnicaDesktop=array_sum($arrayDesktopUniq);
         $sommaUnicaMobile=array_sum($arrayMobileUniq);
        // dd($sommaUnicaMobile);
-
-        $geos = Geo::where(['id_promo' => $promo->id])->get();
-        $regioni = Geo::where(['id_promo' => $promo->id])
-        ->select('place')
-        ->groupBy('place')
-        ->get();
-        $arr_regioni=[];
-        for ($i = 0; $i < $regioni->count(); $i ++) {
-            $arr_regioni[$i]=$regioni[$i]->place;
-        }
-        // $arrConnTot=[];
-        // for ($i = 0; $i < $geos->count(); $i  ++) {
-        //     for ($j = 0; $j < $regioni->count(); $i  ++) {
-        //         if ($geos[$i]->place==$regioni[$j]){
-        //             $arrConnTot[$i]=$geos[$i]->visite_region_qta;
-        //         }
-        //     }
-        // }
-        // dd($arrConnTot);
-        $products = Geo::groupBy('place')
+        $datiGrafico = Geo::groupBy('place')
         ->where(['id_promo' => $promo->id])
         ->select(DB::raw("SUM(visite_region_qta) AS somma, SUM(visite_uniche_region_qta) AS uniche"), 'place')
+        ->orderBy('somma', 'DESC')
         ->get();
-   
-
+        $arrUniche=[];
+        $arrTotali=[];
+        $arrRegioni=[];
+        for ($i = 0; $i < count($datiGrafico); $i++ ){
+            $arrUniche[$i]= $datiGrafico[$i]->uniche;
+            $arrTotali[$i]= $datiGrafico[$i]->somma;
+            $arrRegioni[$i]= $datiGrafico[$i]->place;
+        }
+        ////////////////// FINE CONNESSIONI ///////////////////////
+        $volantino=Volantino::where(['id_promo' => $promo->id])
+        ->count();
+        // dd($volantino);
         
-        
-        
-        
-        
-       
-        //dd($arrayUniche);
-       ////////////////// FINE CONNESSIONI ///////////////////////
-
 
        ////////////////// GRAFICI PAGINE ///////////////////
        $pagine = Pagina::where(['id_promo' => $promo->id])
@@ -188,7 +173,7 @@ class HomeController extends Controller
             
         }//dd($arrayPromo);
        
-        return view('/statistics/statistics_chartjs', compact('arr_regioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
+        return view('/statistics/statistics_chartjs', compact( 'volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
     }
 
 
