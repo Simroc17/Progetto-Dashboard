@@ -1,723 +1,1646 @@
 @extends('layouts.master')
 
-@section('title', 'Basic - Datatables')
+
 
 @section('headerStyle')
-<link rel="stylesheet" media="screen, print" href="{{ URL::asset('css/datagrid/datatables/datatables.bundle.css') }}">
+<link rel="stylesheet" media="screen, print" href="{{ URL::asset('css/statistics/chartjs/chartjs.css')}}">
+
 @stop
 
 @section('content')
-<main id="js-page-content" role="main" class="page-content">
+<main id="js-page-content" role="main" class="page-content"  >
 
-    @component('common-components.breadcrumb')
-        @slot('item1') Datatables @endslot
-        @slot('item2') Basic @endslot
-    @endcomponent
 
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-table'></i> DataTables: <span class='fw-300'>Basic</span> <sup class='badge badge-primary fw-500'>ADDON</sup>
+            <i class='subheader-icon fal fa-chart-pie'></i> Dettaglio Promozione <sup class='badge badge-primary fw-500'>...</sup>
             <small>
-                Create headache free searching, sorting and pagination tables without any complex configuration
+                Simple yet flexible JavaScript charting for designers & developers
             </small>
         </h1>
     </div>
-    <div class="alert alert-primary">
-        <div class="d-flex flex-start w-100">
-            <div class="mr-2 hidden-md-down">
+
+
+    <!-- <div class="mr-2 hidden-md-down">
                 <span class="icon-stack icon-stack-lg">
-                    <i class="base base-2 icon-stack-3x opacity-100 color-primary-500"></i>
-                    <i class="base base-2 icon-stack-2x opacity-100 color-primary-300"></i>
-                    <i class="fal fa-info icon-stack-1x opacity-100 color-white"></i>
+                    <i class="base base-6 icon-stack-3x opacity-100 color-primary-500"></i>
+                    <i class="base base-10 icon-stack-2x opacity-100 color-primary-300 fa-flip-vertical"></i>
+                    <i class="ni ni-blog-read icon-stack-1x opacity-100 color-white"></i>
                 </span>
+            </div> -->
+    <div class="row justify-content-between">
+        <div style="font-size: 20px;" class="col-6"> <i class="fa-solid fa-bomb"></i> {{$promo->nome}}: {{$promo->descrizione}}</div>
+        <div class="col-6">
+            @if ($promo->id_canale==75)
+            <img src="{{asset('img/decoNuova.png')}}" alt="" style="width: 100px;margin-left: 70px; float:right; border-radius:5px;">
+            @elseif ($promo->id_canale==92)
+            <img src="{{asset('img\sebonNuova.png')}}" alt="" style="width:100px; margin-left: 70px; float:right; border-radius:5px;">
+            @elseif ($promo->id_canale==141)
+            <img src="{{asset('img\ayokaNuova.png')}}" alt="" style="width:100px;margin-left: 70px; float:right; border-radius:5px;">
+            @else($promo->id_canale==143)
+            <img src="" alt="" style="width: 50px;">
+            @endif
+        </div>
+    </div>
+    <div style="font-size: 15px; margin-bottom:1rem;"><i class="fa-regular fa-clock"></i> DAL {{$promo->date_start}} AL {{$promo->date_end}}</div>
+
+    <div class="row mb-2">
+        <div class="col-lg-3 col-6" style="border-radius:25px;">
+            <div class="box text-center" style=" background-color: #17a2b8; border-radius:5px;">
+                <h3 class="fw-500 text-white"><i class="ion ion-stats-bars"></i> Connessioni</h3>
+                <hr style=" border-bottom-style: solid;">
+                <div class="row">
+                    <div class="col-sm-6 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header text-white">{{$sommaDesktop+$sommaMobile}}</h5>
+                            <span class="description-text text-white">TOTALI</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="description-block">
+                            <h5 class="description-header text-white">{{$sommaUnicaDesktop+$sommaUnicaMobile}}</h5>
+                            <span class="description-text text-white">UNICHE</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="d-flex flex-fill">
-                <div class="flex-fill">
-                    <span class="h5">About</span>
-                    <p>
-                        DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, built upon the foundations of progressive enhancement, that adds all of these advanced features to any HTML table.
-                        The stated goal of DataTables is "To enhance the accessibility of data in HTML tables". In order to achieve this we recognise that DataTables has two categories of users that interact with the interfaces the software has:
-                    </p>
-                    <ul>
-                        <li>
-                            End users - those who use the interface in the browser that you create with DataTables
-                        </li>
-                        <li>
-                            Developers - yourself and the other developers working with DataTables to create your apps, sites, services, etc.
-                        </li>
-                    </ul>
-                    <p class="m-0">
-                        Find in-depth, guidelines, tutorials and more on Datatables's <a href="https://www.datatables.net/manual/" target="_blank">Official Documentation</a>
-                    </p>
+        </div>
+        <div class="col-lg-3 col-6" style="border-radius:25px;">
+            <div class="box text-center" style=" background-color: #dc3545; border-radius:5px;">
+                <h3 class="fw-500 text-white"><i class="ion ion-stats-bars"></i> Pagine</h3>
+                <hr style=" border-bottom-style: solid;">
+                <div class="row">
+                    <div class="col-sm-6 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header text-white">{{$volantino}}</h5>
+                            <span class="description-text text-white">N.VOLANTINI</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="description-block">
+                            <h5 class="description-header text-white">{{$sommaDesktopPag+$sommaMobilePag}}</h5>
+                            <span class="description-text text-white">VISUALIZZATE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6" style="border-radius:25px;">
+            <div class="box text-center" style=" background-color: #ffc107; border-radius:5px;">
+                <h3 class="fw-500 text-white"><i class="ion ion-stats-bars"></i> Interattivi</h3>
+                <hr style=" border-bottom-style: solid;">
+                <div class="row">
+                    <div class="col-sm-6 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header text-white">2.852</h5>
+                            <span class="description-text text-white">Totali</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="description-block">
+                            <h5 class="description-header text-white">786</h5>
+                            <span class="description-text text-white">Uniche</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6" style="border-radius:25px;">
+            <div class="box text-center" style=" background-color: #28a745; border-radius:5px;">
+                <h3 class="fw-500 text-white"><i class="ion ion-stats-bars"></i> Prodotti</h3>
+                <hr style=" border-bottom-style: solid;">
+                <div class="row">
+                    <div class="col-sm-6 border-right">
+                        <div class="description-block">
+                            <h5 class="description-header text-white">2.852</h5>
+                            <span class="description-text text-white">Totali</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="description-block">
+                            <h5 class="description-header text-white">786</h5>
+                            <span class="description-text text-white">Uniche</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+
+    <ul class="nav nav-tabs mb-2">
+        <li class="nav-item">
+            <a class="nav-link active" href="" aria-current="page" id="connessioni">Connessioni</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="#" id="pagine">Pagine</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link " href="#" id="interattivi">Interattivi</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="#" id="prodotti">Prodotti</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="#" id="riepilogo">Riepilogo</a>
+        </li>
+    </ul>
+
+    <!--/////////// DIV CONNESSIONI //////////-->
+    <div class="row" id="pagina1">
         <div class="col-xl-12">
-            <div id="panel-1" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Example <span class="fw-300"><i>Table</i></span>
-                    </h2>
-                    <div class="panel-toolbar">
-                        <button class="btn btn-primary btn-sm" data-toggle="dropdown">Table Style</button>
-                        <div class="dropdown-menu dropdown-menu-animated dropdown-menu-right position-absolute pos-top">
-                            <button class="dropdown-item active" data-action="toggle" data-class="table-bordered" data-target="#dt-basic-example"> Bordered Table </button>
-                            <button class="dropdown-item" data-action="toggle" data-class="table-sm" data-target="#dt-basic-example"> Smaller Table </button>
-                            <button class="dropdown-item" data-action="toggle" data-class="table-dark" data-target="#dt-basic-example"> Table Dark </button>
-                            <button class="dropdown-item active" data-action="toggle" data-class="table-hover" data-target="#dt-basic-example"> Table Hover </button>
-                            <button class="dropdown-item active" data-action="toggle" data-class="table-stripe" data-target="#dt-basic-example"> Table Stripped </button>
-                            <div class="dropdown-divider m-0"></div>
-                            <div class="dropdown-multilevel dropdown-multilevel-left">
-                                <div class="dropdown-item">
-                                    tbody color
-                                </div>
-                                <div class="dropdown-menu no-transition-delay">
-                                    <div class="js-tbody-colors dropdown-multilevel dropdown-multilevel-left d-flex flex-wrap" style="width: 15.9rem; padding: 0.5rem">
-                                        <a href="javascript:void(0);" data-bg="bg-primary-100" class="btn d-inline-block bg-primary-100 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-200" class="btn d-inline-block bg-primary-200 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-300" class="btn d-inline-block bg-primary-300 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-400" class="btn d-inline-block bg-primary-400 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-500" class="btn d-inline-block bg-primary-500 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-600" class="btn d-inline-block bg-primary-600 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-700" class="btn d-inline-block bg-primary-700 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-800" class="btn d-inline-block bg-primary-800 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-900" class="btn d-inline-block bg-primary-900 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-100" class="btn d-inline-block bg-success-100 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-200" class="btn d-inline-block bg-success-200 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-300" class="btn d-inline-block bg-success-300 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-400" class="btn d-inline-block bg-success-400 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-500" class="btn d-inline-block bg-success-500 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-600" class="btn d-inline-block bg-success-600 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-700" class="btn d-inline-block bg-success-700 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-800" class="btn d-inline-block bg-success-800 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-900" class="btn d-inline-block bg-success-900 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-100" class="btn d-inline-block bg-info-100 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-200" class="btn d-inline-block bg-info-200 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-300" class="btn d-inline-block bg-info-300 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-400" class="btn d-inline-block bg-info-400 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-500" class="btn d-inline-block bg-info-500 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-600" class="btn d-inline-block bg-info-600 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-700" class="btn d-inline-block bg-info-700 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-800" class="btn d-inline-block bg-info-800 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-900" class="btn d-inline-block bg-info-900 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-100" class="btn d-inline-block bg-danger-100 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-200" class="btn d-inline-block bg-danger-200 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-300" class="btn d-inline-block bg-danger-300 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-400" class="btn d-inline-block bg-danger-400 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-500" class="btn d-inline-block bg-danger-500 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-600" class="btn d-inline-block bg-danger-600 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-700" class="btn d-inline-block bg-danger-700 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-800" class="btn d-inline-block bg-danger-800 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-900" class="btn d-inline-block bg-danger-900 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-100" class="btn d-inline-block bg-warning-100 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-200" class="btn d-inline-block bg-warning-200 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-300" class="btn d-inline-block bg-warning-300 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-400" class="btn d-inline-block bg-warning-400 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-500" class="btn d-inline-block bg-warning-500 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-600" class="btn d-inline-block bg-warning-600 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-700" class="btn d-inline-block bg-warning-700 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-800" class="btn d-inline-block bg-warning-800 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-900" class="btn d-inline-block bg-warning-900 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-100" class="btn d-inline-block bg-fusion-100 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-200" class="btn d-inline-block bg-fusion-200 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-300" class="btn d-inline-block bg-fusion-300 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-400" class="btn d-inline-block bg-fusion-400 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-500" class="btn d-inline-block bg-fusion-500 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-600" class="btn d-inline-block bg-fusion-600 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-700" class="btn d-inline-block bg-fusion-700 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-800" class="btn d-inline-block bg-fusion-800 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-900" class="btn d-inline-block bg-fusion-900 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="" class="btn d-inline-block bg-white border width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                    </div>
-                                </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="panel-2" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Visite Geografiche
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
                             </div>
-                            <div class="dropdown-multilevel dropdown-multilevel-left">
-                                <div class="dropdown-item">
-                                    thead color
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    A horizontal bar chart provides a way of showing data values represented as horizontal bars. It is sometimes used to show trend data, and the comparison of multiple data sets on top of another
                                 </div>
-                                <div class="dropdown-menu no-transition-delay">
-                                    <div class="js-thead-colors dropdown-multilevel dropdown-multilevel-left d-flex flex-wrap" style="width: 15.9rem; padding: 0.5rem">
-                                        <a href="javascript:void(0);" data-bg="bg-primary-100" class="btn d-inline-block bg-primary-100 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-200" class="btn d-inline-block bg-primary-200 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-300" class="btn d-inline-block bg-primary-300 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-400" class="btn d-inline-block bg-primary-400 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-500" class="btn d-inline-block bg-primary-500 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-600" class="btn d-inline-block bg-primary-600 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-700" class="btn d-inline-block bg-primary-700 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-800" class="btn d-inline-block bg-primary-800 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-primary-900" class="btn d-inline-block bg-primary-900 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-100" class="btn d-inline-block bg-success-100 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-200" class="btn d-inline-block bg-success-200 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-300" class="btn d-inline-block bg-success-300 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-400" class="btn d-inline-block bg-success-400 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-500" class="btn d-inline-block bg-success-500 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-600" class="btn d-inline-block bg-success-600 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-700" class="btn d-inline-block bg-success-700 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-800" class="btn d-inline-block bg-success-800 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-success-900" class="btn d-inline-block bg-success-900 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-100" class="btn d-inline-block bg-info-100 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-200" class="btn d-inline-block bg-info-200 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-300" class="btn d-inline-block bg-info-300 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-400" class="btn d-inline-block bg-info-400 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-500" class="btn d-inline-block bg-info-500 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-600" class="btn d-inline-block bg-info-600 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-700" class="btn d-inline-block bg-info-700 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-800" class="btn d-inline-block bg-info-800 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-info-900" class="btn d-inline-block bg-info-900 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-100" class="btn d-inline-block bg-danger-100 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-200" class="btn d-inline-block bg-danger-200 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-300" class="btn d-inline-block bg-danger-300 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-400" class="btn d-inline-block bg-danger-400 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-500" class="btn d-inline-block bg-danger-500 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-600" class="btn d-inline-block bg-danger-600 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-700" class="btn d-inline-block bg-danger-700 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-800" class="btn d-inline-block bg-danger-800 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-danger-900" class="btn d-inline-block bg-danger-900 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-100" class="btn d-inline-block bg-warning-100 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-200" class="btn d-inline-block bg-warning-200 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-300" class="btn d-inline-block bg-warning-300 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-400" class="btn d-inline-block bg-warning-400 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-500" class="btn d-inline-block bg-warning-500 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-600" class="btn d-inline-block bg-warning-600 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-700" class="btn d-inline-block bg-warning-700 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-800" class="btn d-inline-block bg-warning-800 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-warning-900" class="btn d-inline-block bg-warning-900 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-100" class="btn d-inline-block bg-fusion-100 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-200" class="btn d-inline-block bg-fusion-200 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-300" class="btn d-inline-block bg-fusion-300 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-400" class="btn d-inline-block bg-fusion-400 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-500" class="btn d-inline-block bg-fusion-500 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-600" class="btn d-inline-block bg-fusion-600 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-700" class="btn d-inline-block bg-fusion-700 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-800" class="btn d-inline-block bg-fusion-800 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="bg-fusion-900" class="btn d-inline-block bg-fusion-900 width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                        <a href="javascript:void(0);" data-bg="" class="btn d-inline-block bg-white border width-2 height-2 p-0 rounded-0" style="margin:1px"></a>
-                                    </div>
+                                <div id="horizontalBarChart">
+                                    <canvas style="width:100%; height:500px;"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="panel-container show">
-                    <div class="panel-content">
-                        <div class="panel-tag">
-                            This example shows DataTables and the Responsive extension being used with the Bootstrap framework providing the styling. The DataTables / Bootstrap integration provides seamless integration for DataTables to be used in a Bootstrap page. <strong>Note</strong> that the <code>.dt-responsive</code> class is used to indicate to the extension that it should be enabled on this page, as responsive has special meaning in Bootstrap. The responsive option could also be used if required
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="panel-8" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Andamento giornaliero
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
                         </div>
-                        <!-- datatable start -->
-                        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                    <td>$320,800</td>
-                                </tr>
-                                <tr>
-                                    <td>Garrett Winters</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>63</td>
-                                    <td>2011/07/25</td>
-                                    <td>$170,750</td>
-                                </tr>
-                                <tr>
-                                    <td>Ashton Cox</td>
-                                    <td>Junior Technical Author</td>
-                                    <td>San Francisco</td>
-                                    <td>66</td>
-                                    <td>2009/01/12</td>
-                                    <td>$86,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric Kelly</td>
-                                    <td>Senior Javascript Developer</td>
-                                    <td>Edinburgh</td>
-                                    <td>22</td>
-                                    <td>2012/03/29</td>
-                                    <td>$433,060</td>
-                                </tr>
-                                <tr>
-                                    <td>Airi Satou</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>33</td>
-                                    <td>2008/11/28</td>
-                                    <td>$162,700</td>
-                                </tr>
-                                <tr>
-                                    <td>Brielle Williamson</td>
-                                    <td>Integration Specialist</td>
-                                    <td>New York</td>
-                                    <td>61</td>
-                                    <td>2012/12/02</td>
-                                    <td>$372,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Herrod Chandler</td>
-                                    <td>Sales Assistant</td>
-                                    <td>San Francisco</td>
-                                    <td>59</td>
-                                    <td>2012/08/06</td>
-                                    <td>$137,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Rhona Davidson</td>
-                                    <td>Integration Specialist</td>
-                                    <td>Tokyo</td>
-                                    <td>55</td>
-                                    <td>2010/10/14</td>
-                                    <td>$327,900</td>
-                                </tr>
-                                <tr>
-                                    <td>Colleen Hurst</td>
-                                    <td>Javascript Developer</td>
-                                    <td>San Francisco</td>
-                                    <td>39</td>
-                                    <td>2009/09/15</td>
-                                    <td>$205,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Sonya Frost</td>
-                                    <td>Software Engineer</td>
-                                    <td>Edinburgh</td>
-                                    <td>23</td>
-                                    <td>2008/12/13</td>
-                                    <td>$103,600</td>
-                                </tr>
-                                <tr>
-                                    <td>Jena Gaines</td>
-                                    <td>Office Manager</td>
-                                    <td>London</td>
-                                    <td>30</td>
-                                    <td>2008/12/19</td>
-                                    <td>$90,560</td>
-                                </tr>
-                                <tr>
-                                    <td>Quinn Flynn</td>
-                                    <td>Support Lead</td>
-                                    <td>Edinburgh</td>
-                                    <td>22</td>
-                                    <td>2013/03/03</td>
-                                    <td>$342,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Charde Marshall</td>
-                                    <td>Regional Director</td>
-                                    <td>San Francisco</td>
-                                    <td>36</td>
-                                    <td>2008/10/16</td>
-                                    <td>$470,600</td>
-                                </tr>
-                                <tr>
-                                    <td>Haley Kennedy</td>
-                                    <td>Senior Marketing Designer</td>
-                                    <td>London</td>
-                                    <td>43</td>
-                                    <td>2012/12/18</td>
-                                    <td>$313,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Tatyana Fitzpatrick</td>
-                                    <td>Regional Director</td>
-                                    <td>London</td>
-                                    <td>19</td>
-                                    <td>2010/03/17</td>
-                                    <td>$385,750</td>
-                                </tr>
-                                <tr>
-                                    <td>Michael Silva</td>
-                                    <td>Marketing Designer</td>
-                                    <td>London</td>
-                                    <td>66</td>
-                                    <td>2012/11/27</td>
-                                    <td>$198,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Paul Byrd</td>
-                                    <td>Chief Financial Officer (CFO)</td>
-                                    <td>New York</td>
-                                    <td>64</td>
-                                    <td>2010/06/09</td>
-                                    <td>$725,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Gloria Little</td>
-                                    <td>Systems Administrator</td>
-                                    <td>New York</td>
-                                    <td>59</td>
-                                    <td>2009/04/10</td>
-                                    <td>$237,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Bradley Greer</td>
-                                    <td>Software Engineer</td>
-                                    <td>London</td>
-                                    <td>41</td>
-                                    <td>2012/10/13</td>
-                                    <td>$132,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Dai Rios</td>
-                                    <td>Personnel Lead</td>
-                                    <td>Edinburgh</td>
-                                    <td>35</td>
-                                    <td>2012/09/26</td>
-                                    <td>$217,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Jenette Caldwell</td>
-                                    <td>Development Lead</td>
-                                    <td>New York</td>
-                                    <td>30</td>
-                                    <td>2011/09/03</td>
-                                    <td>$345,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Yuri Berry</td>
-                                    <td>Chief Marketing Officer (CMO)</td>
-                                    <td>New York</td>
-                                    <td>40</td>
-                                    <td>2009/06/25</td>
-                                    <td>$675,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Caesar Vance</td>
-                                    <td>Pre-Sales Support</td>
-                                    <td>New York</td>
-                                    <td>21</td>
-                                    <td>2011/12/12</td>
-                                    <td>$106,450</td>
-                                </tr>
-                                <tr>
-                                    <td>Doris Wilder</td>
-                                    <td>Sales Assistant</td>
-                                    <td>Sidney</td>
-                                    <td>23</td>
-                                    <td>2010/09/20</td>
-                                    <td>$85,600</td>
-                                </tr>
-                                <tr>
-                                    <td>Angelica Ramos</td>
-                                    <td>Chief Executive Officer (CEO)</td>
-                                    <td>London</td>
-                                    <td>47</td>
-                                    <td>2009/10/09</td>
-                                    <td>$1,200,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Gavin Joyce</td>
-                                    <td>Developer</td>
-                                    <td>Edinburgh</td>
-                                    <td>42</td>
-                                    <td>2010/12/22</td>
-                                    <td>$92,575</td>
-                                </tr>
-                                <tr>
-                                    <td>Jennifer Chang</td>
-                                    <td>Regional Director</td>
-                                    <td>Singapore</td>
-                                    <td>28</td>
-                                    <td>2010/11/14</td>
-                                    <td>$357,650</td>
-                                </tr>
-                                <tr>
-                                    <td>Brenden Wagner</td>
-                                    <td>Software Engineer</td>
-                                    <td>San Francisco</td>
-                                    <td>28</td>
-                                    <td>2011/06/07</td>
-                                    <td>$206,850</td>
-                                </tr>
-                                <tr>
-                                    <td>Fiona Green</td>
-                                    <td>Chief Operating Officer (COO)</td>
-                                    <td>San Francisco</td>
-                                    <td>48</td>
-                                    <td>2010/03/11</td>
-                                    <td>$850,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Shou Itou</td>
-                                    <td>Regional Marketing</td>
-                                    <td>Tokyo</td>
-                                    <td>20</td>
-                                    <td>2011/08/14</td>
-                                    <td>$163,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Michelle House</td>
-                                    <td>Integration Specialist</td>
-                                    <td>Sidney</td>
-                                    <td>37</td>
-                                    <td>2011/06/02</td>
-                                    <td>$95,400</td>
-                                </tr>
-                                <tr>
-                                    <td>Suki Burks</td>
-                                    <td>Developer</td>
-                                    <td>London</td>
-                                    <td>53</td>
-                                    <td>2009/10/22</td>
-                                    <td>$114,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Prescott Bartlett</td>
-                                    <td>Technical Author</td>
-                                    <td>London</td>
-                                    <td>27</td>
-                                    <td>2011/05/07</td>
-                                    <td>$145,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Gavin Cortez</td>
-                                    <td>Team Leader</td>
-                                    <td>San Francisco</td>
-                                    <td>22</td>
-                                    <td>2008/10/26</td>
-                                    <td>$235,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Martena Mccray</td>
-                                    <td>Post-Sales support</td>
-                                    <td>Edinburgh</td>
-                                    <td>46</td>
-                                    <td>2011/03/09</td>
-                                    <td>$324,050</td>
-                                </tr>
-                                <tr>
-                                    <td>Unity Butler</td>
-                                    <td>Marketing Designer</td>
-                                    <td>San Francisco</td>
-                                    <td>47</td>
-                                    <td>2009/12/09</td>
-                                    <td>$85,675</td>
-                                </tr>
-                                <tr>
-                                    <td>Howard Hatfield</td>
-                                    <td>Office Manager</td>
-                                    <td>San Francisco</td>
-                                    <td>51</td>
-                                    <td>2008/12/16</td>
-                                    <td>$164,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Hope Fuentes</td>
-                                    <td>Secretary</td>
-                                    <td>San Francisco</td>
-                                    <td>41</td>
-                                    <td>2010/02/12</td>
-                                    <td>$109,850</td>
-                                </tr>
-                                <tr>
-                                    <td>Vivian Harrell</td>
-                                    <td>Financial Controller</td>
-                                    <td>San Francisco</td>
-                                    <td>62</td>
-                                    <td>2009/02/14</td>
-                                    <td>$452,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Timothy Mooney</td>
-                                    <td>Office Manager</td>
-                                    <td>London</td>
-                                    <td>37</td>
-                                    <td>2008/12/11</td>
-                                    <td>$136,200</td>
-                                </tr>
-                                <tr>
-                                    <td>Jackson Bradshaw</td>
-                                    <td>Director</td>
-                                    <td>New York</td>
-                                    <td>65</td>
-                                    <td>2008/09/26</td>
-                                    <td>$645,750</td>
-                                </tr>
-                                <tr>
-                                    <td>Olivia Liang</td>
-                                    <td>Support Engineer</td>
-                                    <td>Singapore</td>
-                                    <td>64</td>
-                                    <td>2011/02/03</td>
-                                    <td>$234,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Bruno Nash</td>
-                                    <td>Software Engineer</td>
-                                    <td>London</td>
-                                    <td>38</td>
-                                    <td>2011/05/03</td>
-                                    <td>$163,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Sakura Yamamoto</td>
-                                    <td>Support Engineer</td>
-                                    <td>Tokyo</td>
-                                    <td>37</td>
-                                    <td>2009/08/19</td>
-                                    <td>$139,575</td>
-                                </tr>
-                                <tr>
-                                    <td>Thor Walton</td>
-                                    <td>Developer</td>
-                                    <td>New York</td>
-                                    <td>61</td>
-                                    <td>2013/08/11</td>
-                                    <td>$98,540</td>
-                                </tr>
-                                <tr>
-                                    <td>Finn Camacho</td>
-                                    <td>Support Engineer</td>
-                                    <td>San Francisco</td>
-                                    <td>47</td>
-                                    <td>2009/07/07</td>
-                                    <td>$87,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Serge Baldwin</td>
-                                    <td>Data Coordinator</td>
-                                    <td>Singapore</td>
-                                    <td>64</td>
-                                    <td>2012/04/09</td>
-                                    <td>$138,575</td>
-                                </tr>
-                                <tr>
-                                    <td>Zenaida Frank</td>
-                                    <td>Software Engineer</td>
-                                    <td>New York</td>
-                                    <td>63</td>
-                                    <td>2010/01/04</td>
-                                    <td>$125,250</td>
-                                </tr>
-                                <tr>
-                                    <td>Zorita Serrano</td>
-                                    <td>Software Engineer</td>
-                                    <td>San Francisco</td>
-                                    <td>56</td>
-                                    <td>2012/06/01</td>
-                                    <td>$115,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Jennifer Acosta</td>
-                                    <td>Junior Javascript Developer</td>
-                                    <td>Edinburgh</td>
-                                    <td>43</td>
-                                    <td>2013/02/01</td>
-                                    <td>$75,650</td>
-                                </tr>
-                                <tr>
-                                    <td>Cara Stevens</td>
-                                    <td>Sales Assistant</td>
-                                    <td>New York</td>
-                                    <td>46</td>
-                                    <td>2011/12/06</td>
-                                    <td>$145,600</td>
-                                </tr>
-                                <tr>
-                                    <td>Hermione Butler</td>
-                                    <td>Regional Director</td>
-                                    <td>London</td>
-                                    <td>47</td>
-                                    <td>2011/03/21</td>
-                                    <td>$356,250</td>
-                                </tr>
-                                <tr>
-                                    <td>Lael Greer</td>
-                                    <td>Systems Administrator</td>
-                                    <td>London</td>
-                                    <td>21</td>
-                                    <td>2009/02/27</td>
-                                    <td>$103,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Jonas Alexander</td>
-                                    <td>Developer</td>
-                                    <td>San Francisco</td>
-                                    <td>30</td>
-                                    <td>2010/07/14</td>
-                                    <td>$86,500</td>
-                                </tr>
-                                <tr>
-                                    <td>Shad Decker</td>
-                                    <td>Regional Director</td>
-                                    <td>Edinburgh</td>
-                                    <td>51</td>
-                                    <td>2008/11/13</td>
-                                    <td>$183,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Michael Bruce</td>
-                                    <td>Javascript Developer</td>
-                                    <td>Singapore</td>
-                                    <td>29</td>
-                                    <td>2011/06/27</td>
-                                    <td>$183,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Donna Snider</td>
-                                    <td>Customer Support</td>
-                                    <td>New York</td>
-                                    <td>27</td>
-                                    <td>2011/01/25</td>
-                                    <td>$112,000</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        <!-- datatable end -->
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
+                                </div>
+                                <div id="barChart">
+                                    <canvas style="width:100%; height:300px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-xl-12">
+            <div class="row">
+                <div class="col-xl-6">
+                    <div id="panel-6" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Connessioni per dispositivo
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    Pie charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data
+                                </div>
+                                <div id="pieChart">
+                                    <canvas style="width:100%; height:300px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div id="panel-12" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Connessioni uniche per dispositivo
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    Doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data
+                                </div>
+                                <div id="doughnutChart">
+                                    <canvas style="width:100%; height:300px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div class="panel-container show ">
+                    <div class="table-list-container " id="users">
+                        <div class="row justify-content-between">
+                            <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
+                               
+                            </div>
+                            
+                        </div>
+
+                       
+                        <table id="intestazione"  class="table table-hover table-striped w-100 mt-1">
+                            <thead>
+                            <tr class="text-white" role="row" style="background-color: red;">
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="regione">Regione</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 30%;" ><button type="button" class="sort" data-sort="click_unici">Click Unici</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="click_totali">Click Totali</button></th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <table id="test-list"  class="table table-hover table-striped w-100 mt-1">
+                           
+                            <tbody id="tbody" class="list ">
+                               
+                                @foreach ($datiGrafico as $dato )
+                                <tr>
+                                    
+                                    <td class="regione" style="width: 35%;" >{{ $dato['place'] }}</td>
+                                    <td class="click_unici" style="width: 30%;">{{ $dato['uniche'] }}</td>
+                                    <td class="click_totali" style="width: 35%;">{{ $dato['somma']}}</td>
+
+
+
+
+
+                                    
+                                    
+                                </tr>
+                                @endforeach
+                               
+                            </tbody>
+                        </table>
+                        <table id="tfoot" style="display: block;" class="table-footer">
+                            <tr>
+                                <td class="table-pagination position-absolute">
+                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
+                                    <ul class="pagination"></ul>
+                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
+                                </td>
+                                
+                                
+                            </tr>
+                        </table>
+                        
+                    </div>
+            </div>
+        </div>
     </div>
+
+    <!--//////// DIV PAGINE ////////////-->
+    <div id="pagina2" class="row" style="display: none;">
+        <div class="col-xl-12">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="panel-8" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Andamento giornaliero
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
+                                </div>
+                                <div id="barChart1">
+                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6">
+                    <div id="panel-6" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Connessioni per dispositivo
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    Pie charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data
+                                </div>
+                                <div id="pieChart1">
+                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div id="panel-12" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Connessioni uniche per dispositivo
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    Doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data
+                                </div>
+                                <div id="doughnutChart1">
+                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            <div class="col-xl-12">
+            
+        </div>
+
+    </div>
+
+    <!--//////////// DIV INTERATTIVI /////////////-->
+    <div id="pagina3" class="row" style="display: none;">
+        <div class="col-xl-12">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="panel-3" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Bar <span class="fw-300"><i>Stacked</i></span>
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    A stacked bar chart, is a graph that is used to break down and compare parts of a whole. Each bar in the chart represents a whole, and segments in the bar represent different parts or categories of that whole
+                                </div>
+                                <div id="barStacked">
+                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="panel-8" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Andamento giornaliero
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
+                                </div>
+                                <div id="barChart2">
+                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card bg-light mb-3" style="max-width: 100%;">
+                        <div class="card-header text-dark">Header</div>
+                        <div class="card-body row">
+
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div class="panel-container show ">
+                <div class="panel-content ">
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-warning-200">
+                            <tr>
+                                <th>Regione</th>
+                                <th>Click Unici</th>
+                                <th>Click Totali</th>
+                                <th>Controls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>268410636</td>
+                                <td>Cooley, Walker J.</td>
+                                <td>03-13-19</td>
+                                <td>1</td>
+                            </tr>
+                        
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>CustomerID</th>
+                                <th>Name</th>
+                                <th>PurchaseDate</th>
+                                <th>Controls</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ////Div PRODOTTI////////////// -->
+    <div id="pagina4" class="row" style="display:none;" >
+            <div class="col-xl-12">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card bg-light mb-3" style="max-width: 100%;">
+                            <div class="card-header text-dark">Header</div>
+                            <div class="card-body row">
+
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12">
+                 <div class="panel-container show ">
+                <div class="panel-content ">
+                    <table id="dt-basic-example2" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-warning-200">
+                            <tr>
+                                <th>Regione</th>
+                                <th>Click Unici</th>
+                                <th>Click Totali</th>
+                                <th>Controls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>268410636</td>
+                                <td>Cooley, Walker J.</td>
+                                <td>03-13-19</td>
+                                <td>1</td>
+                            </tr>
+                           
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>CustomerID</th>
+                                <th>Name</th>
+                                <th>PurchaseDate</th>
+                                <th>Controls</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+
+
+        </div>
 </main>
+<link rel="stylesheet" href="https://btn.ninja/css/addons.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 @stop
 
 @section('footerScript')
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
+<script src="{{ URL::asset('js/datagrid/datatables/datatables.export.js') }}"></script>
+<script src="{{ URL::asset('js/dependency/moment/moment.js') }}"></script>
+<script src="{{ URL::asset('js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js') }}"></script>
+<script src="{{ URL::asset('js/statistics/chartjs/chartjs.bundle.js')}}"></script>
+
+
 <script>
-    /* demo scripts for change table color */
-    /* change background */
+     window.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
 
+      // Prova ricerca
+      var options = {
+        valueNames: ['regione', 'click_unici', 'click_totali'],
+        page: 10,
+        pagination: {
+            innerWindow: 1,
+            left: 0,
+            right: 0,
+            paginationClass: "pagination",
+        }
+    };
+
+    var userList = new List('users', options);
+    // Prova Pagination
+    var monkeyList = new List('test-list', {
+        valueNames: ['regione', 'click_unici', 'click_totali',],
+        page: 10,
+        pagination: {
+            innerWindow: 1,
+            left: 0,
+            right: 0,
+            paginationClass: "pagination",
+        }
+    });
+
+    $('.jPaginateNext').on('click', function() {
+            var list = $('.pagination').find('li');
+            $.each(list, function(position, element) {
+                if ($(element).is('.active')) {
+                    $(list[position + 1]).trigger('click');
+                }
+            })
+        });
+
+
+        $('.jPaginateBack').on('click', function() {
+            var list = $('.pagination').find('li');
+            $.each(list, function(position, element) {
+                if ($(element).is('.active')) {
+                    $(list[position - 1]).trigger('click');
+                }
+            })
+        });
+
+
+});
+   
+   
+   
+    /* horizontal bar chart */
+    var regioni = <?php echo json_encode($arrRegioni); ?>;
+    var arrUniche = <?php echo json_encode($arrUniche); ?>;
+    var arrTotali = <?php echo json_encode($arrTotali); ?>;
+    var horizontalBarChart = function() {
+        var horizontalBarChart = {
+            labels: regioni,
+            datasets: [{
+                    label: "Connessioni Totali",
+                    backgroundColor: color.success._300,
+                    borderColor: color.success._500,
+                    borderWidth: 1,
+                    data: arrTotali
+                    
+                },
+                {
+                    label: "Connessioni Uniche",
+                    backgroundColor: color.primary._300,
+                    borderColor: color.primary._500,
+                    borderWidth: 1,
+                    data: arrUniche
+                }
+            ]
+
+        };
+        var config = {
+            type: 'horizontalBar',
+            data: horizontalBarChart,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: false,
+                    text: 'Horizontal Bar Chart'
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: 'Profit margin (approx)'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: 'Quarterly forecast'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }]
+                }
+            }
+        }
+        new Chart($("#horizontalBarChart > canvas").get(0).getContext("2d"), config);
+    }
+    /* horizontal bar chart -- end */
+
+    /* bar chart */
+    var connessioniUniche = <?php echo json_encode($arrayUniq); ?>;
+    var connessioniTotale = <?php echo json_encode($arrayTot); ?>;
+    var giorni = <?php echo json_encode($arrayGiorni); ?>;
+    var barChart = function() {
+        var barChartData = {
+            labels: giorni,
+            datasets: [{
+                    label: "Connessioni Totali",
+                    backgroundColor: color.success._300,
+                    borderColor: color.success._500,
+                    borderWidth: 1,
+                    data: connessioniTotale,
+                },
+                {
+                    label: "Connessioni Uniche",
+                    backgroundColor: color.primary._300,
+                    borderColor: color.primary._500,
+                    borderWidth: 1,
+                    data: connessioniUniche,
+                }
+            ]
+
+        };
+        var config = {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: false,
+                    text: 'Bar Chart'
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: '6 months forecast'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: 'Profit margin (approx)'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }]
+                }
+            }
+        }
+        new Chart($("#barChart > canvas").get(0).getContext("2d"), config);
+    }
+    /* bar chart -- end */
+
+    /* bar chart */
+    var visualizzazioni=<?php echo json_encode($arrayTotPag); ?>;
+    var pagineUniche=<?php echo json_encode($arrayUnicPag); ?>;
+    var giorniPag=<?php echo json_encode($arrayGiorniPag); ?>;
+    var barChart1 = function() {
+        var barChartData = {
+            labels: giorniPag,
+            datasets: [{
+                    label: "Visualizzazioni",
+                    backgroundColor: color.success._300,
+                    borderColor: color.success._500,
+                    borderWidth: 1,
+                    data: visualizzazioni
+                       
+                    
+                },
+                {
+                    label: "Pagine Uniche",
+                    backgroundColor: color.primary._300,
+                    borderColor: color.primary._500,
+                    borderWidth: 1,
+                    data: pagineUniche
+                    
+                }
+            ]
+
+        };
+        var config = {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: false,
+                    text: 'Bar Chart'
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: '6 months forecast'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: 'Profit margin (approx)'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }]
+                }
+            }
+        }
+        new Chart($("#barChart1 > canvas").get(0).getContext("2d"), config);
+    }
+    /* bar chart -- end */
+
+    /* bar chart */
+    var barChart2 = function() {
+        var barChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                    label: "red",
+                    backgroundColor: color.success._300,
+                    borderColor: color.success._500,
+                    borderWidth: 1,
+                    data: [
+                        45,
+                        75,
+                        26,
+                        23,
+                        60, -48, -9
+                    ]
+                },
+                {
+                    label: "Blue",
+                    backgroundColor: color.primary._300,
+                    borderColor: color.primary._500,
+                    borderWidth: 1,
+                    data: [-10,
+                        16,
+                        72,
+                        93,
+                        29, -74,
+                        64
+                    ]
+                }
+            ]
+
+        };
+        var config = {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: false,
+                    text: 'Bar Chart'
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: '6 months forecast'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: 'Profit margin (approx)'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }]
+                }
+            }
+        }
+        new Chart($("#barChart2 > canvas").get(0).getContext("2d"), config);
+    }
+    /* bar chart -- end */
+
+    /* bar stacked */
+    var barStacked = function() {
+        var barStackedData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                    label: "Red",
+                    backgroundColor: color.primary._300,
+                    borderColor: color.primary._500,
+                    borderWidth: 1,
+                    data: [
+                        45,
+                        75,
+                        26,
+                        23,
+                        60, -48, -9
+                    ]
+                },
+                {
+                    label: "Blue",
+                    backgroundColor: color.success._300,
+                    borderColor: color.success._500,
+                    borderWidth: 1,
+                    data: [-10,
+                        16,
+                        72,
+                        93,
+                        29, -74,
+                        64
+                    ]
+                }
+            ]
+
+        };
+        var config = {
+            type: 'bar',
+            data: barStackedData,
+            options: {
+                legend: {
+                    display: false,
+                    labels: {
+                        display: false
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }],
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }]
+                }
+            }
+        }
+        new Chart($("#barStacked > canvas").get(0).getContext("2d"), config);
+    }
+    /* bar stacked -- end */
+
+    /* pie chart */
+    var connessioniDesktop=<?php echo json_encode($sommaDesktop); ?>;
+    var connessioniMobile=<?php echo json_encode($sommaMobile); ?>;
+    var pieChart = function() {
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [connessioniDesktop,connessioniMobile]     
+                    ,
+                    backgroundColor: [
+                        color.success._300,
+                        color.primary._400,
+                        color.success._50,
+                        color.success._300,
+                        color.success._500
+                    ],
+                    label: 'My dataset' // for legend
+                }],
+                labels: [
+                    "Desktop",
+                    "Mobile",
+                ]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        usePointStyle: true,
+                    },
+                },
+            },
+            
+        };
+        new Chart($("#pieChart > canvas").get(0).getContext("2d"), config);
+    }
+    /* pie chart -- end */
+
+    /* pie chart */
+    var connessioniDesktopPag=<?php echo json_encode($sommaDesktopPag); ?>;
+    var connessioneMobilePag=<?php echo json_encode($sommaMobilePag); ?>;
+    var pieChart1 = function() {
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [ connessioniDesktopPag,connessioneMobilePag
+                        
+                        
+                    ],
+                    backgroundColor: [
+                        color.primary._200,
+                        color.primary._400,
+                        color.success._50,
+                        color.success._300,
+                        color.success._500
+                    ],
+                    label: 'My dataset' // for legend
+                }],
+                labels: [
+                    "Desktop",
+                    "Mobile",
+                ]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        usePointStyle: true,
+                    },
+                }
+            }
+        };
+        new Chart($("#pieChart1 > canvas").get(0).getContext("2d"), config);
+    }
+    /* pie chart -- end */
+    var connessioniDesktopU=<?php echo json_encode($sommaUnicaDesktop); ?>;
+    var connessioniMobileU=<?php echo json_encode($sommaUnicaMobile); ?>;
+    /* doughnut chart */
+    var doughnutChart = function() {
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [connessioniDesktopU,connessioniMobileU],
+                       
+                    
+                    backgroundColor: [
+                        color.primary._300,
+                        color.success._500,
+                        color.primary._50,
+                        color.primary._300,
+                        color.primary._500
+                    ],
+                    label: 'My dataset' // for legend
+
+
+                }],
+                labels: [
+                    "Desktop",
+                    "Mobile",
+                ]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: true,
+                    position: 'left',
+                    labels: {
+                        usePointStyle: true,
+                    },
+                }
+            }
+        };
+        new Chart($("#doughnutChart > canvas").get(0).getContext("2d"), config);
+    }
+    /* doughnut chart -- end */
+
+    /* doughnut chart */
+    var connDesktop=<?php echo json_encode($sommaDesktopUnicPag); ?>;
+    var connMobile= <?php echo json_encode($sommaMobileUnicPag); ?>;
+    var doughnutChart1 = function() {
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [connDesktop,connMobile
+                        
+                    ],
+                    backgroundColor: [
+                        color.success._200,
+                        color.success._400,
+                        color.primary._50,
+                        color.primary._300,
+                        color.primary._500
+                    ],
+                    label: 'My dataset' // for legend
+
+
+                }],
+                labels: [
+                    "Desktop",
+                    "Mobile",
+                ]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: true,
+                    position: 'left',
+                    labels: {
+                        usePointStyle: true,
+                    },
+                }
+            }
+        };
+        new Chart($("#doughnutChart1 > canvas").get(0).getContext("2d"), config);
+    }
+    /* doughnut chart -- end */
+
+    /* initialize all charts */
     $(document).ready(function() {
-        $('#dt-basic-example').dataTable({
-            responsive: true
+
+     
+
+        var pagina1 = document.getElementById('pagina1');
+        var pagina2 = document.getElementById('pagina2');
+        var pagina3 = document.getElementById('pagina3');
+        var pagina4 = document.getElementById('pagina4');
+        var link1 = document.getElementById('connessioni');
+        var link2 = document.getElementById('pagine');
+        var link3 = document.getElementById('interattivi');
+        var link4= document.getElementById('prodotti');
+        $('#pagine').on('click', function() {
+            pagina1.style.display = 'none';
+            pagina2.style.display = 'block';
+            pagina3.style.display = 'none';
+            pagina4.style.display = 'none';
+            link1.classList.remove('active');
+            link3.classList.remove('active');
+            link2.classList.add('active');
+            link4.classList.remove('active');
+        });
+        $('#interattivi').on('click', function() {
+            pagina1.style.display = 'none';
+            pagina2.style.display = 'none';
+            pagina3.style.display = 'block';
+            pagina4.style.display = 'none';
+            link1.classList.remove('active');
+            link2.classList.remove('active');
+            link3.classList.add('active');
+            link4.classList.remove('active');
+        });
+        $('#prodotti').on('click', function() {
+            pagina1.style.display = 'none';
+            pagina2.style.display = 'none';
+            pagina3.style.display = 'none';
+            pagina4.style.display = 'block';
+            link1.classList.remove('active');
+            link2.classList.remove('active');
+            link3.classList.remove('active');
+            link4.classList.add('active');
         });
 
-        $('.js-thead-colors a').on('click', function() {
-            var theadColor = $(this).attr("data-bg");
-            console.log(theadColor);
-            $('#dt-basic-example thead').removeClassPrefix('bg-').addClass(theadColor);
-        });
 
-        $('.js-tbody-colors a').on('click', function() {
-            var theadColor = $(this).attr("data-bg");
-            console.log(theadColor);
-            $('#dt-basic-example').removeClassPrefix('bg-').addClass(theadColor);
-        });
+        
+        $('#dt-basic-example1').dataTable({
+            responsive: true,
+            dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: [{
+                    extend: 'csvHtml5',
+                    text: 'CSV',
+                    titleAttr: 'Generate CSV',
+                    className: 'btn-outline-default'
+                },
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copy',
+                    titleAttr: 'Copy to clipboard',
+                    className: 'btn-outline-default'
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fal fa-print"></i>',
+                    titleAttr: 'Print Table',
+                    className: 'btn-outline-default'
+                }
 
+            ],
+            columnDefs: [{
+                    targets: -1,
+                    title: '',
+                    orderable: false,
+                    render: function(data, type, full, meta) {
+
+                      
+                        return "\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Change Status</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
+                    },
+                },
+
+            ]
+
+        });
+        $('#dt-basic-example2').dataTable({
+            responsive: true,
+            dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: [{
+                    extend: 'csvHtml5',
+                    text: 'CSV',
+                    titleAttr: 'Generate CSV',
+                    className: 'btn-outline-default'
+                },
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copy',
+                    titleAttr: 'Copy to clipboard',
+                    className: 'btn-outline-default'
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fal fa-print"></i>',
+                    titleAttr: 'Print Table',
+                    className: 'btn-outline-default'
+                }
+
+            ],
+            columnDefs: [{
+                    targets: -1,
+                    title: '',
+                    orderable: false,
+                    render: function(data, type, full, meta) {
+                        return "\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Change Status</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
+                    },
+                },
+
+            ]
+
+        });
+        // lineChart();
+        // areaChart();
+        horizontalBarChart();
+        barChart();
+        barChart1();
+        barChart2();
+        barStacked();
+        // barHorizontalStacked();
+        // bubbleChart();
+        // barlineCombine();
+        // polarArea();
+        // radarChart();
+        pieChart();
+        pieChart1();
+        doughnutChart();
+        doughnutChart1();
     });
 </script>
+
+<style>
+    
+    .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .table-search {
+        width: 310px;
+        border-left: 1px solid #d2d2d2;
+    }
+
+    .table-search .search {
+        width: 100%;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    /**/
+
+    .table-pagination {
+        white-space: nowrap;
+    }
+
+    .table-pagination:after {
+        display: block;
+        content: "";
+        clear: both;
+    }
+
+    .jPaginateBack,
+    .jPaginateNext,
+    .table-list-container .pagination {
+        float: left;
+    }
+
+    .jPaginateBack,
+    .jPaginateNext {
+        line-height: 1.75rem;
+        width: 1.75rem;
+        text-align: center;
+        user-select: none;
+    }
+
+    .jPaginateBack .material-icons,
+    .jPaginateNext .material-icons {
+        display: block;
+        font-size: 16px;
+        line-height: inherit;
+    }
+
+    .table-footer {
+        background-color: #fff;
+        margin-top: -1px;
+
+        z-index: -1;
+    }
+
+    .table-list {
+        min-height: 176px;
+    }
+
+    .table-list th {
+        border-bottom: 0.6px solid #d2d2d2;
+    }
+
+    .table-list td {
+        white-space: nowrap;
+        height: 1.75rem;
+        vertical-align: top;
+        padding: 10px;
+        border-bottom: 1px solid #d2d2d2;
+    }
+
+    .table-list tr:last-child td {
+        height: auto;
+    }
+
+    .bullet {
+        margin-top: 13px;
+    }
+
+    i.bullet,
+    i.bullet-primary,
+    i.bullet-success,
+    i.bullet-warning,
+    i.bullet-danger {
+        display: inline-table;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+
+    i.bullet {
+        opacity: 0.5;
+    }
+
+    i.bullet-primary {
+        background-color: #33a7d2;
+    }
+
+    i.bullet-success {
+        background-color: #6dad21;
+    }
+
+    i.bullet-warning {
+        background-color: #ef9327;
+    }
+
+    i.bullet-danger {
+        background-color: #db4f4f;
+    }
+
+    td a {
+        color: black;
+        text-decoration: none;
+        /* no underline */
+    }
+
+    
+    .img75 {
+        background-image: url("img/decoNuova.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        width: 100%;
+        border-radius: 35px;
+        ;
+
+    }
+
+    .img92 {
+        background-image: url("img/sebonNuova.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        border-radius: 35px;
+        width: 100%;
+        ;
+    }
+
+    .img141 {
+        background-image: url("img/ayokaNuova.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        border-radius: 35px;
+        width: 100%;
+        ;
+    }
+
+    .img143 {
+        background-image: url("img/ayokaNuova.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        border-radius: 35px;
+        width: 100%;
+        ;
+    }
+
+    .pagination {
+        border: 0;
+    }
+
+    .pagination a.page {
+        display: block;
+        line-height: 35px;
+        width: 35px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 12px;
+    }
+
+    .pagination a.page:hover,
+    .pagination a.page:focus {
+        background-color: #33a7d2;
+        color: #fff;
+    }
+
+    .pagination .disabled .page {
+        display: none;
+    }
+
+    .active a.page,
+    .active a.page:hover,
+    .active a.page:focus {
+        color: #a0a0a0;
+        pointer-events: none;
+        cursor: default;
+    }
+
+    .pagination a.page {
+        user-select: none;
+    }
+
+   
+
+    .sort {
+        margin: 0 !important;
+        padding: 8px 30px;
+        border-radius: 6px;
+        border: none;
+        display: inline-block;
+        color: white;
+        text-decoration: none;
+        background-color: red;
+    }
+
+    .sort:hover {
+        text-decoration: none;
+        background-color: #343a40;
+    }
+
+    .sort:focus {
+        outline: none;
+    }
+
+   
+</style>
+
 @stop

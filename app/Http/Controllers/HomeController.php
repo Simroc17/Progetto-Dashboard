@@ -7,6 +7,7 @@ use App\Models\Gruppo;
 use App\Models\Market;
 use App\Models\Negozio;
 use App\Models\Pagina;
+use App\Models\PaginaQta;
 use App\Models\Promo;
 use App\Models\Visite;
 use App\Models\Volantino;
@@ -45,7 +46,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function benvenuto($id){
-        $mutable = Carbon::now();
+        
         
         $promo = Promo::find($id);
         //dd($promo);  //Promo su cui ho cliccato
@@ -107,7 +108,7 @@ class HomeController extends Controller
         ////////////////// FINE CONNESSIONI ///////////////////////
         $volantino=Volantino::where(['id_promo' => $promo->id])
         ->count();
-        // dd($volantino);
+        
         
 
        ////////////////// GRAFICI PAGINE ///////////////////
@@ -117,7 +118,7 @@ class HomeController extends Controller
        $arrayTotPag=[];
        for( $i=0; $i<count($pagine); $i++ ){
         $arrayTotPag[$i] = $pagine[$i]->pagina_qta;
-    }
+        }
         
         $arrayUnicPag=[];
         for( $i=0; $i<count($pagine); $i++ ){
@@ -151,6 +152,9 @@ class HomeController extends Controller
         }
             $sommaMobileUnicPag = array_sum($arrayMobileUnicPag);
 
+        $id_vol = Volantino::where(['id_promo' => $promo->id ])->get();
+        $volantinoId = PaginaQta::where(['id_volantino' => 12229])->get();
+        //dd($id_vol[0]->id_volantino);
        ////////////////// FINE PAGINE /////////////////////////
         $id = Auth::id();
         //dd($id);
@@ -174,6 +178,146 @@ class HomeController extends Controller
         }//dd($arrayPromo);
        
         return view('/statistics/statistics_chartjs', compact( 'volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
+    }
+
+      /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function benvenuto1($id){
+        
+        
+        $promo = Promo::find($id);
+        //dd($promo);  //Promo su cui ho cliccato
+
+        ///////////////////   GRAFICI PARTE CONNESSIONI //////////////////////
+        $visits = Visite::where(['id_promo' => $promo->id])
+        ->orderBy('data_visita', 'ASC')
+        ->get();
+        //dd($visit); //Visite
+        $arrayTot = [];
+        for( $i=0; $i<count($visits); $i++ ){
+            $arrayTot[$i] = $visits[$i]->visite_qta;
+        }
+        //dd($arrayTot);
+        $arrayUniq = [];
+        for( $i=0; $i<count($visits); $i++ ){
+            $arrayUniq[$i] = $visits[$i]->visite_uniche_qta;
+        }
+        $arrayGiorni = [];
+        for( $i=0; $i<count($visits); $i++ ){
+            $arrayGiorni[$i] = $visits[$i]->data_visita;
+        }
+        $arrayDesktop=[];
+        for( $i=0; $i<count($visits); $i++ ){
+            $arrayDesktop[$i] = $visits[$i]->visite_desktop_qta;
+        }
+        $arrayMobile=[];
+        for( $i=0; $i<count($visits); $i++ ){
+            $arrayMobile[$i] = $visits[$i]->visite_mobile_qta;
+        }
+        $sommaMobile=array_sum($arrayMobile);
+       // dd($sommaMobile);
+        $sommaDesktop=array_sum($arrayDesktop);
+        //dd($sommaDesktop);
+        $arrayDesktopUniq=[];
+        for( $i=0; $i<count($visits); $i++ ){
+            $arrayDesktopUniq[$i] = $visits[$i]->visite_uniche_desktop_qta;
+        }
+        $arrayMobileUniq=[];
+        for( $i=0; $i<count($visits); $i++ ){
+            $arrayMobileUniq[$i] = $visits[$i]->visite_uniche_mobile_qta;
+        } 
+        $sommaUnicaDesktop=array_sum($arrayDesktopUniq);
+        $sommaUnicaMobile=array_sum($arrayMobileUniq);
+       // dd($sommaUnicaMobile);
+        $datiGrafico = Geo::groupBy('place')
+        ->where(['id_promo' => $promo->id])
+        ->select(DB::raw("SUM(visite_region_qta) AS somma, SUM(visite_uniche_region_qta) AS uniche"), 'place')
+        ->orderBy('somma', 'DESC')
+        ->get();
+        $arrUniche=[];
+        $arrTotali=[];
+        $arrRegioni=[];
+        for ($i = 0; $i < count($datiGrafico); $i++ ){
+            $arrUniche[$i]= $datiGrafico[$i]->uniche;
+            $arrTotali[$i]= $datiGrafico[$i]->somma;
+            $arrRegioni[$i]= $datiGrafico[$i]->place;
+        }
+        ////////////////// FINE CONNESSIONI ///////////////////////
+        $volantino=Volantino::where(['id_promo' => $promo->id])
+        ->count();
+        
+        
+
+       ////////////////// GRAFICI PAGINE ///////////////////
+       $pagine = Pagina::where(['id_promo' => $promo->id])
+       ->orderBy('data_visita', 'ASC')
+       ->get();
+       $arrayTotPag=[];
+       for( $i=0; $i<count($pagine); $i++ ){
+        $arrayTotPag[$i] = $pagine[$i]->pagina_qta;
+        }
+        
+        $arrayUnicPag=[];
+        for( $i=0; $i<count($pagine); $i++ ){
+            $arrayUnicPag[$i] = $pagine[$i]->pagina_unica_qta;
+        }
+        $arrayGiorniPag = [];
+        for( $i=0; $i<count($pagine); $i++ ){
+            $arrayGiorniPag[$i] = $pagine[$i]->data_visita;
+        }
+
+        $arrayDesktopPag=[];
+        for( $i=0; $i<count($pagine); $i++ ){
+            $arrayDesktopPag[$i] = $pagine[$i]->pagina_desktop_qta;
+        }
+        $sommaDesktopPag=array_sum($arrayDesktopPag);
+        $arrayMobilePag=[];
+        for( $i=0; $i<count($pagine); $i++ ){
+            $arrayMobilePag[$i] = $pagine[$i]->pagina_mobile_qta;
+        }
+        $sommaMobilePag=array_sum($arrayMobilePag); //
+
+        $arrayDesktopUnicPag=[];
+        for( $i=0; $i<count($pagine); $i++ ){
+            $arrayDesktopUnicPag[$i] = $pagine[$i]->pagina_desktop_unica_qta;
+        }
+            $sommaDesktopUnicPag=array_sum($arrayDesktopUnicPag);
+
+        $arrayMobileUnicPag=[];
+        for( $i=0; $i<count($pagine); $i++ ){
+            $arrayMobileUnicPag[$i] = $pagine[$i]->pagina_mobile_unica_qta;
+        }
+            $sommaMobileUnicPag = array_sum($arrayMobileUnicPag);
+
+        $id_vol = Volantino::where(['id_promo' => $promo->id ])->get();
+        $volantinoId = PaginaQta::where(['id_volantino' => 12229])->get();
+        //dd($id_vol[0]->id_volantino);
+       ////////////////// FINE PAGINE /////////////////////////
+        $id = Auth::id();
+        //dd($id);
+        $negozi = Negozio::all();
+        $markets = Market::where(['id_parent' => $id])->get();
+        $marketsAll= Market::all();
+        //dd($markets);
+        $arrayPromo = [];
+        //dd($arrayPromo);
+        $promozioni = Promo::all();
+        foreach ($markets as $market) 
+        {
+            foreach ($promozioni as $promozione) 
+            {
+                if ($market->id == $promozione->id_canale) 
+                {
+                    array_push($arrayPromo, $promozione);
+                }
+            }
+            
+        }//dd($arrayPromo);
+       
+        return view('/datatables/datatables_basic', compact( 'volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
     }
 
 
@@ -230,15 +374,8 @@ class HomeController extends Controller
                 <td style="width:15%;" class="date_end"> ' .$promozione->date_end. ' </td>\
                 </tr>`';
             }
-            if ($promozione->date_end=$mutable){
-                $result.='`<tr role="row">\
-                <td style="width:5%;" class="img'.$promozione->id_canale.' w3-round-xxlarge">  </td>\
-                <td style="width:30%;" class="nome"> <a href="statistics/statistics_chartjs/'.$promozione->id.'" style="color: black;" > ' .$promozione->nome. ' </a> <i style="float:right" class="bullet-success"></i> </td>\
-                <td style="width:35%;" class="descrizione"> ' .$promozione->descrizione. ' </td>\
-                <td style="width:15%;" class="date_start"> ' .$promozione->date_start. ' </td>\
-                <td style="width:15%;" class="date_end"> ' .$promozione->date_end. ' </td>\
-                </tr>`';
-            }else{
+            
+            else{
                 $result.='`<tr role="row">\
                 <td style="width:5%;" class="img'.$promozione->id_canale.' w3-round-xxlarge">  </td>\
                 <td style="width:30%;" class="nome"> <a href="statistics/statistics_chartjs/'.$promozione->id.'" style="color: black;" > ' .$promozione->nome. ' </a><i style="float:right" class="bullet-danger"></i>  </td>\
@@ -369,8 +506,9 @@ class HomeController extends Controller
         //dd($id);
         $negozi = Negozio::all();
         $markets = Market::where(['id_parent' => $id])->get();
+        
         $marketsAll= Market::all();
-        //dd($markets);
+        //dd($marketsAll);
         $arrayPromo = [];
         //dd($arrayPromo);
         $promozioni = Promo::all();
@@ -399,28 +537,29 @@ class HomeController extends Controller
                 ->get(); 
                
             }
+            $volantini = Volantino::all();
             $mutable = Carbon::now();
             $result='';
             foreach ($promozioni as $promozione){
-                if ($promozione->date_end>$mutable){
-                $result.='`<tr role="row">\
-                <td style="width:5%;" class="img'.$promozione->id_canale.' w3-round-xxlarge">  </td>\
-                <td style="width:30%;" class="nome"> <a href="statistics/statistics_chartjs/'.$promozione->id.'" style="color: black;" > ' .$promozione->nome. ' </a> <i style="float:right" class="bullet-success"></i> </td>\
-                <td style="width:35%;" class="descrizione"> ' .$promozione->descrizione. ' </td>\
-                <td style="width:15%;" class="date_start"> ' .$promozione->date_start. ' </td>\
-                <td style="width:15%;" class="date_end"> ' .$promozione->date_end. ' </td>\
-                </tr>`';
-            }else{
-                $result.='`<tr role="row">\
-                <td style="width:5%;" class="img'.$promozione->id_canale.' w3-round-xxlarge">  </td>\
-                <td style="width:30%;" class="nome"> <a href="statistics/statistics_chartjs/'.$promozione->id.'" style="color: black;" > ' .$promozione->nome. ' </a><i style="float:right" class="bullet-danger"></i>  </td>\
-                <td style="width:35%;" class="descrizione"> ' .$promozione->descrizione. ' </td>\
-                <td style="width:15%;" class="date_start"> ' .$promozione->date_start. ' </td>\
-                <td style="width:15%;" class="date_end"> ' .$promozione->date_end. ' </td>\
-                </tr>`';
-            } 
+                foreach ($volantini as $volantino){
+                    if($promozione->id==$volantino->id_promo){
+                        foreach ($marketsAll as $market){
+                            if($volantino->id_subcanale==$market->id){
+                                    $result.='`<tr role="row">\
+                                    <td style="width:5%;" class="img'.$promozione->id_canale.' w3-round-xxlarge">  </td>\
+                                    <td style="width:5%;" class="text'.$promozione->id_canale.'">  </td>\
+                                    <td style="width:5%;" class="id"> ' .$market->nome. ' </td>\
+                                    <td style="width:30%;" class="nome"> <a href= "datatables_basic/'.$promozione->id.'" style="color: black;" > ' .$promozione->nome. ' </a>  </td>\
+                                    <td style="width:35%;" class="descrizione"> ' .$promozione->descrizione. ' </td>\
+                                    <td style="width:10%;" class="date_start"> ' .$promozione->date_start. ' </td>\
+                                    <td style="width:10%;" class="date_end"> ' .$promozione->date_end. ' </td>\
+                                </tr>`';
+                            }
+                        }
+                    }
+           
+                }
             }
-
             return response()->json($result);
         }
         $promozioni = $query->get();

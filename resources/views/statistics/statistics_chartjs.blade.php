@@ -288,7 +288,6 @@
 
 
 
-
                                     
                                     
                                 </tr>
@@ -393,6 +392,9 @@
                 </div>
             </div>
 
+        </div>
+        <div class="col-xl-12">
+            
         </div>
 
     </div>
@@ -966,7 +968,6 @@
 @stop
 
 @section('footerScript')
-
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.export.js') }}"></script>
@@ -1443,9 +1444,8 @@
                         usePointStyle: true,
                     },
                 },
-                
+            },
             
-            }
         };
         new Chart($("#pieChart > canvas").get(0).getContext("2d"), config);
     }
