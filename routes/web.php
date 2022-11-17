@@ -38,7 +38,7 @@ Route::get('/', function () {
 // Route::get('/dati', [App\Http\Controllers\SmartAdmin::class, 'welcome'])->name('dati');
 Route::get('/{filename}', [App\Http\Controllers\HomeController::class, 'mostraDati']);
 Route::get('/statistics/statistics_chartjs/{id}', [App\Http\Controllers\HomeController::class, 'benvenuto'])->name('grafici');
-Route::get('/datatables/datatables_basic/{id}', [App\Http\Controllers\HomeController::class, 'benvenuto1'])->name('grafici');
+Route::get('/datatables/datatables_basic/{id}', [App\Http\Controllers\HomeController::class, 'benvenuto1']);
 Route::get('/dashboard/intel_marketing_dashboard', [App\Http\Controllers\HomeController::class, 'mostraDati1']);
 Route::get('/datatables/datatables_buttons', [App\Http\Controllers\HomeController::class, 'mostraDati2']);
 

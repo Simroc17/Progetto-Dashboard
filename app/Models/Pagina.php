@@ -11,5 +11,6 @@ class Pagina extends Model
     protected $table = 'history_pagine';
     protected $fillable=[
         'id_promo',
+        
     ];
 }

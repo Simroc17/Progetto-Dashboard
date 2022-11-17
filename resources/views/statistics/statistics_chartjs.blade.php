@@ -1256,41 +1256,32 @@
     /* bar chart -- end */
 
     /* bar chart */
+    var curiosita = <?php echo json_encode($sommaCuriosita); ?>;
+    var link = <?php echo json_encode($sommaCollegamenti); ?>;
+    var ricette = <?php echo json_encode($sommaRicette); ?>;
+    var vai_a=<?php echo json_encode($sommaVai_a); ?>;
+    var video=<?php echo json_encode($sommaVideo); ?>;
+    var ecommerce=<?php echo json_encode($sommaEcommerce); ?>;
     var barChart2 = function() {
         var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: ["link", "curiosita", "ricette","vai_a","video","ecommerce"],
             datasets: [{
-                    label: "red",
+                    label: "link",
                     backgroundColor: color.success._300,
-                    borderColor: color.success._500,
                     borderWidth: 1,
-                    data: [
-                        45,
-                        75,
-                        26,
-                        23,
-                        60, -48, -9
-                    ]
-                },
-                {
-                    label: "Blue",
+                    data: link
+                    },
+                    { label: "curiosita",
                     backgroundColor: color.primary._300,
-                    borderColor: color.primary._500,
                     borderWidth: 1,
-                    data: [-10,
-                        16,
-                        72,
-                        93,
-                        29, -74,
-                        64
+                    data: curiosita
+                    }
                     ]
-                }
-            ]
 
         };
         var config = {
-            type: 'bar',
-            data: barChartData,
+            type: 'horizontalBar',
+            data: horizontalBarChart,
             options: {
                 responsive: true,
                 legend: {
@@ -1298,14 +1289,14 @@
                 },
                 title: {
                     display: false,
-                    text: 'Bar Chart'
+                    text: 'Horizontal Bar Chart'
                 },
                 scales: {
                     xAxes: [{
                         display: true,
                         scaleLabel: {
                             display: false,
-                            labelString: '6 months forecast'
+                            labelString: 'Profit margin (approx)'
                         },
                         gridLines: {
                             display: true,
@@ -1320,7 +1311,7 @@
                         display: true,
                         scaleLabel: {
                             display: false,
-                            labelString: 'Profit margin (approx)'
+                            labelString: 'Quarterly forecast'
                         },
                         gridLines: {
                             display: true,

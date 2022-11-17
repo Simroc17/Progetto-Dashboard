@@ -8,41 +8,33 @@
 @stop
 
 @section('content')
-<main id="js-page-content" role="main" class="page-content"  >
+<main id="js-page-content" role="main" class="page-content">
 
 
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-chart-pie'></i> Dettaglio Promozione <sup class='badge badge-primary fw-500'>...</sup>
-            <small>
-                Simple yet flexible JavaScript charting for designers & developers
-            </small>
+            Dettaglio Promozione
+
         </h1>
     </div>
 
 
-    <!-- <div class="mr-2 hidden-md-down">
-                <span class="icon-stack icon-stack-lg">
-                    <i class="base base-6 icon-stack-3x opacity-100 color-primary-500"></i>
-                    <i class="base base-10 icon-stack-2x opacity-100 color-primary-300 fa-flip-vertical"></i>
-                    <i class="ni ni-blog-read icon-stack-1x opacity-100 color-white"></i>
-                </span>
-            </div> -->
+
     <div class="row justify-content-between">
-        <div style="font-size: 20px;" class="col-6"> <i class="fa-solid fa-bomb"></i> {{$promo->nome}}: {{$promo->descrizione}}</div>
-        <div class="col-6">
-            @if ($promo->id_canale==75)
+        <div style="font-size: 20px;" class="col-6"> <i class="fa-solid fa-bomb"></i> {{$promo[0]->nome}}: {{$promo[0]->descrizione}}</div>
+        <!-- <div class="col-6">
+            @if ($promo[0]->id_canale==75)
             <img src="{{asset('img/decoNuova.png')}}" alt="" style="width: 100px;margin-left: 70px; float:right; border-radius:5px;">
-            @elseif ($promo->id_canale==92)
+            @elseif ($promo[0]->id_canale==92)
             <img src="{{asset('img\sebonNuova.png')}}" alt="" style="width:100px; margin-left: 70px; float:right; border-radius:5px;">
-            @elseif ($promo->id_canale==141)
+            @elseif ($promo[0]->id_canale==141)
             <img src="{{asset('img\ayokaNuova.png')}}" alt="" style="width:100px;margin-left: 70px; float:right; border-radius:5px;">
-            @else($promo->id_canale==143)
+            @else($promo[0]->id_canale==143)
             <img src="" alt="" style="width: 50px;">
             @endif
-        </div>
+        </div> -->
     </div>
-    <div style="font-size: 15px; margin-bottom:1rem;"><i class="fa-regular fa-clock"></i> DAL {{$promo->date_start}} AL {{$promo->date_end}}</div>
+    <div style="font-size: 15px; margin-bottom:1rem;"><i class="fa-regular fa-clock"></i> DAL {{$promo[0]->date_start}} AL {{$promo[0]->date_end}}</div>
 
     <div class="row mb-2">
         <div class="col-lg-3 col-6" style="border-radius:25px;">
@@ -72,7 +64,7 @@
                 <div class="row">
                     <div class="col-sm-6 border-right">
                         <div class="description-block">
-                            <h5 class="description-header text-white">{{$volantino}}</h5>
+                            <h5 class="description-header text-white">{{$volantino1}}</h5>
                             <span class="description-text text-white">N.VOLANTINI</span>
                         </div>
                     </div>
@@ -255,59 +247,49 @@
         </div>
         <div class="col-xl-12">
             <div class="panel-container show ">
-                    <div class="table-list-container " id="users">
-                        <div class="row justify-content-between">
-                            <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
-                               
-                            </div>
-                            
+                <div class="table-list-container " id="users">
+                    <div class="row justify-content-between">
+                        <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
+
                         </div>
 
-                       
-                        <table id="intestazione"  class="table table-hover table-striped w-100 mt-1">
-                            <thead>
-                            <tr class="text-white" role="row" style="background-color: red;">
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="regione">Regione</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 30%;" ><button type="button" class="sort" data-sort="click_unici">Click Unici</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="click_totali">Click Totali</button></th>
-                            </tr>
-                            </thead>
-                        </table>
-                        <table id="test-list"  class="table table-hover table-striped w-100 mt-1">
-                           
-                            <tbody id="tbody" class="list ">
-                               
-                                @foreach ($datiGrafico as $dato )
-                                <tr>
-                                    
-                                    <td class="regione" style="width: 35%;" >{{ $dato['place'] }}</td>
-                                    <td class="click_unici" style="width: 30%;">{{ $dato['uniche'] }}</td>
-                                    <td class="click_totali" style="width: 35%;">{{ $dato['somma']}}</td>
-
-
-
-
-
-                                    
-                                    
-                                </tr>
-                                @endforeach
-                               
-                            </tbody>
-                        </table>
-                        <table id="tfoot" style="display: block;" class="table-footer">
-                            <tr>
-                                <td class="table-pagination position-absolute">
-                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
-                                    <ul class="pagination"></ul>
-                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
-                                </td>
-                                
-                                
-                            </tr>
-                        </table>
-                        
                     </div>
+
+
+                    <table id="intestazione" class="table table-hover table-striped w-100 mt-1">
+                        <thead>
+                            <tr class="text-white" role="row" style="background-color: red;">
+                                <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;"><button type="button" class="sort" data-sort="regione">Regione</button></th>
+                                <th tabindex="0" rowspan="1" colspan="1" style="width: 30%;"><button type="button" class="sort" data-sort="click_unici">Click Unici</button></th>
+                                <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;"><button type="button" class="sort" data-sort="click_totali">Click Totali</button></th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table id="test-list" class="table table-hover table-striped w-100 mt-1">
+
+                        <tbody id="tbody" class="list ">
+                            @foreach ($datiGrafico as $dato )
+                            <tr>
+                                <td class="regione" style="width: 35%;">{{ $dato['place'] }}</td>
+                                <td class="click_unici" style="width: 30%;">{{ $dato['uniche'] }}</td>
+                                <td class="click_totali" style="width: 35%;">{{ $dato['somma']}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <table id="tfoot" style="display: block;margin-bottom: 20px;" class="table-footer">
+                        <tr>
+                            <td class="table-pagination position-absolute">
+                                <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
+                                <ul class="pagination"></ul>
+                                <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
+                            </td>
+
+
+                        </tr>
+                    </table>
+
+                </div>
             </div>
         </div>
     </div>
@@ -391,168 +373,117 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="panel-container show ">
+                        <div class="table-list-container " id="users2">
+                            <div class="row justify-content-between">
+                                <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
+
+                                </div>
+
+                            </div>
+
+
+                            <table id="intestazione2" class="table table-hover table-striped w-100 mt-1">
+                                <thead>
+                                    <tr class="text-white" role="row" style="background-color: red;">
+                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;"><button type="button" class="sort" data-sort="regione2">Numero Pagina</button></th>
+                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 30%;"><button type="button" class="sort" data-sort="click_unici2">volantini onlini</button></th>                                                       
+                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 25%;"><button type="button" class="sort" data-sort="click_unici2">Visite uniche</button></th>
+                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 30%;"><button type="button" class="sort" data-sort="click_totali2">Visite totali</button></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <table id="test-list2" class="table table-hover table-striped w-100 mt-1">
+
+                                <tbody id="tbody2" class="list ">
+                                    @foreach ($volantinoId as $dato )
+                                    <tr>
+                                        <td class="regione2" style="width: 35%;">{{$dato['num_pagina']}}</td>
+                                        <td class="click_unici2" style="width: 30%;">vis.online</td>
+                                        <td class="click_unici2" style="width: 25%;">{{ $dato['uniche'] }}</td>
+                                        <td class="click_totali2" style="width: 30%;">{{ $dato['somma']}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <table id="tfoot2" style="display: block;margin-bottom: 50px;" class="table-footer">
+                                <tr>
+                                    <td class="table-pagination position-absolute">
+                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
+                                        <ul class="pagination"></ul>
+                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
+                                    </td>
+
+
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         </div>
+
+        <!--//////////// DIV INTERATTIVI /////////////-->
+        <div id="pagina3" class="row" style="display: none;">
             <div class="col-xl-12">
-            
-        </div>
-
-    </div>
-
-    <!--//////////// DIV INTERATTIVI /////////////-->
-    <div id="pagina3" class="row" style="display: none;">
-        <div class="col-xl-12">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div id="panel-3" class="panel">
-                        <div class="panel-hdr">
-                            <h2>
-                                Bar <span class="fw-300"><i>Stacked</i></span>
-                            </h2>
-                            <div class="panel-toolbar">
-                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div id="panel-3" class="panel">
+                            <div class="panel-hdr">
+                                <h2>
+                                    Bar <span class="fw-300"><i>Stacked</i></span>
+                                </h2>
+                                <div class="panel-toolbar">
+                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                                </div>
+                            </div>
+                            <div class="panel-container show">
+                                <div class="panel-content">
+                                    <div class="panel-tag">
+                                        A stacked bar chart, is a graph that is used to break down and compare parts of a whole. Each bar in the chart represents a whole, and segments in the bar represent different parts or categories of that whole
+                                    </div>
+                                    <div id="barStacked">
+                                        <canvas style="height: 190px!important; width: 700px!important;"></canvas>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="panel-container show">
-                            <div class="panel-content">
-                                <div class="panel-tag">
-                                    A stacked bar chart, is a graph that is used to break down and compare parts of a whole. Each bar in the chart represents a whole, and segments in the bar represent different parts or categories of that whole
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div id="panel-8" class="panel">
+                            <div class="panel-hdr">
+                                <h2>
+                                    Andamento giornaliero
+                                </h2>
+                                <div class="panel-toolbar">
+                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
                                 </div>
-                                <div id="barStacked">
-                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
+                            </div>
+                            <div class="panel-container show">
+                                <div class="panel-content">
+                                    <div class="panel-tag">
+                                        A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
+                                    </div>
+                                    <div id="barChart2">
+                                        <canvas style="height: 190px!important; width: 700px!important;"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xl-12">
-                    <div id="panel-8" class="panel">
-                        <div class="panel-hdr">
-                            <h2>
-                                Andamento giornaliero
-                            </h2>
-                            <div class="panel-toolbar">
-                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
-                            </div>
-                        </div>
-                        <div class="panel-container show">
-                            <div class="panel-content">
-                                <div class="panel-tag">
-                                    A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
-                                </div>
-                                <div id="barChart2">
-                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-12">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card bg-light mb-3" style="max-width: 100%;">
-                        <div class="card-header text-dark">Header</div>
-                        <div class="card-body row">
-
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-12">
-            <div class="panel-container show ">
-                <div class="panel-content ">
-                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
-                        <thead class="bg-warning-200">
-                            <tr>
-                                <th>Regione</th>
-                                <th>Click Unici</th>
-                                <th>Click Totali</th>
-                                <th>Controls</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>268410636</td>
-                                <td>Cooley, Walker J.</td>
-                                <td>03-13-19</td>
-                                <td>1</td>
-                            </tr>
-                        
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>CustomerID</th>
-                                <th>Name</th>
-                                <th>PurchaseDate</th>
-                                <th>Controls</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <!-- datatable end -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ////Div PRODOTTI////////////// -->
-    <div id="pagina4" class="row" style="display:none;" >
             <div class="col-xl-12">
                 <div class="row">
                     <div class="col-xl-12">
@@ -615,39 +546,137 @@
                 </div>
             </div>
             <div class="col-xl-12">
-                 <div class="panel-container show ">
-                <div class="panel-content ">
-                    <table id="dt-basic-example2" class="table table-bordered table-hover table-striped w-100">
-                        <thead class="bg-warning-200">
-                            <tr>
-                                <th>Regione</th>
-                                <th>Click Unici</th>
-                                <th>Click Totali</th>
-                                <th>Controls</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>268410636</td>
-                                <td>Cooley, Walker J.</td>
-                                <td>03-13-19</td>
-                                <td>1</td>
-                            </tr>
-                           
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>CustomerID</th>
-                                <th>Name</th>
-                                <th>PurchaseDate</th>
-                                <th>Controls</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <!-- datatable end -->
+                <div class="panel-container show ">
+                    <div class="panel-content ">
+                        <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-warning-200">
+                                <tr>
+                                    <th>Regione</th>
+                                    <th>Click Unici</th>
+                                    <th>Click Totali</th>
+                                    <th>Controls</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>268410636</td>
+                                    <td>Cooley, Walker J.</td>
+                                    <td>03-13-19</td>
+                                    <td>1</td>
+                                </tr>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>CustomerID</th>
+                                    <th>Name</th>
+                                    <th>PurchaseDate</th>
+                                    <th>Controls</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <!-- datatable end -->
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- ////Div PRODOTTI////////////// -->
+        <div id="pagina4" class="row" style="display:none;">
+            <div class="col-xl-12">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card bg-light mb-3" style="max-width: 100%;">
+                            <div class="card-header text-dark">Header</div>
+                            <div class="card-body row">
+
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                                <div class="card col-3" style="width: 15rem; height:15rem;">
+                                    <img class="card-img-top" src="..." alt="Card image cap">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12">
+                <div class="panel-container show ">
+                    <div class="panel-content ">
+                        <table id="dt-basic-example2" class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-warning-200">
+                                <tr>
+                                    <th>Regione</th>
+                                    <th>Click Unici</th>
+                                    <th>Click Totali</th>
+                                    <th>Controls</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>268410636</td>
+                                    <td>Cooley, Walker J.</td>
+                                    <td>03-13-19</td>
+                                    <td>1</td>
+                                </tr>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>CustomerID</th>
+                                    <th>Name</th>
+                                    <th>PurchaseDate</th>
+                                    <th>Controls</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <!-- datatable end -->
+                    </div>
+                </div>
+            </div>
 
 
         </div>
@@ -667,58 +696,55 @@
 
 
 <script>
-     window.addEventListener('DOMContentLoaded', (event) => {
-    console.log('DOM fully loaded and parsed');
-
-      // Prova ricerca
-      var options = {
-        valueNames: ['regione', 'click_unici', 'click_totali'],
-        page: 10,
-        pagination: {
-            innerWindow: 1,
-            left: 0,
-            right: 0,
-            paginationClass: "pagination",
-        }
-    };
-
-    var userList = new List('users', options);
-    // Prova Pagination
-    var monkeyList = new List('test-list', {
-        valueNames: ['regione', 'click_unici', 'click_totali',],
-        page: 10,
-        pagination: {
-            innerWindow: 1,
-            left: 0,
-            right: 0,
-            paginationClass: "pagination",
-        }
-    });
-
-    $('.jPaginateNext').on('click', function() {
-            var list = $('.pagination').find('li');
-            $.each(list, function(position, element) {
-                if ($(element).is('.active')) {
-                    $(list[position + 1]).trigger('click');
+    window.addEventListener('DOMContentLoaded', (event) => {
+        console.log('DOM fully loaded and parsed');
+        /////////////CONNESSIONI\\\\\\\\\\\\\\\\\\\\
+        // Prova ricerca connessioni
+            var options = {
+                valueNames: ['regione', 'click_unici', 'click_totali'],
+                page: 10,
+                pagination: {
+                    innerWindow: 1,
+                    left: 0,
+                    right: 0,
+                    paginationClass: "pagination",
                 }
-            })
+            };
+
+            var userList = new List('users', options);
+            // Prova Pagination connsessioni
+            var monkeyList = new List('test-list', {
+                valueNames: ['regione', 'click_unici', 'click_totali', ],
+                page: 10,
+                pagination: {
+                    innerWindow: 1,
+                    left: 0,
+                    right: 0,
+                    paginationClass: "pagination",
+                }
+            });
+            $('.jPaginateNext').on('click', function() {
+                var list = $('.pagination').find('li');
+                $.each(list, function(position, element) {
+                    if ($(element).is('.active')) {
+                        $(list[position + 1]).trigger('click');
+                    }
+                })
+            });
+            $('.jPaginateBack').on('click', function() {
+                var list = $('.pagination').find('li');
+                $.each(list, function(position, element) {
+                    if ($(element).is('.active')) {
+                        $(list[position - 1]).trigger('click');
+                    }
+                })
+            });
+
+
         });
 
 
-        $('.jPaginateBack').on('click', function() {
-            var list = $('.pagination').find('li');
-            $.each(list, function(position, element) {
-                if ($(element).is('.active')) {
-                    $(list[position - 1]).trigger('click');
-                }
-            })
-        });
 
-
-});
-   
-   
-   
     /* horizontal bar chart */
     var regioni = <?php echo json_encode($arrRegioni); ?>;
     var arrUniche = <?php echo json_encode($arrUniche); ?>;
@@ -732,7 +758,7 @@
                     borderColor: color.success._500,
                     borderWidth: 1,
                     data: arrTotali
-                    
+
                 },
                 {
                     label: "Connessioni Uniche",
@@ -869,9 +895,9 @@
     /* bar chart -- end */
 
     /* bar chart */
-    var visualizzazioni=<?php echo json_encode($arrayTotPag); ?>;
-    var pagineUniche=<?php echo json_encode($arrayUnicPag); ?>;
-    var giorniPag=<?php echo json_encode($arrayGiorniPag); ?>;
+    var visualizzazioni = <?php echo json_encode($arrayTotPag); ?>;
+    var pagineUniche = <?php echo json_encode($arrayUnicPag); ?>;
+    var giorniPag = <?php echo json_encode($arrayGiorniPag); ?>;
     var barChart1 = function() {
         var barChartData = {
             labels: giorniPag,
@@ -881,8 +907,8 @@
                     borderColor: color.success._500,
                     borderWidth: 1,
                     data: visualizzazioni
-                       
-                    
+
+
                 },
                 {
                     label: "Pagine Uniche",
@@ -890,7 +916,7 @@
                     borderColor: color.primary._500,
                     borderWidth: 1,
                     data: pagineUniche
-                    
+
                 }
             ]
 
@@ -1102,15 +1128,14 @@
     /* bar stacked -- end */
 
     /* pie chart */
-    var connessioniDesktop=<?php echo json_encode($sommaDesktop); ?>;
-    var connessioniMobile=<?php echo json_encode($sommaMobile); ?>;
+    var connessioniDesktop = <?php echo json_encode($sommaDesktop); ?>;
+    var connessioniMobile = <?php echo json_encode($sommaMobile); ?>;
     var pieChart = function() {
         var config = {
             type: 'pie',
             data: {
                 datasets: [{
-                    data: [connessioniDesktop,connessioniMobile]     
-                    ,
+                    data: [connessioniDesktop, connessioniMobile],
                     backgroundColor: [
                         color.success._300,
                         color.primary._400,
@@ -1135,23 +1160,23 @@
                     },
                 },
             },
-            
+
         };
         new Chart($("#pieChart > canvas").get(0).getContext("2d"), config);
     }
     /* pie chart -- end */
 
     /* pie chart */
-    var connessioniDesktopPag=<?php echo json_encode($sommaDesktopPag); ?>;
-    var connessioneMobilePag=<?php echo json_encode($sommaMobilePag); ?>;
+    var connessioniDesktopPag = <?php echo json_encode($sommaDesktopPag); ?>;
+    var connessioneMobilePag = <?php echo json_encode($sommaMobilePag); ?>;
     var pieChart1 = function() {
         var config = {
             type: 'pie',
             data: {
                 datasets: [{
-                    data: [ connessioniDesktopPag,connessioneMobilePag
-                        
-                        
+                    data: [connessioniDesktopPag, connessioneMobilePag
+
+
                     ],
                     backgroundColor: [
                         color.primary._200,
@@ -1181,17 +1206,17 @@
         new Chart($("#pieChart1 > canvas").get(0).getContext("2d"), config);
     }
     /* pie chart -- end */
-    var connessioniDesktopU=<?php echo json_encode($sommaUnicaDesktop); ?>;
-    var connessioniMobileU=<?php echo json_encode($sommaUnicaMobile); ?>;
+    var connessioniDesktopU = <?php echo json_encode($sommaUnicaDesktop); ?>;
+    var connessioniMobileU = <?php echo json_encode($sommaUnicaMobile); ?>;
     /* doughnut chart */
     var doughnutChart = function() {
         var config = {
             type: 'pie',
             data: {
                 datasets: [{
-                    data: [connessioniDesktopU,connessioniMobileU],
-                       
-                    
+                    data: [connessioniDesktopU, connessioniMobileU],
+
+
                     backgroundColor: [
                         color.primary._300,
                         color.success._500,
@@ -1224,15 +1249,15 @@
     /* doughnut chart -- end */
 
     /* doughnut chart */
-    var connDesktop=<?php echo json_encode($sommaDesktopUnicPag); ?>;
-    var connMobile= <?php echo json_encode($sommaMobileUnicPag); ?>;
+    var connDesktop = <?php echo json_encode($sommaDesktopUnicPag); ?>;
+    var connMobile = <?php echo json_encode($sommaMobileUnicPag); ?>;
     var doughnutChart1 = function() {
         var config = {
             type: 'pie',
             data: {
                 datasets: [{
-                    data: [connDesktop,connMobile
-                        
+                    data: [connDesktop, connMobile
+
                     ],
                     backgroundColor: [
                         color.success._200,
@@ -1268,7 +1293,7 @@
     /* initialize all charts */
     $(document).ready(function() {
 
-     
+
 
         var pagina1 = document.getElementById('pagina1');
         var pagina2 = document.getElementById('pagina2');
@@ -1277,7 +1302,7 @@
         var link1 = document.getElementById('connessioni');
         var link2 = document.getElementById('pagine');
         var link3 = document.getElementById('interattivi');
-        var link4= document.getElementById('prodotti');
+        var link4 = document.getElementById('prodotti');
         $('#pagine').on('click', function() {
             pagina1.style.display = 'none';
             pagina2.style.display = 'block';
@@ -1287,6 +1312,45 @@
             link3.classList.remove('active');
             link2.classList.add('active');
             link4.classList.remove('active');
+
+            var options2 = {
+            valueNames: ['regione2', 'click_unici2', 'click_totali2'],
+            page: 10,
+            pagination: {
+                innerWindow: 1,
+                left: 0,
+                right: 0,
+                paginationClass: "pagination",
+            }
+            };
+            var userList2 = new List('users2', options2);
+            var monkeyList2 = new List('test-list2', {
+            valueNames: ['regione2', 'click_unici2', 'click_totali2', ],
+            page: 10,
+            pagination: {
+                innerWindow: 1,
+                left: 0,
+                right: 0,
+                paginationClass: "pagination",
+            }
+            });
+            $('.jPaginateNext').on('click', function() {
+            var list = $('.pagination').find('li');
+            $.each(list, function(position, element) {
+                if ($(element).is('.active')) {
+                    $(list[position + 1]).trigger('click');
+                }
+            })
+            });
+            $('.jPaginateBack').on('click', function() {
+            var list = $('.pagination').find('li');
+            $.each(list, function(position, element) {
+                if ($(element).is('.active')) {
+                    $(list[position - 1]).trigger('click');
+                }
+            })
+            });
+
         });
         $('#interattivi').on('click', function() {
             pagina1.style.display = 'none';
@@ -1310,83 +1374,8 @@
         });
 
 
+
         
-        $('#dt-basic-example1').dataTable({
-            responsive: true,
-            dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            buttons: [{
-                    extend: 'csvHtml5',
-                    text: 'CSV',
-                    titleAttr: 'Generate CSV',
-                    className: 'btn-outline-default'
-                },
-                {
-                    extend: 'copyHtml5',
-                    text: 'Copy',
-                    titleAttr: 'Copy to clipboard',
-                    className: 'btn-outline-default'
-                },
-                {
-                    extend: 'print',
-                    text: '<i class="fal fa-print"></i>',
-                    titleAttr: 'Print Table',
-                    className: 'btn-outline-default'
-                }
-
-            ],
-            columnDefs: [{
-                    targets: -1,
-                    title: '',
-                    orderable: false,
-                    render: function(data, type, full, meta) {
-
-                      
-                        return "\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Change Status</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
-                    },
-                },
-
-            ]
-
-        });
-        $('#dt-basic-example2').dataTable({
-            responsive: true,
-            dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            buttons: [{
-                    extend: 'csvHtml5',
-                    text: 'CSV',
-                    titleAttr: 'Generate CSV',
-                    className: 'btn-outline-default'
-                },
-                {
-                    extend: 'copyHtml5',
-                    text: 'Copy',
-                    titleAttr: 'Copy to clipboard',
-                    className: 'btn-outline-default'
-                },
-                {
-                    extend: 'print',
-                    text: '<i class="fal fa-print"></i>',
-                    titleAttr: 'Print Table',
-                    className: 'btn-outline-default'
-                }
-
-            ],
-            columnDefs: [{
-                    targets: -1,
-                    title: '',
-                    orderable: false,
-                    render: function(data, type, full, meta) {
-                        return "\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Change Status</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
-                    },
-                },
-
-            ]
-
-        });
         // lineChart();
         // areaChart();
         horizontalBarChart();
@@ -1407,7 +1396,6 @@
 </script>
 
 <style>
-    
     .material-icons {
         font-family: 'Material Icons';
         font-weight: normal;
@@ -1537,7 +1525,7 @@
         /* no underline */
     }
 
-    
+
     .img75 {
         background-image: url("img/decoNuova.png");
         background-size: 60px;
@@ -1618,7 +1606,7 @@
         user-select: none;
     }
 
-   
+
 
     .sort {
         margin: 0 !important;
@@ -1639,8 +1627,6 @@
     .sort:focus {
         outline: none;
     }
-
-   
 </style>
 
 @stop

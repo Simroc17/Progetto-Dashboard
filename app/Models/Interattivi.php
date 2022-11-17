@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Volantino extends Model
+class Interattivi extends Model
 {
     use HasFactory;
-    protected $table = 'volantino';
-    protected $fillable=[
-        'id_volantino',
+    protected $table = 'history_interattivi';
+    protected  $fillable = [
         'id_promo',
-    ];
+        ];
+    
 }

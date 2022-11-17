@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Geo;
 use App\Models\Gruppo;
+use App\Models\Interattivi;
 use App\Models\Market;
 use App\Models\Negozio;
 use App\Models\Pagina;
@@ -152,10 +153,66 @@ class HomeController extends Controller
         }
             $sommaMobileUnicPag = array_sum($arrayMobileUnicPag);
 
-        $id_vol = Volantino::where(['id_promo' => $promo->id ])->get();
-        $volantinoId = PaginaQta::where(['id_volantino' => 12229])->get();
+     
+        
         //dd($id_vol[0]->id_volantino);
        ////////////////// FINE PAGINE /////////////////////////
+
+       ////////////////////// INTERATTIVI \\\\\\\\\\\\\\\\\\\\\\\\\\\ 122290006002 
+
+       $interattivo = Interattivi::groupBy('tipo' ,'id_prodotto', )
+       ->where(['id_promo' => $promo->id])
+       ->select(DB::raw("(SUM(qta)+ SUM(qta_unici)) AS somma"), 'tipo' ,'id_prodotto',)
+       ->orderBy('id_prodotto', 'ASC')
+       ->get();
+       //dd($interattivo[20]->somma);
+       $arrRicette=[];
+       $arrVideo=[];
+       $arrCuriosita=[];
+       $arrlink=[];
+       $arrVai_a=[];
+       $arrEcommerce=[];
+        for ($i = 0; $i < count($interattivo); $i++ ){
+            if($interattivo[$i]->tipo=='curiosita'){
+                $arrCuriosita[$i]=$interattivo[$i]->somma;
+            }
+        }
+        for ($i = 0; $i < count($interattivo); $i++ ){
+            if($interattivo[$i]->tipo=='collegamento'){
+                $arrlink[$i]=$interattivo[$i]->somma;
+            }
+        }
+        for ($i = 0; $i < count($interattivo); $i++ ){
+            if($interattivo[$i]->tipo=='ricette'){
+                $arrRicette[$i]=$interattivo[$i]->somma;
+            }
+        }
+        for ($i = 0; $i < count($interattivo); $i++ ){
+                if($interattivo[$i]->tipo=='vai_a'){
+                    $arrVai_a[$i]=$interattivo[$i]->somma;
+                }
+        }
+        for ($i = 0; $i < count($interattivo); $i++ ){
+                if($interattivo[$i]->tipo=='video'){
+                        $arrVideo[$i]=$interattivo[$i]->somma;
+                }
+        }
+        for ($i = 0; $i < count($interattivo); $i++ ){
+                if($interattivo[$i]->tipo=='ecommerce'){
+                            $arrEcommerce[$i]=$interattivo[$i]->somma;
+                }
+        }
+    //dd($arrlink);
+     $sommaCuriosita=array_sum($arrCuriosita);
+     $sommaCollegamenti=array_sum($arrlink);
+     $sommaRicette=array_sum($arrRicette);
+     $sommaVai_a=array_sum($arrVai_a);
+     $sommaVideo=array_sum($arrVideo);
+     $sommaEcommerce=array_sum($arrEcommerce);
+
+     //dd($sommaCuriosita);
+       //////////////////// FINE INTERATTIVI \\\\\\\\\\\\\\\\\\\\\\\\\\
+
         $id = Auth::id();
         //dd($id);
         $negozi = Negozio::all();
@@ -177,7 +234,7 @@ class HomeController extends Controller
             
         }//dd($arrayPromo);
        
-        return view('/statistics/statistics_chartjs', compact( 'volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
+        return view('/statistics/statistics_chartjs', compact('sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
     }
 
       /**
@@ -187,12 +244,12 @@ class HomeController extends Controller
      */
     public function benvenuto1($id){
         
-        
-        $promo = Promo::find($id);
-        //dd($promo);  //Promo su cui ho cliccato
-
+        $volantino= Volantino::where(['id_volantino'=> $id])->get();
+        //dd($volantino);  //Volantino su cui ho cliccato
+        $promo = Promo::where(['id'=> $volantino[0]->id_promo])->get();
+        //dd($promo);
         ///////////////////   GRAFICI PARTE CONNESSIONI //////////////////////
-        $visits = Visite::where(['id_promo' => $promo->id])
+        $visits = Visite::where(['id_volantino' => $volantino[0]->id_volantino])
         ->orderBy('data_visita', 'ASC')
         ->get();
         //dd($visit); //Visite
@@ -233,7 +290,7 @@ class HomeController extends Controller
         $sommaUnicaMobile=array_sum($arrayMobileUniq);
        // dd($sommaUnicaMobile);
         $datiGrafico = Geo::groupBy('place')
-        ->where(['id_promo' => $promo->id])
+        ->where(['id_volantino' => $volantino[0]->id_volantino])
         ->select(DB::raw("SUM(visite_region_qta) AS somma, SUM(visite_uniche_region_qta) AS uniche"), 'place')
         ->orderBy('somma', 'DESC')
         ->get();
@@ -246,13 +303,14 @@ class HomeController extends Controller
             $arrRegioni[$i]= $datiGrafico[$i]->place;
         }
         ////////////////// FINE CONNESSIONI ///////////////////////
-        $volantino=Volantino::where(['id_promo' => $promo->id])
+        $volantino1=Volantino::where(['id_volantino' => $volantino[0]->id_volantino])
         ->count();
         
         
 
        ////////////////// GRAFICI PAGINE ///////////////////
-       $pagine = Pagina::where(['id_promo' => $promo->id])
+
+       $pagine = Pagina::where(['id_volantino' => $volantino[0]->id_volantino])
        ->orderBy('data_visita', 'ASC')
        ->get();
        $arrayTotPag=[];
@@ -292,10 +350,16 @@ class HomeController extends Controller
         }
             $sommaMobileUnicPag = array_sum($arrayMobileUnicPag);
 
-        $id_vol = Volantino::where(['id_promo' => $promo->id ])->get();
-        $volantinoId = PaginaQta::where(['id_volantino' => 12229])->get();
-        //dd($id_vol[0]->id_volantino);
-       ////////////////// FINE PAGINE /////////////////////////
+        // $id_vol = Volantino::where(['id_volantino' => $promo->id ])->get();
+         $volantinoId = PaginaQta::groupBy('num_pagina')
+         ->where(['id_volantino' => $volantino[0]->id_volantino])
+         ->select(DB::raw("SUM(pagina_qta) AS somma, SUM(pagina_unica_qta) AS uniche"), 'num_pagina')
+         ->orderBy('somma', 'DESC')
+         ->get();
+      // dd($volantinoId);
+        ////////////////// FINE PAGINE /////////////////////////
+
+        
         $id = Auth::id();
         //dd($id);
         $negozi = Negozio::all();
@@ -317,7 +381,7 @@ class HomeController extends Controller
             
         }//dd($arrayPromo);
        
-        return view('/datatables/datatables_basic', compact( 'volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
+        return view('/datatables/datatables_basic', compact( 'volantinoId','volantino1' ,'volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
     }
 
 
@@ -549,7 +613,7 @@ class HomeController extends Controller
                                     <td style="width:5%;" class="img'.$promozione->id_canale.' w3-round-xxlarge">  </td>\
                                     <td style="width:5%;" class="text'.$promozione->id_canale.'">  </td>\
                                     <td style="width:5%;" class="id"> ' .$market->nome. ' </td>\
-                                    <td style="width:30%;" class="nome"> <a href= "datatables_basic/'.$promozione->id.'" style="color: black;" > ' .$promozione->nome. ' </a>  </td>\
+                                    <td style="width:30%;" class="nome"> <a href= "datatables_basic/'.$volantino->id_volantino.'" style="color: black;" > ' .$promozione->nome. ' </a>  </td>\
                                     <td style="width:35%;" class="descrizione"> ' .$promozione->descrizione. ' </td>\
                                     <td style="width:10%;" class="date_start"> ' .$promozione->date_start. ' </td>\
                                     <td style="width:10%;" class="date_end"> ' .$promozione->date_end. ' </td>\
