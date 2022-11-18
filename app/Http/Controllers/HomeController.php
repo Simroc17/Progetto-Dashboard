@@ -58,38 +58,25 @@ class HomeController extends Controller
         ->get();
         //dd($visit); //Visite
         $arrayTot = [];
+        $arrayUniq = [];
+        $arrayGiorni = [];
+        $arrayDesktop=[];
+        $arrayMobile=[];
+        $arrayDesktopUniq=[];
+        $arrayMobileUniq=[];
         for( $i=0; $i<count($visits); $i++ ){
             $arrayTot[$i] = $visits[$i]->visite_qta;
-        }
-        //dd($arrayTot);
-        $arrayUniq = [];
-        for( $i=0; $i<count($visits); $i++ ){
             $arrayUniq[$i] = $visits[$i]->visite_uniche_qta;
-        }
-        $arrayGiorni = [];
-        for( $i=0; $i<count($visits); $i++ ){
             $arrayGiorni[$i] = $visits[$i]->data_visita;
-        }
-        $arrayDesktop=[];
-        for( $i=0; $i<count($visits); $i++ ){
             $arrayDesktop[$i] = $visits[$i]->visite_desktop_qta;
-        }
-        $arrayMobile=[];
-        for( $i=0; $i<count($visits); $i++ ){
             $arrayMobile[$i] = $visits[$i]->visite_mobile_qta;
+            $arrayDesktopUniq[$i] = $visits[$i]->visite_uniche_desktop_qta;
+            $arrayMobileUniq[$i] = $visits[$i]->visite_uniche_mobile_qta;
         }
         $sommaMobile=array_sum($arrayMobile);
        // dd($sommaMobile);
         $sommaDesktop=array_sum($arrayDesktop);
         //dd($sommaDesktop);
-        $arrayDesktopUniq=[];
-        for( $i=0; $i<count($visits); $i++ ){
-            $arrayDesktopUniq[$i] = $visits[$i]->visite_uniche_desktop_qta;
-        }
-        $arrayMobileUniq=[];
-        for( $i=0; $i<count($visits); $i++ ){
-            $arrayMobileUniq[$i] = $visits[$i]->visite_uniche_mobile_qta;
-        } 
         $sommaUnicaDesktop=array_sum($arrayDesktopUniq);
         $sommaUnicaMobile=array_sum($arrayMobileUniq);
        // dd($sommaUnicaMobile);
@@ -202,15 +189,38 @@ class HomeController extends Controller
                             $arrEcommerce[$i]=$interattivo[$i]->somma;
                 }
         }
-    //dd($arrlink);
-     $sommaCuriosita=array_sum($arrCuriosita);
-     $sommaCollegamenti=array_sum($arrlink);
-     $sommaRicette=array_sum($arrRicette);
-     $sommaVai_a=array_sum($arrVai_a);
-     $sommaVideo=array_sum($arrVideo);
-     $sommaEcommerce=array_sum($arrEcommerce);
-
-     //dd($sommaCuriosita);
+        //dd($arrlink);
+        $sommaCuriosita=array_sum($arrCuriosita);
+        $sommaCollegamenti=array_sum($arrlink);
+        $sommaRicette=array_sum($arrRicette);
+        $sommaVai_a=array_sum($arrVai_a);
+        $sommaVideo=array_sum($arrVideo);
+        $sommaEcommerce=array_sum($arrEcommerce);
+        //dd($sommaCuriosita);
+        //query per grafico interattivi
+        $interattivo2 = Interattivi::groupBy('data_visita')
+        ->where(['id_promo' => $promo->id])
+        ->select(DB::raw("(SUM(qta)+ SUM(qta_unici)) AS somma"),'data_visita',)
+        ->orderBy('data_visita', 'ASC')
+        ->get();
+        //dd($interattivo2);
+        $interattivoTipo =Interattivi::groupBy('tipo')
+        ->where(['id_promo' => $promo->id])
+        ->select(DB::raw("(SUM(qta)+ SUM(qta_unici)) AS somma"),'tipo',)
+        ->orderBy('tipo', 'ASC')
+        ->get();
+        //dd($interattivoTipo);
+        $arrTipo=[];
+        $arrData=[];
+        $arrSomma=[];
+        for ($i = 0; $i < count($interattivo2); $i++ ){
+            $arrData[$i]= $interattivo2[$i]->data_visita;
+        }
+        for ($i = 0; $i < count($interattivoTipo); $i++ ){
+            $arrTipo[$i]= $interattivoTipo[$i]->tipo;
+            $arrSomma[$i]= $interattivoTipo[$i]->somma;
+        }
+        //dd($arrSomma);
        //////////////////// FINE INTERATTIVI \\\\\\\\\\\\\\\\\\\\\\\\\\
 
         $id = Auth::id();
@@ -234,7 +244,7 @@ class HomeController extends Controller
             
         }//dd($arrayPromo);
        
-        return view('/statistics/statistics_chartjs', compact('sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
+        return view('/statistics/statistics_chartjs', compact('arrTipo','arrData','arrSomma','sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
     }
 
       /**

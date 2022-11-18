@@ -1263,87 +1263,60 @@
     var video=<?php echo json_encode($sommaVideo); ?>;
     var ecommerce=<?php echo json_encode($sommaEcommerce); ?>;
     var barChart2 = function() {
-        var barChartData = {
-            labels: ["link", "curiosita", "ricette","vai_a","video","ecommerce"],
-            datasets: [{
-                    label: "link",
-                    backgroundColor: color.success._300,
-                    borderWidth: 1,
-                    data: link
-                    },
-                    { label: "curiosita",
-                    backgroundColor: color.primary._300,
-                    borderWidth: 1,
-                    data: curiosita
-                    }
-                    ]
-
-        };
-        var config = {
+        const data = {
+                labels: ["curiosita","link","ricette","vai_a","video","ecommerce"],
+                datasets: [{
+                axis: 'y',
+                label: '',
+                data: [curiosita,link,ricette,vai_a,video,ecommerce],
+                fill: false,
+                backgroundColor: [
+                '#67ea19',
+                '#447ba5',
+                '#744f4f',
+                '#51aef6',
+                '#cf1523',
+                '#6d437c',
+                
+                ],
+                borderColor: [
+                'black',
+                'black',
+                'black',
+                'black',
+                'black',
+                'black',
+                
+                ],
+                borderWidth: 1
+            }]
+            };
+                    const config = {
             type: 'horizontalBar',
-            data: horizontalBarChart,
+            data,
             options: {
-                responsive: true,
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: false,
-                    text: 'Horizontal Bar Chart'
-                },
-                scales: {
-                    xAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: false,
-                            labelString: 'Profit margin (approx)'
-                        },
-                        gridLines: {
-                            display: true,
-                            color: "#f2f2f2"
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            fontSize: 11
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: false,
-                            labelString: 'Quarterly forecast'
-                        },
-                        gridLines: {
-                            display: true,
-                            color: "#f2f2f2"
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            fontSize: 11
-                        }
-                    }]
-                }
+                indexAxis: 'y',
             }
-        }
+            };
         new Chart($("#barChart2 > canvas").get(0).getContext("2d"), config);
     }
     /* bar chart -- end */
 
     /* bar stacked */
+    var somma=<?php echo json_encode($arrSomma); ?>;
+    var tipo=<?php echo json_encode($arrTipo); ?>;
+    var data=<?php echo json_encode($arrData); ?>;
+    console.log(data)
     var barStacked = function() {
         var barStackedData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: data,
             datasets: [{
                     label: "Red",
                     backgroundColor: color.primary._300,
                     borderColor: color.primary._500,
                     borderWidth: 1,
                     data: [
-                        45,
-                        75,
-                        26,
-                        23,
-                        60, -48, -9
+                        somma
                     ]
                 },
                 {
@@ -1351,12 +1324,7 @@
                     backgroundColor: color.success._300,
                     borderColor: color.success._500,
                     borderWidth: 1,
-                    data: [-10,
-                        16,
-                        72,
-                        93,
-                        29, -74,
-                        64
+                    data: [10,10,10
                     ]
                 }
             ]
