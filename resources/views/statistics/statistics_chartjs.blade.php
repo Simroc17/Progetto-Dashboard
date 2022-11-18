@@ -1303,29 +1303,34 @@
     /* bar chart -- end */
 
     /* bar stacked */
-    var somma=<?php echo json_encode($arrSomma); ?>;
-    var tipo=<?php echo json_encode($arrTipo); ?>;
-    var data=<?php echo json_encode($arrData); ?>;
-    console.log(data)
+    var somma=<?php echo json_encode($arrayCuriosita); ?>;
+    var tipo=<?php echo json_encode($arrayprodotti); ?>;
+    var data=<?php echo json_encode($arrayGiorni2); ?>;
+    let numbers = Object.values(somma);
+    // console.log(numbers)
+    let arrCu=[]
+    for(i =0; i < numbers.length; i++){
+        arrCu[i]= numbers[i].somma
+    }
+    console.log(arrCu)
+    
+    
     var barStacked = function() {
         var barStackedData = {
             labels: data,
             datasets: [{
-                    label: "Red",
+                    label: "Curiosita",
                     backgroundColor: color.primary._300,
                     borderColor: color.primary._500,
                     borderWidth: 1,
-                    data: [
-                        somma
-                    ]
+                    data: arrCu,
                 },
                 {
                     label: "Blue",
                     backgroundColor: color.success._300,
                     borderColor: color.success._500,
                     borderWidth: 1,
-                    data: [10,10,10
-                    ]
+                    data: [],
                 }
             ]
 
