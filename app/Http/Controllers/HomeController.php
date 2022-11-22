@@ -249,14 +249,14 @@ class HomeController extends Controller
             
         }//dd($arrayPromo);
 
-        $interattivo3 = Interattivi::groupBy('seriale','tipo' )
-        ->where(['id_promo' => $promo->id])
-        ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'seriale','tipo')
-        ->orderBy('sommaQta', 'ASC')
-        ->get();
-       // dd($interattivo3);
-            if($interattivo3->count()==0){$prodotti = [];
-                return view('/statistics/statistics_chartjs', compact('prodotti' ,'interattivo3' ,'interattivo2','arrayVai_a','arrayRicette','arrayLink' ,'arrayVideo' ,'arrayEcommerce' ,'arrayCuriosita','arrayGiorni2','arrayprodotti','sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));}
+                $interattivo3 = Interattivi::groupBy('seriale','tipo' )
+                ->where(['id_promo' => $promo->id])
+                ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'seriale','tipo')
+                ->orderBy('sommaQta', 'ASC')
+                ->get();
+            // dd($interattivo3);
+            if($interattivo3->count()==0){$finale = [];
+                return view('/statistics/statistics_chartjs', compact('finale' ,'interattivo3' ,'interattivo2','arrayVai_a','arrayRicette','arrayLink' ,'arrayVideo' ,'arrayEcommerce' ,'arrayCuriosita','arrayGiorni2','arrayprodotti','sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));}
                 else{ for ($i = 0; $i <count($interattivo3); $i++){
                     $prodotti[$i] = Prodotto::where(['seriale' => $interattivo3[$i]->seriale])->get();
                 }
@@ -267,22 +267,18 @@ class HomeController extends Controller
             // dd($prodotti);
             $finale = DB::table('history_interattivi')
             ->where(['id_promo' => $promo->id])
-            
-            
             ->join('prodotti', 'prodotti.seriale', '=', 'history_interattivi.seriale')
             ->join('prodotti_interattivi', 'prodotti_interattivi.seriale', '=', 'history_interattivi.seriale')
             ->groupBy('seriale','tipo', 'descrizione', 'descrizione_estesa', 'titolo')
             ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','history_interattivi.tipo','prodotti.descrizione', 'prodotti.descrizione_estesa', 'prodotti_interattivi.titolo')
             // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa') 
             ->get();
-            dd($finale);
-           
-           
-       //////////////////// FINE INTERATTIVI \\\\\\\\\\\\\\\\\\\\\\\\\\
+            //dd($finale);
+            //////////////////// FINE INTERATTIVI \\\\\\\\\\\\\\\\\\\\\\\\\\
 
       
        
-        return view('/statistics/statistics_chartjs', compact( 'prodotti' , 'interattivo3' ,'interattivo2','arrayVai_a','arrayRicette','arrayLink' ,'arrayVideo' ,'arrayEcommerce' ,'arrayCuriosita','arrayGiorni2','arrayprodotti','sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
+        return view('/statistics/statistics_chartjs', compact( 'finale' , 'interattivo3' ,'interattivo2','arrayVai_a','arrayRicette','arrayLink' ,'arrayVideo' ,'arrayEcommerce' ,'arrayCuriosita','arrayGiorni2','arrayprodotti','sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
     }
 
       /**

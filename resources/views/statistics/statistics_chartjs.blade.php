@@ -516,9 +516,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-12">
+        <div class="col-xl-12 mb-3">
                 <div class="panel-container show ">
-                    <div class="table-list-container " id="users">
+                    <div class="table-list-container " id="users2">
                         <div class="row justify-content-between">
                             <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
                                
@@ -530,65 +530,68 @@
                         <table id="intestazione"  class="table table-hover table-striped w-100 mt-1">
                             <thead>
                             <tr class="text-white" role="row" style="background-color: red;">
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="regione">Tipo</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="click_unici">Titolo</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="click_totali">Prodotto</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="click_totali">Click unici</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="click_totali">Click totali</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="tipo1">Tipo</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 45%;" ><button type="button" class="sort" data-sort="titolo1">Titolo</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 25%;" ><button type="button" class="sort" data-sort="prodotto1">Prodotto</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="unici1">Click unici</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="totali1">Click totali</button></th>
                             </tr>
                             </thead>
                         </table>
-                        <table id="test-list"  class="table table-hover table-striped w-100 mt-1">
+                        <table id="test-list2"  class="table table-hover table-striped w-100 mt-1">
                            
                             <tbody id="tbody" class="list ">
                               
 
-                                @foreach ($interattivo3 as $interattivo )
+                                @foreach ($finale as $finale )
                                     
                                       
-                                            @if ($interattivo->tipo=='ricetta')
+                                            @if ($finale->tipo=='ricetta')
                                                 <tr>
-                                                    <td class="regione" style="width: 10%;" ></td>
-                                                    <td style="width:35%;"></td>
-                                                    <td style="width:35%"></td>
-                                                    <td class="click_unici" style="width: 10%;">{{ $interattivo['sommaUnici'] }}</td>
-                                                    <td class="click_totali" style="width: 10%;">{{ $interattivo['sommaQta']}}</td>
+                                                    <td class="tipo1" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                    <td class="titolo1" style="width:45%;">{{ $finale->titolo }}</td>
+                                                    <td class="prodotto1" style="width:25%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                    <td class="unici1" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                    <td class="totali1" style="width: 10%;">{{ $finale->sommaQta }}</td>
                                                 </tr>
                                             @endif
-                                            @if ($interattivo->tipo=='icona')
-                                                <tr>
-                                                <td class="regione" style="width: 10%;" >{{ $interattivo['seriale'] }}</td>
-                                                    <td style="width:35%;"></td>
-                                                    <td style="width:35%"></td>
-                                                    <td class="click_unici" style="width: 10%;">{{ $interattivo['sommaUnici'] }}</td>
-                                                    <td class="click_totali" style="width: 10%;">{{ $interattivo['sommaQta']}}</td>
+                                            @if ($finale->tipo=='icona')
+                                            <tr>
+                                                    <td class="tipo1" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                    <td class="titolo1" style="width:45%;">{{ $finale->titolo }}</td>
+                                                    <td class="prodotto1" style="width:25%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                    <td class="unici1" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                    <td class="totali1" style="width: 10%;">{{ $finale->sommaQta }}</td>
                                                 </tr>
                                             @endif
-                                            @if ($interattivo->tipo=='curiosita')
-                                                <tr>
-                                                <td class="regione" style="width: 10%;" >{{ $interattivo['seriale'] }}</td>
-                                                    <td style="width:35%;"></td>
-                                                    <td style="width:35%"></td>
-                                                    <td class="click_unici" style="width: 10%;">{{ $interattivo['sommaUnici'] }}</td>
-                                                    <td class="click_totali" style="width: 10%;">{{ $interattivo['sommaQta']}}</td>
+                                            @if ($finale->tipo=='curiosita')
+                                            <tr>
+                                                    <td class="tipo1" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                    <td class="titolo1" style="width:45%;">{{ $finale->titolo }}</td>
+                                                    <td class="prodotto1" style="width:25%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                    <td class="unici1" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                    <td class="totali1" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                                </tr>
+
+
+
+                                            @endif
+                                            @if ($finale->tipo=='collegamento')
+                                            <tr>
+                                                    <td class="tipo1" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                    <td class="titolo1" style="width:45%;">{{ $finale->titolo }}</td>
+                                                    <td class="prodotto1" style="width:25%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                    <td class="unici1" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                    <td class="totali1" style="width: 10%;">{{ $finale->sommaQta }}</td>
                                                 </tr>
                                             @endif
-                                            @if ($interattivo->tipo=='link')
-                                                <tr>
-                                                <td class="regione" style="width: 10%;" >{{ $interattivo['seriale'] }}</td>
-                                                    <td style="width:35%;"></td>
-                                                    <td style="width:35%"></td>
-                                                    <td class="click_unici" style="width: 10%;">{{ $interattivo['sommaUnici'] }}</td>
-                                                    <td class="click_totali" style="width: 10%;">{{ $interattivo['sommaQta']}}</td>
-                                                </tr>
-                                            @endif
-                                            @if ($interattivo->tipo=='video')
-                                                <tr>
-                                                <td class="regione" style="width: 10%;" >{{ $interattivo['seriale'] }}</td>
-                                                    <td style="width:35%;"></td>
-                                                    <td style="width:35%"></td>
-                                                    <td class="click_unici" style="width: 10%;">{{ $interattivo['sommaUnici'] }}</td>
-                                                    <td class="click_totali" style="width: 10%;">{{ $interattivo['sommaQta']}}</td>
+                                            @if ($finale->tipo=='video')
+                                            <tr>
+                                                    <td class="tipo1" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                    <td class="titolo1" style="width:45%;">{{ $finale->titolo }}</td>
+                                                    <td class="prodotto1" style="width:25%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                    <td class="unici1" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                    <td class="totali1" style="width: 10%;">{{ $finale->sommaQta }}</td>
                                                 </tr>
                                             @endif
                                        
@@ -1534,6 +1537,54 @@
             link2.classList.remove('active');
             link3.classList.add('active');
             link4.classList.remove('active');
+
+            var options = {
+                valueNames: ['tipo1','titolo1','prodotto1','unici1','totali1',],
+                page: 10,
+                pagination: {
+                    innerWindow: 1,
+                    left: 0,
+                    right: 0,
+                    paginationClass: "pagination",
+                }
+            };
+
+            var userList = new List('users2', options);
+            // Prova Pagination
+            var monkeyList = new List('test-list2', {
+                valueNames: ['tipo1','titolo1','prodotto1','unici1','totali1',],
+                page: 10,
+                pagination: {
+                    innerWindow: 1,
+                    left: 0,
+                    right: 0,
+                    paginationClass: "pagination",
+                }
+            });
+
+            $('.jPaginateNext').on('click', function() {
+                var list = $('.pagination').find('li');
+                $.each(list, function(position, element) {
+                    if ($(element).is('.active')) {
+                        $(list[position + 1]).trigger('click');
+                    }
+                })
+            });
+
+
+            $('.jPaginateBack').on('click', function() {
+                var list = $('.pagination').find('li');
+                $.each(list, function(position, element) {
+                    if ($(element).is('.active')) {
+                        $(list[position - 1]).trigger('click');
+                    }
+                })
+            });
+
+
+            
+
+
         });
         $('#prodotti').on('click', function() {
             pagina1.style.display = 'none';
@@ -1548,101 +1599,8 @@
 
 
         
-        $('#dt-basic-example1').dataTable({
-            responsive: true,
-            dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            buttons: [{
-                    extend: 'csvHtml5',
-                    text: 'CSV',
-                    titleAttr: 'Generate CSV',
-                    className: 'btn-outline-default'
-                },
-                {
-                    extend: 'copyHtml5',
-                    text: 'Copy',
-                    titleAttr: 'Copy to clipboard',
-                    className: 'btn-outline-default'
-                },
-                {
-                    extend: 'print',
-                    text: '<i class="fal fa-print"></i>',
-                    titleAttr: 'Print Table',
-                    className: 'btn-outline-default'
-                }
-
-            ],
-            columnDefs: [{
-                    targets: -1,
-                    title: '',
-                    orderable: false,
-                    render: function(data, type, full, meta) {
-
-                        /*
-                        -- ES6
-                        -- convert using https://babeljs.io online transpiler
-                        return `
-                        <a href='javascript:void(0);' class='btn btn-sm btn-icon btn-outline-danger rounded-circle mr-1' title='Delete Record'>
-                            <i class="fal fa-times"></i>
-                        </a>
-                        <div class='dropdown d-inline-block dropleft '>
-                            <a href='#'' class='btn btn-sm btn-icon btn-outline-primary rounded-circle shadow-0' data-toggle='dropdown' aria-expanded='true' title='More options'>
-                                <i class="fal fa-ellipsis-v"></i>
-                            </a>
-                            <div class='dropdown-menu'>
-                                <a class='dropdown-item' href='javascript:void(0);'>Change Status</a>
-                                <a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>
-                            </div>
-                        </div>`;
-                            
-                        ES5 example below:  
-
-                        */
-                        return "\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Change Status</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
-                    },
-                },
-
-            ]
-
-        });
-        $('#dt-basic-example2').dataTable({
-            responsive: true,
-            dom: "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'B>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            buttons: [{
-                    extend: 'csvHtml5',
-                    text: 'CSV',
-                    titleAttr: 'Generate CSV',
-                    className: 'btn-outline-default'
-                },
-                {
-                    extend: 'copyHtml5',
-                    text: 'Copy',
-                    titleAttr: 'Copy to clipboard',
-                    className: 'btn-outline-default'
-                },
-                {
-                    extend: 'print',
-                    text: '<i class="fal fa-print"></i>',
-                    titleAttr: 'Print Table',
-                    className: 'btn-outline-default'
-                }
-
-            ],
-            columnDefs: [{
-                    targets: -1,
-                    title: '',
-                    orderable: false,
-                    render: function(data, type, full, meta) {
-                        return "\n\t\t\t\t\t\t<div class='dropdown d-inline-block dropleft'>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t<div class='dropdown-menu'>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Change Status</a>\n\t\t\t\t\t\t\t\t<a class='dropdown-item' href='javascript:void(0);'>Generate Report</a>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>";
-                    },
-                },
-
-            ]
-
-        });
+       
+      
         // lineChart();
         // areaChart();
         horizontalBarChart();
