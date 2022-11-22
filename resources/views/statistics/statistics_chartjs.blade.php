@@ -517,192 +517,99 @@
             </div>
         </div>
         <div class="col-xl-12">
-            <div class="panel-container show ">
-                <div class="panel-content ">
-                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
-                        <thead class="bg-warning-200">
-                            <tr>
-                                <th>Regione</th>
-                                <th>Click Unici</th>
-                                <th>Click Totali</th>
-                                <th>Controls</th>
+                <div class="panel-container show ">
+                    <div class="table-list-container " id="users">
+                        <div class="row justify-content-between">
+                            <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
+                               
+                            </div>
+                            
+                        </div>
+
+                       
+                        <table id="intestazione"  class="table table-hover table-striped w-100 mt-1">
+                            <thead>
+                            <tr class="text-white" role="row" style="background-color: red;">
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="regione">Tipo</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="click_unici">Titolo</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="click_totali">Prodotto</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="click_totali">Click unici</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="click_totali">Click totali</button></th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                        </table>
+                        <table id="test-list"  class="table table-hover table-striped w-100 mt-1">
+                           
+                            <tbody id="tbody" class="list ">
+                              
+
+                                @foreach ($interattivo3 as $interattivo )
+                                    
+                                      
+                                            @if ($interattivo->tipo=='ricetta')
+                                                <tr>
+                                                    <td class="regione" style="width: 10%;" ></td>
+                                                    <td style="width:35%;"></td>
+                                                    <td style="width:35%"></td>
+                                                    <td class="click_unici" style="width: 10%;">{{ $interattivo['sommaUnici'] }}</td>
+                                                    <td class="click_totali" style="width: 10%;">{{ $interattivo['sommaQta']}}</td>
+                                                </tr>
+                                            @endif
+                                            @if ($interattivo->tipo=='icona')
+                                                <tr>
+                                                <td class="regione" style="width: 10%;" >{{ $interattivo['seriale'] }}</td>
+                                                    <td style="width:35%;"></td>
+                                                    <td style="width:35%"></td>
+                                                    <td class="click_unici" style="width: 10%;">{{ $interattivo['sommaUnici'] }}</td>
+                                                    <td class="click_totali" style="width: 10%;">{{ $interattivo['sommaQta']}}</td>
+                                                </tr>
+                                            @endif
+                                            @if ($interattivo->tipo=='curiosita')
+                                                <tr>
+                                                <td class="regione" style="width: 10%;" >{{ $interattivo['seriale'] }}</td>
+                                                    <td style="width:35%;"></td>
+                                                    <td style="width:35%"></td>
+                                                    <td class="click_unici" style="width: 10%;">{{ $interattivo['sommaUnici'] }}</td>
+                                                    <td class="click_totali" style="width: 10%;">{{ $interattivo['sommaQta']}}</td>
+                                                </tr>
+                                            @endif
+                                            @if ($interattivo->tipo=='link')
+                                                <tr>
+                                                <td class="regione" style="width: 10%;" >{{ $interattivo['seriale'] }}</td>
+                                                    <td style="width:35%;"></td>
+                                                    <td style="width:35%"></td>
+                                                    <td class="click_unici" style="width: 10%;">{{ $interattivo['sommaUnici'] }}</td>
+                                                    <td class="click_totali" style="width: 10%;">{{ $interattivo['sommaQta']}}</td>
+                                                </tr>
+                                            @endif
+                                            @if ($interattivo->tipo=='video')
+                                                <tr>
+                                                <td class="regione" style="width: 10%;" >{{ $interattivo['seriale'] }}</td>
+                                                    <td style="width:35%;"></td>
+                                                    <td style="width:35%"></td>
+                                                    <td class="click_unici" style="width: 10%;">{{ $interattivo['sommaUnici'] }}</td>
+                                                    <td class="click_totali" style="width: 10%;">{{ $interattivo['sommaQta']}}</td>
+                                                </tr>
+                                            @endif
+                                       
+                                   
+                                @endforeach
+                               
+                            </tbody>
+                        </table>
+                        <table id="tfoot" style="display: block;" class="table-footer">
                             <tr>
-                                <td>268410636</td>
-                                <td>Cooley, Walker J.</td>
-                                <td>03-13-19</td>
-                                <td>1</td>
+                                <td class="table-pagination position-absolute">
+                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
+                                    <ul class="pagination"></ul>
+                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
+                                </td>
+                                
+                                
                             </tr>
-                            <tr>
-                                <td>077610947</td>
-                                <td>Wise, Ruby R.</td>
-                                <td>04-10-19</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>959104621</td>
-                                <td>Orr, Isabella V.</td>
-                                <td>05-14-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>756590147</td>
-                                <td>Schwartz, Xander P.</td>
-                                <td>11-05-18</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>533801387</td>
-                                <td>Gilmore, Cedric O.</td>
-                                <td>01-16-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>403080948</td>
-                                <td>Foley, Cynthia M.</td>
-                                <td>07-14-18</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>114290869</td>
-                                <td>Marshall, Carter V.</td>
-                                <td>08-30-18</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>033182882</td>
-                                <td>Reilly, Jacob K.</td>
-                                <td>09-19-18</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>471026559</td>
-                                <td>Barlow, Jena S.</td>
-                                <td>12-16-19</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>CustomerID</th>
-                                <th>Name</th>
-                                <th>PurchaseDate</th>
-                                <th>Controls</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <!-- datatable end -->
-                </div>
+                        </table>
+                        
+                    </div>
             </div>
         </div>
     </div>
@@ -1303,17 +1210,45 @@
     /* bar chart -- end */
 
     /* bar stacked */
-    var somma=<?php echo json_encode($arrayCuriosita); ?>;
+    
+   
+    
+    
     var tipo=<?php echo json_encode($arrayprodotti); ?>;
     var data=<?php echo json_encode($arrayGiorni2); ?>;
-    let numbers = Object.values(somma);
+    let numbers = Object.values(<?php echo json_encode($arrayCuriosita); ?>);
+    let numbers2 = Object.values(<?php echo json_encode($arrayEcommerce); ?>);
+    let numbers3 = Object.values(<?php echo json_encode($arrayLink); ?>);
+    let numbers4 = Object.values(<?php echo json_encode($arrayVideo); ?>);
+    let numbers5= Object.values(<?php echo json_encode($arrayRicette); ?>);
+    let numbers6= Object.values(<?php echo json_encode($arrayVai_a); ?>);
     // console.log(numbers)
     let arrCu=[]
     for(i =0; i < numbers.length; i++){
         arrCu[i]= numbers[i].somma
     }
-    console.log(arrCu)
-    
+    //console.log(arrCu)
+    let arrEcomm=[]
+    for(i =0; i < numbers2.length; i++){
+        arrEcomm[i]= numbers2[i].somma
+    }
+    let arrLink=[]
+    for(i=0;i<numbers3.length;i++){
+        arrLink[i]= numbers3[i].somma
+    }
+    let arrVid=[]
+    for(i=0;i<numbers4.length;i++){
+        arrVid[i]= numbers4[i].somma
+    }
+    let arrRic=[]
+    for(i=0;i>numbers5.length;i++){
+        arrRic[i]= numbers5[i].somma
+    }
+    let arrVai=[]
+    for(i=0;i<numbers6.length;i++){
+        arrVai[i]=numbers6[i].somma
+    }
+
     
     var barStacked = function() {
         var barStackedData = {
@@ -1326,11 +1261,39 @@
                     data: arrCu,
                 },
                 {
-                    label: "Blue",
+                    label: "Ecommerce",
+                    backgroundColor: color.danger._300,
+                    borderColor: color.danger._500,
+                    borderWidth: 1,
+                    data: arrEcomm,
+                },
+                {
+                    label: "Link",
+                    backgroundColor: color.warning._300,
+                    borderColor: color.warning._500,
+                    borderWidth: 1,
+                    data: arrLink,
+                },
+                {
+                    label: "Video",
                     backgroundColor: color.success._300,
                     borderColor: color.success._500,
                     borderWidth: 1,
-                    data: [],
+                    data: arrVid,
+                },
+                {
+                    label: "Ricette",
+                    backgroundColor:color.warning._700,
+                    borderColor: color.warning._500,
+                    borderWidth: 1,
+                    data: arrRic,
+                },
+                {
+                    label: "Vai_a",
+                    backgroundColor: color.success._1000,
+                    borderColor: color.success._00,
+                    borderWidth: 1,
+                    data: arrVai,
                 }
             ]
 

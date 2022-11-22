@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Interattivi extends Model
+class Prodotto extends Model
 {
     use HasFactory;
-    protected $table = 'history_interattivi';
+    protected $table = 'prodotti';
     protected  $fillable = [
-        'id_promo',
         'seriale',
         ];
-    
 }
