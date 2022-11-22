@@ -680,192 +680,66 @@
                 </div>
             </div>
             <div class="col-xl-12">
+                 
                  <div class="panel-container show ">
-                <div class="panel-content ">
-                    <table id="dt-basic-example2" class="table table-bordered table-hover table-striped w-100">
-                        <thead class="bg-warning-200">
-                            <tr>
-                                <th>Regione</th>
-                                <th>Click Unici</th>
-                                <th>Click Totali</th>
-                                <th>Controls</th>
+                    <div class="table-list-container " id="users2">
+                        <div class="row justify-content-between">
+                            <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
+                               
+                            </div>
+                            
+                        </div>
+
+                       
+                        <table id="intestazione"  class="table table-hover table-striped w-100 mt-1">
+                            <thead>
+                            <tr class="text-white" role="row" style="background-color: red;">
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="tipo1">Tipo</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 45%;" ><button type="button" class="sort" data-sort="titolo1">Titolo</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 25%;" ><button type="button" class="sort" data-sort="prodotto1">Prodotto</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="unici1">Click unici</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="totali1">Click totali</button></th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                        </table>
+                        <table id="test-list2"  class="table table-hover table-striped w-100 mt-1">
+                           
+                            <tbody id="tbody" class="list ">
+                              
+
+                                @foreach ($products as $product )
+                                    
+                                      
+                                          
+                                                <tr>
+                                                    <td class="tipo1" style="width: 10%;" >{{ $product->descrizione }}</td>
+                                                    <td class="titolo1" style="width:45%;">{{ $product->descrizione_estesa }}</td>
+                                                   
+                                                    <td class="unici1" style="width: 10%;">{{ $product->sommaUnici }}</td>
+                                                    <td class="totali1" style="width: 10%;">{{ $product->sommaQta }}</td>
+                                                </tr>
+                                          
+                                           
+                                       
+                                   
+                                @endforeach
+                               
+                            </tbody>
+                        </table>
+                        <table id="tfoot" style="display: block;" class="table-footer">
                             <tr>
-                                <td>268410636</td>
-                                <td>Cooley, Walker J.</td>
-                                <td>03-13-19</td>
-                                <td>1</td>
+                                <td class="table-pagination position-absolute">
+                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
+                                    <ul class="pagination"></ul>
+                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
+                                </td>
+                                
+                                
                             </tr>
-                            <tr>
-                                <td>077610947</td>
-                                <td>Wise, Ruby R.</td>
-                                <td>04-10-19</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>959104621</td>
-                                <td>Orr, Isabella V.</td>
-                                <td>05-14-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>756590147</td>
-                                <td>Schwartz, Xander P.</td>
-                                <td>11-05-18</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>533801387</td>
-                                <td>Gilmore, Cedric O.</td>
-                                <td>01-16-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>403080948</td>
-                                <td>Foley, Cynthia M.</td>
-                                <td>07-14-18</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>114290869</td>
-                                <td>Marshall, Carter V.</td>
-                                <td>08-30-18</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>033182882</td>
-                                <td>Reilly, Jacob K.</td>
-                                <td>09-19-18</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>471026559</td>
-                                <td>Barlow, Jena S.</td>
-                                <td>12-16-19</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>223467911</td>
-                                <td>Huber, Warren Z.</td>
-                                <td>05-30-20</td>
-                                <td>1</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>CustomerID</th>
-                                <th>Name</th>
-                                <th>PurchaseDate</th>
-                                <th>Controls</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <!-- datatable end -->
-                </div>
+                        </table>
+                        
+                    </div>
+           
             </div>
         </div>
 
