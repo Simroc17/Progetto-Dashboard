@@ -44,6 +44,7 @@
     </div>
     <div style="font-size: 15px; margin-bottom:1rem;"><i class="fa-regular fa-clock"></i> DAL {{$promo->date_start}} AL {{$promo->date_end}}</div>
 
+    <!-- /////////////// CARDS ////////////////// -->
     <div class="row mb-2">
         <div class="col-lg-3 col-6" style="border-radius:25px;">
             <div class="box text-center" style=" background-color: #17a2b8; border-radius:5px;">
@@ -92,14 +93,14 @@
                 <div class="row">
                     <div class="col-sm-6 border-right">
                         <div class="description-block">
-                            <h5 class="description-header text-white">2.852</h5>
-                            <span class="description-text text-white">Totali</span>
+                            <h5 class="description-header text-white">{{count($finale)}}</h5>
+                            <span class="description-text text-white">TOTALI</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="description-block">
-                            <h5 class="description-header text-white">786</h5>
-                            <span class="description-text text-white">Uniche</span>
+                            <h5 class="description-header text-white">{{$sommaInter}}</h5>
+                            <span class="description-text text-white">CLICK RICEVUTI</span>
                         </div>
                     </div>
                 </div>
@@ -112,14 +113,14 @@
                 <div class="row">
                     <div class="col-sm-6 border-right">
                         <div class="description-block">
-                            <h5 class="description-header text-white">2.852</h5>
-                            <span class="description-text text-white">Totali</span>
+                            <h5 class="description-header text-white">{{count($products)}}</h5>
+                            <span class="description-text text-white">SU {{count($products)}} TOTALI</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="description-block">
-                            <h5 class="description-header text-white">786</h5>
-                            <span class="description-text text-white">Uniche</span>
+                            <h5 class="description-header text-white">{{$sommaPr}}</h5>
+                            <span class="description-text text-white">CLICK RICEVUTI</span>
                         </div>
                     </div>
                 </div>
@@ -127,9 +128,10 @@
         </div>
     </div>
 
+    <!-- ////////////////////////// LISTA UL ////////////////////// -->
     <ul class="nav nav-tabs mb-2">
         <li class="nav-item">
-            <a class="nav-link active" href="" aria-current="page" id="connessioni">Connessioni</a>
+            <a class="nav-link active" href="#" aria-current="page" id="connessioni">Connessioni</a>
         </li>
         <li class="nav-item">
             <a class="nav-link " href="#" id="pagine">Pagine</a>
@@ -253,7 +255,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-12">
+        <div class="col-xl-12 mb-3">
             <div class="panel-container show ">
                     <div class="table-list-container " id="users">
                         <div class="row justify-content-between">
@@ -594,7 +596,7 @@
                                                     <td class="totali1" style="width: 10%;">{{ $finale->sommaQta }}</td>
                                                 </tr>
                                             @endif
-                                       
+                                            
                                    
                                 @endforeach
                                
@@ -616,7 +618,7 @@
             </div>
         </div>
     </div>
-    <!-- ////Div PRODOTTI////////////// -->
+    <!-- ////DIV PRODOTTI////////////// -->
     <div id="pagina4" class="row" style="display:none;" >
             <div class="col-xl-12">
                 <div class="row">
@@ -679,10 +681,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12">
+            <div class="col-xl-12 mb-3">
                  
                  <div class="panel-container show ">
-                    <div class="table-list-container " id="users2">
+                    <div class="table-list-container " id="users3">
                         <div class="row justify-content-between">
                             <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
                                
@@ -694,15 +696,15 @@
                         <table id="intestazione"  class="table table-hover table-striped w-100 mt-1">
                             <thead>
                             <tr class="text-white" role="row" style="background-color: red;">
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="tipo1">Tipo</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 45%;" ><button type="button" class="sort" data-sort="titolo1">Titolo</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 25%;" ><button type="button" class="sort" data-sort="prodotto1">Prodotto</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="unici1">Click unici</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="totali1">Click totali</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 20%;" ><button type="button" class="sort" data-sort="tipoPr">Descrizione</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 60%;" ><button type="button" class="sort" data-sort="titoloPr">Descrizione Estesa</button></th>
+                                   
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="uniciPr">Click unici</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="totaliPr">Click totali</button></th>
                             </tr>
                             </thead>
                         </table>
-                        <table id="test-list2"  class="table table-hover table-striped w-100 mt-1">
+                        <table id="test-list3"  class="table table-hover table-striped w-100 mt-1">
                            
                             <tbody id="tbody" class="list ">
                               
@@ -712,11 +714,11 @@
                                       
                                           
                                                 <tr>
-                                                    <td class="tipo1" style="width: 10%;" >{{ $product->descrizione }}</td>
-                                                    <td class="titolo1" style="width:45%;">{{ $product->descrizione_estesa }}</td>
+                                                    <td class="tipoPr" style="width: 20%;" >{{ $product->descrizione }}</td>
+                                                    <td class="titoloPr" style="width:60%;">{{ $product->descrizione_estesa }}</td>
                                                    
-                                                    <td class="unici1" style="width: 10%;">{{ $product->sommaUnici }}</td>
-                                                    <td class="totali1" style="width: 10%;">{{ $product->sommaQta }}</td>
+                                                    <td class="uniciPr" style="width: 10%;">{{ $product->sommaUnici }}</td>
+                                                    <td class="totaliPr" style="width: 10%;">{{ $product->sommaQta }}</td>
                                                 </tr>
                                           
                                            
@@ -740,11 +742,80 @@
                         
                     </div>
            
+                </div>
             </div>
+    </div>
+
+     <!-- ////DIV RIEPILOGO////////////// -->
+
+    <div id="pagina5" class="row" style="display:none;">
+
+        <div class="col-xl-12 mb-3">
+                    
+                    <div class="panel-container show ">
+                        <div class="table-list-container " id="users4">
+                            <div class="row justify-content-between">
+                                <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
+                                
+                                </div>
+                                
+                            </div>
+
+                        
+                            <table id="intestazione"  class="table table-hover table-striped w-100 mt-1">
+                                <thead>
+                                <tr class="text-white" role="row" style="background-color: red;">
+                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 20%;" ><button type="button" class="sort" data-sort="tipoPr">Descrizione</button></th>
+                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 60%;" ><button type="button" class="sort" data-sort="titoloPr">Descrizione Estesa</button></th>
+                                    
+                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="uniciPr">Click unici</button></th>
+                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="totaliPr">Click totali</button></th>
+                                </tr>
+                                </thead>
+                            </table>
+                            <table id="test-list4"  class="table table-hover table-striped w-100 mt-1">
+                            
+                                <tbody id="tbody" class="list ">
+                                
+
+                                    @foreach ($products as $product )
+                                        
+                                        
+                                            
+                                                    <tr>
+                                                        <td class="tipoPr" style="width: 20%;" >{{ $product->descrizione }}</td>
+                                                        <td class="titoloPr" style="width:60%;">{{ $product->descrizione_estesa }}</td>
+                                                    
+                                                        <td class="uniciPr" style="width: 10%;">{{ $product->sommaUnici }}</td>
+                                                        <td class="totaliPr" style="width: 10%;">{{ $product->sommaQta }}</td>
+                                                    </tr>
+                                            
+                                            
+                                        
+                                    
+                                    @endforeach
+                                
+                                </tbody>
+                            </table>
+                            <table id="tfoot" style="display: block;" class="table-footer">
+                                <tr>
+                                    <td class="table-pagination position-absolute">
+                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
+                                        <ul class="pagination"></ul>
+                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
+                                    </td>
+                                    
+                                    
+                                </tr>
+                            </table>
+                            
+                        </div>
+            
+                    </div>
         </div>
 
+    </div>
 
-        </div>
 </main>
 <link rel="stylesheet" href="https://btn.ninja/css/addons.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -796,20 +867,22 @@
                     $(list[position + 1]).trigger('click');
                 }
             })
-        });
+    });
 
 
-        $('.jPaginateBack').on('click', function() {
+    $('.jPaginateBack').on('click', function() {
             var list = $('.pagination').find('li');
             $.each(list, function(position, element) {
                 if ($(element).is('.active')) {
                     $(list[position - 1]).trigger('click');
                 }
             })
-        });
+    });
 
+    
 
-});
+    
+    });
    
    
    
@@ -1118,7 +1191,7 @@
         arrVid[i]= numbers4[i].somma
     }
     let arrRic=[]
-    for(i=0;i>numbers5.length;i++){
+    for(i=0;i<numbers5.length;i++){
         arrRic[i]= numbers5[i].somma
     }
     let arrVai=[]
@@ -1388,31 +1461,49 @@
         var pagina2 = document.getElementById('pagina2');
         var pagina3 = document.getElementById('pagina3');
         var pagina4 = document.getElementById('pagina4');
+        var pagina5 = document.getElementById('pagina5');
         var link1 = document.getElementById('connessioni');
         var link2 = document.getElementById('pagine');
         var link3 = document.getElementById('interattivi');
         var link4= document.getElementById('prodotti');
+        var link5= document.getElementById('riepilogo');
+        $('#connessioni').on('click', function() {
+            pagina1.style.display = 'block';
+            pagina2.style.display = 'none';
+            pagina3.style.display = 'none';
+            pagina4.style.display = 'none';
+            pagina5.style.display = 'none';
+            link1.classList.add('active');
+            link3.classList.remove('active');
+            link2.classList.remove('active');
+            link4.classList.remove('active');
+            link5.classList.remove('active');
+        });
         $('#pagine').on('click', function() {
             pagina1.style.display = 'none';
             pagina2.style.display = 'block';
             pagina3.style.display = 'none';
             pagina4.style.display = 'none';
+            pagina5.style.display = 'none';
             link1.classList.remove('active');
             link3.classList.remove('active');
             link2.classList.add('active');
             link4.classList.remove('active');
+            link5.classList.remove('active');
         });
         $('#interattivi').on('click', function() {
             pagina1.style.display = 'none';
             pagina2.style.display = 'none';
             pagina3.style.display = 'block';
             pagina4.style.display = 'none';
+            pagina5.style.display = 'none';
             link1.classList.remove('active');
             link2.classList.remove('active');
             link3.classList.add('active');
             link4.classList.remove('active');
+            link5.classList.remove('active');
 
-            var options = {
+            var options1 = {
                 valueNames: ['tipo1','titolo1','prodotto1','unici1','totali1',],
                 page: 10,
                 pagination: {
@@ -1423,9 +1514,9 @@
                 }
             };
 
-            var userList = new List('users2', options);
+            var userList1 = new List('users2', options1);
             // Prova Pagination
-            var monkeyList = new List('test-list2', {
+            var monkeyList1 = new List('test-list2', {
                 valueNames: ['tipo1','titolo1','prodotto1','unici1','totali1',],
                 page: 10,
                 pagination: {
@@ -1465,10 +1556,115 @@
             pagina2.style.display = 'none';
             pagina3.style.display = 'none';
             pagina4.style.display = 'block';
+            pagina5.style.display = 'none';
             link1.classList.remove('active');
             link2.classList.remove('active');
             link3.classList.remove('active');
             link4.classList.add('active');
+            link5.classList.remove('active');
+        
+            var options2 = {
+                valueNames: ['tipoPr','titoloPr','uniciPr','totaliPr'],
+                page: 10,
+                pagination: {
+                    innerWindow: 1,
+                    left: 0,
+                    right: 0,
+                    paginationClass: "pagination",
+                }
+            };
+
+            var userList2 = new List('users3', options2);
+            // Prova Pagination
+            var monkeyList2 = new List('test-list3', {
+                valueNames: ['tipoPr','titoloPr','uniciPr','totaliPr',],
+                page: 10,
+                pagination: {
+                    innerWindow: 1,
+                    left: 0,
+                    right: 0,
+                    paginationClass: "pagination",
+                }
+            });
+
+            $('.jPaginateNext').on('click', function() {
+                var list = $('.pagination').find('li');
+                $.each(list, function(position, element) {
+                    if ($(element).is('.active')) {
+                        $(list[position + 1]).trigger('click');
+                    }
+                })
+            });
+
+
+            $('.jPaginateBack').on('click', function() {
+                var list = $('.pagination').find('li');
+                $.each(list, function(position, element) {
+                    if ($(element).is('.active')) {
+                        $(list[position - 1]).trigger('click');
+                    }
+                })
+            });
+
+        
+        
+        
+        });
+        $('#riepilogo').on('click', function() {
+            pagina1.style.display = 'none';
+            pagina2.style.display = 'none';
+            pagina3.style.display = 'none';
+            pagina4.style.display = 'none';
+            pagina5.style.display = 'block';
+            link1.classList.remove('active');
+            link3.classList.remove('active');
+            link2.classList.remove('active');
+            link4.classList.remove('active');
+            link5.classList.add('active');
+
+            var options3 = {
+                valueNames: [],
+                page: 10,
+                pagination: {
+                    innerWindow: 1,
+                    left: 0,
+                    right: 0,
+                    paginationClass: "pagination",
+                }
+            };
+
+            var userList3 = new List('users4', options3);
+            // Prova Pagination
+            var monkeyList3 = new List('test-list4', {
+                valueNames: [],
+                page: 10,
+                pagination: {
+                    innerWindow: 1,
+                    left: 0,
+                    right: 0,
+                    paginationClass: "pagination",
+                }
+            });
+
+            $('.jPaginateNext').on('click', function() {
+                var list = $('.pagination').find('li');
+                $.each(list, function(position, element) {
+                    if ($(element).is('.active')) {
+                        $(list[position + 1]).trigger('click');
+                    }
+                })
+            });
+
+
+            $('.jPaginateBack').on('click', function() {
+                var list = $('.pagination').find('li');
+                $.each(list, function(position, element) {
+                    if ($(element).is('.active')) {
+                        $(list[position - 1]).trigger('click');
+                    }
+                })
+            });
+
         });
 
 
