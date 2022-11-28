@@ -552,7 +552,7 @@
     }
 
     .img143 {
-        background-image: url("img/ayokaNuova.png");
+        background-image: url("img/dodeca.png");
         background-size: 60px;
         background-position: center;
         background-repeat: no-repeat;

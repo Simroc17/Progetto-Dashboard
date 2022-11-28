@@ -38,7 +38,7 @@
             @elseif ($promo->id_canale==141)
             <img src="{{asset('img\ayokaNuova.png')}}" alt="" style="width:100px;margin-left: 70px; float:right; border-radius:5px;">
             @else($promo->id_canale==143)
-            <img src="" alt="" style="width: 50px;">
+            <img src="{{asset('img\dodeca.png')}}" alt="" style="width:100px;margin-left: 70px; float:right; border-radius:5px;">
             @endif
         </div>
     </div>
@@ -529,7 +529,7 @@
                         </div>
 
                        
-                        <table id="intestazione"  class="table table-hover table-striped w-100 mt-1">
+                        <table id="intestazione2"  class="table table-hover table-striped w-100 mt-1">
                             <thead>
                             <tr class="text-white" role="row" style="background-color: red;">
                                     <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="tipo1">Tipo</button></th>
@@ -602,7 +602,7 @@
                                
                             </tbody>
                         </table>
-                        <table id="tfoot" style="display: block;" class="table-footer">
+                        <table id="tfoot2" style="display: block;" class="table-footer">
                             <tr>
                                 <td class="table-pagination position-absolute">
                                     <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
@@ -693,7 +693,7 @@
                         </div>
 
                        
-                        <table id="intestazione"  class="table table-hover table-striped w-100 mt-1">
+                        <table id="intestazione3"  class="table table-hover table-striped w-100 mt-1">
                             <thead>
                             <tr class="text-white" role="row" style="background-color: red;">
                                     <th tabindex="0" rowspan="1" colspan="1" style="width: 20%;" ><button type="button" class="sort" data-sort="tipoPr">Descrizione</button></th>
@@ -728,7 +728,7 @@
                                
                             </tbody>
                         </table>
-                        <table id="tfoot" style="display: block;" class="table-footer">
+                        <table id="tfoot3" style="display: block;" class="table-footer">
                             <tr>
                                 <td class="table-pagination position-absolute">
                                     <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
@@ -753,7 +753,7 @@
         <div class="col-xl-12 mb-3">
                     
                     <div class="panel-container show ">
-                        <div class="table-list-container " id="users4">
+                        <div class="table-list-container " id="users5">
                             <div class="row justify-content-between">
                                 <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
                                 
@@ -761,52 +761,178 @@
                                 
                             </div>
 
-                        
-                            <table id="intestazione"  class="table table-hover table-striped w-100 mt-1">
-                                <thead>
-                                <tr class="text-white" role="row" style="background-color: red;">
-                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 20%;" ><button type="button" class="sort" data-sort="tipoPr">Descrizione</button></th>
-                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 60%;" ><button type="button" class="sort" data-sort="titoloPr">Descrizione Estesa</button></th>
-                                    
-                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="uniciPr">Click unici</button></th>
-                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="totaliPr">Click totali</button></th>
-                                </tr>
-                                </thead>
-                            </table>
-                            <table id="test-list4"  class="table table-hover table-striped w-100 mt-1">
-                            
-                                <tbody id="tbody" class="list ">
-                                
 
-                                    @foreach ($products as $product )
-                                        
-                                        
-                                            
-                                                    <tr>
-                                                        <td class="tipoPr" style="width: 20%;" >{{ $product->descrizione }}</td>
-                                                        <td class="titoloPr" style="width:60%;">{{ $product->descrizione_estesa }}</td>
-                                                    
-                                                        <td class="uniciPr" style="width: 10%;">{{ $product->sommaUnici }}</td>
-                                                        <td class="totaliPr" style="width: 10%;">{{ $product->sommaQta }}</td>
+                                <table id="test-list5" class="table table-striped data-t table-sm table-bordered table-volantino dataTable ">
+                                    <thead>
+                                        <tr class="text-white" role="row" style="background-color: red;">
+                                            <th colspan="2"></th>
+                                            <th colspan="6">Connessioni</th>
+                                            <th></th>
+                                            <th colspan="2">Visualizzazioni</th>
+                                            <th></th>
+                                            <th colspan="5">Interazioni</th>
+                                            <th></th>
+                                            <th colspan="3">Spesa</th>
+                                        </tr>
+                                        <tr class="text-white" role="row" style="background-color: #fb3e3e;">
+                                            <th colspan="2"><button type="button" class="sort" data-sort="i">Info Volantino</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="d">Desktop</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="m">Mobile</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="t">Totali</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="de">Desktop</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="mo">Mobile</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="un">Uniche</button></th>
+                                            <th></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="uni">Uniche</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="tot">Totali</button></th>
+                                            <th></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="pr">Prodotti</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="ri">Ricette</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="vi">Video</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="cu">Curiosita</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="li">Link</button></th>
+                                            <th></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="lis">Liste</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="imp">Importo</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="med">Media</button></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody" class="list">
+                                        @foreach($riepilogoConnessioni as $connessione)
+                                            @foreach($riepilogoVisualizzazioni as $visualizzazione)
+                                                @if($connessione->id_market==$visualizzazione->id_market)
+                                                    <tr role="row">
+                                                        <td colspan="2" class="i">{{$connessione->nome}} - {{$connessione->id_volantino}}</td>
+                                                        <td colspan="1" class="d">{{$connessione->desktop}}</td>
+                                                        <td colspan="1" class="m">{{$connessione->mobile}}</td>
+                                                        <td colspan="1" class="t">{{$connessione->desktop + $connessione->mobile}}</td>
+                                                        <td colspan="1" class="de">{{$connessione->deskUni}}</td>
+                                                        <td colspan="1" class="mo">{{$connessione->mobUni}}</td>
+                                                        <td colspan="1" class="un">{{$connessione->deskUni + $connessione->mobUni}}</td>
+                                                        <td></td>
+                                                        <td colspan="1" class="uni">{{$visualizzazione->uniche}}</td>
+                                                        <td colspan="1" class="tot">{{$visualizzazione->totali}}</td>
+                                                        <td></td>
+                                                            @if($interattivoProdotti == '[]')
+                                                                <td class="pr">0</td>
+                                                            @else
+                                                                @foreach($interattivoProdotti as $prodotto) 
+                                                                    @if($prodotto->id_market == $connessione->id_market)
+                                                                        <td colspan="1" class="pr">{{$prodotto->totali}}</td>
+                                                                    @else 
+                                                                    <td class="pr">0</td>             
+                                                                    <!-- MI CREA DELLE COLONNE IN PIU -->
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                            @if($interattivoRicette == '[]')
+                                                                <td class="ri">0</td>
+                                                            @else 
+                                                                @foreach($interattivoRicette as $ricetta)
+                                                                    @if($ricetta->id_market == $connessione->id_market)
+                                                                        <td colspan="1" class="ri">{{$ricetta->totali}}</td>
+                                                                    @else 
+                                                                    <td class="ri">0</td>
+                                                                    @endif
+                                                            @endforeach 
+                                                            @endif
+                                                            @if($interattivoVideo == '[]')
+                                                                <td class="vi">0</td>
+                                                            @else 
+                                                                @foreach($interattivoVideo as $video)
+                                                                    @if($video->id_market == $connessione->id_market)
+                                                                        <td colspan="1" class="vi">{{$video->totali}}</td>
+                                                                    @else <td class="vi">0</td>
+                                                                    @endif
+                                                                @endforeach 
+                                                            @endif
+                                                            @if($interattivoCuriosita == '[]')
+                                                                <td class="cu">0</td>
+                                                                @else 
+                                                                @foreach($interattivoCuriosita as $curiosita)
+                                                                    @if($curiosita->id_market == $connessione->id_market)
+                                                                        <td colspan="1" class="cu">{{$curiosita->totali}}</td>
+                                                                    @else <td class="cu">0</td>
+                                                                    @endif
+                                                                @endforeach 
+                                                            @endif
+                                                            @if($interattivoLink == '[]')
+                                                                <td class="li">0</td>
+                                                                @else 
+                                                                @foreach($interattivoLink as $link)
+                                                                    @if($link->id_market == $connessione->id_market)
+                                                                        <td colspan="1" class="li">{{$link->totali}}</td>
+                                                                    @else <td class="li">0</td>
+                                                                    @endif
+                                                                @endforeach 
+                                                            @endif
+                                                        <td></td>
+                                                        <td colspan="1" class="lis">0</td>
+                                                        <td colspan="1" class="imp">0</td>
+                                                        <td colspan="1" class="med">0</td>
                                                     </tr>
-                                            
-                                            
+                                                @endif
+                                            @endforeach
+                                        @endforeach
                                         
-                                    
-                                    @endforeach
-                                
-                                </tbody>
-                            </table>
-                            <table id="tfoot" style="display: block;" class="table-footer">
-                                <tr>
-                                    <td class="table-pagination position-absolute">
-                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
-                                        <ul class="pagination"></ul>
-                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
-                                    </td>
-                                    
-                                    
-                                </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="text-white" role="row" style="background-color: red;">
+                                            <th colspan="2">Totale</th>
+                                            <th colspan="1">Desktop</th>
+                                            <th colspan="1">Mobile</th>
+                                            <th colspan="1">Totali</th>
+                                            <th colspan="1">Desktop</th>
+                                            <th colspan="1">Mobile</th>
+                                            <th colspan="1">Uniche</th>
+                                            <th></th>
+                                            <th colspan="1">Uniche</th>
+                                            <th colspan="1">Totali</th>
+                                            <th></th>
+                                            <th colspan="1">Prodotti</th>
+                                            <th colspan="1">Ricette</th>
+                                            <th colspan="1">Video</th>
+                                            <th colspan="1">Curiosita</th>
+                                            <th colspan="1">Link</th>
+                                            <th></th>
+                                            <th colspan="1">Liste</th>
+                                            <th colspan="1">Importo</th>
+                                            <th colspan="1">Media</th>
+                                        </tr>
+                                        <tr class="text-white" role="row" style="background-color: #fb3e3e;">
+                                            <td colspan="2"></td>
+                                            <td colspan="1">{{$sumD}}</td>
+                                            <td colspan="1">{{$sumM}}</td>
+                                            <td colspan="1">{{$sumD + $sumM}}</td>
+                                            <td colspan="1">{{$sumDu}}</td>
+                                            <td colspan="1">{{$sumMu}}</td>
+                                            <td colspan="1">{{$sumDu + $sumMu}}</td>
+                                            <td></td>
+                                            <td colspan="1">{{$sumVuni}}</td>
+                                            <td colspan="1">{{$sumVtot}}</td>
+                                            <td></td>
+                                            <td colspan="1">Prodotti</td>
+                                            <td colspan="1">Ricette</td>
+                                            <td colspan="1">Video</td>
+                                            <td colspan="1">Curiosita</td>
+                                            <td colspan="1">Link</td>
+                                            <td></td>
+                                            <td colspan="1">0</td>
+                                            <td colspan="1">0</td>
+                                            <td colspan="1">0</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <table id="tfoot5" style="display: block;" class="table-footer">
+                                    <tr>
+                                        <td class="table-pagination position-absolute">
+                                            <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
+                                            <ul class="pagination"></ul>
+                                            <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
+                                        </td>
+                                        
+                                        
+                                    </tr>
                             </table>
                             
                         </div>
@@ -819,6 +945,7 @@
 </main>
 <link rel="stylesheet" href="https://btn.ninja/css/addons.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 
 @stop
 
@@ -833,11 +960,11 @@
 
 <script>
      window.addEventListener('DOMContentLoaded', (event) => {
-    console.log('DOM fully loaded and parsed');
+        console.log('DOM fully loaded and parsed');
 
       // Prova ricerca
       var options = {
-        valueNames: ['regione', 'click_unici', 'click_totali'],
+        valueNames: ['i','d','m','t','de','mo','un','uni','tot','pr','ri','vi','cu','li','lis','imp','med','regione', 'click_unici', 'click_totali','tipo1','titolo1','prodotto1','unici1','totali1','tipoPr','titoloPr','uniciPr','totaliPr'],
         page: 10,
         pagination: {
             innerWindow: 1,
@@ -846,11 +973,14 @@
             paginationClass: "pagination",
         }
     };
-
+    var userList3 = new List('users4', options);
+    var userList2 = new List('users3', options);
+    var userList1 = new List('users2', options);
     var userList = new List('users', options);
+    var userList = new List('users5', options);
     // Prova Pagination
     var monkeyList = new List('test-list', {
-        valueNames: ['regione', 'click_unici', 'click_totali',],
+        valueNames: ['i','d','m','t','de','mo','un','uni','tot','pr','ri','vi','cu','li','lis','imp','med','regione', 'click_unici', 'click_totali','tipo1','titolo1','prodotto1','unici1','totali1','tipoPr','titoloPr','uniciPr','totaliPr'],
         page: 10,
         pagination: {
             innerWindow: 1,
@@ -1455,7 +1585,7 @@
     /* initialize all charts */
     $(document).ready(function() {
 
-     
+       
 
         var pagina1 = document.getElementById('pagina1');
         var pagina2 = document.getElementById('pagina2');
@@ -1492,6 +1622,7 @@
             link5.classList.remove('active');
         });
         $('#interattivi').on('click', function() {
+            
             pagina1.style.display = 'none';
             pagina2.style.display = 'none';
             pagina3.style.display = 'block';
@@ -1503,29 +1634,11 @@
             link4.classList.remove('active');
             link5.classList.remove('active');
 
-            var options1 = {
-                valueNames: ['tipo1','titolo1','prodotto1','unici1','totali1',],
-                page: 10,
-                pagination: {
-                    innerWindow: 1,
-                    left: 0,
-                    right: 0,
-                    paginationClass: "pagination",
-                }
-            };
+            
+          
 
             var userList1 = new List('users2', options1);
-            // Prova Pagination
-            var monkeyList1 = new List('test-list2', {
-                valueNames: ['tipo1','titolo1','prodotto1','unici1','totali1',],
-                page: 10,
-                pagination: {
-                    innerWindow: 1,
-                    left: 0,
-                    right: 0,
-                    paginationClass: "pagination",
-                }
-            });
+          
 
             $('.jPaginateNext').on('click', function() {
                 var list = $('.pagination').find('li');
@@ -1546,7 +1659,7 @@
                 })
             });
 
-
+            
             
 
 
@@ -1563,31 +1676,11 @@
             link4.classList.add('active');
             link5.classList.remove('active');
         
-            var options2 = {
-                valueNames: ['tipoPr','titoloPr','uniciPr','totaliPr'],
-                page: 10,
-                pagination: {
-                    innerWindow: 1,
-                    left: 0,
-                    right: 0,
-                    paginationClass: "pagination",
-                }
-            };
+            
 
             var userList2 = new List('users3', options2);
-            // Prova Pagination
-            var monkeyList2 = new List('test-list3', {
-                valueNames: ['tipoPr','titoloPr','uniciPr','totaliPr',],
-                page: 10,
-                pagination: {
-                    innerWindow: 1,
-                    left: 0,
-                    right: 0,
-                    paginationClass: "pagination",
-                }
-            });
-
-            $('.jPaginateNext').on('click', function() {
+            
+           $('.jPaginateNext').on('click', function() {
                 var list = $('.pagination').find('li');
                 $.each(list, function(position, element) {
                     if ($(element).is('.active')) {
@@ -1622,29 +1715,10 @@
             link4.classList.remove('active');
             link5.classList.add('active');
 
-            var options3 = {
-                valueNames: [],
-                page: 10,
-                pagination: {
-                    innerWindow: 1,
-                    left: 0,
-                    right: 0,
-                    paginationClass: "pagination",
-                }
-            };
+            
 
             var userList3 = new List('users4', options3);
-            // Prova Pagination
-            var monkeyList3 = new List('test-list4', {
-                valueNames: [],
-                page: 10,
-                pagination: {
-                    innerWindow: 1,
-                    left: 0,
-                    right: 0,
-                    paginationClass: "pagination",
-                }
-            });
+           
 
             $('.jPaginateNext').on('click', function() {
                 var list = $('.pagination').find('li');
