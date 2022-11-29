@@ -800,29 +800,34 @@
                                     <tbody id="tbody" class="list">
                                         @foreach($riepilogoConnessioni as $connessione)
                                             @foreach($riepilogoVisualizzazioni as $visualizzazione)
-                                                @if($connessione->id_market==$visualizzazione->id_market)
-                                                    <tr role="row">
-                                                        <td colspan="2" class="i">{{$connessione->nome}} - {{$connessione->id_volantino}}</td>
-                                                        <td colspan="1" class="d">{{$connessione->desktop}}</td>
-                                                        <td colspan="1" class="m">{{$connessione->mobile}}</td>
-                                                        <td colspan="1" class="t">{{$connessione->desktop + $connessione->mobile}}</td>
-                                                        <td colspan="1" class="de">{{$connessione->deskUni}}</td>
-                                                        <td colspan="1" class="mo">{{$connessione->mobUni}}</td>
-                                                        <td colspan="1" class="un">{{$connessione->deskUni + $connessione->mobUni}}</td>
-                                                        <td></td>
-                                                        <td colspan="1" class="uni">{{$visualizzazione->uniche}}</td>
-                                                        <td colspan="1" class="tot">{{$visualizzazione->totali}}</td>
-                                                        <td></td>
+                                                
+                                                    @if($connessione->id_market==$visualizzazione->id_market)
+                                                       
+                                                        <tr role="row">
+                                                            <td colspan="2" class="i">{{$connessione->nome}} - {{$connessione->id_volantino}}</td>
+                                                            <td colspan="1" class="d">{{$connessione->desktop}}</td>
+                                                            <td colspan="1" class="m">{{$connessione->mobile}}</td>
+                                                            <td colspan="1" class="t">{{$connessione->desktop + $connessione->mobile}}</td>
+                                                            <td colspan="1" class="de">{{$connessione->deskUni}}</td>
+                                                            <td colspan="1" class="mo">{{$connessione->mobUni}}</td>
+                                                            <td colspan="1" class="un">{{$connessione->deskUni + $connessione->mobUni}}</td>
+                                                            <td></td>
+                                                            <td colspan="1" class="uni">{{$visualizzazione->uniche}}</td>
+                                                            <td colspan="1" class="tot">{{$visualizzazione->totali}}</td>
+                                                            <td></td>
                                                             @if($interattivoProdotti == '[]')
                                                                 <td class="pr">0</td>
                                                             @else
                                                                 @foreach($interattivoProdotti as $prodotto) 
-                                                                    @if($prodotto->id_market == $connessione->id_market)
-                                                                        <td colspan="1" class="pr">{{$prodotto->totali}}</td>
-                                                                    @else 
-                                                                    <td class="pr">0</td>             
-                                                                    <!-- MI CREA DELLE COLONNE IN PIU -->
-                                                                    @endif
+                                                                        @if($visualizzazione->id_market == $prodotto->id_market)
+                                                                            <td colspan="1" class="pr">{{$prodotto->totali}}</td>
+                                                                            
+                                                                        @else 
+                                                                        <td class="pr">0</td>   
+                                                                        <!-- PROVA A METTERE LA SEZIONE 'PRODOTTI' ALLA FINE E NON ALL'INIZIO -->
+                                                                        <!-- MI CREA DELLE COLONNE IN PIU -->
+                                                                        @endif
+                                                                    @break
                                                                 @endforeach
                                                             @endif
                                                             @if($interattivoRicette == '[]')
@@ -831,8 +836,10 @@
                                                                 @foreach($interattivoRicette as $ricetta)
                                                                     @if($ricetta->id_market == $connessione->id_market)
                                                                         <td colspan="1" class="ri">{{$ricetta->totali}}</td>
+                                                                        
                                                                     @else 
                                                                     <td class="ri">0</td>
+                                                                    
                                                                     @endif
                                                             @endforeach 
                                                             @endif
@@ -842,7 +849,9 @@
                                                                 @foreach($interattivoVideo as $video)
                                                                     @if($video->id_market == $connessione->id_market)
                                                                         <td colspan="1" class="vi">{{$video->totali}}</td>
+                                                                        
                                                                     @else <td class="vi">0</td>
+                                                                    
                                                                     @endif
                                                                 @endforeach 
                                                             @endif
@@ -852,7 +861,9 @@
                                                                 @foreach($interattivoCuriosita as $curiosita)
                                                                     @if($curiosita->id_market == $connessione->id_market)
                                                                         <td colspan="1" class="cu">{{$curiosita->totali}}</td>
+                                                                       
                                                                     @else <td class="cu">0</td>
+                                                                    
                                                                     @endif
                                                                 @endforeach 
                                                             @endif
@@ -862,16 +873,20 @@
                                                                 @foreach($interattivoLink as $link)
                                                                     @if($link->id_market == $connessione->id_market)
                                                                         <td colspan="1" class="li">{{$link->totali}}</td>
+                                                                         
                                                                     @else <td class="li">0</td>
+                                                                    
                                                                     @endif
                                                                 @endforeach 
                                                             @endif
-                                                        <td></td>
+                                                            <td></td>
                                                         <td colspan="1" class="lis">0</td>
                                                         <td colspan="1" class="imp">0</td>
                                                         <td colspan="1" class="med">0</td>
-                                                    </tr>
-                                                @endif
+                                                        </tr>
+                                                        
+                                                    @endif
+                                                
                                             @endforeach
                                         @endforeach
                                         

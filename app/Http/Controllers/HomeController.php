@@ -57,6 +57,7 @@ class HomeController extends Controller
             ->where(['history_visit.id_parent' => $promo->id_canale])
             ->join('elenco_market', 'elenco_market.id', '=', 'history_visit.id_market')
             ->select(DB::raw("SUM(visite_desktop_qta) AS desktop, SUM(visite_mobile_qta) AS mobile, SUM(visite_uniche_desktop_qta) AS deskUni, SUM(visite_uniche_mobile_qta) AS mobUni"), 'history_visit.id_market', 'history_visit.id_volantino','elenco_market.nome')
+            ->orderBy('id_market', 'ASC')
             ->get();
             //dd($riepilogoConnessioni);
             $arrayD =[];
@@ -79,6 +80,7 @@ class HomeController extends Controller
             ->where(['id_promo' => $promo->id])
             ->where(['id_parent' => $promo->id_canale])
             ->select(DB::raw("SUM(pagina_desktop_qta) + SUM(pagina_mobile_qta) AS totali, SUM(pagina_desktop_unica_qta) + SUM(pagina_mobile_unica_qta) AS uniche "), 'id_market')
+            ->orderBy('id_market', 'ASC')
             ->get();
             //dd($riepilogoVisualizzazioni);
             $arrVtot =[];
@@ -95,12 +97,13 @@ class HomeController extends Controller
             ->groupBy(DB::raw("tipo"))
             ->select(DB::raw("SUM(qta) AS totali"),'tipo','id_market', )
             ->get();
-            dd($riepilogoInterattivi);
+            //dd($riepilogoInterattivi);
         $interattivoProdotti =Interattivi::groupBy('id_market', 'tipo')   
             ->where(['id_promo' => $promo->id])
             ->where(['id_parent' => $promo->id_canale])
             ->where(['tipo' => "prodotto"])
             ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
+            ->orderBy('id_market', 'ASC')
             ->get();
             //dd($interattivoProdotti);
         $interattivoRicette =Interattivi::groupBy('id_market', 'tipo')
