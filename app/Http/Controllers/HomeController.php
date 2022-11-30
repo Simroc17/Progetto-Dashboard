@@ -402,6 +402,52 @@ class HomeController extends Controller
         //dd($volantino);  //Volantino su cui ho cliccato
         $promo = Promo::where(['id'=> $volantino[0]->id_promo])->get();
         //dd($promo);
+        ///////////////////////////// RIEPILOGO ////////////////////////////
+        $interattivoProdotti =Interattivi::groupBy('id_market', 'tipo')   
+            ->where(['id_promo' => $promo[0]->id])
+            ->where(['id_parent' => $promo[0]->id_canale])
+            ->where(['id_market' => $volantino[0]->id_subcanale])
+            ->where(['tipo' => "prodotto"])
+            ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
+            ->orderBy('id_market', 'ASC')
+            ->get();
+            
+        $interattivoRicette =Interattivi::groupBy('id_market', 'tipo')
+            ->where(['id_promo' => $promo[0]->id])
+            ->where(['id_parent' => $promo[0]->id_canale])
+            ->where(['id_market' => $volantino[0]->id_subcanale])
+            ->where(['tipo' => "ricetta"])
+            ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
+            ->orderBy('id_market', 'ASC')
+            ->get();
+            
+        $interattivoVideo =Interattivi::groupBy('id_market', 'tipo')
+            ->where(['id_promo' => $promo[0]->id])
+            ->where(['id_parent' => $promo[0]->id_canale])
+            ->where(['id_market' => $volantino[0]->id_subcanale])
+            ->where(['tipo' => "video"])
+            ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
+            ->orderBy('id_market', 'ASC')
+            ->get();
+            
+        $interattivoCuriosita =Interattivi::groupBy('id_market', 'tipo')
+            ->where(['id_promo' => $promo[0]->id])
+            ->where(['id_parent' => $promo[0]->id_canale])
+            ->where(['id_market' => $volantino[0]->id_subcanale])
+            ->where(['tipo' => "curiosita"])
+            ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
+            ->orderBy('id_market', 'ASC')
+            ->get();
+            
+        $interattivoLink =Interattivi::groupBy('id_market', 'tipo')
+            ->where(['id_promo' => $promo[0]->id])
+            ->where(['id_parent' => $promo[0]->id_canale])
+            ->where(['id_market' => $volantino[0]->id_subcanale])
+            ->where(['tipo' => "collegamento"])
+            ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
+            ->orderBy('id_market', 'ASC')
+            ->get();
+            
         ///////////////////   GRAFICI PARTE CONNESSIONI //////////////////////
         $visits = Visite::where(['id_volantino' => $volantino[0]->id_volantino])
         ->orderBy('data_visita', 'ASC')
@@ -533,9 +579,11 @@ class HomeController extends Controller
                 }
             }
             
-        }//dd($arrayPromo);
-       
-        return view('/datatables/datatables_basic', compact( 'volantinoId','volantino1' ,'volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
+        }
+        //dd($volantino);
+        //dd($sommaMobilePag);
+        //dd($sommaDesktopPag);
+        return view('/datatables/datatables_basic', compact('interattivoRicette','interattivoVideo','interattivoCuriosita','interattivoLink','interattivoProdotti', 'volantinoId','volantino1' ,'volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
     }
 
 

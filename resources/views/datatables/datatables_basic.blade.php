@@ -110,8 +110,8 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="description-block">
-                            <h5 class="description-header text-white">786</h5>
-                            <span class="description-text text-white">Uniche</span>
+                            <h5 class="description-header text-white">@if($interattivoProdotti == '[]') 0 @else{{$interattivoProdotti[0]->totali}} @endif</h5>
+                            <span class="description-text text-white">CLICK RICEVUTI</span>
                         </div>
                     </div>
                 </div>
@@ -427,9 +427,9 @@
 
 
         </div>
-
-        <!--//////////// DIV INTERATTIVI /////////////-->
-        <div id="pagina3" class="row" style="display: none;">
+    </div>
+    <!--//////////// DIV INTERATTIVI /////////////-->
+    <div id="pagina3" class="row" style="display: none;">
             <div class="col-xl-12">
                 <div class="row">
                     <div class="col-xl-12">
@@ -579,9 +579,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
         <!-- ////Div PRODOTTI////////////// -->
-        <div id="pagina4" class="row" style="display:none;">
+    <div id="pagina4" class="row" style="display:none;">
             <div class="col-xl-12">
                 <div class="row">
                     <div class="col-xl-12">
@@ -679,7 +679,122 @@
             </div>
 
 
-        </div>
+    </div>
+
+        <!-- ///////////////// DIV RIEPILOGO /////////////////////// -->
+    <div id="pagina5" class="row" style="display:none;">
+
+                <div class="col-xl-12 mb-3">
+                    
+                    <div class="panel-container show ">
+                        <div class="table-list-container " id="users5">
+                            <div class="row justify-content-between">
+                                <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
+                                
+                                </div>
+                                
+                            </div>
+
+
+                                <table id="test-list5" class="table table-striped data-t table-sm table-bordered table-volantino dataTable ">
+                                    <thead>
+                                        <tr class="text-white" role="row" style="background-color: red;">
+                                            <th colspan="2"></th>
+                                            <th colspan="6">Connessioni</th>
+                                            <th></th>
+                                            <th colspan="2">Visualizzazioni</th>
+                                            <th></th>
+                                            <th colspan="5">Interazioni</th>
+                                            <th></th>
+                                            <th colspan="3">Spesa</th>
+                                        </tr>
+                                        <tr class="text-white" role="row" style="background-color: #fb3e3e;">
+                                            <th colspan="2"><button type="button" class="sort" data-sort="i">Gruppo</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="d">Desktop</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="m">Mobile</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="t">Totali</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="de">Desktop</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="mo">Mobile</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="un">Uniche</button></th>
+                                            <th></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="uni">Uniche</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="tot">Totali</button></th>
+                                            <th></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="pr">Prodotti</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="ri">Ricette</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="vi">Video</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="cu">Curiosita</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="li">Link</button></th>
+                                            <th></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="lis">Liste</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="imp">Importo</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="med">Media</button></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody" class="list">
+                                                    <tr role="row">
+                                                        <td colspan="2" class="i">{{$volantino[0]->nome_canale}}</td>
+                                                        <td colspan="1" class="d">{{$sommaDesktop}}</td>
+                                                        <td colspan="1" class="m">{{$sommaMobile}}</td>
+                                                        <td colspan="1" class="t">{{$sommaDesktop + $sommaMobile}}</td>
+                                                        <td colspan="1" class="de">{{$sommaUnicaDesktop}}</td>
+                                                        <td colspan="1" class="mo">{{$sommaUnicaMobile}}</td>
+                                                        <td colspan="1" class="un">{{$sommaUnicaDesktop + $sommaUnicaMobile}}</td>
+                                                        <td></td>
+                                                        <td colspan="1" class="uni">{{$sommaMobileUnicPag + $sommaDesktopUnicPag}}</td>
+                                                        <td colspan="1" class="tot">{{$sommaMobilePag + $sommaDesktopPag}}</td>
+                                                        <td></td>
+                                                            @if($interattivoProdotti == '[]')
+                                                            <td class="pr">0</td>
+                                                            @else
+                                                            <td class="pr">{{$interattivoProdotti[0]->totali}}</td>
+                                                            @endif
+                                                            @if($interattivoRicette == '[]')
+                                                            <td class="pr">0</td>
+                                                            @else
+                                                            <td class="ri">{{$interattivoRicette[0]->totali}}</td>
+                                                            @endif
+                                                            @if($interattivoVideo == '[]')
+                                                            <td class="pr">0</td>
+                                                            @else
+                                                            <td class="vi">{{$interattivoVideo[0]->totali}}</td>
+                                                            @endif
+                                                            @if($interattivoCuriosita == '[]')
+                                                            <td class="pr">0</td>
+                                                            @else
+                                                            <td class="cu">{{$interattivoCuriosita[0]->totali}}</td>
+                                                            @endif
+                                                            @if($interattivoLink == '[]')
+                                                            <td class="pr">0</td>
+                                                            @else
+                                                            <td class="li">{{$interattivoLink[0]->totali}}</td>
+                                                            @endif
+                                                        <td></td>
+                                                        <td colspan="1" class="lis">0</td>
+                                                        <td colspan="1" class="imp">0</td>
+                                                        <td colspan="1" class="med">0</td>
+                                                    </tr>
+                                    </tbody>
+                                </table>
+                                <table id="tfoot5" style="display: block;" class="table-footer">
+                                    <tr>
+                                        <td class="table-pagination position-absolute">
+                                            <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
+                                            <ul class="pagination"></ul>
+                                            <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
+                                        </td>
+                                        
+                                        
+                                    </tr>
+                                </table>
+                            
+                        </div>
+            
+                    </div>
+                </div>
+
+    </div>
+
 </main>
 <link rel="stylesheet" href="https://btn.ninja/css/addons.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -1299,19 +1414,23 @@
         var pagina2 = document.getElementById('pagina2');
         var pagina3 = document.getElementById('pagina3');
         var pagina4 = document.getElementById('pagina4');
+        var pagina5 = document.getElementById('pagina5');
         var link1 = document.getElementById('connessioni');
         var link2 = document.getElementById('pagine');
         var link3 = document.getElementById('interattivi');
         var link4 = document.getElementById('prodotti');
+        var link5= document.getElementById('riepilogo');
         $('#pagine').on('click', function() {
             pagina1.style.display = 'none';
             pagina2.style.display = 'block';
             pagina3.style.display = 'none';
             pagina4.style.display = 'none';
+            pagina5.style.display = 'none';
             link1.classList.remove('active');
             link3.classList.remove('active');
             link2.classList.add('active');
             link4.classList.remove('active');
+            link5.classList.remove('active');
 
             var options2 = {
             valueNames: ['regione2', 'click_unici2', 'click_totali2'],
@@ -1357,20 +1476,61 @@
             pagina2.style.display = 'none';
             pagina3.style.display = 'block';
             pagina4.style.display = 'none';
+            pagina5.style.display = 'none';
             link1.classList.remove('active');
             link2.classList.remove('active');
             link3.classList.add('active');
             link4.classList.remove('active');
+            link5.classList.remove('active');
         });
         $('#prodotti').on('click', function() {
             pagina1.style.display = 'none';
             pagina2.style.display = 'none';
             pagina3.style.display = 'none';
             pagina4.style.display = 'block';
+            pagina5.style.display = 'none';
             link1.classList.remove('active');
             link2.classList.remove('active');
             link3.classList.remove('active');
             link4.classList.add('active');
+            link5.classList.remove('active');
+        });
+        $('#riepilogo').on('click', function() {
+            pagina1.style.display = 'none';
+            pagina2.style.display = 'none';
+            pagina3.style.display = 'none';
+            pagina4.style.display = 'none';
+            pagina5.style.display = 'block';
+            link1.classList.remove('active');
+            link3.classList.remove('active');
+            link2.classList.remove('active');
+            link4.classList.remove('active');
+            link5.classList.add('active');
+
+            
+
+            var userList3 = new List('users5', options3);
+           
+
+            $('.jPaginateNext').on('click', function() {
+                var list = $('.pagination').find('li');
+                $.each(list, function(position, element) {
+                    if ($(element).is('.active')) {
+                        $(list[position + 1]).trigger('click');
+                    }
+                })
+            });
+
+
+            $('.jPaginateBack').on('click', function() {
+                var list = $('.pagination').find('li');
+                $.each(list, function(position, element) {
+                    if ($(element).is('.active')) {
+                        $(list[position - 1]).trigger('click');
+                    }
+                })
+            });
+
         });
 
 
