@@ -13,9 +13,9 @@
 
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-chart-pie'></i> Dettaglio Promozione <sup class='badge badge-primary fw-500'>...</sup>
+            <i class='subheader-icon fal fa-chart-pie'></i> Dettaglio Promozione <sup class='badge badge-primary fw-500'>Promozione</sup>
             <small>
-                Simple yet flexible JavaScript charting for designers & developers
+                Scrivi qualcosa qui
             </small>
         </h1>
     </div>
@@ -763,15 +763,15 @@
 
                                 <table id="test-list5" class="table table-striped data-t table-sm table-bordered table-volantino dataTable ">
                                     <thead>
-                                        <tr class="text-white" role="row" style="background-color: red;">
+                                    <tr class="text-white" role="row" style="background-color: red;">
                                             <th colspan="2"></th>
-                                            <th colspan="6">Connessioni</th>
+                                            <th colspan="6"><i class="bi bi-bar-chart-line-fill"></i> Connessioni</th>
                                             <th></th>
-                                            <th colspan="2">Visualizzazioni</th>
+                                            <th colspan="2"><i class="bi bi-clipboard2-data-fill"></i> Visualizzazioni</th>
                                             <th></th>
-                                            <th colspan="5">Interazioni</th>
+                                            <th colspan="5"><i class="bi bi-cursor-fill"></i> Interazioni</th>
                                             <th></th>
-                                            <th colspan="3">Spesa</th>
+                                            <th colspan="3"><i class="bi bi-cart3"></i> Spesa</th>
                                         </tr>
                                         <tr class="text-white" role="row" style="background-color: #fb3e3e;">
                                             <th colspan="2"><button type="button" class="sort" data-sort="i">Info Volantino</button></th>
@@ -785,15 +785,15 @@
                                             <th colspan="1"><button type="button" class="sort" data-sort="uni">Uniche</button></th>
                                             <th colspan="1"><button type="button" class="sort" data-sort="tot">Totali</button></th>
                                             <th></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="pr">Prodotti</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="pr"><i class="bi bi-plus-circle-fill"></i> Prodotti</button></th>
                                             <th colspan="1"><button type="button" class="sort" data-sort="ri">Ricette</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="vi">Video</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="cu">Curiosita</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="li">Link</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="vi"><i class="bi bi-play-circle-fill"></i> Video</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="cu"><i class="bi bi-info-lg"></i> Curiosita</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="li"><i class="bi bi-globe"></i> Link</button></th>
                                             <th></th>
                                             <th colspan="1"><button type="button" class="sort" data-sort="lis">Liste</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="imp">Importo</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="med">Media</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="imp"><i class="bi bi-currency-euro"></i> Importo</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="med"><i class="bi bi-currency-euro"></i> Media</button></th>
                                         </tr>
                                     </thead>
                                     <tbody id="tbody" class="list">
@@ -1004,6 +1004,7 @@
 @stop
 
 @section('footerScript')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css" integrity="sha512-YFENbnqHbCRmJt5d+9lHimyEMt8LKSNTMLSaHjvsclnZGICeY/0KYEeiHwD1Ux4Tcao0h60tdcMv+0GljvWyHg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.export.js') }}"></script>
@@ -2876,6 +2877,7 @@
         margin: 0 !important;
         padding: 8px 30px;
         border-radius: 6px;
+        font-weight: bold;
         border: none;
         display: inline-block;
         color: white;

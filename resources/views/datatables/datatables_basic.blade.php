@@ -12,8 +12,8 @@
 
 
     <div class="subheader">
-        <h1 class="subheader-title">
-            Dettaglio Promozione
+        <h1 class="subheader-title">{{$volantino[0]->id_volantino}}
+            Dettaglio Volantino <a href="https://preview.volantinopiu.it/volantino{{$volantino[0]->id_volantino}}00.html" > clicca qui<img src="https://resources.volantinopiu.it/flyer/{{$array[0]}}/{{$array[1]}}/{{$array[2]}}/{{$array[3]}}/{{$array[4]}}/pagine/1.jpg" style="margin-right: 6px; max-width: 130px; max-height:10rem"></a>
 
         </h1>
     </div>
@@ -696,97 +696,97 @@
                             </div>
 
 
-                                <table id="test-list5" class="table table-striped data-t table-sm table-bordered table-volantino dataTable ">
-                                    <thead>
-                                        <tr class="text-white" role="row" style="background-color: red;">
-                                            <th colspan="2"></th>
-                                            <th colspan="6">Connessioni</th>
-                                            <th></th>
-                                            <th colspan="2">Visualizzazioni</th>
-                                            <th></th>
-                                            <th colspan="5">Interazioni</th>
-                                            <th></th>
-                                            <th colspan="3">Spesa</th>
-                                        </tr>
-                                        <tr class="text-white" role="row" style="background-color: #fb3e3e;">
-                                            <th colspan="2"><button type="button" class="sort" data-sort="i">Gruppo</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="d">Desktop</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="m">Mobile</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="t">Totali</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="de">Desktop</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="mo">Mobile</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="un">Uniche</button></th>
-                                            <th></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="uni">Uniche</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="tot">Totali</button></th>
-                                            <th></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="pr">Prodotti</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="ri">Ricette</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="vi">Video</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="cu">Curiosita</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="li">Link</button></th>
-                                            <th></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="lis">Liste</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="imp">Importo</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="med">Media</button></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbody" class="list">
-                                                    <tr role="row">
-                                                        <td colspan="2" class="i">{{$volantino[0]->nome_canale}}</td>
-                                                        <td colspan="1" class="d">{{$sommaDesktop}}</td>
-                                                        <td colspan="1" class="m">{{$sommaMobile}}</td>
-                                                        <td colspan="1" class="t">{{$sommaDesktop + $sommaMobile}}</td>
-                                                        <td colspan="1" class="de">{{$sommaUnicaDesktop}}</td>
-                                                        <td colspan="1" class="mo">{{$sommaUnicaMobile}}</td>
-                                                        <td colspan="1" class="un">{{$sommaUnicaDesktop + $sommaUnicaMobile}}</td>
-                                                        <td></td>
-                                                        <td colspan="1" class="uni">{{$sommaMobileUnicPag + $sommaDesktopUnicPag}}</td>
-                                                        <td colspan="1" class="tot">{{$sommaMobilePag + $sommaDesktopPag}}</td>
-                                                        <td></td>
-                                                            @if($interattivoProdotti == '[]')
-                                                            <td class="pr">0</td>
-                                                            @else
-                                                            <td class="pr">{{$interattivoProdotti[0]->totali}}</td>
-                                                            @endif
-                                                            @if($interattivoRicette == '[]')
-                                                            <td class="pr">0</td>
-                                                            @else
-                                                            <td class="ri">{{$interattivoRicette[0]->totali}}</td>
-                                                            @endif
-                                                            @if($interattivoVideo == '[]')
-                                                            <td class="pr">0</td>
-                                                            @else
-                                                            <td class="vi">{{$interattivoVideo[0]->totali}}</td>
-                                                            @endif
-                                                            @if($interattivoCuriosita == '[]')
-                                                            <td class="pr">0</td>
-                                                            @else
-                                                            <td class="cu">{{$interattivoCuriosita[0]->totali}}</td>
-                                                            @endif
-                                                            @if($interattivoLink == '[]')
-                                                            <td class="pr">0</td>
-                                                            @else
-                                                            <td class="li">{{$interattivoLink[0]->totali}}</td>
-                                                            @endif
-                                                        <td></td>
-                                                        <td colspan="1" class="lis">0</td>
-                                                        <td colspan="1" class="imp">0</td>
-                                                        <td colspan="1" class="med">0</td>
-                                                    </tr>
-                                    </tbody>
-                                </table>
-                                <table id="tfoot5" style="display: block;" class="table-footer">
-                                    <tr>
-                                        <td class="table-pagination position-absolute">
-                                            <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
-                                            <ul class="pagination"></ul>
-                                            <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
-                                        </td>
-                                        
-                                        
+                            <table id="test-list5" class="table table-striped data-t table-sm table-bordered table-volantino dataTable ">
+                                <thead>
+                                    <tr class="text-white" role="row" style="background-color: red;">
+                                        <th colspan="2"></th>
+                                        <th colspan="6"><i class="bi bi-bar-chart-line-fill"></i> Connessioni</th>
+                                        <th></th>
+                                        <th colspan="2"><i class="bi bi-clipboard2-data-fill"></i> Visualizzazioni</th>
+                                        <th></th>
+                                        <th colspan="5"><i class="bi bi-cursor-fill"></i> Interazioni</th>
+                                        <th></th>
+                                        <th colspan="3"><i class="bi bi-cart3"></i> Spesa</th>
                                     </tr>
-                                </table>
+                                    <tr class="text-white fw-bold" role="row" style="background-color: #fb3e3e;">
+                                        <th colspan="2"><button type="button" class="sort" data-sort="i">Gruppo</button></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="d">Desktop</button></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="m">Mobile</button></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="t">Totali</button></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="de">Desktop</button></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="mo">Mobile</button></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="un">Uniche</button></th>
+                                        <th></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="uni">Uniche</button></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="tot">Totali</button></th>
+                                        <th></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="pr"><i class="bi bi-plus-circle-fill"></i> Prodotti</button></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="ri">Ricette</button></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="vi"><i class="bi bi-play-circle-fill"></i> Video</button></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="cu"><i class="bi bi-info-lg"></i> Curiosita</button></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="li"><i class="bi bi-globe"></i> Link</button></th>
+                                        <th></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="lis">Liste</button></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="imp"><i class="bi bi-currency-euro"></i> Importo</button></th>
+                                        <th colspan="1"><button type="button" class="sort" data-sort="med"><i class="bi bi-currency-euro"></i> Media</button></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody" class="list">
+                                                <tr role="row">
+                                                    <td colspan="2" class="i">{{$volantino[0]->nome_canale}}</td>
+                                                    <td colspan="1" class="d">{{$sommaDesktop}}</td>
+                                                    <td colspan="1" class="m">{{$sommaMobile}}</td>
+                                                    <td colspan="1" class="t">{{$sommaDesktop + $sommaMobile}}</td>
+                                                    <td colspan="1" class="de">{{$sommaUnicaDesktop}}</td>
+                                                    <td colspan="1" class="mo">{{$sommaUnicaMobile}}</td>
+                                                    <td colspan="1" class="un">{{$sommaUnicaDesktop + $sommaUnicaMobile}}</td>
+                                                    <td></td>
+                                                    <td colspan="1" class="uni">{{$sommaMobileUnicPag + $sommaDesktopUnicPag}}</td>
+                                                    <td colspan="1" class="tot">{{$sommaMobilePag + $sommaDesktopPag}}</td>
+                                                    <td></td>
+                                                        @if($interattivoProdotti == '[]')
+                                                        <td class="pr">0</td>
+                                                        @else
+                                                        <td class="pr">{{$interattivoProdotti[0]->totali}}</td>
+                                                        @endif
+                                                        @if($interattivoRicette == '[]')
+                                                        <td class="pr">0</td>
+                                                        @else
+                                                        <td class="ri">{{$interattivoRicette[0]->totali}}</td>
+                                                        @endif
+                                                        @if($interattivoVideo == '[]')
+                                                        <td class="pr">0</td>
+                                                        @else
+                                                        <td class="vi">{{$interattivoVideo[0]->totali}}</td>
+                                                        @endif
+                                                        @if($interattivoCuriosita == '[]')
+                                                        <td class="pr">0</td>
+                                                        @else
+                                                        <td class="cu">{{$interattivoCuriosita[0]->totali}}</td>
+                                                        @endif
+                                                        @if($interattivoLink == '[]')
+                                                        <td class="pr">0</td>
+                                                        @else
+                                                        <td class="li">{{$interattivoLink[0]->totali}}</td>
+                                                        @endif
+                                                    <td></td>
+                                                    <td colspan="1" class="lis">0</td>
+                                                    <td colspan="1" class="imp">0</td>
+                                                    <td colspan="1" class="med">0</td>
+                                                </tr>
+                                </tbody>
+                            </table>
+                            <table id="tfoot5" style="display: block;" class="table-footer">
+                                <tr>
+                                    <td class="table-pagination position-absolute">
+                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
+                                        <ul class="pagination"></ul>
+                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
+                                    </td>
+                                    
+                                    
+                                </tr>
+                            </table>
                             
                         </div>
             
@@ -802,6 +802,7 @@
 @stop
 
 @section('footerScript')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css" integrity="sha512-YFENbnqHbCRmJt5d+9lHimyEMt8LKSNTMLSaHjvsclnZGICeY/0KYEeiHwD1Ux4Tcao0h60tdcMv+0GljvWyHg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ URL::asset('js/datagrid/datatables/datatables.export.js') }}"></script>
@@ -1772,6 +1773,7 @@
         margin: 0 !important;
         padding: 8px 30px;
         border-radius: 6px;
+        font-weight: bold;
         border: none;
         display: inline-block;
         color: white;

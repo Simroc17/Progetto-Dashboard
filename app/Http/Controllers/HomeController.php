@@ -400,6 +400,8 @@ class HomeController extends Controller
         
         $volantino= Volantino::where(['id_volantino'=> $id])->get();
         //dd($volantino);  //Volantino su cui ho cliccato
+        $array = str_split($volantino[0]->id_volantino);
+        //dd($array);
         $promo = Promo::where(['id'=> $volantino[0]->id_promo])->get();
         //dd($promo);
         ///////////////////////////// RIEPILOGO ////////////////////////////
@@ -556,7 +558,7 @@ class HomeController extends Controller
          ->select(DB::raw("SUM(pagina_qta) AS somma, SUM(pagina_unica_qta) AS uniche"), 'num_pagina')
          ->orderBy('somma', 'DESC')
          ->get();
-      // dd($volantinoId);
+        //dd($volantinoId);
         ////////////////// FINE PAGINE /////////////////////////
 
         
@@ -583,7 +585,133 @@ class HomeController extends Controller
         //dd($volantino);
         //dd($sommaMobilePag);
         //dd($sommaDesktopPag);
-        return view('/datatables/datatables_basic', compact('interattivoRicette','interattivoVideo','interattivoCuriosita','interattivoLink','interattivoProdotti', 'volantinoId','volantino1' ,'volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
+        ////////////////////// INTERATTIVI \\\\\\\\\\\\\\\\\\\\\\\\\\\ 
+        $interattivo = Interattivi::groupBy('tipo' ,'id_prodotto', )
+            ->where(['id_volantino' => $volantino[0]->id_volantino])
+            ->select(DB::raw("SUM(qta) AS somma"), 'tipo' ,'id_prodotto',)
+            ->orderBy('id_prodotto', 'ASC')
+            ->get();
+            //dd($interattivo);
+        $arrRicette=[];
+        $arrVideo=[];
+        $arrCuriosita=[];
+        $arrlink=[];
+        $arrVai_a=[];
+        $arrEcommerce=[];
+        for ($i = 0; $i < count($interattivo); $i++ ){
+            if($interattivo[$i]->tipo=='curiosita'){
+                $arrCuriosita[$i]=$interattivo[$i]->somma;
+            }
+            if($interattivo[$i]->tipo=='collegamento'){
+                $arrlink[$i]=$interattivo[$i]->somma;
+            }
+            if($interattivo[$i]->tipo=='ricetta'){
+                $arrRicette[$i]=$interattivo[$i]->somma;
+            }
+            if($interattivo[$i]->tipo=='vai_a'){
+                $arrVai_a[$i]=$interattivo[$i]->somma;
+            }
+            if($interattivo[$i]->tipo=='video'){
+                $arrVideo[$i]=$interattivo[$i]->somma;
+            }
+            if($interattivo[$i]->tipo=='ecommerce'){
+            $arrEcommerce[$i]=$interattivo[$i]->somma;
+            }
+        }
+        $sommaCuriosita=array_sum($arrCuriosita);
+        $sommaCollegamenti=array_sum($arrlink);
+        $sommaRicette=array_sum($arrRicette);
+        $sommaVai_a=array_sum($arrVai_a);
+        $sommaVideo=array_sum($arrVideo);
+        $sommaEcommerce=array_sum($arrEcommerce);
+        $interattivo2 = Interattivi::groupBy('data_visita', 'tipo')
+            ->where(['id_volantino' =>$volantino[0]->id_volantino])
+            ->select(DB::raw("SUM(qta) AS somma"),'data_visita', 'tipo')
+            ->orderBy('data_visita', 'ASC')
+            ->get();
+
+        $interattivoDay = Interattivi::groupBy('data_visita',)
+            ->where(['id_volantino' =>$volantino[0]->id_volantino])
+            ->select(DB::raw("SUM(qta) AS somma"),'data_visita')
+            ->orderBy('data_visita', 'ASC')
+            ->get();
+
+        $arrayGiorni2 = [];
+        for( $i=0; $i<count($interattivoDay); $i++ ){
+                $arrayGiorni2[$i] = $interattivoDay[$i]->data_visita;
+        }
+        //dd($arrayGiorni2);
+        $arrayCuriosita =[];
+        $arrayprodotti = [];
+        $arrayEcommerce=[];
+        $arrayVideo=[];
+        $arrayLink=[];
+        $arrayRicette=[];
+        $arrayVai_a=[];
+        for ($i=0; $i<count($interattivo2); $i++){
+            if($interattivo2[$i]->tipo=='curiosita'){
+                $arrayCuriosita[$i]=$interattivo2[$i];
+                
+            }
+            if($interattivo2[$i]->tipo=='prodotto'){
+                $arrayprodotti[$i]=$interattivo2[$i];
+            }
+            if($interattivo2[$i]->tipo=='ecommerce'){
+                $arrayEcommerce[$i]=$interattivo2[$i];
+            }
+            if($interattivo2[$i]->tipo=='video'){
+                $arrayVideo[$i]=$interattivo2[$i];
+            }
+            if($interattivo2[$i]->tipo=='collegamento'){
+                $arrayLink[$i]=$interattivo2[$i];
+            }
+            if($interattivo2[$i]->tipo=='ricetta'){
+                $arrayRicette[$i]=$interattivo2[$i];
+            }
+            if($interattivo2[$i]->tipo=='vai_a'){
+                $arrayVai_a[$i]=$interattivo2[$i];
+            }
+            
+        }
+        
+        $interattivo3 = Interattivi::groupBy('seriale','tipo' )
+            ->where(['id_volantino' =>$volantino[0]->id_volantino])
+            ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'seriale','tipo')
+            ->orderBy('sommaQta', 'ASC')
+            ->get();
+
+        $finale = DB::table('history_interattivi')
+            ->where(['history_interattivi.id_volantino' =>$volantino[0]->id_volantino])
+            ->where('history_interattivi.tipo', '!=', "prodotto" )
+            ->where('history_interattivi.tipo', '!=', "ecommerce" )
+            ->where('history_interattivi.tipo', '!=', "vai_a" )
+            ->join('prodotti', 'prodotti.seriale', '=', 'history_interattivi.seriale')
+            ->join('prodotti_interattivi', 'prodotti_interattivi.seriale', '=', 'history_interattivi.seriale')
+            ->groupBy('seriale','tipo', 'descrizione', 'descrizione_estesa', 'titolo')
+            ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','history_interattivi.tipo','prodotti.descrizione', 'prodotti.descrizione_estesa', 'prodotti_interattivi.titolo')
+            // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa') 
+            ->get();
+        $arrTot =[];
+        for($i=0; $i<count($finale); $i++){
+            $arrTot[$i] = $finale[$i]->sommaUnici; 
+        }
+        $sommaInter = array_sum($arrTot);
+        $products = DB::table('history_interattivi')
+            ->where(['history_interattivi.id_volantino' =>$volantino[0]->id_volantino])
+            ->where(['tipo' => "prodotto"])
+            ->where('prodotti.descrizione', '!=', "")
+            ->join('prodotti', 'prodotti.seriale', '=', 'history_interattivi.seriale')
+            //->join('prodotti_interattivi', 'prodotti_interattivi.seriale', '=', 'history_interattivi.seriale')
+            ->groupBy('seriale', 'descrizione', 'descrizione_estesa','pagina')
+            ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'pagina','prodotti.seriale','prodotti.descrizione', 'prodotti.descrizione_estesa')
+            // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa') 
+            ->get();
+        $arrTotale =[];
+        for($i=0; $i<count($products); $i++){
+                $arrTotale[$i] = $products[$i]->sommaUnici; 
+            }
+        $sommaPr = array_sum($arrTotale);
+        return view('/datatables/datatables_basic', compact('sommaPr','products','sommaInter','finale','interattivo3','arrayVai_a','arrayRicette','arrayVideo','arrayLink','arrayEcommerce','arrayprodotti','arrayGiorni2','interattivo2','arrRicette','arrayCuriosita','arrVideo','arrlink','arrRicette','arrVai_a' ,'sommaCuriosita','sommaCollegamenti','sommaRicette','sommaVai_a','sommaVideo','sommaEcommerce','array','interattivoRicette','interattivoVideo','interattivoCuriosita','interattivoLink','interattivoProdotti', 'volantinoId','volantino1' ,'volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
     }
 
 
