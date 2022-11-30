@@ -396,7 +396,6 @@
 
         </div>
         <div class="col-xl-12">
-            
         </div>
 
     </div>
@@ -798,95 +797,135 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tbody" class="list">
+                                                            @php $indP = 0 @endphp
+                                                            @php $indR = 0 @endphp
+                                                            @php $indV = 0 @endphp
+                                                            @php $indC = 0 @endphp
+                                                            @php $indL = 0 @endphp
                                         @foreach($riepilogoConnessioni as $connessione)
                                             @foreach($riepilogoVisualizzazioni as $visualizzazione)
-                                                
-                                                    @if($connessione->id_market==$visualizzazione->id_market)
-                                                       
-                                                        <tr role="row">
-                                                            <td colspan="2" class="i">{{$connessione->nome}} - {{$connessione->id_volantino}}</td>
-                                                            <td colspan="1" class="d">{{$connessione->desktop}}</td>
-                                                            <td colspan="1" class="m">{{$connessione->mobile}}</td>
-                                                            <td colspan="1" class="t">{{$connessione->desktop + $connessione->mobile}}</td>
-                                                            <td colspan="1" class="de">{{$connessione->deskUni}}</td>
-                                                            <td colspan="1" class="mo">{{$connessione->mobUni}}</td>
-                                                            <td colspan="1" class="un">{{$connessione->deskUni + $connessione->mobUni}}</td>
-                                                            <td></td>
-                                                            <td colspan="1" class="uni">{{$visualizzazione->uniche}}</td>
-                                                            <td colspan="1" class="tot">{{$visualizzazione->totali}}</td>
-                                                            <td></td>
-                                                            @if($interattivoProdotti == '[]')
-                                                                <td class="pr">0</td>
-                                                            @else
-                                                                @foreach($interattivoProdotti as $prodotto) 
-                                                                        @if($visualizzazione->id_market == $prodotto->id_market)
-                                                                            <td colspan="1" class="pr">{{$prodotto->totali}}</td>
-                                                                            
-                                                                        @else 
-                                                                        <td class="pr">0</td>   
-                                                                        <!-- PROVA A METTERE LA SEZIONE 'PRODOTTI' ALLA FINE E NON ALL'INIZIO -->
-                                                                        <!-- MI CREA DELLE COLONNE IN PIU -->
+                                                @if($connessione->id_market==$visualizzazione->id_market)
+                                                    <tr role="row">
+                                                        <td colspan="2" class="i"><a href="{{ route('volantino', $connessione->id_volantino)}}" style="color: #17a2b8;">{{$connessione->nome}} - {{$connessione->id_volantino}}</a></td>
+                                                        <td colspan="1" class="d">{{$connessione->desktop}}</td>
+                                                        <td colspan="1" class="m">{{$connessione->mobile}}</td>
+                                                        <td colspan="1" class="t">{{$connessione->desktop + $connessione->mobile}}</td>
+                                                        <td colspan="1" class="de">{{$connessione->deskUni}}</td>
+                                                        <td colspan="1" class="mo">{{$connessione->mobUni}}</td>
+                                                        <td colspan="1" class="un">{{$connessione->deskUni + $connessione->mobUni}}</td>
+                                                        <td></td>
+                                                        <td colspan="1" class="uni">{{$visualizzazione->uniche}}</td>
+                                                        <td colspan="1" class="tot">{{$visualizzazione->totali}}</td>
+                                                        <td></td>
+                                                        @if($interattivoProdotti == '[]')
+                                                            <td class="pr">0</td>
+                                                        @else
+                                                            @if (count($interattivoProdotti)>$indP)    
+                                                                @while($indP< count($interattivoProdotti))  
+                                                                    @if($interattivoProdotti[$indP]->id_market == $visualizzazione->id_market)
+                                                                        <td colspan="1" class="pr">{{$interattivoProdotti[$indP]->totali}}</td>
+                                                                        @if($interattivoProdotti[$indP]->id_market == $visualizzazione->id_market)
+                                                                            @php $indP++ @endphp
                                                                         @endif
+                                                                        
+                                                                    @else
+                                                                        <td class="pr">0</td>
+                                                                    @endif
                                                                     @break
-                                                                @endforeach
-                                                            @endif
-                                                            @if($interattivoRicette == '[]')
-                                                                <td class="ri">0</td>
-                                                            @else 
-                                                                @foreach($interattivoRicette as $ricetta)
-                                                                    @if($ricetta->id_market == $connessione->id_market)
-                                                                        <td colspan="1" class="ri">{{$ricetta->totali}}</td>
+                                                                @endwhile
+                                                            @else
+                                                                <td class="pr">0</td> 
+                                                            @endif       
+                                                        @endif
+                                                        @if($interattivoRicette == '[]')
+                                                            <td class="ri">0</td>
+                                                        @else
+                                                        <!-- ////////////// PROVA A FARLO CON UN FOR E METTERE IL "<=" ////////////// -->
+                                                            @if (count($interattivoRicette)>$indR)
+                                                                @while($indR < count($interattivoRicette))  
+                                                                    @if($interattivoRicette[$indR]->id_market == $visualizzazione->id_market)
+                                                                        <td colspan="1" class="ri">{{$interattivoRicette[$indR]->totali}}</td>
+                                                                        @if($interattivoRicette[$indR]->id_market == $visualizzazione->id_market)
+                                                                            @php $indR++ @endphp
+                                                                        @endif
+                                                                    @else
+                                                                        <td class="ri">0</td>
+                                                                    @endif
+                                                                    @break
+                                                                @endwhile
+                                                            @else
+                                                                <td class="ri">0</td> 
+                                                            @endif       
+                                                        @endif
+                                                        @if($interattivoVideo == '[]')
+                                                            <td class="vi">0</td>
+                                                        @else 
+                                                            @if (count($interattivoVideo)>$indV)
+                                                                @while($indV< count($interattivoVideo))  
+                                                                    @if($interattivoVideo[$indV]->id_market == $visualizzazione->id_market)
+                                                                        <td colspan="1" class="vi">{{$interattivoVideo[$indV]->totali}}</td>
+                                                                        @if($interattivoVideo[$indV]->id_market == $visualizzazione->id_market)
+                                                                            @php $indV++ @endphp
+                                                                        @endif
                                                                         
-                                                                    @else 
-                                                                    <td class="ri">0</td>
-                                                                    
-                                                                    @endif
-                                                            @endforeach 
-                                                            @endif
-                                                            @if($interattivoVideo == '[]')
-                                                                <td class="vi">0</td>
-                                                            @else 
-                                                                @foreach($interattivoVideo as $video)
-                                                                    @if($video->id_market == $connessione->id_market)
-                                                                        <td colspan="1" class="vi">{{$video->totali}}</td>
                                                                         
-                                                                    @else <td class="vi">0</td>
-                                                                    
+                                                                    @else
+                                                                        <td class="vi">0</td>
                                                                     @endif
-                                                                @endforeach 
-                                                            @endif
-                                                            @if($interattivoCuriosita == '[]')
-                                                                <td class="cu">0</td>
-                                                                @else 
-                                                                @foreach($interattivoCuriosita as $curiosita)
-                                                                    @if($curiosita->id_market == $connessione->id_market)
-                                                                        <td colspan="1" class="cu">{{$curiosita->totali}}</td>
-                                                                       
-                                                                    @else <td class="cu">0</td>
-                                                                    
+                                                                    @break
+                                                                @endwhile
+                                                            @else
+                                                                <td class="vi">0</td> 
+                                                            @endif    
+                                                        @endif
+                                                        @if($interattivoCuriosita == '[]')
+                                                            <td class="cu">0</td>
+                                                        @else 
+                                                            @if (count($interattivoCuriosita)>$indC)
+                                                                @while($indC< count($interattivoCuriosita))  
+                                                                    @if($interattivoCuriosita[$indC]->id_market == $visualizzazione->id_market)
+                                                                        <td colspan="1" class="cu">{{$interattivoCuriosita[$indC]->totali}}</td>
+                                                                        @if($interattivoCuriosita[$indC]->id_market == $visualizzazione->id_market)
+                                                                            @php $indC++ @endphp
+                                                                        @endif
+                                                                        
+                                                                        
+                                                                    @else
+                                                                        <td class="cu">0</td>
                                                                     @endif
-                                                                @endforeach 
-                                                            @endif
-                                                            @if($interattivoLink == '[]')
-                                                                <td class="li">0</td>
-                                                                @else 
-                                                                @foreach($interattivoLink as $link)
-                                                                    @if($link->id_market == $connessione->id_market)
-                                                                        <td colspan="1" class="li">{{$link->totali}}</td>
-                                                                         
-                                                                    @else <td class="li">0</td>
-                                                                    
+                                                                    @break
+                                                                @endwhile
+                                                            @else
+                                                                <td class="cu">0</td> 
+                                                            @endif 
+                                                        @endif
+                                                        @if($interattivoLink == '[]')
+                                                            <td class="li">0</td>
+                                                        @else 
+                                                            @if (count($interattivoLink)>$indL)    
+                                                                @while($indL< count($interattivoLink))  
+                                                                    @if($interattivoLink[$indL]->id_market == $visualizzazione->id_market)
+                                                                        <td colspan="1" class="li">{{$interattivoLink[$indL]->totali}}</td>
+                                                                        @if($interattivoLink[$indL]->id_market == $visualizzazione->id_market)
+                                                                            @php $indL++ @endphp
+                                                                        @endif
+                                                                        
+                                                                        
+                                                                    @else
+                                                                        <td class="li">0</td>
                                                                     @endif
-                                                                @endforeach 
-                                                            @endif
-                                                            <td></td>
+                                                                    @break
+                                                                @endwhile
+                                                            @else
+                                                                <td class="li">0</td> 
+                                                            @endif 
+                                                        @endif
+                                                        <td></td>
                                                         <td colspan="1" class="lis">0</td>
                                                         <td colspan="1" class="imp">0</td>
                                                         <td colspan="1" class="med">0</td>
-                                                        </tr>
-                                                        
-                                                    @endif
-                                                
+                                                    </tr>
+                                                @endif
                                             @endforeach
                                         @endforeach
                                         
@@ -920,17 +959,17 @@
                                             <td colspan="1">{{$sumM}}</td>
                                             <td colspan="1">{{$sumD + $sumM}}</td>
                                             <td colspan="1">{{$sumDu}}</td>
-                                            <td colspan="1">{{$sumMu}}</td>
+                                            <td colspan="1">{{$sumMu}}</td>                                             
                                             <td colspan="1">{{$sumDu + $sumMu}}</td>
                                             <td></td>
                                             <td colspan="1">{{$sumVuni}}</td>
                                             <td colspan="1">{{$sumVtot}}</td>
                                             <td></td>
-                                            <td colspan="1">Prodotti</td>
-                                            <td colspan="1">Ricette</td>
-                                            <td colspan="1">Video</td>
-                                            <td colspan="1">Curiosita</td>
-                                            <td colspan="1">Link</td>
+                                            <td colspan="1">{{$sommaProdotti}}</td>
+                                            <td colspan="1">{{$sommaRicette}}</td>
+                                            <td colspan="1">{{$sommaVideo}}</td>
+                                            <td colspan="1">{{$sommaCuriosita}}</td>
+                                            <td colspan="1">{{$sommaCollegamenti}}</td>
                                             <td></td>
                                             <td colspan="1">0</td>
                                             <td colspan="1">0</td>
