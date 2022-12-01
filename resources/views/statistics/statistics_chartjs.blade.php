@@ -408,7 +408,7 @@
                     <div id="panel-3" class="panel">
                         <div class="panel-hdr">
                             <h2>
-                                Bar <span class="fw-300"><i>Stacked</i></span>
+                                Andamento <span class="fw-300"><i>Interattivi</i></span>
                             </h2>
                             <div class="panel-toolbar">
                                 <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -434,7 +434,7 @@
                     <div id="panel-8" class="panel">
                         <div class="panel-hdr">
                             <h2>
-                                Andamento giornaliero
+                                Interattivi per tipologia
                             </h2>
                             <div class="panel-toolbar">
                                 <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -1689,35 +1689,6 @@
             link4.classList.remove('active');
             link5.classList.remove('active');
 
-            
-          
-
-            var userList1 = new List('users2', options1);
-          
-
-            $('.jPaginateNext').on('click', function() {
-                var list = $('.pagination').find('li');
-                $.each(list, function(position, element) {
-                    if ($(element).is('.active')) {
-                        $(list[position + 1]).trigger('click');
-                    }
-                })
-            });
-
-
-            $('.jPaginateBack').on('click', function() {
-                var list = $('.pagination').find('li');
-                $.each(list, function(position, element) {
-                    if ($(element).is('.active')) {
-                        $(list[position - 1]).trigger('click');
-                    }
-                })
-            });
-
-            
-            
-
-
         });
         $('#prodotti').on('click', function() {
             pagina1.style.display = 'none';
@@ -1731,32 +1702,7 @@
             link4.classList.add('active');
             link5.classList.remove('active');
         
-            
-
-            var userList2 = new List('users3', options2);
-            
-           $('.jPaginateNext').on('click', function() {
-                var list = $('.pagination').find('li');
-                $.each(list, function(position, element) {
-                    if ($(element).is('.active')) {
-                        $(list[position + 1]).trigger('click');
-                    }
-                })
-            });
-
-
-            $('.jPaginateBack').on('click', function() {
-                var list = $('.pagination').find('li');
-                $.each(list, function(position, element) {
-                    if ($(element).is('.active')) {
-                        $(list[position - 1]).trigger('click');
-                    }
-                })
-            });
-
-        
-        
-        
+          
         });
         $('#riepilogo').on('click', function() {
             pagina1.style.display = 'none';

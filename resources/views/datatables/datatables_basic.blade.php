@@ -11,10 +11,12 @@
 <main id="js-page-content" role="main" class="page-content">
 
 
-    <div class="subheader">
-        <h1 class="subheader-title">{{$volantino[0]->id_volantino}}
-            Dettaglio Volantino <a href="https://preview.volantinopiu.it/volantino{{$volantino[0]->id_volantino}}00.html" > clicca qui<img src="https://resources.volantinopiu.it/flyer/{{$array[0]}}/{{$array[1]}}/{{$array[2]}}/{{$array[3]}}/{{$array[4]}}/pagine/1.jpg" style="margin-right: 6px; max-width: 130px; max-height:10rem"></a>
-
+    <div class="subheader justify-content-between">
+        <h1 class="subheader-title">
+            Dettaglio Volantino 
+        </h1>
+        <h1>
+        <a target="_blank" href="https://preview.volantinopiu.it/volantino{{$volantino[0]->id_volantino}}00.html" ><img src="https://resources.volantinopiu.it/flyer/{{$array[0]}}/{{$array[1]}}/{{$array[2]}}/{{$array[3]}}/{{$array[4]}}/pagine/1.jpg" style="margin-right: 6px; max-width: 130px; max-height:10rem"></a>
         </h1>
     </div>
 
@@ -84,14 +86,14 @@
                 <div class="row">
                     <div class="col-sm-6 border-right">
                         <div class="description-block">
-                            <h5 class="description-header text-white">2.852</h5>
-                            <span class="description-text text-white">Totali</span>
+                            <h5 class="description-header text-white">{{count($finale)}}</h5>
+                            <span class="description-text text-white">TOTALI</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="description-block">
-                            <h5 class="description-header text-white">786</h5>
-                            <span class="description-text text-white">Uniche</span>
+                            <h5 class="description-header text-white">{{$sommaInter}}</h5>
+                            <span class="description-text text-white">CLICK RICEVUTI</span>
                         </div>
                     </div>
                 </div>
@@ -104,8 +106,8 @@
                 <div class="row">
                     <div class="col-sm-6 border-right">
                         <div class="description-block">
-                            <h5 class="description-header text-white">2.852</h5>
-                            <span class="description-text text-white">Totali</span>
+                            <h5 class="description-header text-white">{{count($products)}}</h5>
+                            <span class="description-text text-white">SU {{count($products)}} TOTALI</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -389,7 +391,7 @@
                                 <thead>
                                     <tr class="text-white" role="row" style="background-color: red;">
                                         <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;"><button type="button" class="sort" data-sort="regione2">Numero Pagina</button></th>
-                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 30%;"><button type="button" class="sort" data-sort="click_unici2">volantini onlini</button></th>                                                       
+                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 30%;"><button type="button" class="sort" data-sort="volantini_online">volantini onlini</button></th>                                                       
                                         <th tabindex="0" rowspan="1" colspan="1" style="width: 25%;"><button type="button" class="sort" data-sort="click_unici2">Visite uniche</button></th>
                                         <th tabindex="0" rowspan="1" colspan="1" style="width: 30%;"><button type="button" class="sort" data-sort="click_totali2">Visite totali</button></th>
                                     </tr>
@@ -401,7 +403,7 @@
                                     @foreach ($volantinoId as $dato )
                                     <tr>
                                         <td class="regione2" style="width: 35%;">{{$dato['num_pagina']}}</td>
-                                        <td class="click_unici2" style="width: 30%;">vis.online</td>
+                                        <td class="volantini_online" style="width: 30%;">vis.online</td>
                                         <td class="click_unici2" style="width: 25%;">{{ $dato['uniche'] }}</td>
                                         <td class="click_totali2" style="width: 30%;">{{ $dato['somma']}}</td>
                                     </tr>
@@ -429,14 +431,15 @@
         </div>
     </div>
     <!--//////////// DIV INTERATTIVI /////////////-->
-    <div id="pagina3" class="row" style="display: none;">
+   <!--//////////// DIV INTERATTIVI /////////////-->
+   <div id="pagina3" class="row" style="display: none;">
             <div class="col-xl-12">
                 <div class="row">
                     <div class="col-xl-12">
                         <div id="panel-3" class="panel">
                             <div class="panel-hdr">
                                 <h2>
-                                    Bar <span class="fw-300"><i>Stacked</i></span>
+                                    Andamento <span class="fw-300"><i>Interattivi</i></span>
                                 </h2>
                                 <div class="panel-toolbar">
                                     <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -462,7 +465,7 @@
                         <div id="panel-8" class="panel">
                             <div class="panel-hdr">
                                 <h2>
-                                    Andamento giornaliero
+                                    Interattivi per tipologia
                                 </h2>
                                 <div class="panel-toolbar">
                                     <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -547,33 +550,95 @@
             </div>
             <div class="col-xl-12">
                 <div class="panel-container show ">
-                    <div class="panel-content ">
-                        <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
+                    <div class="table-list-container " id="users3">
+                        <div class="row justify-content-between">
+                            <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
+
+                            </div>
+
+                        </div>
+                        <table id="intestazione3" class="table table-bordered table-hover table-striped w-100">
+                        
                             <thead class="bg-warning-200">
-                                <tr>
-                                    <th>Regione</th>
-                                    <th>Click Unici</th>
-                                    <th>Click Totali</th>
-                                    <th>Controls</th>
+                                <tr class="text-white" role="row" style="background-color: red;">
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="tipo">Tipo</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="titolo">Titolo</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="prodotto">Prodotto</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="unici2">Click unici</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="totali2">Click totali</button></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>268410636</td>
-                                    <td>Cooley, Walker J.</td>
-                                    <td>03-13-19</td>
-                                    <td>1</td>
-                                </tr>
+                        </table>
+                        <table id="test-list3" class="table table-hover table-striped w-100 mt-1">
+                            <tbody id="tbody3" class="list ">
+                                @foreach ($finale as $finale )
+                                        
+                                        
+                                        @if ($finale->tipo=='ricetta')
+                                            <tr>
+                                                <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
+                                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                            </tr>
+                                        @endif
+                                        @if ($finale->tipo=='icona')
+                                            <tr>
+                                                <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
+                                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                            </tr>
+                                        @endif
+                                        @if ($finale->tipo=='curiosita')
+                                            <tr>
+                                                <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
+                                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                            </tr>
 
+
+
+                                        @endif
+                                        @if ($finale->tipo=='collegamento')
+                                            <tr>
+                                                <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
+                                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                            </tr>
+                                        @endif
+                                        @if ($finale->tipo=='video')
+                                            <tr>
+                                                <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
+                                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                            </tr>
+                                        @endif
+                                        
+                            
+                                @endforeach
+                       
                             </tbody>
-                            <tfoot>
+                            
+                        </table>
+                        <table id="tfoot3" style="display: block;margin-bottom: 50px;" class="table-footer">
                                 <tr>
-                                    <th>CustomerID</th>
-                                    <th>Name</th>
-                                    <th>PurchaseDate</th>
-                                    <th>Controls</th>
+                                    <td class="table-pagination position-absolute">
+                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
+                                        <ul class="pagination"></ul>
+                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
+                                    </td>
+
+
                                 </tr>
-                            </tfoot>
                         </table>
                         <!-- datatable end -->
                     </div>
@@ -581,104 +646,122 @@
             </div>
     </div>
         <!-- ////Div PRODOTTI////////////// -->
+    <!-- ////Div PRODOTTI////////////// -->
     <div id="pagina4" class="row" style="display:none;">
-            <div class="col-xl-12">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="card bg-light mb-3" style="max-width: 100%;">
-                            <div class="card-header text-dark">Header</div>
-                            <div class="card-body row">
+        <div class="col-xl-12">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card bg-light mb-3" style="max-width: 100%;">
+                        <div class="card-header text-dark">Header</div>
+                        <div class="card-body row">
 
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                 </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-
                             </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12">
-                <div class="panel-container show ">
-                    <div class="panel-content ">
-                        <table id="dt-basic-example2" class="table table-bordered table-hover table-striped w-100">
-                            <thead class="bg-warning-200">
-                                <tr>
-                                    <th>Regione</th>
-                                    <th>Click Unici</th>
-                                    <th>Click Totali</th>
-                                    <th>Controls</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>268410636</td>
-                                    <td>Cooley, Walker J.</td>
-                                    <td>03-13-19</td>
-                                    <td>1</td>
-                                </tr>
+        </div>
+        <div class="col-xl-12">
+            <div class="panel-container show ">
+                <div class="table-list-container " id="users4">
+                    <div class="row justify-content-between">
+                        <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
 
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>CustomerID</th>
-                                    <th>Name</th>
-                                    <th>PurchaseDate</th>
-                                    <th>Controls</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        <!-- datatable end -->
+                        </div>
+
                     </div>
+                    <table id="intestazione4" class="table table-bordered table-hover table-striped w-100">
+                        <thead class="bg-warning-200">
+                            <tr class="text-white" role="row" style="background-color: red;">
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 20%;" ><button type="button" class="sort" data-sort="tipoPr">Prodotto</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 50%;" ><button type="button" class="sort" data-sort="descrizionePr">Descrizione</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="pagina">Pagina</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="uniciPr">Click unici</button></th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="totaliPr">Click totali</button></th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table id="test-list4" class="table table-hover table-striped w-100 mt-1">
+                        <tbody id="tbody3" class="list ">
+                        @foreach ($products as $product )
+                                
+                                    
+                                        
+                                <tr>
+                                    <td class="tipoPr" style="width: 20%;" >{{ $product->descrizione }}</td>
+                                    <td class="descrizionePr" style="width:50%;">{{ $product->descrizione_estesa }}</td>
+                                    <td class="pagina" style="width:10%;">{{$product->pagina}}</td>
+                                    <td class="uniciPr" style="width: 10%;">{{ $product->sommaUnici }}</td>
+                                    <td class="totaliPr" style="width: 10%;">{{ $product->sommaQta }}</td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                        
+                    </table>
+                    <table id="tfoot4" style="display: block;margin-bottom: 50px;" class="table-footer">
+                            <tr>
+                                <td class="table-pagination position-absolute">
+                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
+                                    <ul class="pagination"></ul>
+                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
+                                </td>
+
+
+                            </tr>
+                    </table>
+                    <!-- datatable end -->
                 </div>
             </div>
-
-
+        </div>
     </div>
 
         <!-- ///////////////// DIV RIEPILOGO /////////////////////// -->
@@ -817,7 +900,7 @@
         /////////////CONNESSIONI\\\\\\\\\\\\\\\\\\\\
         // Prova ricerca connessioni
             var options = {
-                valueNames: ['regione', 'click_unici', 'click_totali'],
+                valueNames: ['tipo','titolo','prodotto','unici2','totali2','tipoPr','descrizionePr','pagina','uniciPr','totaliPr','regione', 'click_unici', 'click_totali','regione2','volantini_online' ,'click_unici2', 'click_totali2'],
                 page: 10,
                 pagination: {
                     innerWindow: 1,
@@ -827,10 +910,13 @@
                 }
             };
 
-            var userList = new List('users', options);
+            var userList0 = new List('users', options);
+            var userList = new List('users2', options);
+            var userList1 = new List('users3', options);
+            var userList2 = new List('users4', options);
             // Prova Pagination connsessioni
             var monkeyList = new List('test-list', {
-                valueNames: ['regione', 'click_unici', 'click_totali', ],
+                valueNames: ['tipo','titolo','prodotto','unici2','totali2','tipoPr','descrizionePr','pagina','uniciPr','totaliPr','regione', 'click_unici', 'click_totali','regione2','volantini_online' ,'click_unici2', 'click_totali2'],
                 page: 10,
                 pagination: {
                     innerWindow: 1,
@@ -1088,117 +1174,134 @@
     /* bar chart -- end */
 
     /* bar chart */
+    var curiosita = <?php echo json_encode($sommaCuriosita); ?>;
+    var video = <?php echo json_encode($sommaVideo); ?>;
+    var link = <?php echo json_encode($sommaCollegamenti); ?>;
+    var ricette= <?php echo json_encode($sommaRicette); ?>;
+    var vai_a = <?php echo json_encode($sommaVai_a); ?>;
+    var ecommerce = <?php echo json_encode($sommaEcommerce); ?>;
     var barChart2 = function() {
-        var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [{
-                    label: "red",
-                    backgroundColor: color.success._300,
-                    borderColor: color.success._500,
-                    borderWidth: 1,
-                    data: [
-                        45,
-                        75,
-                        26,
-                        23,
-                        60, -48, -9
-                    ]
-                },
-                {
-                    label: "Blue",
-                    backgroundColor: color.primary._300,
-                    borderColor: color.primary._500,
-                    borderWidth: 1,
-                    data: [-10,
-                        16,
-                        72,
-                        93,
-                        29, -74,
-                        64
-                    ]
-                }
-            ]
-
-        };
-        var config = {
-            type: 'bar',
-            data: barChartData,
+        const data = {
+                labels: ["curiosita","link","ricette","vai_a","video","ecommerce"],
+                datasets: [{
+                axis: 'y',
+                label: '',
+                data: [curiosita,link,ricette,vai_a,video,ecommerce],
+                fill: false,
+                backgroundColor: [
+                '#67ea19',
+                '#447ba5',
+                '#744f4f',
+                '#51aef6',
+                '#cf1523',
+                '#6d437c',
+                
+                ],
+                borderColor: [
+                'black',
+                'black',
+                'black',
+                'black',
+                'black',
+                'black',
+                
+                ],
+                borderWidth: 1
+            }]
+            };
+                    const config = {
+            type: 'horizontalBar',
+            data,
             options: {
-                responsive: true,
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: false,
-                    text: 'Bar Chart'
-                },
-                scales: {
-                    xAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: false,
-                            labelString: '6 months forecast'
-                        },
-                        gridLines: {
-                            display: true,
-                            color: "#f2f2f2"
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            fontSize: 11
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: false,
-                            labelString: 'Profit margin (approx)'
-                        },
-                        gridLines: {
-                            display: true,
-                            color: "#f2f2f2"
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            fontSize: 11
-                        }
-                    }]
-                }
+                indexAxis: 'y',
             }
-        }
+            };
         new Chart($("#barChart2 > canvas").get(0).getContext("2d"), config);
     }
     /* bar chart -- end */
 
+
     /* bar stacked */
+    var tipo=<?php echo json_encode($arrayprodotti); ?>;
+    var data=<?php echo json_encode($arrayGiorni2); ?>;
+    let numbers = Object.values(<?php echo json_encode($arrayCuriosita); ?>);
+    let numbers2 = Object.values(<?php echo json_encode($arrayEcommerce); ?>);
+    let numbers3 = Object.values(<?php echo json_encode($arrayLink); ?>);
+    let numbers4 = Object.values(<?php echo json_encode($arrayVideo); ?>);
+    let numbers5= Object.values(<?php echo json_encode($arrayRicette); ?>);
+    let numbers6= Object.values(<?php echo json_encode($arrayVai_a); ?>);
+   //  console.log(numbers)
+    let arrCu=[]
+    for(i =0; i < numbers.length; i++){
+        arrCu[i]= numbers[i].somma
+    }
+    console.log(arrCu)
+    let arrEcomm=[]
+    for(i =0; i < numbers2.length; i++){
+        arrEcomm[i]= numbers2[i].somma
+    }
+    let arrLink=[]
+    for(i=0;i<numbers3.length;i++){
+        arrLink[i]= numbers3[i].somma
+    }
+    let arrVid=[]
+    for(i=0;i<numbers4.length;i++){
+        arrVid[i]= numbers4[i].somma
+    }
+    let arrRic=[]
+    for(i=0;i<numbers5.length;i++){
+        arrRic[i]= numbers5[i].somma
+    }
+    let arrVai=[]
+    for(i=0;i<numbers6.length;i++){
+        arrVai[i]=numbers6[i].somma
+    }
+
+    
     var barStacked = function() {
         var barStackedData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: data,
             datasets: [{
-                    label: "Red",
+                    label: "Curiosita",
                     backgroundColor: color.primary._300,
                     borderColor: color.primary._500,
                     borderWidth: 1,
-                    data: [
-                        45,
-                        75,
-                        26,
-                        23,
-                        60, -48, -9
-                    ]
+                    data: arrCu,
                 },
                 {
-                    label: "Blue",
+                    label: "Ecommerce",
+                    backgroundColor: color.danger._300,
+                    borderColor: color.danger._500,
+                    borderWidth: 1,
+                    data: arrEcomm,
+                },
+                {
+                    label: "Link",
+                    backgroundColor: color.warning._300,
+                    borderColor: color.warning._500,
+                    borderWidth: 1,
+                    data: arrLink,
+                },
+                {
+                    label: "Video",
                     backgroundColor: color.success._300,
                     borderColor: color.success._500,
                     borderWidth: 1,
-                    data: [-10,
-                        16,
-                        72,
-                        93,
-                        29, -74,
-                        64
-                    ]
+                    data: arrVid,
+                },
+                {
+                    label: "Ricette",
+                    backgroundColor:color.warning._700,
+                    borderColor: color.warning._500,
+                    borderWidth: 1,
+                    data: arrRic,
+                },
+                {
+                    label: "Vai_a",
+                    backgroundColor: color.success._1000,
+                    borderColor: color.success._00,
+                    borderWidth: 1,
+                    data: arrVai,
                 }
             ]
 
@@ -1433,44 +1536,7 @@
             link4.classList.remove('active');
             link5.classList.remove('active');
 
-            var options2 = {
-            valueNames: ['regione2', 'click_unici2', 'click_totali2'],
-            page: 10,
-            pagination: {
-                innerWindow: 1,
-                left: 0,
-                right: 0,
-                paginationClass: "pagination",
-            }
-            };
-            var userList2 = new List('users2', options2);
-            var monkeyList2 = new List('test-list2', {
-            valueNames: ['regione2', 'click_unici2', 'click_totali2', ],
-            page: 10,
-            pagination: {
-                innerWindow: 1,
-                left: 0,
-                right: 0,
-                paginationClass: "pagination",
-            }
-            });
-            $('.jPaginateNext').on('click', function() {
-            var list = $('.pagination').find('li');
-            $.each(list, function(position, element) {
-                if ($(element).is('.active')) {
-                    $(list[position + 1]).trigger('click');
-                }
-            })
-            });
-            $('.jPaginateBack').on('click', function() {
-            var list = $('.pagination').find('li');
-            $.each(list, function(position, element) {
-                if ($(element).is('.active')) {
-                    $(list[position - 1]).trigger('click');
-                }
-            })
-            });
-
+           
         });
         $('#interattivi').on('click', function() {
             pagina1.style.display = 'none';
