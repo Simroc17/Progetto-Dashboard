@@ -813,7 +813,17 @@ class HomeController extends Controller
         $id = Auth::id();
         //dd($id);
         $negozi = Negozio::all();
+        $nome = Negozio::where(['id' => $id])
+        ->get();
+        //dd($nome);
         $markets = Market::where(['id_parent' => $id])->get();
+        //dd($markets);
+        $arrMark = [];
+        for ( $i=0; $i<count($markets); $i++ ){
+            $arrMark[$i]=$markets[$i]->id;
+        }
+        
+        //dd($markets[0]->id);
         $marketsAll= Market::all();
         //dd($markets);
         $arrayPromo = [];
@@ -885,7 +895,7 @@ class HomeController extends Controller
             $arrayMarketId[$i] = $markets[$i]->id;
         }  // dd($arrayMarketId);
       
-        return view('/dashboard/intel_marketing_dashboard', compact('negozi', 'markets','id', 'promozioni','arrayPromo','marketsAll'));
+        return view('/dashboard/intel_marketing_dashboard', compact('arrMark','negozi', 'markets','id', 'promozioni','arrayPromo','marketsAll','nome'));
     }
 
 

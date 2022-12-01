@@ -220,9 +220,9 @@
 
     function selezionaValore() {
         var valoreSelezionato = document.getElementById("s1").value;
-
+        
         var secondoValore = document.getElementById("s2");
-        //console.log(secondoValore);
+        console.log(secondoValore);
 
 
 
@@ -251,6 +251,7 @@
         // console.log(dateEnd);
         return myArray;
     }
+    
     // Prova ricerca
     var options = {
         valueNames: ['nome', 'descrizione'],
@@ -319,7 +320,7 @@
 
 
             let arrayDate = selezionaData();
-            // console.log(arrayDate);
+            console.log(arrayDate);
             let dateStart = arrayDate[0];
             let dateEnd = arrayDate[1];
             // console.log(typeof(dateStart), dateStart);

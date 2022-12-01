@@ -43,39 +43,50 @@
 
 
                         <div class="row ">
-                            <div class="col-4">
-                                <h4 class="text-dark"><b>Gruppo</b></h4>
-                                <select id="s1" onchange="selezionaValore()" class="form-select " style="height: 35px; border-radius: 5px;">
-                                    
-                                    <option selected>Scegli supermercato</option>
-                                    @foreach ($markets as $market )
+                            
+                                <div class="col-4" >
+                                    <form action="#" name="InventoryList" method="post">
+                                        <h4 class="text-dark"><b>Gruppo</b></h4>
+                                        <select id="s1" name="gruppo"  class="form-select bnotes" style="width: 200px; height: 60px; border-radius: 5px;" multiple>
+                                            
+                                            <option selected>Scegli supermercato</option>
+                                            @foreach ($markets as $market )
 
-                                    <option value="{{$market->id}}">
-                                        {{$market->nome}}
-                                    </option>
+                                            <option value="{{$market->id}}">
+                                                {{$market->nome}}
+                                            </option>
 
-                                    @endforeach
+                                            @endforeach
 
-                                </select>
-                            </div>
-                            <div class="col-4">
-                                <h4 class="text-dark"><b>Canale</b></h4>
-                                <select id="s2" class="form-select" style="height: 35px; border-radius: 5px;" aria-label="Default select example">
-                                    
-                                    <option selected>Seleziona tutti</option>
-                                    @foreach ($marketsAll as $market )
-                                    <option value="{{$market->id_parent}}" style="display:none;">
-                                        {{$market->nome}}
-                                    </option>
-                                    @endforeach
-
-                                </select>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <button id="bottone" class="btn  " style="color:white; background-color: red; border-color: red; ">cerca</button>
+                                        </select>
+                                    </form>
                                 </div>
-                            </div>
+                                <div class="col-4">
+                                    <form action="#" name="InventoryList1" method="post">
+                                        <h4 class="text-dark"><b>Canale</b></h4>
+                                        <select id="s2" name="canale" class="form-select" style="width: 200px; height: 60px; border-radius: 5px;" aria-label="Default select example" multiple>
+                                            
+                                            <option selected>Seleziona tutti</option>
+                                            @foreach ($marketsAll as $market )
+                                            @foreach ($markets as $market1 )
+                                            @if($market1->id==$market->id_parent)
+                                            <option value="{{$market->id_parent}}" style="display:block;">
+                                                {{$market->nome}}
+                                            </option>
+                                            @endif
+                                            @endforeach
+                                            @endforeach
+
+                                        </select>
+                                    </form>
+                                </div>
+                            
+                                <div class="row">
+                                    <div class="col">
+                                        <button id="bottone" class="btn bnotes" style="color:white; background-color: red; border-color: red; " >cerca</button>
+                                    </div>
+                                </div>
+                            
                         </div>
 
                     </div>
@@ -84,7 +95,10 @@
             </div>
         </div>
     </div>
-   
+    <h1>{{$nome[0]->nome}}</h1>
+    <h2>
+        Dal: <span class="ml-1" id="dataInizio"></span> 
+    </h2>
 </main>
 <link rel="stylesheet" href="https://btn.ninja/css/addons.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -102,21 +116,25 @@
 <script src="{{ URL::asset('js/dependency/moment/moment.js') }}"></script>
 <script src="{{ URL::asset('js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js') }}"></script>
 <script>
-      function selezionaValore() {
-        var valoreSelezionato = document.getElementById("s1").value;
+       
+    // function selezionaValore() {
+    // var valoreSelezionato= [] 
+    // valoreSelezionato = document.getElementById("s1").value;
+    // // console.log(valoreSelezionato);
 
-        var secondoValore = document.getElementById("s2");
-        //console.log(secondoValore);
-            for (var i = 0; i < secondoValore.length; i++) {
-            var option = secondoValore.options[i];
-            option.style.display = "none";
-            if (option.value == valoreSelezionato) {
-                option.style.display = "block";
-            }
-        }
-    }
+    // var secondoValore = document.getElementById("s2");
+    // //console.log(secondoValore);
+    //     for (var i = 0; i < secondoValore.length; i++) {
+    //     var option = secondoValore.options[i];
+    //     option.style.display = "none";
+    //     if (option.value == valoreSelezionato) {
+    //         option.style.display = "block";                                                     
+    //     }                                                               
+    // }
+    // // console.log(secondoValore);
+    // }                 
 
-
+                                            
     function selezionaData() {
         var dataSelezionata = document.getElementById("datepicker-2").value;
         document.getElementById("dataInizio").innerHTML=dataSelezionata;
@@ -129,16 +147,13 @@
         // console.log(dateEnd);
         return myArray;
     }
-
-    //// Prendo e divido la data in due stringhe
-    let arrayDate = selezionaData();
-            // console.log(arrayDate);
-            let dateStart = arrayDate[0];
-            let dateEnd = arrayDate[1];
+    // console.log(myArray)
+    
+    
 
 </script>
 <script>
-   $(document).ready(function() {
+    $(document).ready(function() {
             
         // Funzione calendario
         $('#datepicker-2, #datepicker-modal-3').daterangepicker({
@@ -150,7 +165,39 @@
             }
         });
 
-
+        $('#bottone').on('click', function() {
+        
+            var InvForm = document.forms.InventoryList;
+            var InvForm1 = document.forms.InventoryList1;
+            var gruppi = [];
+            var canali = [];
+            for (i=0; i<InvForm.gruppo.length; i++)
+            {
+            if (InvForm.gruppo[i].selected)
+            {
+                //alert(InvForm.SelBranch[x].value);
+                gruppi[i] = InvForm.gruppo[i].value;
+            }
+            }
+            for (i=0; i<InvForm1.canale.length; i++)
+            {
+            if (InvForm1.canale[i].selected)
+            {
+                //alert(InvForm.SelBranch[x].value);
+                canali[i] = InvForm1.canale[i].value;
+            }
+            }
+            console.log(gruppi)
+            console.log(canali)
+            // alert(SelBranchVal);
+            
+            let arrayDate = selezionaData();
+            // console.log(arrayDate);
+            //// Prendo e divido la data in due stringhe
+            let dateStart = arrayDate[0];
+            let dateEnd = arrayDate[1];
+            console.log(arrayDate)
+        });
     });
 </script>
 @stop

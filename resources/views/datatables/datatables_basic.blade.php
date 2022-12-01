@@ -430,222 +430,222 @@
 
         </div>
     </div>
-    <!--//////////// DIV INTERATTIVI /////////////-->
+    
    <!--//////////// DIV INTERATTIVI /////////////-->
    <div id="pagina3" class="row" style="display: none;">
-            <div class="col-xl-12">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div id="panel-3" class="panel">
-                            <div class="panel-hdr">
-                                <h2>
-                                    Andamento <span class="fw-300"><i>Interattivi</i></span>
-                                </h2>
-                                <div class="panel-toolbar">
-                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
-                                </div>
-                            </div>
-                            <div class="panel-container show">
-                                <div class="panel-content">
-                                    <div class="panel-tag">
-                                        A stacked bar chart, is a graph that is used to break down and compare parts of a whole. Each bar in the chart represents a whole, and segments in the bar represent different parts or categories of that whole
-                                    </div>
-                                    <div id="barStacked">
-                                        <canvas style="height: 190px!important; width: 700px!important;"></canvas>
-                                    </div>
-                                </div>
+        <div class="col-xl-12">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="panel-3" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Andamento <span class="fw-300"><i>Interattivi</i></span>
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div id="panel-8" class="panel">
-                            <div class="panel-hdr">
-                                <h2>
-                                    Interattivi per tipologia
-                                </h2>
-                                <div class="panel-toolbar">
-                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    A stacked bar chart, is a graph that is used to break down and compare parts of a whole. Each bar in the chart represents a whole, and segments in the bar represent different parts or categories of that whole
                                 </div>
-                            </div>
-                            <div class="panel-container show">
-                                <div class="panel-content">
-                                    <div class="panel-tag">
-                                        A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
-                                    </div>
-                                    <div id="barChart2">
-                                        <canvas style="height: 190px!important; width: 700px!important;"></canvas>
-                                    </div>
+                                <div id="barStacked">
+                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="card bg-light mb-3" style="max-width: 100%;">
-                            <div class="card-header text-dark">Header</div>
-                            <div class="card-body row">
-
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="panel-8" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Interattivi per tipologia
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
                                 </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
+                                <div id="barChart2">
+                                    <canvas style="height: 190px!important; width: 700px!important;"></canvas>
                                 </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-12">
-                <div class="panel-container show ">
-                    <div class="table-list-container " id="users3">
-                        <div class="row justify-content-between">
-                            <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
+        </div>
+        <div class="col-xl-12">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card bg-light mb-3" style="max-width: 100%;">
+                        <div class="card-header text-dark">Header</div>
+                        <div class="card-body row">
 
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                            <div class="card col-3" style="width: 15rem; height:15rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
                             </div>
 
                         </div>
-                        <table id="intestazione3" class="table table-bordered table-hover table-striped w-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div class="panel-container show ">
+                <div class="table-list-container " id="users3">
+                    <div class="row justify-content-between">
+                        <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
+
+                        </div>
+
+                    </div>
+                    <table id="intestazione3" class="table table-bordered table-hover table-striped w-100">
+                    
+                        <thead class="bg-warning-200">
+                            <tr class="text-white" role="row" style="background-color: red;">
+                                <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="tipo">Tipo</button></th>
+                                <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="titolo">Titolo</button></th>
+                                <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="prodotto">Prodotto</button></th>
+                                <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="unici2">Click unici</button></th>
+                                <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="totali2">Click totali</button></th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table id="test-list3" class="table table-hover table-striped w-100 mt-1">
+                        <tbody id="tbody3" class="list ">
+                            @foreach ($finale as $finale )
+                                    
+                                    
+                                    @if ($finale->tipo=='ricetta')
+                                        <tr>
+                                            <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                            <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
+                                            <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                            <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                            <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                        </tr>
+                                    @endif
+                                    @if ($finale->tipo=='icona')
+                                        <tr>
+                                            <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                            <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
+                                            <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                            <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                            <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                        </tr>
+                                    @endif
+                                    @if ($finale->tipo=='curiosita')
+                                        <tr>
+                                            <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                            <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
+                                            <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                            <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                            <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                        </tr>
+
+
+
+                                    @endif
+                                    @if ($finale->tipo=='collegamento')
+                                        <tr>
+                                            <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                            <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
+                                            <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                            <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                            <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                        </tr>
+                                    @endif
+                                    @if ($finale->tipo=='video')
+                                        <tr>
+                                            <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                            <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
+                                            <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                            <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                            <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                        </tr>
+                                    @endif
+                                    
                         
-                            <thead class="bg-warning-200">
-                                <tr class="text-white" role="row" style="background-color: red;">
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="tipo">Tipo</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="titolo">Titolo</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;" ><button type="button" class="sort" data-sort="prodotto">Prodotto</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="unici2">Click unici</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="totali2">Click totali</button></th>
-                                </tr>
-                            </thead>
-                        </table>
-                        <table id="test-list3" class="table table-hover table-striped w-100 mt-1">
-                            <tbody id="tbody3" class="list ">
-                                @foreach ($finale as $finale )
-                                        
-                                        
-                                        @if ($finale->tipo=='ricetta')
-                                            <tr>
-                                                <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
-                                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
-                                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
-                                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
-                                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
-                                            </tr>
-                                        @endif
-                                        @if ($finale->tipo=='icona')
-                                            <tr>
-                                                <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
-                                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
-                                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
-                                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
-                                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
-                                            </tr>
-                                        @endif
-                                        @if ($finale->tipo=='curiosita')
-                                            <tr>
-                                                <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
-                                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
-                                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
-                                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
-                                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
-                                            </tr>
+                            @endforeach
+                    
+                        </tbody>
+                        
+                    </table>
+                    <table id="tfoot3" style="display: block;margin-bottom: 50px;" class="table-footer">
+                            <tr>
+                                <td class="table-pagination position-absolute">
+                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
+                                    <ul class="pagination"></ul>
+                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
+                                </td>
 
 
-
-                                        @endif
-                                        @if ($finale->tipo=='collegamento')
-                                            <tr>
-                                                <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
-                                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
-                                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
-                                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
-                                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
-                                            </tr>
-                                        @endif
-                                        @if ($finale->tipo=='video')
-                                            <tr>
-                                                <td class="tipo" style="width: 10%;" >{{ $finale->tipo }}</td>
-                                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
-                                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
-                                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
-                                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
-                                            </tr>
-                                        @endif
-                                        
-                            
-                                @endforeach
-                       
-                            </tbody>
-                            
-                        </table>
-                        <table id="tfoot3" style="display: block;margin-bottom: 50px;" class="table-footer">
-                                <tr>
-                                    <td class="table-pagination position-absolute">
-                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
-                                        <ul class="pagination"></ul>
-                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
-                                    </td>
-
-
-                                </tr>
-                        </table>
-                        <!-- datatable end -->
-                    </div>
+                            </tr>
+                    </table>
+                    <!-- datatable end -->
                 </div>
             </div>
+        </div>
     </div>
-        <!-- ////Div PRODOTTI////////////// -->
+       
     <!-- ////Div PRODOTTI////////////// -->
     <div id="pagina4" class="row" style="display:none;">
         <div class="col-xl-12">
@@ -764,7 +764,7 @@
         </div>
     </div>
 
-        <!-- ///////////////// DIV RIEPILOGO /////////////////////// -->
+    <!-- ///////////////// DIV RIEPILOGO /////////////////////// -->
     <div id="pagina5" class="row" style="display:none;">
 
                 <div class="col-xl-12 mb-3">
