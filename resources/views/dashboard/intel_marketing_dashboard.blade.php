@@ -7,12 +7,11 @@
 @stop
 
 @section('content')
-<main id="js-page-content" role="main" class="page-content" style="color: white;
-    background-color: black!important;">
+<main id="js-page-content" role="main" class="page-content">
     <div class="row">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
-                <div class="panel-hdr justify-content-between  text-white" style="background-color: red;">
+                <div class="panel-hdr justify-content-between  text-white" style="background-color: #ed1c29;">
                     <h1>
                         Filtra per risultati
                     </h1>
@@ -41,18 +40,19 @@
                             </div>
                         </div>
 
-
-                        <div class="row ">
+                        <!-- ///////////////// FILTRI ///////////////////// -->
+                        <div class="row">
                             
                                 <div class="col-4" >
                                     <form action="#" name="InventoryList" method="post">
                                         <h4 class="text-dark"><b>Gruppo</b></h4>
+
                                         <select id="s1" name="gruppo"  class="form-select bnotes" style="width: 200px; height: 60px; border-radius: 5px;" multiple>
                                             
-                                            <option >Scegli supermercato</option>
+                                            
                                             @foreach ($markets as $market )
 
-                                            <option selected value="{{$market->id}}">
+                                            <option  value="{{$market->id}}">
                                                 {{$market->nome}}
                                             </option>
 
@@ -66,11 +66,11 @@
                                         <h4 class="text-dark"><b>Canale</b></h4>
                                         <select id="s2" name="canale" class="form-select" style="width: 200px; height: 60px; border-radius: 5px;" aria-label="Default select example" multiple>
                                             
-                                            <option selected>Seleziona tutti</option>
+                                        
                                             @foreach ($marketsAll as $market )
                                             @foreach ($markets as $market1 )
                                             @if($market1->id==$market->id_parent)
-                                            <option value="{{$market->id_parent}}" style="display:block;">
+                                            <option selected value="{{$market->id_parent}}" name='{{$market->id}}' style="display:block;">
                                                 {{$market->nome}}
                                             </option>
                                             @endif
@@ -96,10 +96,15 @@
         </div>
     </div>
     <h1>{{$nome[0]->nome}}</h1>
+    @isset($data1)
+    <h2>
+        Dal: {{$data1}} al {{$data2}}
+    </h2>
+    @else
     <h2>
         Dal: <span class="ml-1" id="dataInizio"></span> 
     </h2>
-
+    @endisset
 
      <!-- /////////////// CARDS ////////////////// -->
     <div class="row mb-2">
@@ -110,13 +115,13 @@
                 <div class="row">
                     <div class="col-sm-6 border-right">
                         <div class="description-block">
-                            <h5 class="description-header text-white">{{$sommaDesktop+$sommaMobile}}</h5>
+                            <h5 class="description-header text-white">{{number_format($sommaDesktop+$sommaMobile, 2)}}</h5>
                             <span class="description-text text-white">TOTALI</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="description-block">
-                            <h5 class="description-header text-white">{{$sommaUnicaDesktop+$sommaUnicaMobile}}</h5>
+                            <h5 class="description-header text-white">{{number_format($sommaUnicaDesktop+$sommaUnicaMobile, 2)}}</h5>
                             <span class="description-text text-white">UNICHE</span>
                         </div>
                     </div>
@@ -130,13 +135,13 @@
                 <div class="row">
                     <div class="col-sm-6 border-right">
                         <div class="description-block">
-                            <h5 class="description-header text-white">{{$volantino}}</h5>
+                            <h5 class="description-header text-white">{{$volantinoSum}}</h5>
                             <span class="description-text text-white">N.VOLANTINI</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="description-block">
-                            <h5 class="description-header text-white">{{$sommaDesktopPag+$sommaMobilePag}}</h5>
+                            <h5 class="description-header text-white">{{number_format($sommaDesktopPag+$sommaMobilePag, 2)}}</h5>
                             <span class="description-text text-white">VISUALIZZATE</span>
                         </div>
                     </div>
@@ -170,13 +175,13 @@
                 <div class="row">
                     <div class="col-sm-6 border-right">
                         <div class="description-block">
-                            <h5 class="description-header text-white">{{count($products)}}</h5>
-                            <span class="description-text text-white">SU {{count($products)}} TOTALI</span>
+                            <h5 class="description-header text-white">{{count($arrTotale)}}</h5>
+                            <span class="description-text text-white">SU {{count($arrTotale)}} TOTALI</span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="description-block">
-                            <h5 class="description-header text-white">{{$sommaPr}}</h5>
+                            <h5 class="description-header text-white">{{number_format($sommaPr,2)}}</h5>
                             <span class="description-text text-white">CLICK RICEVUTI</span>
                         </div>
                     </div>
@@ -473,13 +478,13 @@
                        
                         <table id="intestazione3"  class="table table-hover table-striped w-100 mt-1">
                             <thead>
-                            <tr class="text-white" role="row" style="background-color: red;">
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 20%;" ><button type="button" class="sort" data-sort="tipoPr">Descrizione</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 60%;" ><button type="button" class="sort" data-sort="titoloPr">Descrizione Estesa</button></th>
-                                   
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="uniciPr">Click unici</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="totaliPr">Click totali</button></th>
-                            </tr>
+                                <tr class="text-white" role="row" style="background-color: red;">
+                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 20%;" ><button type="button" class="sort" data-sort="tipoPr">Descrizione</button></th>
+                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 60%;" ><button type="button" class="sort" data-sort="titoloPr">Descrizione Estesa</button></th>
+                                    
+                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="uniciPr">Click unici</button></th>
+                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="totaliPr">Click totali</button></th>
+                                </tr>
                             </thead>
                         </table>
                         <table id="test-list3"  class="table table-hover table-striped w-100 mt-1">
@@ -488,18 +493,18 @@
                               
 
                                 @foreach ($products as $product )
-                                    
+                                    @foreach($product as $p)
                                       
                                           
                                                 <tr>
-                                                    <td class="tipoPr" style="width: 20%;" >{{ $product->descrizione }}</td>
-                                                    <td class="titoloPr" style="width:60%;">{{ $product->descrizione_estesa }}</td>
+                                                    <td class="tipoPr" style="width: 20%;" >{{ $p->descrizione }}</td>
+                                                    <td class="titoloPr" style="width:60%;">{{ $p->descrizione_estesa }}</td>
                                                    
-                                                    <td class="uniciPr" style="width: 10%;">{{ $product->sommaUnici }}</td>
-                                                    <td class="totaliPr" style="width: 10%;">{{ $product->sommaQta }}</td>
+                                                    <td class="uniciPr" style="width: 10%;">{{ $p->sommaUnici }}</td>
+                                                    <td class="totaliPr" style="width: 10%;">{{ $p->sommaQta }}</td>
                                                 </tr>
                                           
-                                           
+                                    @endforeach
                                        
                                    
                                 @endforeach
@@ -542,7 +547,7 @@
 
                                 <table id="test-list5" class="table table-striped data-t table-sm table-bordered table-volantino dataTable ">
                                     <thead>
-                                    <tr class="text-white" role="row" style="background-color: red;">
+                                        <tr class="text-white" role="row" style="background-color: red;">
                                             <th colspan="2"></th>
                                             <th colspan="6"><i class="bi bi-bar-chart-line-fill"></i> Connessioni</th>
                                             <th></th>
@@ -582,132 +587,135 @@
                                                             @php $indC = 0 @endphp
                                                             @php $indL = 0 @endphp
                                         @foreach($riepilogoConnessioni as $connessione)
-                                            @foreach($riepilogoVisualizzazioni as $visualizzazione)
-                                                @if($connessione->id_market==$visualizzazione->id_market)
-                                                    <tr role="row">
-                                                        <td colspan="2" class="i"><a href="{{ route('volantino', $connessione->id_volantino)}}" style="color: #17a2b8;">{{$connessione->nome}} - {{$connessione->id_volantino}}</a></td>
-                                                        <td colspan="1" class="d">{{$connessione->desktop}}</td>
-                                                        <td colspan="1" class="m">{{$connessione->mobile}}</td>
-                                                        <td colspan="1" class="t">{{$connessione->desktop + $connessione->mobile}}</td>
-                                                        <td colspan="1" class="de">{{$connessione->deskUni}}</td>
-                                                        <td colspan="1" class="mo">{{$connessione->mobUni}}</td>
-                                                        <td colspan="1" class="un">{{$connessione->deskUni + $connessione->mobUni}}</td>
-                                                        <td></td>
-                                                        <td colspan="1" class="uni">{{$visualizzazione->uniche}}</td>
-                                                        <td colspan="1" class="tot">{{$visualizzazione->totali}}</td>
-                                                        <td></td>
-                                                        @if($interattivoProdotti == '[]')
-                                                            <td class="pr">0</td>
-                                                        @else
-                                                            @if (count($interattivoProdotti)>$indP)    
-                                                                @while($indP< count($interattivoProdotti))  
-                                                                    @if($interattivoProdotti[$indP]->id_market == $visualizzazione->id_market)
-                                                                        <td colspan="1" class="pr">{{$interattivoProdotti[$indP]->totali}}</td>
-                                                                        @if($interattivoProdotti[$indP]->id_market == $visualizzazione->id_market)
-                                                                            @php $indP++ @endphp
-                                                                        @endif
-                                                                        
+                                            @foreach($connessione as $c)
+                                                @foreach($riepilogoVisualizzazioni as $visualizzazione)
+                                                    @foreach($visualizzazione as $v)
+                                                        @if($c->id_market==$v->id_market)
+                                                            <tr role="row">
+                                                                <td colspan="2" class="i"><a href="{{ route('volantino', $c->id_volantino)}}" style="color: #17a2b8;">{{$c->nome}} - {{$c->nomeMarket}}</a></td>
+                                                                <td colspan="1" class="d">{{$c->desktop}}</td>
+                                                                <td colspan="1" class="m">{{$c->mobile}}</td>
+                                                                <td colspan="1" class="t">{{$c->desktop + $c->mobile}}</td>
+                                                                <td colspan="1" class="de">{{$c->deskUni}}</td>
+                                                                <td colspan="1" class="mo">{{$c->mobUni}}</td>
+                                                                <td colspan="1" class="un">{{$c->deskUni + $c->mobUni}}</td>
+                                                                <td></td>
+                                                                <td colspan="1" class="uni">{{$v->uniche}}</td>
+                                                                <td colspan="1" class="tot">{{$v->totali}}</td>
+                                                                <td></td>
+                                                                @if($interattivoProdotti == '[]')
+                                                                    <td class="pr">0</td>
+                                                                @else
+                                                                    @if (count($interattivoProdotti)>$indP)    
+                                                                        @while($indP< count($interattivoProdotti))  
+                                                                            @if($interattivoProdotti[$indP]->id_market == $v->id_market)
+                                                                                <td colspan="1" class="pr">{{$interattivoProdotti[$indP]->totali}}</td>
+                                                                                @if($interattivoProdotti[$indP]->id_market == $v->id_market)
+                                                                                    @php $indP++ @endphp
+                                                                                @endif
+                                                                                
+                                                                            @else
+                                                                                <td class="pr">0</td>
+                                                                            @endif
+                                                                            @break
+                                                                        @endwhile
                                                                     @else
-                                                                        <td class="pr">0</td>
-                                                                    @endif
-                                                                    @break
-                                                                @endwhile
-                                                            @else
-                                                                <td class="pr">0</td> 
-                                                            @endif       
-                                                        @endif
-                                                        @if($interattivoRicette == '[]')
-                                                            <td class="ri">0</td>
-                                                        @else
-                                                        <!-- ////////////// PROVA A FARLO CON UN FOR E METTERE IL "<=" ////////////// -->
-                                                            @if (count($interattivoRicette)>$indR)
-                                                                @while($indR < count($interattivoRicette))  
-                                                                    @if($interattivoRicette[$indR]->id_market == $visualizzazione->id_market)
-                                                                        <td colspan="1" class="ri">{{$interattivoRicette[$indR]->totali}}</td>
-                                                                        @if($interattivoRicette[$indR]->id_market == $visualizzazione->id_market)
-                                                                            @php $indR++ @endphp
-                                                                        @endif
+                                                                        <td class="pr">0</td> 
+                                                                    @endif       
+                                                                @endif
+                                                                @if($interattivoRicette == '[]')
+                                                                    <td class="ri">0</td>
+                                                                @else
+                                                                <!-- ////////////// PROVA A FARLO CON UN FOR E METTERE IL "<=" ////////////// -->
+                                                                    @if (count($interattivoRicette)>$indR)
+                                                                        @while($indR < count($interattivoRicette))  
+                                                                            @if($interattivoRicette[$indR]->id_market == $v->id_market)
+                                                                                <td colspan="1" class="ri">{{$interattivoRicette[$indR]->totali}}</td>
+                                                                                @if($interattivoRicette[$indR]->id_market == $v->id_market)
+                                                                                    @php $indR++ @endphp
+                                                                                @endif
+                                                                            @else
+                                                                                <td class="ri">0</td>
+                                                                            @endif
+                                                                            @break
+                                                                        @endwhile
                                                                     @else
-                                                                        <td class="ri">0</td>
-                                                                    @endif
-                                                                    @break
-                                                                @endwhile
-                                                            @else
-                                                                <td class="ri">0</td> 
-                                                            @endif       
-                                                        @endif
-                                                        @if($interattivoVideo == '[]')
-                                                            <td class="vi">0</td>
-                                                        @else 
-                                                            @if (count($interattivoVideo)>$indV)
-                                                                @while($indV< count($interattivoVideo))  
-                                                                    @if($interattivoVideo[$indV]->id_market == $visualizzazione->id_market)
-                                                                        <td colspan="1" class="vi">{{$interattivoVideo[$indV]->totali}}</td>
-                                                                        @if($interattivoVideo[$indV]->id_market == $visualizzazione->id_market)
-                                                                            @php $indV++ @endphp
-                                                                        @endif
-                                                                        
-                                                                        
+                                                                        <td class="ri">0</td> 
+                                                                    @endif       
+                                                                @endif
+                                                                @if($interattivoVideo == '[]')
+                                                                    <td class="vi">0</td>
+                                                                @else 
+                                                                    @if (count($interattivoVideo)>$indV)
+                                                                        @while($indV< count($interattivoVideo))  
+                                                                            @if($interattivoVideo[$indV]->id_market == $v->id_market)
+                                                                                <td colspan="1" class="vi">{{$interattivoVideo[$indV]->totali}}</td>
+                                                                                @if($interattivoVideo[$indV]->id_market == $v->id_market)
+                                                                                    @php $indV++ @endphp
+                                                                                @endif
+                                                                                
+                                                                                
+                                                                            @else
+                                                                                <td class="vi">0</td>
+                                                                            @endif
+                                                                            @break
+                                                                        @endwhile
                                                                     @else
-                                                                        <td class="vi">0</td>
-                                                                    @endif
-                                                                    @break
-                                                                @endwhile
-                                                            @else
-                                                                <td class="vi">0</td> 
-                                                            @endif    
-                                                        @endif
-                                                        @if($interattivoCuriosita == '[]')
-                                                            <td class="cu">0</td>
-                                                        @else 
-                                                            @if (count($interattivoCuriosita)>$indC)
-                                                                @while($indC< count($interattivoCuriosita))  
-                                                                    @if($interattivoCuriosita[$indC]->id_market == $visualizzazione->id_market)
-                                                                        <td colspan="1" class="cu">{{$interattivoCuriosita[$indC]->totali}}</td>
-                                                                        @if($interattivoCuriosita[$indC]->id_market == $visualizzazione->id_market)
-                                                                            @php $indC++ @endphp
-                                                                        @endif
-                                                                        
-                                                                        
+                                                                        <td class="vi">0</td> 
+                                                                    @endif    
+                                                                @endif
+                                                                @if($interattivoCuriosita == '[]')
+                                                                    <td class="cu">0</td>
+                                                                @else 
+                                                                    @if (count($interattivoCuriosita)>$indC)
+                                                                        @while($indC< count($interattivoCuriosita))  
+                                                                            @if($interattivoCuriosita[$indC]->id_market == $v->id_market)
+                                                                                <td colspan="1" class="cu">{{$interattivoCuriosita[$indC]->totali}}</td>
+                                                                                @if($interattivoCuriosita[$indC]->id_market == $v->id_market)
+                                                                                    @php $indC++ @endphp
+                                                                                @endif
+                                                                                
+                                                                                
+                                                                            @else
+                                                                                <td class="cu">0</td>
+                                                                            @endif
+                                                                            @break
+                                                                        @endwhile
                                                                     @else
-                                                                        <td class="cu">0</td>
-                                                                    @endif
-                                                                    @break
-                                                                @endwhile
-                                                            @else
-                                                                <td class="cu">0</td> 
-                                                            @endif 
-                                                        @endif
-                                                        @if($interattivoLink == '[]')
-                                                            <td class="li">0</td>
-                                                        @else 
-                                                            @if (count($interattivoLink)>$indL)    
-                                                                @while($indL< count($interattivoLink))  
-                                                                    @if($interattivoLink[$indL]->id_market == $visualizzazione->id_market)
-                                                                        <td colspan="1" class="li">{{$interattivoLink[$indL]->totali}}</td>
-                                                                        @if($interattivoLink[$indL]->id_market == $visualizzazione->id_market)
-                                                                            @php $indL++ @endphp
-                                                                        @endif
-                                                                        
-                                                                        
+                                                                        <td class="cu">0</td> 
+                                                                    @endif 
+                                                                @endif
+                                                                @if($interattivoLink == '[]')
+                                                                    <td class="li">0</td>
+                                                                @else 
+                                                                    @if (count($interattivoLink)>$indL)    
+                                                                        @while($indL< count($interattivoLink))  
+                                                                            @if($interattivoLink[$indL]->id_market == $v->id_market)
+                                                                                <td colspan="1" class="li">{{$interattivoLink[$indL]->totali}}</td>
+                                                                                @if($interattivoLink[$indL]->id_market == $v->id_market)
+                                                                                    @php $indL++ @endphp
+                                                                                @endif
+                                                                                
+                                                                                
+                                                                            @else
+                                                                                <td class="li">0</td>
+                                                                            @endif
+                                                                            @break
+                                                                        @endwhile
                                                                     @else
-                                                                        <td class="li">0</td>
-                                                                    @endif
-                                                                    @break
-                                                                @endwhile
-                                                            @else
-                                                                <td class="li">0</td> 
-                                                            @endif 
+                                                                        <td class="li">0</td> 
+                                                                    @endif 
+                                                                @endif
+                                                                <td></td>
+                                                                <td colspan="1" class="lis">0</td>
+                                                                <td colspan="1" class="imp">0</td>
+                                                                <td colspan="1" class="med">0</td>
+                                                            </tr>
                                                         @endif
-                                                        <td></td>
-                                                        <td colspan="1" class="lis">0</td>
-                                                        <td colspan="1" class="imp">0</td>
-                                                        <td colspan="1" class="med">0</td>
-                                                    </tr>
-                                                @endif
+                                                    @endforeach
+                                                @endforeach
                                             @endforeach
                                         @endforeach
-                                        
                                     </tbody>
                                     <tfoot>
                                         <tr class="text-white" role="row" style="background-color: red;">
@@ -798,29 +806,63 @@
 
 <script src="{{ URL::asset('js/dependency/moment/moment.js') }}"></script>
 <script src="{{ URL::asset('js/formplugins/bootstrap-daterangepicker/bootstrap-daterangepicker.js') }}"></script>
+
 <script>
        
-    // function selezionaValore() {
-    // var valoreSelezionato= [] 
-    // valoreSelezionato = document.getElementById("s1").value;
-    // // console.log(valoreSelezionato);
+    window.addEventListener('DOMContentLoaded', (event) => {
+        console.log('DOM fully loaded and parsed');
 
-    // var secondoValore = document.getElementById("s2");
-    // //console.log(secondoValore);
-    //     for (var i = 0; i < secondoValore.length; i++) {
-    //     var option = secondoValore.options[i];
-    //     option.style.display = "none";
-    //     if (option.value == valoreSelezionato) {
-    //         option.style.display = "block";                                                     
-    //     }                                                               
-    // }
-    // // console.log(secondoValore);
-    // }                 
+            // Prova ricerca
+        var options = {
+            valueNames: ['i','d','m','t','de','mo','un','uni','tot','pr','ri','vi','cu','li','lis','imp','med','regione', 'click_unici', 'click_totali','tipo1','titolo1','prodotto1','unici1','totali1','tipoPr','titoloPr','uniciPr','totaliPr'],
+            page: 10,
+            pagination: {
+                innerWindow: 1,
+                left: 0,
+                right: 0,
+                paginationClass: "pagination",
+            }
+        };
+       
+        var userList2 = new List('users3', options);
+        
+        // Prova Pagination
+        var monkeyList = new List('test-list', {
+            valueNames: ['i','d','m','t','de','mo','un','uni','tot','pr','ri','vi','cu','li','lis','imp','med','regione', 'click_unici', 'click_totali','tipo1','titolo1','prodotto1','unici1','totali1','tipoPr','titoloPr','uniciPr','totaliPr'],
+            page: 10,
+            pagination: {
+                innerWindow: 1,
+                left: 0,
+                right: 0,
+                paginationClass: "pagination",
+            }
+        });
+
+        $('.jPaginateNext').on('click', function() {
+                var list = $('.pagination').find('li');
+                $.each(list, function(position, element) {
+                    if ($(element).is('.active')) {
+                        $(list[position + 1]).trigger('click');
+                    }
+                })
+        });
+
+
+        $('.jPaginateBack').on('click', function() {
+                var list = $('.pagination').find('li');
+                $.each(list, function(position, element) {
+                    if ($(element).is('.active')) {
+                        $(list[position - 1]).trigger('click');
+                    }
+                })
+        });
+
+    });
 
                                             
     function selezionaData() {
         var dataSelezionata = document.getElementById("datepicker-2").value;
-        document.getElementById("dataInizio").innerHTML=dataSelezionata;
+        
         // console.log(dataSelezionata);
         // Spezzare la data e salvarla in un array QUI
         let myArray = dataSelezionata.split(" - ");
@@ -842,8 +884,8 @@
             labels: regioni,
             datasets: [{
                     label: "Connessioni Totali",
-                    backgroundColor: color.success._300,
-                    borderColor: color.success._500,
+                    backgroundColor: color.primary._100,
+                    borderColor: color.primary._100,
                     borderWidth: 1,
                     data: arrTotali
                     
@@ -912,13 +954,14 @@
     var connessioniUniche = <?php echo json_encode($arrayUniq); ?>;
     var connessioniTotale = <?php echo json_encode($arrayTot); ?>;
     var giorni = <?php echo json_encode($arrayGiorni); ?>;
+    var giorni1 = Object.values(giorni);
     var barChart = function() {
         var barChartData = {
-            labels: giorni,
+            labels: giorni1,
             datasets: [{
                     label: "Connessioni Totali",
-                    backgroundColor: color.success._300,
-                    borderColor: color.success._500,
+                    backgroundColor:  color.primary._100,
+                    borderColor:  color.primary._100,
                     borderWidth: 1,
                     data: connessioniTotale,
                 },
@@ -986,13 +1029,16 @@
     var visualizzazioni=<?php echo json_encode($arrayTotPag); ?>;
     var pagineUniche=<?php echo json_encode($arrayUnicPag); ?>;
     var giorniPag=<?php echo json_encode($arrayGiorniPag); ?>;
+    console.log(giorniPag);
+    var gP = Object.values(giorniPag);
+    console.log(gP)
     var barChart1 = function() {
         var barChartData = {
-            labels: giorniPag,
+            labels: gP,
             datasets: [{
                     label: "Visualizzazioni",
-                    backgroundColor: color.success._300,
-                    borderColor: color.success._500,
+                    backgroundColor: color.danger._200,
+                    borderColor: color.danger._300,
                     borderWidth: 1,
                     data: visualizzazioni
                        
@@ -1000,8 +1046,8 @@
                 },
                 {
                     label: "Pagine Uniche",
-                    backgroundColor: color.primary._300,
-                    borderColor: color.primary._500,
+                    backgroundColor: color.danger._600,
+                    borderColor: color.danger._500,
                     borderWidth: 1,
                     data: pagineUniche
                     
@@ -1246,11 +1292,11 @@
                     data: [connessioniDesktop,connessioniMobile]     
                     ,
                     backgroundColor: [
-                        color.success._300,
+                        color.primary._100,
                         color.primary._400,
-                        color.success._50,
-                        color.success._300,
-                        color.success._500
+                        color.primary._200,
+                        color.primary._300,
+                        color.primary._500
                     ],
                     label: 'My dataset' // for legend
                 }],
@@ -1288,11 +1334,11 @@
                         
                     ],
                     backgroundColor: [
-                        color.primary._200,
-                        color.primary._400,
-                        color.success._50,
-                        color.success._300,
-                        color.success._500
+                        color.danger._200,
+                        color.danger._600,
+                        color.danger._100,
+                        color.danger._300,
+                        color.danger._500
                     ],
                     label: 'My dataset' // for legend
                 }],
@@ -1328,7 +1374,7 @@
                     
                     backgroundColor: [
                         color.primary._300,
-                        color.success._500,
+                        color.primary._100,
                         color.primary._50,
                         color.primary._300,
                         color.primary._500
@@ -1369,11 +1415,11 @@
                         
                     ],
                     backgroundColor: [
-                        color.success._200,
-                        color.success._400,
-                        color.primary._50,
-                        color.primary._300,
-                        color.primary._500
+                        color.danger._200,
+                        color.danger._600,
+                        color.danger._100,
+                        color.danger._300,
+                        color.danger._500
                     ],
                     label: 'My dataset' // for legend
 
@@ -1419,8 +1465,8 @@
                 var canali = [];
                 for (i=0; i<InvForm.gruppo.length; i++)
                 {
-                if (InvForm.gruppo[i].selected)
-                {
+                if (InvForm.gruppo[i].selected){
+                    
                     //alert(InvForm.SelBranch[x].value);
                     gruppi[i] = InvForm.gruppo[i].value;
                 }
@@ -1430,28 +1476,55 @@
                 if (InvForm1.canale[i].selected)
                 {
                     //alert(InvForm.SelBranch[x].value);
-                    canali[i] = InvForm1.canale[i].value;
+                    canali[i] = InvForm1.canale[i]
                 }
                 }
+                var rex = /\S/;
+                gruppi = gruppi.filter(entry => /\S/.test(entry));
+                canali = canali.filter(entry => /\S/.test(entry));
+                // console.log(gruppi[1])
                 console.log(gruppi)
                 console.log(canali)
-                // alert(SelBranchVal);
+                // console.log(canali[2].attributes.value.value)
+                // console.log(canali[2].attributes.name.value)
+                ///////// CREA DIRETTAMENTE UN ARRAY CON I VALUE DEI CANALI //////////// !!!!!!!!!!!!!!!!!!!!!!!
                 
                 let arrayDate = selezionaData();
                 // console.log(arrayDate);
                 //// Prendo e divido la data in due stringhe
-                let dateStart = arrayDate[0];
+                let dataScelta = arrayDate[0];
                 let dateEnd = arrayDate[1];
-                console.log(arrayDate)
+                let dataSplit = dataScelta.split("-");
+                let month = dataSplit[1]
+                console.log(month)
+                var arrayGenitori = []
+                for(i=0; i<gruppi.length; i++){
+                    for(j=0; j<canali.length; j++){
+                          /////////// HO BISOGNO CHE MI TROVI LA CORRISPONDENZA SOLO DOVE TROVA L'OPTIONS
+                        if(gruppi[i] == canali[j].attributes.value.value){
+                            arrayGenitori[i]=canali[j].attributes.value.value;
+                            // console.log(gruppi[i])    ///////////// NON MI ENTRA QUIIIIIII !!!!!!!!!!!!!!!!!!!!!!!!!
+                        } 
+                    }
+                }
                 var arrayFinale =[]
                 for(i=0; i<gruppi.length; i++){
                     for(j=0; j<canali.length; j++){
-                        if(gruppi[i]== canali[j]){
-                            arrayFinale[i]=gruppi[i];
+                        if(canali[j].index){  /////////// HO BISOGNO CHE MI TROVI LA CORRISPONDENZA SOLO DOVE TROVA L'OPTIONS
+                            if(gruppi[i] == canali[j].attributes.value.value){
+                                arrayFinale[j]=canali[j].attributes.name.value;
+                                // console.log(gruppi[i])    ///////////// NON MI ENTRA QUIIIIIII !!!!!!!!!!!!!!!!!!!!!!!!!
+                            }
                         }
                     }
                 }
+                arrayFinale = arrayFinale.filter(entry => /\S/.test(entry));
+                arrayGenitori = arrayGenitori.filter(entry => /\S/.test(entry));
                 console.log(arrayFinale)
+                console.log(arrayGenitori)
+                window.location.href="/dashboards/intel_marketing_dashboard?negozi="+arrayFinale+"&genitori="+arrayGenitori+"&mese="+month+"&dataScelta="+dataScelta+"&dataFine="+dateEnd;
+                //////////////////////////////////////////  PROVA A FARLO CON AJAX ////////////////////////////////////////////////////////////
+
             });
 
 
@@ -1578,10 +1651,298 @@
         doughnutChart1();
 
 
-        });
+    });
 
 
 </script>
+<style>
+    select[multiple]:focus option:checked {
+    background: red linear-gradient(0deg, red 0%, #dc3545 100%);
+    }
+    .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .table-search {
+        width: 310px;
+        border-left: 1px solid #d2d2d2;
+    }
+
+    .table-search .search {
+        width: 100%;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    /**/
+
+    .table-pagination {
+        white-space: nowrap;
+    }
+
+    .table-pagination:after {
+        display: block;
+        content: "";
+        clear: both;
+    }
+
+    .jPaginateBack,
+    .jPaginateNext,
+    .table-list-container .pagination {
+        float: left;
+    }
+
+    .jPaginateBack,
+    .jPaginateNext {
+        line-height: 1.75rem;
+        width: 1.75rem;
+        text-align: center;
+        user-select: none;
+    }
+
+    .jPaginateBack .material-icons,
+    .jPaginateNext .material-icons {
+        display: block;
+        font-size: 16px;
+        line-height: inherit;
+    }
+
+    .table-footer {
+        background-color: #fff;
+        margin-top: -1px;
+
+        z-index: -1;
+    }
+
+    .table-list {
+        min-height: 176px;
+    }
+
+    .table-list th {
+        border-bottom: 0.6px solid #d2d2d2;
+    }
+
+    .table-list td {
+        white-space: nowrap;
+        height: 1.75rem;
+        vertical-align: top;
+        padding: 10px;
+        border-bottom: 1px solid #d2d2d2;
+    }
+
+    .table-list tr:last-child td {
+        height: auto;
+    }
+
+    .bullet {
+        margin-top: 13px;
+    }
+
+    i.bullet,
+    i.bullet-primary,
+    i.bullet-success,
+    i.bullet-warning,
+    i.bullet-danger {
+        display: inline-table;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+
+    i.bullet {
+        opacity: 0.5;
+    }
+
+    i.bullet-primary {
+        background-color: #33a7d2;
+    }
+
+    i.bullet-success {
+        background-color: #6dad21;
+    }
+
+    i.bullet-warning {
+        background-color: #ef9327;
+    }
+
+    i.bullet-danger {
+        background-color: #db4f4f;
+    }
+
+    td a {
+        color: black;
+        text-decoration: none;
+        /* no underline */
+    }
+
+    /* td img {
+        width: 100%;;
+    } */
+    .img75 {
+        background-image: url("img/decoNuova.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        width: 100%;
+        border-radius: 35px;
+        ;
+
+    }
+
+    .img92 {
+        background-image: url("img/sebonNuova.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        border-radius: 35px;
+        width: 100%;
+        ;
+    }
+
+    .img141 {
+        background-image: url("img/ayokaNuova.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        border-radius: 35px;
+        width: 100%;
+        ;
+    }
+
+    .img143 {
+        background-image: url("img/ayokaNuova.png");
+        background-size: 60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        border-radius: 35px;
+        width: 100%;
+        ;
+    }
+
+    .pagination {
+        border: 0;
+    }
+
+    .pagination a.page {
+        display: block;
+        line-height: 35px;
+        width: 35px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 12px;
+    }
+
+    .pagination a.page:hover,
+    .pagination a.page:focus {
+        background-color: #33a7d2;
+        color: #fff;
+    }
+
+    .pagination .disabled .page {
+        display: none;
+    }
+
+    .active a.page,
+    .active a.page:hover,
+    .active a.page:focus {
+        color: #a0a0a0;
+        pointer-events: none;
+        cursor: default;
+    }
+
+    .pagination a.page {
+        user-select: none;
+    }
+
+    /* .pagination li a {
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        padding: 0;
+        margin: 0 3px;
+        border-radius: 50% !important;
+        width: 36px;
+        height: 36px;
+        font-size: 0.875rem;
+        background-color: red;
+    } */
+
+    .sort {
+        margin: 0 !important;
+        padding: 8px 30px;
+        border-radius: 6px;
+        font-weight: bold;
+        border: none;
+        display: inline-block;
+        color: white;
+        text-decoration: none;
+        background-color: red;
+    }
+
+    .sort:hover {
+        text-decoration: none;
+        background-color: #343a40;
+    }
+
+    .sort:focus {
+        outline: none;
+    }
+
+    /* .sort:after {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        content: "";
+        position: relative;
+        top: -10px;
+        right: -5px;
+    } */
+
+    /* .sort.asc:after {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #fff;
+        content: "";
+        position: relative;
+        top: 13px;
+        right: -5px;
+    } */
+
+    /* .sort.desc:after {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #fff;
+        content: "";
+        position: relative;
+        top: -10px;
+        right: -5px;
+    }  */
+</style>
 
 
 @stop

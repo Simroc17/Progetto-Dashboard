@@ -1357,12 +1357,12 @@
     let numbers4 = Object.values(<?php echo json_encode($arrayVideo); ?>);
     let numbers5= Object.values(<?php echo json_encode($arrayRicette); ?>);
     let numbers6= Object.values(<?php echo json_encode($arrayVai_a); ?>);
-    // console.log(numbers)
+    console.log(numbers)
     let arrCu=[]
     for(i =0; i < numbers.length; i++){
         arrCu[i]= numbers[i].somma
     }
-    //console.log(arrCu)
+    console.log(arrCu)
     let arrEcomm=[]
     for(i =0; i < numbers2.length; i++){
         arrEcomm[i]= numbers2[i].somma

@@ -40,6 +40,7 @@ Route::get('/{filename}', [App\Http\Controllers\HomeController::class, 'mostraDa
 Route::get('/statistics/statistics_chartjs/{id}', [App\Http\Controllers\HomeController::class, 'benvenuto'])->name('grafici');
 Route::get('/datatables/datatables_basic/{id}', [App\Http\Controllers\HomeController::class, 'benvenuto1'])->name('volantino');
 Route::get('/dashboard/intel_marketing_dashboard', [App\Http\Controllers\HomeController::class, 'mostraDati1']);
+Route::get('/dashboards/intel_marketing_dashboard', [App\Http\Controllers\HomeController::class, 'datiNuovi']);
 Route::get('/datatables/datatables_buttons', [App\Http\Controllers\HomeController::class, 'mostraDati2']);
 
 
