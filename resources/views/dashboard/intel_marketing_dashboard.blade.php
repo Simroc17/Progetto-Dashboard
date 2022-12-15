@@ -118,7 +118,7 @@
                             <h5 class="description-header text-white">{{number_format($sommaDesktop+$sommaMobile, 2)}}</h5>
                             <span class="description-text text-white">TOTALI</span>
                         </div>
-                    </div>
+                    </div>                                                        
                     <div class="col-sm-6">
                         <div class="description-block">
                             <h5 class="description-header text-white">{{number_format($sommaUnicaDesktop+$sommaUnicaMobile, 2)}}</h5>
@@ -212,6 +212,32 @@
     <!--/////////// DIV CONNESSIONI //////////-->
     <div class="row" id="pagina1">
         <div class="col-xl-12">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="panel-8" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Andamento mensile
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
+                                </div>
+                                <div id="barChart0">
+                                    <canvas style="width:100%; height:300px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xl-12">
                     <div id="panel-2" class="panel">
@@ -877,8 +903,16 @@
     
     /* horizontal bar chart */
     var regioni = <?php echo json_encode($arrRegioni); ?>;
+    var regioni1 = Object.values(regioni);
+    var indiceR = regioni1.length
     var arrUniche = <?php echo json_encode($arrUniche); ?>;
     var arrTotali = <?php echo json_encode($arrTotali); ?>;
+    var rU = []
+    var rT = []
+    for(i=0; i<arrUniche.length; i++){
+        rU[i] = arrUniche[i] + arrUniche[i+indiceR]
+        rT[i] = arrTotali[i] + arrTotali[i+indiceR]
+    }
     var horizontalBarChart = function() {
         var horizontalBarChart = {
             labels: regioni,
@@ -887,7 +921,7 @@
                     backgroundColor: color.primary._100,
                     borderColor: color.primary._100,
                     borderWidth: 1,
-                    data: arrTotali
+                    data: rT
                     
                 },
                 {
@@ -895,7 +929,7 @@
                     backgroundColor: color.primary._300,
                     borderColor: color.primary._500,
                     borderWidth: 1,
-                    data: arrUniche
+                    data: rU
                 }
             ]
 
@@ -950,11 +984,18 @@
     }
     /* horizontal bar chart -- end */
 
-    /* bar chart */
+     /* bar chart */
     var connessioniUniche = <?php echo json_encode($arrayUniq); ?>;
     var connessioniTotale = <?php echo json_encode($arrayTot); ?>;
     var giorni = <?php echo json_encode($arrayGiorni); ?>;
     var giorni1 = Object.values(giorni);
+    var indice = giorni1.length
+    var cU = []
+    var cT = []
+    for(i=0; i<connessioniUniche.length; i++){
+        cU[i] = connessioniUniche[i] + connessioniUniche[i+indice]
+        cT[i] = connessioniTotale[i] + connessioniTotale[i+indice]
+    }
     var barChart = function() {
         var barChartData = {
             labels: giorni1,
@@ -963,14 +1004,14 @@
                     backgroundColor:  color.primary._100,
                     borderColor:  color.primary._100,
                     borderWidth: 1,
-                    data: connessioniTotale,
+                    data: cT,
                 },
                 {
                     label: "Connessioni Uniche",
                     backgroundColor: color.primary._300,
                     borderColor: color.primary._500,
                     borderWidth: 1,
-                    data: connessioniUniche,
+                    data: cU,
                 }
             ]
 
@@ -1026,12 +1067,128 @@
     /* bar chart -- end */
 
     /* bar chart */
+    var totali = <?php echo json_encode($sommaMobile + $sommaDesktop); ?>;
+    var uniche = <?php echo json_encode($sommaUnicaDesktop+$sommaUnicaMobile); ?>; 
+    var connessioni = <?php echo json_encode($visits); ?>; 
+    var giorniM = <?php echo json_encode($arrayMesi); ?>;
+    var giorniM1 = Object.values(giorniM);
+    var indiceM = giorniM1.length
+    var cUm = []
+    var cTm = []
+    
+    function convertIntObj(connessioni) {
+        const res = {}
+        for (const key in connessioni) {
+            res[key] = {};
+            for (const prop in connessioni[key]) {
+            const parsed = parseInt(connessioni[key][prop], 10);
+            res[key][prop] = isNaN(parsed) ? connessioni[key][prop] : parsed;
+            }
+        }
+        return res;
+    }
+    var result = [];
+    for (var i=0; i<connessioni.length; i++) {
+    result.push(convertIntObj(connessioni[i]));
+    var arrayResult = Object.values(result);
+    }
+    console.log(result)  /// OGGETTO DI OGGETTI /////
+    console.log(arrayResult)  //// ARRAY DI OGGETTI //////
+    var sumId =[]
+    for(i=0; i<arrayResult.length; i++){
+        for(j=0; j<arrayResult[i].length; j++){
+        sumId += arrayResult[i][j].reduce((a, {
+        mese,
+        vDq,vMq
+        }) => (a[mese] = (a[mese] || 0) + vDq + vMq, a), {});
+    }
+    }
+    console.log(sumId); //{editor: 57, admin: 56}
+
+    
+    
+    // var barChart0 = function() {
+    //     var barChartData = {
+    //         labels: giorniM,
+    //         datasets: [{
+    //                 label: "Connessioni Totali",
+    //                 backgroundColor:  color.primary._100,
+    //                 borderColor:  color.primary._100,
+    //                 borderWidth: 1,
+    //                 data: [],
+    //             },
+    //             {
+    //                 label: "Connessioni Uniche",
+    //                 backgroundColor: color.primary._300,
+    //                 borderColor: color.primary._500,
+    //                 borderWidth: 1,
+    //                 data: [],
+    //             }
+    //         ]
+
+    //     };
+    //     var config = {
+    //         type: 'bar',
+    //         data: barChartData,
+    //         options: {
+    //             responsive: true,
+    //             legend: {
+    //                 position: 'top',
+    //             },
+    //             title: {
+    //                 display: false,
+    //                 text: 'Bar Chart'
+    //             },
+    //             scales: {
+    //                 xAxes: [{
+    //                     display: true,
+    //                     scaleLabel: {
+    //                         display: false,
+    //                         labelString: '6 months forecast'
+    //                     },
+    //                     gridLines: {
+    //                         display: true,
+    //                         color: "#f2f2f2"
+    //                     },
+    //                     ticks: {
+    //                         beginAtZero: true,
+    //                         fontSize: 11
+    //                     }
+    //                 }],
+    //                 yAxes: [{
+    //                     display: true,
+    //                     scaleLabel: {
+    //                         display: false,
+    //                         labelString: 'Profit margin (approx)'
+    //                     },
+    //                     gridLines: {
+    //                         display: true,
+    //                         color: "#f2f2f2"
+    //                     },
+    //                     ticks: {
+    //                         beginAtZero: true,
+    //                         fontSize: 11
+    //                     }
+    //                 }]
+    //             }
+    //         }
+    //     }
+    //     new Chart($("#barChart0 > canvas").get(0).getContext("2d"), config);
+    // }
+    /* bar chart -- end */
+
+    /* bar chart */
     var visualizzazioni=<?php echo json_encode($arrayTotPag); ?>;
     var pagineUniche=<?php echo json_encode($arrayUnicPag); ?>;
     var giorniPag=<?php echo json_encode($arrayGiorniPag); ?>;
-    console.log(giorniPag);
     var gP = Object.values(giorniPag);
-    console.log(gP)
+    var indiceP = gP.length
+    var vU = []
+    var vT = []                                                          //////////////////// SBAGLIATO ///////////////////////////////////
+    for(i=0; i<visualizzazioni.length; i++){
+        vU[i] = pagineUniche[i] + pagineUniche[i+indiceP]
+        vT[i] = visualizzazioni[i] + visualizzazioni[i+indiceP]
+    }
     var barChart1 = function() {
         var barChartData = {
             labels: gP,
@@ -1040,7 +1197,7 @@
                     backgroundColor: color.danger._200,
                     borderColor: color.danger._300,
                     borderWidth: 1,
-                    data: visualizzazioni
+                    data: vT
                        
                     
                 },
@@ -1049,7 +1206,7 @@
                     backgroundColor: color.danger._600,
                     borderColor: color.danger._500,
                     borderWidth: 1,
-                    data: pagineUniche
+                    data: vU
                     
                 }
             ]
@@ -1636,6 +1793,7 @@
         // lineChart();
         // areaChart();
         horizontalBarChart();
+        // barChart0();
         barChart();
         barChart1();
         barChart2();

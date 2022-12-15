@@ -42,6 +42,7 @@ Route::get('/datatables/datatables_basic/{id}', [App\Http\Controllers\HomeContro
 Route::get('/dashboard/intel_marketing_dashboard', [App\Http\Controllers\HomeController::class, 'mostraDati1']);
 Route::get('/dashboards/intel_marketing_dashboard', [App\Http\Controllers\HomeController::class, 'datiNuovi']);
 Route::get('/datatables/datatables_buttons', [App\Http\Controllers\HomeController::class, 'mostraDati2']);
+Route::get('/datatables/datatables_columnfilter', [App\Http\Controllers\HomeController::class, 'mostra']);
 
 
 

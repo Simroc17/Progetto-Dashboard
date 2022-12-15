@@ -41,6 +41,10 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function mostra()
+    {
+        return view('/datatables/datatables_export');
+    }
 
     /**
      * Show the application dashboard.
@@ -54,7 +58,7 @@ class HomeController extends Controller
           //Promo su cui ho cliccato
         $riepilogoConnessioni = Visite::groupBy('id_market','id_volantino')
             ->where(['id_promo' => $promo->id])
-            ->where(['history_visit.id_parent' => 75])
+            ->where(['history_visit.id_parent' => $promo->id_canale])
             ->join('elenco_market', 'elenco_market.id', '=', 'history_visit.id_market')
             ->select(DB::raw("SUM(visite_desktop_qta) AS desktop, SUM(visite_mobile_qta) AS mobile, SUM(visite_uniche_desktop_qta) AS deskUni, SUM(visite_uniche_mobile_qta) AS mobUni"), 'history_visit.id_market', 'history_visit.id_volantino','elenco_market.nome')
             ->orderBy('id_market', 'ASC')
@@ -78,19 +82,19 @@ class HomeController extends Controller
             
         $riepilogoVisualizzazioni = Pagina::groupBy('id_market')
             ->where(['id_promo' => $promo->id])
-            ->where(['id_parent' => 75])
-            ->select(DB::raw("SUM(pagina_desktop_qta) + SUM(pagina_mobile_qta) AS totali, SUM(pagina_desktop_unica_qta) + SUM(pagina_mobile_unica_qta) AS uniche "), 'id_market')
+            ->where(['id_parent' => $promo->id_canale])
+            ->select(DB::raw("SUM(pagina_desktop_qta) + SUM(pagina_mobile_qta) AS totali, SUM(pagina_unica_qta) AS uniche "), 'id_market')
             ->orderBy('id_market', 'ASC')
             ->get();
             //dd($riepilogoVisualizzazioni);
-            $arrVtot =[];
-            $arrVuni =[];
-            for ($i=0; $i<count($riepilogoVisualizzazioni); $i++ ){
-                $arrVtot[$i] = $riepilogoVisualizzazioni[$i]->totali;
-                $arrVuni[$i] = $riepilogoVisualizzazioni[$i]->uniche;
-            }
-            $sumVtot = array_sum($arrVtot);
-            $sumVuni = array_sum($arrVuni);
+        $arrVtot =[];
+        $arrVuni =[];
+        for ($i=0; $i<count($riepilogoVisualizzazioni); $i++ ){
+            $arrVtot[$i] = $riepilogoVisualizzazioni[$i]->totali;
+            $arrVuni[$i] = $riepilogoVisualizzazioni[$i]->uniche;
+        }
+        $sumVtot = array_sum($arrVtot);
+        $sumVuni = array_sum($arrVuni);
         $riepilogoInterattivi= Interattivi::groupBy('id_market', )
             ->where(['id_promo' => $promo->id])
             ->where(['id_parent' => $promo->id_canale])
@@ -138,7 +142,8 @@ class HomeController extends Controller
             ->orderBy('id_market', 'ASC')
             ->get();
             //dd($interattivoLink);
-        ///////////////////   GRAFICI PARTE CONNESSIONI //////////////////////
+        
+            ///////////////////   GRAFICI PARTE CONNESSIONI //////////////////////
         $visits = Visite::where(['id_promo' => $promo->id])
         // ->groupBy('data_visita')
         ->select(DB::raw('data_visita, SUM(visite_qta) AS qta, SUM(visite_uniche_qta) AS uniche, SUM(visite_desktop_qta) AS vdq, SUM(visite_mobile_qta) AS vmq, SUM(visite_uniche_desktop_qta) AS vudq, SUM(visite_uniche_mobile_qta) AS vumq'))
@@ -363,7 +368,8 @@ class HomeController extends Controller
                 ->join('prodotti_interattivi', 'prodotti_interattivi.seriale', '=', 'history_interattivi.seriale')
                 ->groupBy('seriale','tipo', 'descrizione', 'descrizione_estesa', 'titolo')
                 ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','history_interattivi.tipo','prodotti.descrizione', 'prodotti.descrizione_estesa', 'prodotti_interattivi.titolo')
-                // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa') 
+                // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa')
+                ->orderBy('sommaQta', 'DESC') 
                 ->get();
             //dd($finale);
             $arrTot =[];
@@ -383,7 +389,8 @@ class HomeController extends Controller
                     //->join('prodotti_interattivi', 'prodotti_interattivi.seriale', '=', 'history_interattivi.seriale')
                     ->groupBy('seriale', 'descrizione', 'descrizione_estesa')
                     ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','prodotti.descrizione', 'prodotti.descrizione_estesa')
-                    // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa') 
+                    // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa')
+                    ->orderBy('sommaQta', 'DESC')  
                     ->get();
            //dd($products);
            $arrTotale =[];
@@ -693,8 +700,9 @@ class HomeController extends Controller
             ->join('prodotti', 'prodotti.seriale', '=', 'history_interattivi.seriale')
             ->join('prodotti_interattivi', 'prodotti_interattivi.seriale', '=', 'history_interattivi.seriale')
             ->groupBy('seriale','tipo', 'descrizione', 'descrizione_estesa', 'titolo')
-            ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','history_interattivi.tipo','prodotti.descrizione', 'prodotti.descrizione_estesa', 'prodotti_interattivi.titolo')
-            // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa') 
+            ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','history_interattivi.tipo','prodotti.descrizione', 'prodotti.descrizione_estesa', 'prodotti_interattivi.titolo','history_interattivi.id_prodotto')
+            // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa')
+            ->orderBy('sommaQta', 'DESC')  
             ->get();
         $arrTot =[];
         for($i=0; $i<count($finale); $i++){
@@ -708,8 +716,9 @@ class HomeController extends Controller
             ->join('prodotti', 'prodotti.seriale', '=', 'history_interattivi.seriale')
             //->join('prodotti_interattivi', 'prodotti_interattivi.seriale', '=', 'history_interattivi.seriale')
             ->groupBy('seriale', 'descrizione', 'descrizione_estesa','pagina')
-            ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'pagina','prodotti.seriale','prodotti.descrizione', 'prodotti.descrizione_estesa')
-            // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa') 
+            ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'pagina','prodotti.seriale','prodotti.descrizione', 'prodotti.descrizione_estesa','prodotti.id_prodotti')
+            // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa')
+            ->orderBy('sommaQta', 'DESC')  
             ->get();
         $arrTotale =[];
         for($i=0; $i<count($products); $i++){
@@ -908,6 +917,8 @@ class HomeController extends Controller
         ///////////////////   GRAFICI PARTE CONNESSIONI //////////////////////
         $visits = Visite::where(['id_parent' => 75])
         ->whereMonth('data_visita', '=', $mutable)
+        ->select(DB::raw("data_visita, SUM(visite_qta) AS sommaV, SUM(visite_uniche_qta) AS unicheV, SUM(visite_desktop_qta) AS vDq, SUM(visite_mobile_qta) AS vMq, SUM(visite_uniche_desktop_qta) AS vDuQ, SUM(visite_uniche_mobile_qta) AS vMuQ, MONTH(data_visita) AS mese"))
+
         ->orderBy('data_visita', 'ASC')
         ->get();
         //dd($visit); //Visite
@@ -919,13 +930,14 @@ class HomeController extends Controller
         $arrayDesktopUniq=[];
         $arrayMobileUniq=[];
         for( $i=0; $i<count($visits); $i++ ){
-            $arrayTot[$i] = $visits[$i]->visite_qta;
-            $arrayUniq[$i] = $visits[$i]->visite_uniche_qta;
+            $arrayTot[$i] = $visits[$i]->sommaV;
+            $arrayUniq[$i] = $visits[$i]->unicheV;
             $arrayGiorni[$i] = $visits[$i]->data_visita;
-            $arrayDesktop[$i] = $visits[$i]->visite_desktop_qta;
-            $arrayMobile[$i] = $visits[$i]->visite_mobile_qta;
-            $arrayDesktopUniq[$i] = $visits[$i]->visite_uniche_desktop_qta;
-            $arrayMobileUniq[$i] = $visits[$i]->visite_uniche_mobile_qta;
+            $arrayMesi[$i] = $visits[$i]->mese;
+            $arrayDesktop[$i] = $visits[$i]->vDq;
+            $arrayMobile[$i] = $visits[$i]->vMq;
+            $arrayDesktopUniq[$i] = $visits[$i]->vDuQ;
+            $arrayMobileUniq[$i] = $visits[$i]->vMuQ;
         }
         //dd($arrayTot);
         $sommaMobile=array_sum($arrayMobile);
@@ -1248,7 +1260,7 @@ class HomeController extends Controller
             // dd(count($arrTotale));
         }
 
-        return view('/dashboard/intel_marketing_dashboard', compact('arrTotale','volantinoSum','sommaProdotti', 'sumD', 'sumM', 'sumDu', 'sumMu', 'sumVtot', 'sumVuni','riepilogoInterattivi','interattivoProdotti','interattivoRicette','interattivoVideo','interattivoCuriosita','interattivoLink' ,'riepilogoVisualizzazioni' ,'riepilogoConnessioni' ,'sommaPr','sommaInter' ,'products','finale' , 'interattivo3' ,'interattivo2','arrayVai_a','arrayRicette','arrayLink' ,'arrayVideo' ,'arrayEcommerce' ,'arrayCuriosita','arrayGiorni2','arrayprodotti','sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag','arrMark','negozi', 'markets','id', 'promozioni','arrayPromo','marketsAll','nome', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile'));
+        return view('/dashboard/intel_marketing_dashboard', compact('arrayMesi','visits','arrayDesktop','arrayMobile','arrTotale','volantinoSum','sommaProdotti', 'sumD', 'sumM', 'sumDu', 'sumMu', 'sumVtot', 'sumVuni','riepilogoInterattivi','interattivoProdotti','interattivoRicette','interattivoVideo','interattivoCuriosita','interattivoLink' ,'riepilogoVisualizzazioni' ,'riepilogoConnessioni' ,'sommaPr','sommaInter' ,'products','finale' , 'interattivo3' ,'interattivo2','arrayVai_a','arrayRicette','arrayLink' ,'arrayVideo' ,'arrayEcommerce' ,'arrayCuriosita','arrayGiorni2','arrayprodotti','sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag','arrMark','negozi', 'markets','id', 'promozioni','arrayPromo','marketsAll','nome', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile'));
     }
 
 
@@ -1264,6 +1276,7 @@ class HomeController extends Controller
         $arrayG = explode(',',$request->genitori);
         $data1 = $request->dataScelta;
         $data2 = $request->dataFine;
+        $mese = $request->mese;
         //dd($arrayG);
         
         $mutable = Carbon::now()->month;
@@ -1312,7 +1325,7 @@ class HomeController extends Controller
                 ->where(['history_pagine.id_market' => $array10[$i]])
                 ->join('elenco_market', 'elenco_market.id', '=', 'history_pagine.id_market')
                 ->join('users', 'users.id', '=', 'elenco_market.id_parent')
-                ->select(DB::raw("SUM(pagina_desktop_qta) + SUM(pagina_mobile_qta) AS totali, SUM(pagina_desktop_unica_qta) + SUM(pagina_mobile_unica_qta) AS uniche "), 'history_pagine.id_market','elenco_market.nome AS nomeMarket','elenco_market.id_parent','users.nome')
+                ->select(DB::raw("SUM(pagina_desktop_qta) + SUM(pagina_mobile_qta) AS totali, SUM(pagina_unica_qta) AS uniche "), 'history_pagine.id_market','elenco_market.nome AS nomeMarket','elenco_market.id_parent','users.nome')
                 ->orderBy('id_market', 'ASC')
                 ->get();
                 //dd($riepilogoVisualizzazioni);
@@ -1375,51 +1388,57 @@ class HomeController extends Controller
         $arrayTot = [];
         $arrayUniq = [];
         $arrayGiorni = [];
+        $arrayMesi=[];
         $arrayDesktop=[];
         $arrayMobile=[];
         $arrayDesktopUniq=[];
         $arrayMobileUniq=[];
+        // GRAFICO ANDAMENTO GIORNALIERO
         for($i = 0; $i <count($array10); $i++){
             $visits[$i] = Visite::where(['id_market' => $array10[$i]])
             ->whereBetween('data_visita', [$data1, $data2])
-            ->select(DB::raw("data_visita, SUM(visite_qta) AS sommaV, SUM(visite_uniche_qta) AS unicheV, SUM(visite_desktop_qta) AS vDq, SUM(visite_mobile_qta) AS vMq, SUM(visite_uniche_desktop_qta) AS vDuQ, SUM(visite_uniche_mobile_qta) AS vMuQ"))
+            ->select(DB::raw("data_visita, SUM(visite_qta) AS sommaV, SUM(visite_uniche_qta) AS unicheV, SUM(visite_desktop_qta) AS vDq, SUM(visite_mobile_qta) AS vMq, SUM(visite_uniche_desktop_qta) AS vDuQ, SUM(visite_uniche_mobile_qta) AS vMuQ, MONTH(data_visita) AS mese"))
             ->groupBy(DB::raw('data_visita'))
             // ->orderBy('data_visita', 'ASC')
             ->get();
             //dd($visits); //Visite
         
-            for( $j=0; $j<count($visits[$i]); $j++ ){
-                $arrayTot = array_merge($arrayTot, array( $visits[$i][$j]->sommaV));  
+            for( $j=0; $j<count($visits[$i]); $j++ ){ //////////// PROVARE A FARE DEGLI IF PER SOMMARE PER GIORNI /////////// E PER MESI //////////
+                $arrayTot = array_merge($arrayTot, array($visits[$i][$j]->sommaV));
                 $arrayUniq = array_merge($arrayUniq, array($visits[$i][$j]->unicheV));                                 
                 $arrayGiorni = array_merge($arrayGiorni, array($visits[$i][$j]->data_visita));
+                $arrayMesi = array_merge($arrayMesi, array($visits[$i][$j]->mese));
                 $arrayDesktop = array_merge($arrayDesktop, array($visits[$i][$j]->vDq));
                 $arrayMobile = array_merge($arrayMobile, array($visits[$i][$j]->vMq));
                 $arrayDesktopUniq = array_merge($arrayDesktopUniq, array($visits[$i][$j]->vDuQ));
                 $arrayMobileUniq = array_merge($arrayMobileUniq, array($visits[$i][$j]->vMuQ));
             }
             //dd($arrayTot);
-            $sommaMobile=array_sum($arrayMobile);
+            $sommaMobile=array_sum($arrayMobile);            
             $sommaDesktop=array_sum($arrayDesktop);
             $sommaUnicaDesktop=array_sum($arrayDesktopUniq);
             $sommaUnicaMobile=array_sum($arrayMobileUniq);
         }
-        //dd($visits);
+        //dd($arrayTot);
         $arrayGiorni = array_unique($arrayGiorni);
+        $arrayMesi = array_unique($arrayMesi);
         $index = count($arrayGiorni);
-        for($i=0; $i<count($arrayGiorni)-1; $i++) {
+        for($i=0; $i<count($arrayTot); $i++) {
             if(isset($arrayGiorni[$i+$index])){
             $arrayTot[$i]=$arrayTot[$i]+$arrayTot[$i+$index];
+            $arrayUniq[$i]=$arrayUniq[$i]+$arrayUniq[$i+$index];
+            $arrayDesktop[$i]=$arrayDesktop[$i]+$arrayDesktop[$i+$index];
+            $arrayMobile[$i]=$arrayMobile[$i]+$arrayMobile[$i+$index];
             }else{
                 $arrayTot[$i]=$arrayTot[$i]+0;
-            }
-        }
-        for($i=0; $i<count($arrayGiorni)-1; $i++) {
-            if(isset($arrayGiorni[$i+$index])){
-            $arrayUniq[$i]=$arrayUniq[$i]+$arrayUniq[$i+$index];
-            }else{
                 $arrayUniq[$i]=$arrayUniq[$i]+0;
+                $arrayDesktop[$i]=$arrayDesktop[$i]+0;
+                $arrayMobile[$i]=$arrayMobile[$i]+0;
             }
-        }
+        }//dd($arrayTot);
+       
+        // FINE GRAFICO
+
         $arrUniche=[];
         $arrTotali=[];
         $arrRegioni=[];
@@ -1429,7 +1448,7 @@ class HomeController extends Controller
             ->whereBetween('data_visita', [$data1, $data2])
             // ->whereMonth('data_visita', '=', $request->dataInizio)
             ->select(DB::raw("SUM(visite_region_qta) AS somma, SUM(visite_uniche_region_qta) AS uniche"), 'place')
-            ->orderBy('somma', 'DESC')
+            ->orderBy('place', 'DESC')
             ->get();
             //dd($datiGrafico);
             
@@ -1439,6 +1458,7 @@ class HomeController extends Controller
                 $arrRegioni= array_merge($arrRegioni, array($datiGrafico[$i][$j]->place));
             }
         }
+        //dd($arrUniche);
         $arrRegioni = array_unique($arrRegioni);
         $index = count($arrRegioni);
         for($i=0; $i<count($arrRegioni)-1; $i++) {
@@ -1449,7 +1469,7 @@ class HomeController extends Controller
                 $arrTotali[$i]=$arrTotali[$i]+0;
                 $arrUniche[$i]=$arrUniche[$i]+0;
             }
-        }
+        }//dd($arrTotali);
         ////////////////// FINE CONNESSIONI ///////////////////////
        
         ////////////////// GRAFICI PAGINE ///////////////////
@@ -1495,7 +1515,7 @@ class HomeController extends Controller
         $index = count($arrayGiorniPag);
         //dd($arrayTotPag);
         if(count($array10)>1){ // COSI ANCHE SE SCELGO UN SOLO MARKET NON MI ANDR° IN ERRORE!!!
-            for($i=0; $i<count($arrayGiorniPag)-1; $i++) {
+            for($i=0; $i<count($arrayTotPag); $i++) {
                 if(isset($arrayGiorniPag[$i+$index])){
                     $arrayTotPag[$i]=$arrayTotPag[$i]+$arrayTotPag[$i+$index];
                     $arrayUnicPag[$i]=$arrayUnicPag[$i]+$arrayUnicPag[$i+$index];
@@ -1506,7 +1526,7 @@ class HomeController extends Controller
                     $arrayUnicPag[$i]=$arrayUnicPag[$i]+0;
                 }
             }
-        } //dd($arrayTotPag);
+        }//dd($arrayTotPag);
         
         ////////////////// FINE PAGINE /////////////////////////
 
@@ -1731,7 +1751,7 @@ class HomeController extends Controller
             // dd($arrTotale);
             // dd(count($arrTotale));
         }
-        return view('/dashboard/intel_marketing_dashboard', compact('arrTotale','data2','data1','sommaProdotti', 'sumD', 'sumM', 'sumDu', 'sumMu', 'sumVtot', 'sumVuni','riepilogoInterattivi','interattivoProdotti','interattivoRicette','interattivoVideo','interattivoCuriosita','interattivoLink' ,'riepilogoVisualizzazioni' ,'riepilogoConnessioni' ,'sommaPr','sommaInter' ,'products','finale' , 'interattivo3' ,'interattivo2','arrayVai_a','arrayRicette','arrayLink' ,'arrayVideo' ,'arrayEcommerce' ,'arrayCuriosita','arrayGiorni2','arrayprodotti','sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantinoSum' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag','arrMark','negozi', 'markets','id', 'promozioni','arrayPromo','marketsAll','nome', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile'));
+        return view('/dashboard/intel_marketing_dashboard', compact('visits','arrayMobile','arrayDesktop','arrayDesktopUniq','arrayMobileUniq','arrayMesi','arrTotale','data2','data1','sommaProdotti', 'sumD', 'sumM', 'sumDu', 'sumMu', 'sumVtot', 'sumVuni','riepilogoInterattivi','interattivoProdotti','interattivoRicette','interattivoVideo','interattivoCuriosita','interattivoLink' ,'riepilogoVisualizzazioni' ,'riepilogoConnessioni' ,'sommaPr','sommaInter' ,'products','finale' , 'interattivo3' ,'interattivo2','arrayVai_a','arrayRicette','arrayLink' ,'arrayVideo' ,'arrayEcommerce' ,'arrayCuriosita','arrayGiorni2','arrayprodotti','sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantinoSum' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag','arrMark','negozi', 'markets','id', 'promozioni','arrayPromo','marketsAll','nome', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile'));
     }
 
 

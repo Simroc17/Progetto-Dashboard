@@ -258,7 +258,7 @@
         <div class="col-xl-12 mb-3">
             <div class="panel-container show ">
                     <div class="table-list-container " id="users">
-                        <div class="row justify-content-between">
+                        <!-- <div class="row justify-content-between">
                             <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
                                
                             </div>
@@ -280,18 +280,10 @@
                             <tbody id="tbody" class="list ">
                                
                                 @foreach ($datiGrafico as $dato )
-                                <tr>
-                                    
+                                <tr>    
                                     <td class="regione" style="width: 35%;" >{{ $dato['place'] }}</td>
                                     <td class="click_unici" style="width: 30%;">{{ $dato['uniche'] }}</td>
-                                    <td class="click_totali" style="width: 35%;">{{ $dato['somma']}}</td>
-
-
-
-
-
-                                    
-                                    
+                                    <td class="click_totali" style="width: 35%;">{{ $dato['somma']}}</td>    
                                 </tr>
                                 @endforeach
                                
@@ -307,8 +299,36 @@
                                 
                                 
                             </tr>
-                        </table>
+                        </table> -->
                         
+
+                        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-primary-600">
+                                <tr>
+                                    <th>Regione</th>
+                                    <th>Click Unici</th>
+                                    <th>Click Totali</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($datiGrafico as $dato )
+                                <tr>    
+                                    <td class="regione" style="width: 35%;" >{{ $dato['place'] }}</td>
+                                    <td class="click_unici" style="width: 30%;">{{ $dato['uniche'] }}</td>
+                                    <td class="click_totali" style="width: 35%;">{{ $dato['somma']}}</td>    
+                                </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Regione</th>
+                                    <th>Click Unici</th>
+                                    <th>Click Totali</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+
                     </div>
             </div>
         </div>
@@ -460,58 +480,32 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card bg-light mb-3" style="max-width: 100%;">
-                        <div class="card-header text-dark">Header</div>
+                        <div class="card-header text-dark">8 Interattivi più cliccati</div>
                         <div class="card-body row">
-
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            @php $count = 0 @endphp
+                            @foreach($finale as $fin)
+                                <div class="col-12 col-md-6 col-xl-3 p-1 text-center div-top">
+                                    <div class="container-fluid">
+                                        <div class="col-12">
+                                            <span class="badge bg-primary coccarda float-left text-white">{{$count+1}}°</span>
+                                            <span class="badge bg-success text-white" style="font-size: 15px; border-radius: 0.1; margin-left: -36px">{{$fin->sommaQta}}</span>
+                                        </div>
+                                        <div class="col-12" style="min-height: 70px;  margin-top: 10px">
+                                            {{$fin->descrizione}}                                          
+                                        </div>
+                                        <div class="col-12 p-1">
+                                            <img src="" class="img-prod">
+                                        </div>
+                                        <div class="col-12 p-1">
+                                            <div class="float-left"><img class="top-prod" src="/img/curiosita.png"> {{$fin->tipo}} - {{$fin->titolo}}</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card col-3" style="width: 15rem; height:15rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-
+                                @php $count++ @endphp
+                                @if($count == 8)
+                                    @break
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -520,33 +514,22 @@
         <div class="col-xl-12 mb-3">
                 <div class="panel-container show ">
                     <div class="table-list-container " id="users2">
-                        <div class="row justify-content-between">
-                            <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
-                               
-                            </div>
-                            
-                        </div>
-
-                       
-                        <table id="intestazione2"  class="table table-hover table-striped w-100 mt-1">
-                            <thead>
-                            <tr class="text-white" role="row" style="background-color: red;">
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="tipo1">Tipo</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 45%;" ><button type="button" class="sort" data-sort="titolo1">Titolo</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 25%;" ><button type="button" class="sort" data-sort="prodotto1">Prodotto</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="unici1">Click unici</button></th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;" ><button type="button" class="sort" data-sort="totali1">Click totali</button></th>
-                            </tr>
+                        
+                        
+                        <table id="dt-basic-example2" class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-primary-600">
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Titolo</th>
+                                    <th>Prodotto</th>
+                                    <th>Click Unici</th>
+                                    <th>Click Totali</th>
+                                </tr>
                             </thead>
-                        </table>
-                        <table id="test-list2"  class="table table-hover table-striped w-100 mt-1">
-                           
-                            <tbody id="tbody" class="list ">
-                              
-
-                                @foreach ($finale as $finale )
-                                    
-                                      
+                            <tbody>
+                                    @foreach ($finale as $finale )
+                                            
+                                            
                                             @if ($finale->tipo=='ricetta')
                                                 <tr>
                                                     <td class="tipo1" style="width: 10%;" >{{ $finale->tipo }}</td>
@@ -596,23 +579,20 @@
                                                 </tr>
                                             @endif
                                             
-                                   
+                                
                                 @endforeach
-                               
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Titolo</th>
+                                    <th>Prodotto</th>
+                                    <th>Click Unici</th>
+                                    <th>Click Totali</th>
+                                </tr>
+                            </tfoot>
                         </table>
-                        <table id="tfoot2" style="display: block;" class="table-footer">
-                            <tr>
-                                <td class="table-pagination position-absolute">
-                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
-                                    <ul class="pagination"></ul>
-                                    <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
-                                </td>
-                                
-                                
-                            </tr>
-                        </table>
-                        
+
                     </div>
             </div>
         </div>
@@ -623,58 +603,27 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card bg-light mb-3" style="max-width: 100%;">
-                            <div class="card-header text-dark">Header</div>
+                            <div class="card-header text-dark">8 Prodotti più cliccati</div>
                             <div class="card-body row">
-
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            @php $count = 0 @endphp
+                            @foreach($products as $pro)
+                                <div class="col-12 col-md-6 col-xl-3 p-1 text-center div-top">    
+                                    <div class="col-12">
+                                        <span class="badge bg-primary coccarda float-left text-white">{{$count+1}}°</span>
+                                        <span class="badge bg-success text-white" style="font-size: 15px; border-radius: 0.1; margin-left: -36px">{{$pro->sommaQta}}</span>
                                     </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <div class="col-12" style="min-height: 70px; margin-top: 10px">
+                                        {{$pro->descrizione}}                                            
                                     </div>
+                                    <div class="col-12 p-2">
+                                        <img src="" class="img-prod">
+                                    </div>        
                                 </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-                                <div class="card col-3" style="width: 15rem; height:15rem;">
-                                    <img class="card-img-top" src="..." alt="Card image cap">
-                                    <div class="card-body">
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>
-
+                                @php $count++ @endphp
+                                @if($count == 8)
+                                    @break
+                                @endif
+                            @endforeach
                             </div>
                         </div>
                     </div>
@@ -684,14 +633,12 @@
                  
                  <div class="panel-container show ">
                     <div class="table-list-container " id="users3">
-                        <div class="row justify-content-between">
+                        <!-- <div class="row justify-content-between">
                             <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
                                
                             </div>
                             
                         </div>
-
-                       
                         <table id="intestazione3"  class="table table-hover table-striped w-100 mt-1">
                             <thead>
                             <tr class="text-white" role="row" style="background-color: red;">
@@ -706,25 +653,15 @@
                         <table id="test-list3"  class="table table-hover table-striped w-100 mt-1">
                            
                             <tbody id="tbody" class="list ">
-                              
-
-                                @foreach ($products as $product )
-                                    
-                                      
-                                          
+                                @foreach ($products as $product )       
                                                 <tr>
                                                     <td class="tipoPr" style="width: 20%;" >{{ $product->descrizione }}</td>
                                                     <td class="titoloPr" style="width:60%;">{{ $product->descrizione_estesa }}</td>
                                                    
                                                     <td class="uniciPr" style="width: 10%;">{{ $product->sommaUnici }}</td>
                                                     <td class="totaliPr" style="width: 10%;">{{ $product->sommaQta }}</td>
-                                                </tr>
-                                          
-                                           
-                                       
-                                   
+                                                </tr>  
                                 @endforeach
-                               
                             </tbody>
                         </table>
                         <table id="tfoot3" style="display: block;" class="table-footer">
@@ -737,8 +674,38 @@
                                 
                                 
                             </tr>
-                        </table>
+                        </table> -->
                         
+                        <table id="dt-basic-example3" class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-primary-600">
+                                <tr>
+                                    <th>Descrizione</th>
+                                    <th>Descrizione Estesa</th>
+                                    <th>Click Unici</th>
+                                    <th>Click Totali</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($products as $product )       
+                                    <tr>
+                                        <td class="tipoPr" style="width: 20%;" >{{ $product->descrizione }}</td>
+                                        <td class="titoloPr" style="width:60%;">{{ $product->descrizione_estesa }}</td>
+                                        
+                                        <td class="uniciPr" style="width: 10%;">{{ $product->sommaUnici }}</td>
+                                        <td class="totaliPr" style="width: 10%;">{{ $product->sommaQta }}</td>
+                                    </tr>  
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                <th>Descrizione</th>
+                                    <th>Descrizione Estesa</th>
+                                    <th>Click Unici</th>
+                                    <th>Click Totali</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+
                     </div>
            
                 </div>
@@ -1640,7 +1607,278 @@
     /* initialize all charts */
     $(document).ready(function() {
 
-       
+        $('#dt-basic-example').dataTable({
+            responsive: true,
+            lengthChange: false,
+            dom:
+                /*  --- Layout Structure
+                    --- Options
+                    l   -   length changing input control
+                    f   -   filtering input
+                    t   -   The table!
+                    i   -   Table information summary
+                    p   -   pagination control
+                    r   -   processing display element
+                    B   -   buttons
+                    R   -   ColReorder
+                    S   -   Select
+
+                    --- Markup
+                    < and >             - div element
+                    <"class" and >      - div with a class
+                    <"#id" and >        - div with an ID
+                    <"#id.class" and >  - div with an ID and a class
+
+                    --- Further reading
+                    https://datatables.net/reference/option/dom
+                    --------------------------------------
+                 */
+                "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: [
+                /*{
+                    extend:    'colvis',
+                    text:      'Column Visibility',
+                    titleAttr: 'Col visibility',
+                    className: 'mr-sm-3'
+                },*/
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF',
+                    titleAttr: 'Generate PDF',
+                    className: 'btn-outline-danger btn-sm mr-1'
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel',
+                    titleAttr: 'Generate Excel',
+                    className: 'btn-outline-success btn-sm mr-1'
+                },
+                {
+                    extend: 'csvHtml5',
+                    text: 'CSV',
+                    titleAttr: 'Generate CSV',
+                    className: 'btn-outline-primary btn-sm mr-1'
+                },
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copy',
+                    titleAttr: 'Copy to clipboard',
+                    className: 'btn-outline-primary btn-sm mr-1'
+                },
+                {
+                    extend: 'print',
+                    text: 'Print',
+                    titleAttr: 'Print Table',
+                    className: 'btn-outline-primary btn-sm'
+                }
+            ]
+        });
+        $('#dt-basic-example2').dataTable({
+            responsive: true,
+            lengthChange: false,
+            dom:
+                /*  --- Layout Structure
+                    --- Options
+                    l   -   length changing input control
+                    f   -   filtering input
+                    t   -   The table!
+                    i   -   Table information summary
+                    p   -   pagination control
+                    r   -   processing display element
+                    B   -   buttons
+                    R   -   ColReorder
+                    S   -   Select
+
+                    --- Markup
+                    < and >             - div element
+                    <"class" and >      - div with a class
+                    <"#id" and >        - div with an ID
+                    <"#id.class" and >  - div with an ID and a class
+
+                    --- Further reading
+                    https://datatables.net/reference/option/dom
+                    --------------------------------------
+                 */
+                "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: [
+                /*{
+                    extend:    'colvis',
+                    text:      'Column Visibility',
+                    titleAttr: 'Col visibility',
+                    className: 'mr-sm-3'
+                },*/
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF',
+                    titleAttr: 'Generate PDF',
+                    className: 'btn-outline-danger btn-sm mr-1'
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel',
+                    titleAttr: 'Generate Excel',
+                    className: 'btn-outline-success btn-sm mr-1'
+                },
+                {
+                    extend: 'csvHtml5',
+                    text: 'CSV',
+                    titleAttr: 'Generate CSV',
+                    className: 'btn-outline-primary btn-sm mr-1'
+                },
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copy',
+                    titleAttr: 'Copy to clipboard',
+                    className: 'btn-outline-primary btn-sm mr-1'
+                },
+                {
+                    extend: 'print',
+                    text: 'Print',
+                    titleAttr: 'Print Table',
+                    className: 'btn-outline-primary btn-sm'
+                }
+            ]
+        });
+        $('#dt-basic-example3').dataTable({
+            responsive: true,
+            lengthChange: false,
+            dom:
+                /*  --- Layout Structure
+                    --- Options
+                    l   -   length changing input control
+                    f   -   filtering input
+                    t   -   The table!
+                    i   -   Table information summary
+                    p   -   pagination control
+                    r   -   processing display element
+                    B   -   buttons
+                    R   -   ColReorder
+                    S   -   Select
+
+                    --- Markup
+                    < and >             - div element
+                    <"class" and >      - div with a class
+                    <"#id" and >        - div with an ID
+                    <"#id.class" and >  - div with an ID and a class
+
+                    --- Further reading
+                    https://datatables.net/reference/option/dom
+                    --------------------------------------
+                 */
+                "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: [
+                /*{
+                    extend:    'colvis',
+                    text:      'Column Visibility',
+                    titleAttr: 'Col visibility',
+                    className: 'mr-sm-3'
+                },*/
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF',
+                    titleAttr: 'Generate PDF',
+                    className: 'btn-outline-danger btn-sm mr-1'
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel',
+                    titleAttr: 'Generate Excel',
+                    className: 'btn-outline-success btn-sm mr-1'
+                },
+                {
+                    extend: 'csvHtml5',
+                    text: 'CSV',
+                    titleAttr: 'Generate CSV',
+                    className: 'btn-outline-primary btn-sm mr-1'
+                },
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copy',
+                    titleAttr: 'Copy to clipboard',
+                    className: 'btn-outline-primary btn-sm mr-1'
+                },
+                {
+                    extend: 'print',
+                    text: 'Print',
+                    titleAttr: 'Print Table',
+                    className: 'btn-outline-primary btn-sm'
+                }
+            ]
+        });
+        $('#dt-basic-example4').dataTable({
+            responsive: true,
+            lengthChange: false,
+            dom:
+                /*  --- Layout Structure
+                    --- Options
+                    l   -   length changing input control
+                    f   -   filtering input
+                    t   -   The table!
+                    i   -   Table information summary
+                    p   -   pagination control
+                    r   -   processing display element
+                    B   -   buttons
+                    R   -   ColReorder
+                    S   -   Select
+
+                    --- Markup
+                    < and >             - div element
+                    <"class" and >      - div with a class
+                    <"#id" and >        - div with an ID
+                    <"#id.class" and >  - div with an ID and a class
+
+                    --- Further reading
+                    https://datatables.net/reference/option/dom
+                    --------------------------------------
+                 */
+                "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: [
+                /*{
+                    extend:    'colvis',
+                    text:      'Column Visibility',
+                    titleAttr: 'Col visibility',
+                    className: 'mr-sm-3'
+                },*/
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF',
+                    titleAttr: 'Generate PDF',
+                    className: 'btn-outline-danger btn-sm mr-1'
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel',
+                    titleAttr: 'Generate Excel',
+                    className: 'btn-outline-success btn-sm mr-1'
+                },
+                {
+                    extend: 'csvHtml5',
+                    text: 'CSV',
+                    titleAttr: 'Generate CSV',
+                    className: 'btn-outline-primary btn-sm mr-1'
+                },
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copy',
+                    titleAttr: 'Copy to clipboard',
+                    className: 'btn-outline-primary btn-sm mr-1'
+                },
+                {
+                    extend: 'print',
+                    text: 'Print',
+                    titleAttr: 'Print Table',
+                    className: 'btn-outline-primary btn-sm'
+                }
+            ]
+        });
 
         var pagina1 = document.getElementById('pagina1');
         var pagina2 = document.getElementById('pagina2');
@@ -1744,7 +1982,6 @@
 
 
         
-       
       
         // lineChart();
         // areaChart();
