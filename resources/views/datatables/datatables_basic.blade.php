@@ -519,59 +519,42 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="panel-container show ">
-                        <div class="table-list-container " id="users2">
-                            <div class="row justify-content-between">
-                                <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
+        </div>
+        <div class="col-xl-12">
+            <div class="panel-container show ">
+                <div class="table-list-container " id="users2">
 
-                                </div>
-
-                            </div>
-
-
-                            <table id="intestazione2" class="table table-hover table-striped w-100 mt-1">
-                                <thead>
-                                    <tr class="text-white" role="row" style="background-color: red;">
-                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;"><button type="button" class="sort" data-sort="regione2">Numero Pagina</button></th>
-                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 30%;"><button type="button" class="sort" data-sort="volantini_online">volantini onlini</button></th>
-                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 25%;"><button type="button" class="sort" data-sort="click_unici2">Visite uniche</button></th>
-                                        <th tabindex="0" rowspan="1" colspan="1" style="width: 30%;"><button type="button" class="sort" data-sort="click_totali2">Visite totali</button></th>
-                                    </tr>
-                                </thead>
-                            </table>
-                            <table id="test-list2" class="table table-hover table-striped w-100 mt-1">
-
-                                <tbody id="tbody2" class="list ">
-                                    @foreach ($volantinoId as $dato )
-                                    <tr>
-                                        <td class="regione2" style="width: 35%;">{{$dato['num_pagina']}}</td>
-                                        <td class="volantini_online" style="width: 30%;">vis.online</td>
-                                        <td class="click_unici2" style="width: 25%;">{{ $dato['uniche'] }}</td>
-                                        <td class="click_totali2" style="width: 30%;">{{ $dato['somma']}}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <table id="tfoot2" style="display: block;margin-bottom: 50px;" class="table-footer">
-                                <tr>
-                                    <td class="table-pagination position-absolute">
-                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
-                                        <ul class="pagination"></ul>
-                                        <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
-                                    </td>
-
-
+                    <table id="dt-basic-example1" class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-primary-600">
+                                <tr style="background-color: #dc3545;">
+                                    <th>Numero Pagina</th>
+                                    <th>Volantini Online</th>
+                                    <th>Visite Uniche</th>
+                                    <th>Visite Totali</th>
                                 </tr>
-                            </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($volantinoId as $dato )
+                                <tr>
+                                    <td class="regione2" style="width: 35%;">{{$dato['num_pagina']}}</td>
+                                    <td class="volantini_online" style="width: 30%;"><a target="_blank" href="https://preview.volantinopiu.it/volantino{{$volantino[0]->id_volantino}}00.html">vis.online</a></td>
+                                    <td class="click_unici2" style="width: 25%;">{{ $dato['uniche'] }}</td>
+                                    <td class="click_totali2" style="width: 30%;">{{ $dato['somma']}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Numero Pagina</th>
+                                    <th>Volantini Online</th>
+                                    <th>Visite Uniche</th>
+                                    <th>Visite Totali</th>
+                                </tr>
+                            </tfoot>
+                    </table>
 
-                        </div>
-                    </div>
                 </div>
             </div>
-
-
         </div>
     </div>
     <!--//////////// DIV INTERATTIVI /////////////-->
@@ -668,96 +651,84 @@
         <div class="col-xl-12">
             <div class="panel-container show ">
                 <div class="table-list-container " id="users3">
-                    <div class="row justify-content-between">
-                        <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
 
-                        </div>
+                    <table id="dt-basic-example2" class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-primary-600">
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Titolo</th>
+                                    <th>Prodotto</th>
+                                    <th>Click Unici</th>
+                                    <th>Click Totali</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    @foreach ($finale as $finale )
+                                            
+                                            
+                                            @if ($finale->tipo=='ricetta')
+                                                <tr>
+                                                    <td class="tipo1" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                    <td class="titolo1" style="width:45%;">{{ $finale->titolo }}</td>
+                                                    <td class="prodotto1" style="width:25%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                    <td class="unici1" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                    <td class="totali1" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                                </tr>
+                                            @endif
+                                            @if ($finale->tipo=='icona')
+                                            <tr>
+                                                    <td class="tipo1" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                    <td class="titolo1" style="width:45%;">{{ $finale->titolo }}</td>
+                                                    <td class="prodotto1" style="width:25%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                    <td class="unici1" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                    <td class="totali1" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                                </tr>
+                                            @endif
+                                            @if ($finale->tipo=='curiosita')
+                                            <tr>
+                                                    <td class="tipo1" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                    <td class="titolo1" style="width:45%;">{{ $finale->titolo }}</td>
+                                                    <td class="prodotto1" style="width:25%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                    <td class="unici1" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                    <td class="totali1" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                                </tr>
 
-                    </div>
-                    <table id="intestazione3" class="table table-bordered table-hover table-striped w-100">
 
-                        <thead class="bg-warning-200">
-                            <tr class="text-white" role="row" style="background-color: red;">
-                                <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;"><button type="button" class="sort" data-sort="tipo">Tipo</button></th>
-                                <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;"><button type="button" class="sort" data-sort="titolo">Titolo</button></th>
-                                <th tabindex="0" rowspan="1" colspan="1" style="width: 35%;"><button type="button" class="sort" data-sort="prodotto">Prodotto</button></th>
-                                <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;"><button type="button" class="sort" data-sort="unici2">Click unici</button></th>
-                                <th tabindex="0" rowspan="1" colspan="1" style="width: 10%;"><button type="button" class="sort" data-sort="totali2">Click totali</button></th>
-                            </tr>
-                        </thead>
+
+                                            @endif
+                                            @if ($finale->tipo=='collegamento')
+                                            <tr>
+                                                    <td class="tipo1" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                    <td class="titolo1" style="width:45%;">{{ $finale->titolo }}</td>
+                                                    <td class="prodotto1" style="width:25%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                    <td class="unici1" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                    <td class="totali1" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                                </tr>
+                                            @endif
+                                            @if ($finale->tipo=='video')
+                                            <tr>
+                                                    <td class="tipo1" style="width: 10%;" >{{ $finale->tipo }}</td>
+                                                    <td class="titolo1" style="width:45%;">{{ $finale->titolo }}</td>
+                                                    <td class="prodotto1" style="width:25%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
+                                                    <td class="unici1" style="width: 10%;">{{ $finale->sommaUnici }}</td>
+                                                    <td class="totali1" style="width: 10%;">{{ $finale->sommaQta }}</td>
+                                                </tr>
+                                            @endif
+                                            
+                                
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Titolo</th>
+                                    <th>Prodotto</th>
+                                    <th>Click Unici</th>
+                                    <th>Click Totali</th>
+                                </tr>
+                            </tfoot>
                     </table>
-                    <table id="test-list3" class="table table-hover table-striped w-100 mt-1">
-                        <tbody id="tbody3" class="list ">
-                            @foreach ($finale as $finale )
 
-
-                            @if ($finale->tipo=='ricetta')
-                            <tr>
-                                <td class="tipo" style="width: 10%;">{{ $finale->tipo }}</td>
-                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
-                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
-                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
-                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
-                            </tr>
-                            @endif
-                            @if ($finale->tipo=='icona')
-                            <tr>
-                                <td class="tipo" style="width: 10%;">{{ $finale->tipo }}</td>
-                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
-                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
-                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
-                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
-                            </tr>
-                            @endif
-                            @if ($finale->tipo=='curiosita')
-                            <tr>
-                                <td class="tipo" style="width: 10%;">{{ $finale->tipo }}</td>
-                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
-                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
-                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
-                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
-                            </tr>
-
-
-
-                            @endif
-                            @if ($finale->tipo=='collegamento')
-                            <tr>
-                                <td class="tipo" style="width: 10%;">{{ $finale->tipo }}</td>
-                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
-                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
-                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
-                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
-                            </tr>
-                            @endif
-                            @if ($finale->tipo=='video')
-                            <tr>
-                                <td class="tipo" style="width: 10%;">{{ $finale->tipo }}</td>
-                                <td class="titolo" style="width:35%;">{{ $finale->titolo }}</td>
-                                <td class="prodotto" style="width:35%">{{ $finale->descrizione }} - {{ $finale->descrizione_estesa}}</td>
-                                <td class="unici2" style="width: 10%;">{{ $finale->sommaUnici }}</td>
-                                <td class="totali2" style="width: 10%;">{{ $finale->sommaQta }}</td>
-                            </tr>
-                            @endif
-
-
-                            @endforeach
-
-                        </tbody>
-
-                    </table>
-                    <table id="tfoot3" style="display: block;margin-bottom: 50px;" class="table-footer">
-                        <tr>
-                            <td class="table-pagination position-absolute">
-                                <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
-                                <ul class="pagination"></ul>
-                                <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
-                            </td>
-
-
-                        </tr>
-                    </table>
-                    <!-- datatable end -->
                 </div>
             </div>
         </div>
@@ -798,7 +769,7 @@
         <div class="col-xl-12">
             <div class="panel-container show ">
                 <div class="table-list-container " id="users4">
-                    <div class="row justify-content-between">
+                    <!-- <div class="row justify-content-between">
                         <div class="col-10 ml-3 mb-3"><input type="text" class="search " placeholder="Search" />
 
                         </div>
@@ -843,8 +814,38 @@
 
 
                         </tr>
+                    </table> -->
+                    
+                    <table id="dt-basic-example3" class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-primary-600">
+                                <tr>
+                                    <th>Descrizione</th>
+                                    <th>Descrizione Estesa</th>
+                                    <th>Click Unici</th>
+                                    <th>Click Totali</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($products as $product )       
+                                    <tr>
+                                        <td class="tipoPr" style="width: 20%;" >{{ $product->descrizione }}</td>
+                                        <td class="titoloPr" style="width:60%;">{{ $product->descrizione_estesa }}</td>
+                                        
+                                        <td class="uniciPr" style="width: 10%;">{{ $product->sommaUnici }}</td>
+                                        <td class="totaliPr" style="width: 10%;">{{ $product->sommaQta }}</td>
+                                    </tr>  
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                <th>Descrizione</th>
+                                    <th>Descrizione Estesa</th>
+                                    <th>Click Unici</th>
+                                    <th>Click Totali</th>
+                                </tr>
+                            </tfoot>
                     </table>
-                    <!-- datatable end -->
+
                 </div>
             </div>
         </div>
@@ -1042,8 +1043,8 @@
             labels: regioni,
             datasets: [{
                     label: "Connessioni Totali",
-                    backgroundColor: color.success._300,
-                    borderColor: color.success._500,
+                    backgroundColor: color.primary._100,
+                    borderColor: color.primary._100,
                     borderWidth: 1,
                     data: arrTotali
 
@@ -1117,8 +1118,8 @@
             labels: giorni,
             datasets: [{
                     label: "Connessioni Totali",
-                    backgroundColor: color.success._300,
-                    borderColor: color.success._500,
+                    backgroundColor:  color.primary._100,
+                    borderColor:  color.primary._100,
                     borderWidth: 1,
                     data: connessioniTotale,
                 },
@@ -1191,8 +1192,8 @@
             labels: giorniPag,
             datasets: [{
                     label: "Visualizzazioni",
-                    backgroundColor: color.success._300,
-                    borderColor: color.success._500,
+                    backgroundColor: color.danger._200,
+                    borderColor: color.danger._300,
                     borderWidth: 1,
                     data: visualizzazioni
 
@@ -1200,8 +1201,8 @@
                 },
                 {
                     label: "Pagine Uniche",
-                    backgroundColor: color.primary._300,
-                    borderColor: color.primary._500,
+                    backgroundColor: color.danger._600,
+                    borderColor: color.danger._500,
                     borderWidth: 1,
                     data: pagineUniche
 
@@ -1442,11 +1443,11 @@
                 datasets: [{
                     data: [connessioniDesktop, connessioniMobile],
                     backgroundColor: [
-                        color.success._300,
+                        color.primary._100,
                         color.primary._400,
-                        color.success._50,
-                        color.success._300,
-                        color.success._500
+                        color.primary._200,
+                        color.primary._300,
+                        color.primary._500
                     ],
                     label: 'My dataset' // for legend
                 }],
@@ -1484,11 +1485,11 @@
 
                     ],
                     backgroundColor: [
-                        color.primary._200,
-                        color.primary._400,
-                        color.success._50,
-                        color.success._300,
-                        color.success._500
+                        color.danger._200,
+                        color.danger._600,
+                        color.danger._100,
+                        color.danger._300,
+                        color.danger._500
                     ],
                     label: 'My dataset' // for legend
                 }],
@@ -1524,7 +1525,7 @@
 
                     backgroundColor: [
                         color.primary._300,
-                        color.success._500,
+                        color.primary._100,
                         color.primary._50,
                         color.primary._300,
                         color.primary._500
@@ -1565,11 +1566,11 @@
 
                     ],
                     backgroundColor: [
-                        color.success._200,
-                        color.success._400,
-                        color.primary._50,
-                        color.primary._300,
-                        color.primary._500
+                        color.danger._200,
+                        color.danger._600,
+                        color.danger._100,
+                        color.danger._300,
+                        color.danger._500
                     ],
                     label: 'My dataset' // for legend
 
@@ -1599,6 +1600,74 @@
     $(document).ready(function() {
 
         $('#dt-basic-example').dataTable({
+            responsive: true,
+            lengthChange: false,
+            dom:
+                /*  --- Layout Structure
+                    --- Options
+                    l   -   length changing input control
+                    f   -   filtering input
+                    t   -   The table!
+                    i   -   Table information summary
+                    p   -   pagination control
+                    r   -   processing display element
+                    B   -   buttons
+                    R   -   ColReorder
+                    S   -   Select
+
+                    --- Markup
+                    < and >             - div element
+                    <"class" and >      - div with a class
+                    <"#id" and >        - div with an ID
+                    <"#id.class" and >  - div with an ID and a class
+
+                    --- Further reading
+                    https://datatables.net/reference/option/dom
+                    --------------------------------------
+                 */
+                "<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            buttons: [
+                /*{
+                    extend:    'colvis',
+                    text:      'Column Visibility',
+                    titleAttr: 'Col visibility',
+                    className: 'mr-sm-3'
+                },*/
+                {
+                    extend: 'pdfHtml5',
+                    text: 'PDF',
+                    titleAttr: 'Generate PDF',
+                    className: 'btn-outline-danger btn-sm mr-1'
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: 'Excel',
+                    titleAttr: 'Generate Excel',
+                    className: 'btn-outline-success btn-sm mr-1'
+                },
+                {
+                    extend: 'csvHtml5',
+                    text: 'CSV',
+                    titleAttr: 'Generate CSV',
+                    className: 'btn-outline-primary btn-sm mr-1'
+                },
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copy',
+                    titleAttr: 'Copy to clipboard',
+                    className: 'btn-outline-primary btn-sm mr-1'
+                },
+                {
+                    extend: 'print',
+                    text: 'Print',
+                    titleAttr: 'Print Table',
+                    className: 'btn-outline-primary btn-sm'
+                }
+            ]
+        });
+        $('#dt-basic-example1').dataTable({
             responsive: true,
             lengthChange: false,
             dom:

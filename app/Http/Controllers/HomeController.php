@@ -367,11 +367,12 @@ class HomeController extends Controller
                 ->join('prodotti', 'prodotti.seriale', '=', 'history_interattivi.seriale')
                 ->join('prodotti_interattivi', 'prodotti_interattivi.seriale', '=', 'history_interattivi.seriale')
                 ->groupBy('seriale','tipo', 'descrizione', 'descrizione_estesa', 'titolo')
-                ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','history_interattivi.tipo','prodotti.descrizione', 'prodotti.descrizione_estesa', 'prodotti_interattivi.titolo')
+                ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','history_interattivi.tipo','prodotti.descrizione', 'prodotti.descrizione_estesa', 'prodotti_interattivi.titolo', 'history_interattivi.id_prodotto','history_interattivi.id_volantino')
                 // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa')
                 ->orderBy('sommaQta', 'DESC') 
                 ->get();
             //dd($finale);
+            $arrayVolantino = 
             $arrTot =[];
                 for($i=0; $i<count($finale); $i++){
                         $arrTot[$i] = $finale[$i]->sommaUnici; 

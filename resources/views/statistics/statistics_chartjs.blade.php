@@ -494,7 +494,7 @@
                                             {{$fin->descrizione}}                                          
                                         </div>
                                         <div class="col-12 p-1">
-                                            <img src="" class="img-prod">
+                                            <img style="height:200px;" src="" class="img-prod">
                                         </div>
                                         <div class="col-12 p-1">
                                             <div class="float-left"><img class="top-prod" src="/img/curiosita.png"> {{$fin->tipo}} - {{$fin->titolo}}</div>
@@ -1047,8 +1047,8 @@
             labels: regioni,
             datasets: [{
                     label: "Connessioni Totali",
-                    backgroundColor: color.success._300,
-                    borderColor: color.success._500,
+                    backgroundColor: color.primary._100,
+                    borderColor: color.primary._100,
                     borderWidth: 1,
                     data: arrTotali
                     
@@ -1122,8 +1122,8 @@
             labels: giorni,
             datasets: [{
                     label: "Connessioni Totali",
-                    backgroundColor: color.success._300,
-                    borderColor: color.success._500,
+                    backgroundColor:  color.primary._100,
+                    borderColor:  color.primary._100,
                     borderWidth: 1,
                     data: connessioniTotale,
                 },
@@ -1196,8 +1196,8 @@
             labels: giorniPag,
             datasets: [{
                     label: "Visualizzazioni",
-                    backgroundColor: color.success._300,
-                    borderColor: color.success._500,
+                    backgroundColor: color.danger._200,
+                    borderColor: color.danger._300,
                     borderWidth: 1,
                     data: visualizzazioni
                        
@@ -1205,8 +1205,8 @@
                 },
                 {
                     label: "Pagine Uniche",
-                    backgroundColor: color.primary._300,
-                    borderColor: color.primary._500,
+                    backgroundColor: color.danger._600,
+                    borderColor: color.danger._500,
                     borderWidth: 1,
                     data: pagineUniche
                     
@@ -1451,11 +1451,11 @@
                     data: [connessioniDesktop,connessioniMobile]     
                     ,
                     backgroundColor: [
-                        color.success._300,
+                        color.primary._100,
                         color.primary._400,
-                        color.success._50,
-                        color.success._300,
-                        color.success._500
+                        color.primary._200,
+                        color.primary._300,
+                        color.primary._500
                     ],
                     label: 'My dataset' // for legend
                 }],
@@ -1493,11 +1493,11 @@
                         
                     ],
                     backgroundColor: [
-                        color.primary._200,
-                        color.primary._400,
-                        color.success._50,
-                        color.success._300,
-                        color.success._500
+                        color.danger._200,
+                        color.danger._600,
+                        color.danger._100,
+                        color.danger._300,
+                        color.danger._500
                     ],
                     label: 'My dataset' // for legend
                 }],
@@ -1533,7 +1533,7 @@
                     
                     backgroundColor: [
                         color.primary._300,
-                        color.success._500,
+                        color.primary._100,
                         color.primary._50,
                         color.primary._300,
                         color.primary._500
@@ -1574,11 +1574,11 @@
                         
                     ],
                     backgroundColor: [
-                        color.success._200,
-                        color.success._400,
-                        color.primary._50,
-                        color.primary._300,
-                        color.primary._500
+                        color.danger._200,
+                        color.danger._600,
+                        color.danger._100,
+                        color.danger._300,
+                        color.danger._500
                     ],
                     label: 'My dataset' // for legend
 
