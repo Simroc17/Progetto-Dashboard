@@ -4,12 +4,16 @@
 
 @section('headerStyle')
 <link rel="stylesheet" media="screen, print" href="{{ URL::asset('css/statistics/chartjs/chartjs.css')}}">
-
+<link rel="stylesheet" media="screen, print" href="{{ URL::asset('css/datagrid/datatables/datatables.bundle.css') }}">
 @stop
 
 @section('content')
 <main id="js-page-content" role="main" class="page-content"  >
 
+    @component('common-components.breadcrumb')
+    @slot('item1') Datatables @endslot
+    @slot('item2') ColumnFilter @endslot
+    @endcomponent
 
     <div class="subheader">
         <h1 class="subheader-title">
@@ -487,17 +491,24 @@
                                 <div class="col-12 col-md-6 col-xl-3 p-1 text-center div-top">
                                     <div class="container-fluid">
                                         <div class="col-12">
-                                            <span class="badge bg-primary coccarda float-left text-white">{{$count+1}}°</span>
-                                            <span class="badge bg-success text-white" style="font-size: 15px; border-radius: 0.1; margin-left: -36px">{{$fin->sommaQta}}</span>
+                                        <span class="badge bg-primary coccarda float-left text-white" style="box-shadow: 0 0 3px #007bff; font-size: 18px;">{{$count+1}}°</span>
+                                            <span class="badge bg-success text-white" style="font-size: 20px; border-radius: 0.1; margin-left: -36px">{{$fin->sommaQta}}</span>
                                         </div>
                                         <div class="col-12" style="min-height: 70px;  margin-top: 10px">
-                                            {{$fin->descrizione}}                                          
+                                            {{$fin->descrizione}}                                     
                                         </div>
                                         <div class="col-12 p-1">
-                                            <img style="height:200px;" src="" class="img-prod">
+                                        @php $array = str_split($fin->id_volantino); @endphp
+                                        <img style="height:200px;"src="https://resources.volantinopiu.it/flyer/{{$array[0]}}/{{$array[1]}}/{{$array[2]}}/{{$array[3]}}/{{$array[4]}}/screenshot/{{$fin->id_prodotto}}.jpg" class="img-prod zoom m-b-2">
                                         </div>
                                         <div class="col-12 p-1">
-                                            <div class="float-left"><img class="top-prod" src="/img/curiosita.png"> {{$fin->tipo}} - {{$fin->titolo}}</div>
+                                            <div class="float-left">
+                                            @if($fin->tipo=='ricetta')<img src="https://preview.volantinopiu.it//public/image/icona-ricette.png" style="width: 30px;">
+                                            @elseif($fin->tipo=='video')<img src="https://preview.volantinopiu.it//public/image/icona-video.png" style="width: 30px;">
+                                            @elseif($fin->tipo=='curiosita')<img src="https://preview.volantinopiu.it//public/image/icona-curiosita.png" style="width: 30px;"> 
+                                            @elseif($fin->tipo=='collegamento')<img src="https://preview.volantinopiu.it//public/image/icona-collegamenti.png" style="width: 30px;"> 
+                                            @endif {{$fin->tipo}} - {{$fin->titolo}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -609,14 +620,14 @@
                             @foreach($products as $pro)
                                 <div class="col-12 col-md-6 col-xl-3 p-1 text-center div-top">    
                                     <div class="col-12">
-                                        <span class="badge bg-primary coccarda float-left text-white">{{$count+1}}°</span>
-                                        <span class="badge bg-success text-white" style="font-size: 15px; border-radius: 0.1; margin-left: -36px">{{$pro->sommaQta}}</span>
+                                    <span class="badge bg-primary coccarda float-left text-white" style="box-shadow: 0 0 3px #007bff; font-size: 18px;">{{$count+1}}°</span>
+                                        <span class="badge bg-success text-white" style="font-size: 20px; border-radius: 0.1; margin-left: -36px">{{$pro->sommaQta}}</span>
                                     </div>
                                     <div class="col-12" style="min-height: 70px; margin-top: 10px">
                                         {{$pro->descrizione}}                                            
                                     </div>
                                     <div class="col-12 p-2">
-                                        <img src="" class="img-prod">
+                                    <img style="height:200px;"src="https://resources.volantinopiu.it/flyer/{{$array[0]}}/{{$array[1]}}/{{$array[2]}}/{{$array[3]}}/{{$array[4]}}/screenshot/{{$pro->id_prodotti}}.jpg" class="img-prod zoom ">
                                     </div>        
                                 </div>
                                 @php $count++ @endphp
@@ -752,11 +763,11 @@
                                             <th colspan="1"><button type="button" class="sort" data-sort="uni">Uniche</button></th>
                                             <th colspan="1"><button type="button" class="sort" data-sort="tot">Totali</button></th>
                                             <th></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="pr"><i class="bi bi-plus-circle-fill"></i> Prodotti</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="ri">Ricette</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="vi"><i class="bi bi-play-circle-fill"></i> Video</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="cu"><i class="bi bi-info-lg"></i> Curiosita</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="li"><i class="bi bi-globe"></i> Link</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="pr"><img src="https://preview.volantinopiu.it//public/image/icona-prodotto.png" style="width: 40px;"> Prodotti</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="ri"><img src="https://preview.volantinopiu.it//public/image/icona-ricette.png" style="width: 40px;">Ricette</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="vi"><img src="https://preview.volantinopiu.it//public/image/icona-video.png" style="width: 40px;"> Video</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="cu"><img src="https://preview.volantinopiu.it//public/image/icona-curiosita.png" style="width: 40px;"> Curiosita</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="li"><img src="https://preview.volantinopiu.it//public/image/icona-collegamenti.png" style="width: 40px;">Link</button></th>
                                             <th></th>
                                             <th colspan="1"><button type="button" class="sort" data-sort="lis">Liste</button></th>
                                             <th colspan="1"><button type="button" class="sort" data-sort="imp"><i class="bi bi-currency-euro"></i> Importo</button></th>
@@ -2828,7 +2839,13 @@
 </div> -->
 
 <style>
-    
+    .zoom {
+    transition: transform .2s; /* Animation */
+    }
+
+    .zoom:hover {
+    transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
     .material-icons {
         font-family: 'Material Icons';
         font-weight: normal;

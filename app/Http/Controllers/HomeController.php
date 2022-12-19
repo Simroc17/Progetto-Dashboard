@@ -389,7 +389,7 @@ class HomeController extends Controller
                     ->join('prodotti', 'prodotti.seriale', '=', 'history_interattivi.seriale')
                     //->join('prodotti_interattivi', 'prodotti_interattivi.seriale', '=', 'history_interattivi.seriale')
                     ->groupBy('seriale', 'descrizione', 'descrizione_estesa')
-                    ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','prodotti.descrizione', 'prodotti.descrizione_estesa')
+                    ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','prodotti.descrizione', 'prodotti.descrizione_estesa','prodotti.id_prodotti')
                     // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa')
                     ->orderBy('sommaQta', 'DESC')  
                     ->get();
