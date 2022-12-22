@@ -102,7 +102,7 @@
     </h2>
     @else
     <h2>
-        Dal: <span class="ml-1" id="dataInizio"></span> 
+        <!-- Dal: <span class="ml-1" id="dataInizio"></span>  -->
     </h2>
     @endisset
 
@@ -353,7 +353,33 @@
                     <div id="panel-8" class="panel">
                         <div class="panel-hdr">
                             <h2>
-                                Andamento giornaliero
+                                Andamento visualizzazioni/pagine
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data, and the comparison of multiple data sets side by side
+                                </div>
+                                <div id="barChartP">
+                                    <canvas style="width:100%; height:300px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="panel-8" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Andamento giornaliero/pagine
                             </h2>
                             <div class="panel-toolbar">
                                 <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -595,11 +621,11 @@
                                             <th colspan="1"><button type="button" class="sort" data-sort="uni">Uniche</button></th>
                                             <th colspan="1"><button type="button" class="sort" data-sort="tot">Totali</button></th>
                                             <th></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="pr"><i class="bi bi-plus-circle-fill"></i> Prodotti</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="ri">Ricette</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="vi"><i class="bi bi-play-circle-fill"></i> Video</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="cu"><i class="bi bi-info-lg"></i> Curiosita</button></th>
-                                            <th colspan="1"><button type="button" class="sort" data-sort="li"><i class="bi bi-globe"></i> Link</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="pr"><img src="https://preview.volantinopiu.it//public/image/icona-prodotto.png" style="width: 30px;"> Prodotti</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="ri"><img src="https://preview.volantinopiu.it//public/image/icona-ricette.png" style="width: 30px;">Ricette</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="vi"><img src="https://preview.volantinopiu.it//public/image/icona-video.png" style="width: 30px;"> Video</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="cu"><img src="https://preview.volantinopiu.it//public/image/icona-curiosita.png" style="width: 30px;"> Curiosita</button></th>
+                                            <th colspan="1"><button type="button" class="sort" data-sort="li"><img src="https://preview.volantinopiu.it//public/image/icona-collegamenti.png" style="width: 30px;">Link</button></th>
                                             <th></th>
                                             <th colspan="1"><button type="button" class="sort" data-sort="lis">Liste</button></th>
                                             <th colspan="1"><button type="button" class="sort" data-sort="imp"><i class="bi bi-currency-euro"></i> Importo</button></th>
@@ -607,136 +633,39 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tbody" class="list">
-                                                            @php $indP = 0 @endphp
-                                                            @php $indR = 0 @endphp
-                                                            @php $indV = 0 @endphp
-                                                            @php $indC = 0 @endphp
-                                                            @php $indL = 0 @endphp
                                         @foreach($riepilogoConnessioni as $connessione)
                                             @foreach($connessione as $c)
                                                 @foreach($riepilogoVisualizzazioni as $visualizzazione)
                                                     @foreach($visualizzazione as $v)
                                                         @if($c->id_market==$v->id_market)
-                                                            <tr role="row">
-                                                                <td colspan="2" class="i"><a href="{{ route('volantino', $c->id_volantino)}}" style="color: #17a2b8;">{{$c->nome}} - {{$c->nomeMarket}}</a></td>
-                                                                <td colspan="1" class="d">{{$c->desktop}}</td>
-                                                                <td colspan="1" class="m">{{$c->mobile}}</td>
-                                                                <td colspan="1" class="t">{{$c->desktop + $c->mobile}}</td>
-                                                                <td colspan="1" class="de">{{$c->deskUni}}</td>
-                                                                <td colspan="1" class="mo">{{$c->mobUni}}</td>
-                                                                <td colspan="1" class="un">{{$c->deskUni + $c->mobUni}}</td>
-                                                                <td></td>
-                                                                <td colspan="1" class="uni">{{$v->uniche}}</td>
-                                                                <td colspan="1" class="tot">{{$v->totali}}</td>
-                                                                <td></td>
-                                                                @if($interattivoProdotti == '[]')
-                                                                    <td class="pr">0</td>
-                                                                @else
-                                                                    @if (count($interattivoProdotti)>$indP)    
-                                                                        @while($indP< count($interattivoProdotti))  
-                                                                            @if($interattivoProdotti[$indP]->id_market == $v->id_market)
-                                                                                <td colspan="1" class="pr">{{$interattivoProdotti[$indP]->totali}}</td>
-                                                                                @if($interattivoProdotti[$indP]->id_market == $v->id_market)
-                                                                                    @php $indP++ @endphp
-                                                                                @endif
-                                                                                
-                                                                            @else
-                                                                                <td class="pr">0</td>
-                                                                            @endif
-                                                                            @break
-                                                                        @endwhile
-                                                                    @else
-                                                                        <td class="pr">0</td> 
-                                                                    @endif       
-                                                                @endif
-                                                                @if($interattivoRicette == '[]')
-                                                                    <td class="ri">0</td>
-                                                                @else
-                                                                <!-- ////////////// PROVA A FARLO CON UN FOR E METTERE IL "<=" ////////////// -->
-                                                                    @if (count($interattivoRicette)>$indR)
-                                                                        @while($indR < count($interattivoRicette))  
-                                                                            @if($interattivoRicette[$indR]->id_market == $v->id_market)
-                                                                                <td colspan="1" class="ri">{{$interattivoRicette[$indR]->totali}}</td>
-                                                                                @if($interattivoRicette[$indR]->id_market == $v->id_market)
-                                                                                    @php $indR++ @endphp
-                                                                                @endif
-                                                                            @else
-                                                                                <td class="ri">0</td>
-                                                                            @endif
-                                                                            @break
-                                                                        @endwhile
-                                                                    @else
-                                                                        <td class="ri">0</td> 
-                                                                    @endif       
-                                                                @endif
-                                                                @if($interattivoVideo == '[]')
-                                                                    <td class="vi">0</td>
-                                                                @else 
-                                                                    @if (count($interattivoVideo)>$indV)
-                                                                        @while($indV< count($interattivoVideo))  
-                                                                            @if($interattivoVideo[$indV]->id_market == $v->id_market)
-                                                                                <td colspan="1" class="vi">{{$interattivoVideo[$indV]->totali}}</td>
-                                                                                @if($interattivoVideo[$indV]->id_market == $v->id_market)
-                                                                                    @php $indV++ @endphp
-                                                                                @endif
-                                                                                
-                                                                                
-                                                                            @else
-                                                                                <td class="vi">0</td>
-                                                                            @endif
-                                                                            @break
-                                                                        @endwhile
-                                                                    @else
-                                                                        <td class="vi">0</td> 
-                                                                    @endif    
-                                                                @endif
-                                                                @if($interattivoCuriosita == '[]')
-                                                                    <td class="cu">0</td>
-                                                                @else 
-                                                                    @if (count($interattivoCuriosita)>$indC)
-                                                                        @while($indC< count($interattivoCuriosita))  
-                                                                            @if($interattivoCuriosita[$indC]->id_market == $v->id_market)
-                                                                                <td colspan="1" class="cu">{{$interattivoCuriosita[$indC]->totali}}</td>
-                                                                                @if($interattivoCuriosita[$indC]->id_market == $v->id_market)
-                                                                                    @php $indC++ @endphp
-                                                                                @endif
-                                                                                
-                                                                                
-                                                                            @else
-                                                                                <td class="cu">0</td>
-                                                                            @endif
-                                                                            @break
-                                                                        @endwhile
-                                                                    @else
-                                                                        <td class="cu">0</td> 
-                                                                    @endif 
-                                                                @endif
-                                                                @if($interattivoLink == '[]')
-                                                                    <td class="li">0</td>
-                                                                @else 
-                                                                    @if (count($interattivoLink)>$indL)    
-                                                                        @while($indL< count($interattivoLink))  
-                                                                            @if($interattivoLink[$indL]->id_market == $v->id_market)
-                                                                                <td colspan="1" class="li">{{$interattivoLink[$indL]->totali}}</td>
-                                                                                @if($interattivoLink[$indL]->id_market == $v->id_market)
-                                                                                    @php $indL++ @endphp
-                                                                                @endif
-                                                                                
-                                                                                
-                                                                            @else
-                                                                                <td class="li">0</td>
-                                                                            @endif
-                                                                            @break
-                                                                        @endwhile
-                                                                    @else
-                                                                        <td class="li">0</td> 
-                                                                    @endif 
-                                                                @endif
-                                                                <td></td>
-                                                                <td colspan="1" class="lis">0</td>
-                                                                <td colspan="1" class="imp">0</td>
-                                                                <td colspan="1" class="med">0</td>
-                                                            </tr>
+                                                            @foreach($riepilogoInterattivi as $interattivi)
+                                                                @foreach($interattivi as $i) 
+                                                                    @if($v->id_market==$i->id_market)
+                                                                        <tr role="row">
+                                                                            <td colspan="2" class="i"><a href="{{ route('volantino', $c->id_volantino)}}" style="color: #17a2b8;">{{$c->nome}} - {{$c->nomeMarket}}</a></td>
+                                                                            <td colspan="1" class="d">{{$c->desktop}}</td>
+                                                                            <td colspan="1" class="m">{{$c->mobile}}</td>
+                                                                            <td colspan="1" class="t">{{$c->desktop + $c->mobile}}</td>
+                                                                            <td colspan="1" class="de">{{$c->deskUni}}</td>
+                                                                            <td colspan="1" class="mo">{{$c->mobUni}}</td>
+                                                                            <td colspan="1" class="un">{{$c->deskUni + $c->mobUni}}</td>
+                                                                            <td></td>
+                                                                            <td colspan="1" class="uni">{{$v->uniche}}</td>
+                                                                            <td colspan="1" class="tot">{{$v->totali}}</td>
+                                                                            <td></td>
+                                                                            <td class="pr">{{$i->totaliP}}</td>
+                                                                            <td class="pr">{{$i->totaliR}}</td>
+                                                                            <td class="pr">{{$i->totaliV}}</td>
+                                                                            <td class="pr">{{$i->totaliCu}}</td>
+                                                                            <td class="pr">{{$i->totaliC}}</td>
+                                                                            <td></td>
+                                                                            <td colspan="1" class="lis">0</td>
+                                                                            <td colspan="1" class="imp">0</td>
+                                                                            <td colspan="1" class="med">0</td>
+                                                                        </tr>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endforeach
                                                         @endif
                                                     @endforeach
                                                 @endforeach
@@ -796,18 +725,13 @@
                                             <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateBack"><i class="material-icons keyboard_arrow_left">&#xe314;</i></button>
                                             <ul class="pagination"></ul>
                                             <button type="button" style="border: none; background-color: #ff0202a8;" class="jPaginateNext"><i class="material-icons keyboard_arrow_right">&#xe315;</i></button>
-                                        </td>
-                                        
-                                        
+                                        </td> 
                                     </tr>
-                            </table>
-                            
+                                </table>
+                            </div>
                         </div>
-            
                     </div>
         </div>
-
-    </div>
 
 
 </main>
@@ -904,15 +828,72 @@
     /* horizontal bar chart */
     var regioni = <?php echo json_encode($arrRegioni); ?>;
     var regioni1 = Object.values(regioni);
+    var grafico = <?php echo json_encode($datiGrafico); ?>;
     var indiceR = regioni1.length
     var arrUniche = <?php echo json_encode($arrUniche); ?>;
     var arrTotali = <?php echo json_encode($arrTotali); ?>;
-    var rU = []
-    var rT = []
-    for(i=0; i<arrUniche.length; i++){
-        rU[i] = arrUniche[i] + arrUniche[i+indiceR]
-        rT[i] = arrTotali[i] + arrTotali[i+indiceR]
+    // var rU = []
+    // var rT = []
+    //console.log(grafico)
+    var resultG = [];
+    for (var i = 0; i < grafico.length; i++){
+        grafico[i].reduce(function(res, value) {
+        if (!res[value.place]) {
+            res[value.place] = { place: value.place, somma: 0 };
+            resultG.push(res[value.place])
+        }
+        res[value.place].somma += value.somma;
+        return res;
+        }, {});
     }
+    var resultGU = [];
+    for (var i = 0; i < grafico.length; i++){
+        grafico[i].reduce(function(resU, value) {
+        if (!resU[value.place]) {
+            resU[value.place] = { place: value.place, uniche: 0 };
+            resultGU.push(resU[value.place])
+        }
+        resU[value.place].uniche += value.uniche;
+        return resU;
+        }, {});
+    }
+    //console.log(resultGU)
+    var resultFinaleG = [];
+    resultG.reduce(function(res, value) {
+    if (!res[value.place]) {
+        res[value.place] = { place: value.place, somma: 0 };
+        resultFinaleG.push(res[value.place])
+    }
+    res[value.place].somma += value.somma;
+    return res;
+    }, {});
+    // console.log(resultFinaleG)
+    var resultFinaleGU = [];
+        resultGU.reduce(function(resU, value) {
+        if (!resU[value.place]) {
+            resU[value.place] = { place: value.place, uniche: 0 };
+            resultFinaleGU.push(resU[value.place])
+        }
+        resU[value.place].uniche += value.uniche;
+        return resU;
+        }, {});
+    // console.log(resultFinaleGU)
+    var sommeG =[]
+    var unicheG =[]
+    for (var i = 0; i < resultFinaleG.length; i++){
+        sommeG[i] = resultFinaleG[i].somma
+        unicheG[i] = resultFinaleGU[i].uniche
+    }
+    // if(arrUniche.length>indiceR){
+    //     for(i=0; i<arrUniche.length; i++){
+    //         rU[i] = arrUniche[i] + arrUniche[i+indiceR]
+    //         rT[i] = arrTotali[i] + arrTotali[i+indiceR]
+    //     }
+    // }else{
+    //         rU = arrUniche
+    //         rT = arrTotali
+    //     }
+    
     var horizontalBarChart = function() {
         var horizontalBarChart = {
             labels: regioni,
@@ -921,7 +902,7 @@
                     backgroundColor: color.primary._100,
                     borderColor: color.primary._100,
                     borderWidth: 1,
-                    data: rT
+                    data: sommeG
                     
                 },
                 {
@@ -929,7 +910,7 @@
                     backgroundColor: color.primary._300,
                     borderColor: color.primary._500,
                     borderWidth: 1,
-                    data: rU
+                    data: unicheG
                 }
             ]
 
@@ -992,9 +973,15 @@
     var indice = giorni1.length
     var cU = []
     var cT = []
-    for(i=0; i<connessioniUniche.length; i++){
-        cU[i] = connessioniUniche[i] + connessioniUniche[i+indice]
-        cT[i] = connessioniTotale[i] + connessioniTotale[i+indice]
+    //console.log(connessioniUniche)
+    if(connessioniUniche.length>indice){
+        for(i=0; i<connessioniUniche.length; i++){
+            cU[i] = connessioniUniche[i] + connessioniUniche[i+indice]
+            cT[i] = connessioniTotale[i] + connessioniTotale[i+indice]
+        }
+    }else{
+        cU = connessioniUniche
+        cT = connessioniTotale
     }
     var barChart = function() {
         var barChartData = {
@@ -1066,115 +1053,129 @@
     }
     /* bar chart -- end */
 
-    /* bar chart */
-    var totali = <?php echo json_encode($sommaMobile + $sommaDesktop); ?>;
-    var uniche = <?php echo json_encode($sommaUnicaDesktop+$sommaUnicaMobile); ?>; 
+    /* bar chart0 */
     var connessioni = <?php echo json_encode($visits); ?>; 
     var giorniM = <?php echo json_encode($arrayMesi); ?>;
     var giorniM1 = Object.values(giorniM);
-    var indiceM = giorniM1.length
-    var cUm = []
-    var cTm = []
-    
-    function convertIntObj(connessioni) {
-        const res = {}
-        for (const key in connessioni) {
-            res[key] = {};
-            for (const prop in connessioni[key]) {
-            const parsed = parseInt(connessioni[key][prop], 10);
-            res[key][prop] = isNaN(parsed) ? connessioni[key][prop] : parsed;
+    console.log(connessioni)     
+    var result = [];
+    for (var i = 0; i < connessioni.length; i++){
+        connessioni[i].reduce(function(res, value) {
+        if (!res[value.mese]) {
+            res[value.mese] = { mese: value.mese, sommaV: 0 };
+            result.push(res[value.mese])
+        }
+        res[value.mese].sommaV += value.sommaV;
+        return res;
+        }, {});
+    }
+    var resultU = [];
+    for (var i = 0; i < connessioni.length; i++){
+        connessioni[i].reduce(function(resU, value) {
+        if (!resU[value.mese]) {
+            resU[value.mese] = { mese: value.mese, unicheV: 0 };
+            resultU.push(resU[value.mese])
+        }
+        resU[value.mese].unicheV += value.unicheV;
+        return resU;
+        }, {});
+    }
+    //console.log(resultU)
+    var resultFinale = [];
+        result.reduce(function(res, value) {
+        if (!res[value.mese]) {
+            res[value.mese] = { mese: value.mese, sommaV: 0 };
+            resultFinale.push(res[value.mese])
+        }
+        res[value.mese].sommaV += value.sommaV;
+        return res;
+        }, {});
+    // console.log(resultFinale)
+    var resultFinaleU = [];
+        resultU.reduce(function(resU, value) {
+        if (!resU[value.mese]) {
+            resU[value.mese] = { mese: value.mese, unicheV: 0 };
+            resultFinaleU.push(resU[value.mese])
+        }
+        resU[value.mese].unicheV += value.unicheV;
+        return resU;
+        }, {});
+    // console.log(resultFinaleU)
+    var somme =[]
+    var uniche =[]
+    for (var i = 0; i < resultFinale.length; i++){
+        somme[i] = resultFinale[i].sommaV
+        uniche[i] = resultFinaleU[i].unicheV
+    }
+    // console.log(somme)
+    var barChart0 = function() {
+        var barChartData = {
+            labels: giorniM1,
+            datasets: [{
+                    label: "Connessioni Totali",
+                    backgroundColor:  color.primary._100,
+                    borderColor:  color.primary._100,
+                    borderWidth: 1,
+                    data: somme,
+                },
+                {
+                    label: "Connessioni Uniche",
+                    backgroundColor: color.primary._300,
+                    borderColor: color.primary._500,
+                    borderWidth: 1,
+                    data: uniche,
+                }
+            ]
+
+        };
+        var config = {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: false,
+                    text: 'Bar Chart'
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: '6 months forecast'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: 'Profit margin (approx)'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }]
+                }
             }
         }
-        return res;
+        new Chart($("#barChart0 > canvas").get(0).getContext("2d"), config);
     }
-    var result = [];
-    for (var i=0; i<connessioni.length; i++) {
-    result.push(convertIntObj(connessioni[i]));
-    var arrayResult = Object.values(result);
-    }
-    console.log(result)  /// OGGETTO DI OGGETTI /////
-    console.log(arrayResult)  //// ARRAY DI OGGETTI //////
-    var sumId =[]
-    for(i=0; i<arrayResult.length; i++){
-        for(j=0; j<arrayResult[i].length; j++){
-        sumId += arrayResult[i][j].reduce((a, {
-        mese,
-        vDq,vMq
-        }) => (a[mese] = (a[mese] || 0) + vDq + vMq, a), {});
-    }
-    }
-    console.log(sumId); //{editor: 57, admin: 56}
-
-    
-    
-    // var barChart0 = function() {
-    //     var barChartData = {
-    //         labels: giorniM,
-    //         datasets: [{
-    //                 label: "Connessioni Totali",
-    //                 backgroundColor:  color.primary._100,
-    //                 borderColor:  color.primary._100,
-    //                 borderWidth: 1,
-    //                 data: [],
-    //             },
-    //             {
-    //                 label: "Connessioni Uniche",
-    //                 backgroundColor: color.primary._300,
-    //                 borderColor: color.primary._500,
-    //                 borderWidth: 1,
-    //                 data: [],
-    //             }
-    //         ]
-
-    //     };
-    //     var config = {
-    //         type: 'bar',
-    //         data: barChartData,
-    //         options: {
-    //             responsive: true,
-    //             legend: {
-    //                 position: 'top',
-    //             },
-    //             title: {
-    //                 display: false,
-    //                 text: 'Bar Chart'
-    //             },
-    //             scales: {
-    //                 xAxes: [{
-    //                     display: true,
-    //                     scaleLabel: {
-    //                         display: false,
-    //                         labelString: '6 months forecast'
-    //                     },
-    //                     gridLines: {
-    //                         display: true,
-    //                         color: "#f2f2f2"
-    //                     },
-    //                     ticks: {
-    //                         beginAtZero: true,
-    //                         fontSize: 11
-    //                     }
-    //                 }],
-    //                 yAxes: [{
-    //                     display: true,
-    //                     scaleLabel: {
-    //                         display: false,
-    //                         labelString: 'Profit margin (approx)'
-    //                     },
-    //                     gridLines: {
-    //                         display: true,
-    //                         color: "#f2f2f2"
-    //                     },
-    //                     ticks: {
-    //                         beginAtZero: true,
-    //                         fontSize: 11
-    //                     }
-    //                 }]
-    //             }
-    //         }
-    //     }
-    //     new Chart($("#barChart0 > canvas").get(0).getContext("2d"), config);
-    // }
     /* bar chart -- end */
 
     /* bar chart */
@@ -1184,10 +1185,15 @@
     var gP = Object.values(giorniPag);
     var indiceP = gP.length
     var vU = []
-    var vT = []                                                          //////////////////// SBAGLIATO ///////////////////////////////////
-    for(i=0; i<visualizzazioni.length; i++){
-        vU[i] = pagineUniche[i] + pagineUniche[i+indiceP]
-        vT[i] = visualizzazioni[i] + visualizzazioni[i+indiceP]
+    var vT = []
+    if(pagineUniche.length>indiceP){                                                         
+        for(i=0; i<visualizzazioni.length; i++){
+            vU[i] = pagineUniche[i] + pagineUniche[i+indiceP]
+            vT[i] = visualizzazioni[i] + visualizzazioni[i+indiceP]
+        }
+    }else{
+        vU = pagineUniche
+        vT = visualizzazioni
     }
     var barChart1 = function() {
         var barChartData = {
@@ -1263,6 +1269,132 @@
     /* bar chart -- end */
 
     /* bar chart */
+     
+    var pagine = <?php echo json_encode($pagine); ?>; 
+    var giorniM = <?php echo json_encode($arrayMesi); ?>;
+    var giorniM1 = Object.values(giorniM);
+    // console.log(giorniM1)     
+    var resultPag = [];
+    for (var i = 0; i < pagine.length; i++){
+        pagine[i].reduce(function(res, value) {
+        if (!res[value.mese]) {
+            res[value.mese] = { mese: value.mese, sommaP: 0 };
+            resultPag.push(res[value.mese])
+        }
+        res[value.mese].sommaP += value.sommaP;
+        return res;
+        }, {});
+    }
+    var resultPagU = [];
+    for (var i = 0; i < pagine.length; i++){
+        pagine[i].reduce(function(resU, value) {
+        if (!resU[value.mese]) {
+            resU[value.mese] = { mese: value.mese, unicheP: 0 };
+            resultPagU.push(resU[value.mese])
+        }
+        resU[value.mese].unicheP += value.unicheP;
+        return resU;
+        }, {});
+    }
+    //console.log(resultU)
+    var resultFinalePag = [];
+        resultPag.reduce(function(res, value) {
+        if (!res[value.mese]) {
+            res[value.mese] = { mese: value.mese, sommaP: 0 };
+            resultFinalePag.push(res[value.mese])
+        }
+        res[value.mese].sommaP += value.sommaP;
+        return res;
+        }, {});
+    // console.log(resultFinale)
+    var resultFinalePagU = [];
+        resultPagU.reduce(function(resU, value) {
+        if (!resU[value.mese]) {
+            resU[value.mese] = { mese: value.mese, unicheP: 0 };
+            resultFinalePagU.push(resU[value.mese])
+        }
+        resU[value.mese].unicheP += value.unicheP;
+        return resU;
+        }, {});
+    // console.log(resultFinaleU)
+    var sommePag =[]
+    var unichePag =[]
+    for (var i = 0; i < resultFinalePag.length; i++){
+        sommePag[i] = resultFinalePag[i].sommaP
+        unichePag[i] = resultFinalePagU[i].unicheP
+    }
+    // console.log(somme)
+    var barChartP = function() {
+        var barChartData = {
+            labels: giorniM1,
+            datasets: [{
+                    label: "Connessioni Totali",
+                    backgroundColor:  color.danger._100,
+                    borderColor:  color.danger._100,
+                    borderWidth: 1,
+                    data: sommePag,
+                },
+                {
+                    label: "Connessioni Uniche",
+                    backgroundColor: color.danger._300,
+                    borderColor: color.danger._500,
+                    borderWidth: 1,
+                    data: unichePag,
+                }
+            ]
+
+        };
+        var config = {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: false,
+                    text: 'Bar Chart'
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: '6 months forecast'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: false,
+                            labelString: 'Profit margin (approx)'
+                        },
+                        gridLines: {
+                            display: true,
+                            color: "#f2f2f2"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            fontSize: 11
+                        }
+                    }]
+                }
+            }
+        }
+        new Chart($("#barChartP > canvas").get(0).getContext("2d"), config);
+    }
+    /* bar chart -- end */
+
+    /* bar chart */
     var curiosita = <?php echo json_encode($sommaCuriosita); ?>;
     var link = <?php echo json_encode($sommaCollegamenti); ?>;
     var ricette = <?php echo json_encode($sommaRicette); ?>;
@@ -1323,11 +1455,12 @@
     let numbers5= Object.values(<?php echo json_encode($arrayRicette); ?>);
     let numbers6= Object.values(<?php echo json_encode($arrayVai_a); ?>);
     // console.log(numbers)
+    // console.log(data)
     let arrCu=[]
     for(i =0; i < numbers.length; i++){
         arrCu[i]= numbers[i].somma
     }
-    //console.log(arrCu)
+    console.log(arrCu)
     let arrEcomm=[]
     for(i =0; i < numbers2.length; i++){
         arrEcomm[i]= numbers2[i].somma
@@ -1348,8 +1481,6 @@
     for(i=0;i<numbers6.length;i++){
         arrVai[i]=numbers6[i].somma
     }
-
-    
     var barStacked = function() {
         var barStackedData = {
             labels: data,
@@ -1793,9 +1924,10 @@
         // lineChart();
         // areaChart();
         horizontalBarChart();
-        // barChart0();
+        barChart0();
         barChart();
         barChart1();
+        barChartP();
         barChart2();
         barStacked();
         // barHorizontalStacked();

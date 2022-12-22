@@ -741,7 +741,7 @@
 
                                 <table id="test-list5" class="table table-striped data-t table-sm table-bordered table-volantino dataTable ">
                                     <thead>
-                                    <tr class="text-white" role="row" style="background-color: red;">
+                                        <tr class="text-white" role="row" style="background-color: red;">
                                             <th colspan="2"></th>
                                             <th colspan="6"><i class="bi bi-bar-chart-line-fill"></i> Connessioni</th>
                                             <th></th>
