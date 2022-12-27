@@ -52,11 +52,16 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function benvenuto($id){
-       
+        
         $promo = Promo::find($id);
+        //dd($promo);
+        $volantino= Volantino::where(['id_promo'=> $promo->id])->get(); 
+        //dd($volantino);
         //Promo su cui ho cliccato
         $riepilogoConnessioni = Visite::groupBy('id_market','id_volantino')
             ->where(['id_promo' => $promo->id])
+            ->where(['history_visit.data_promo_start'=> $promo->date_start])
+            ->where(['history_visit.data_promo_end'=> $promo->date_end])
             ->where(['history_visit.id_parent' => $promo->id_canale])
             ->join('elenco_market', 'elenco_market.id', '=', 'history_visit.id_market')
             // ->select(DB::raw("SUM(visite_desktop_qta) AS desktop, SUM(visite_mobile_qta) AS mobile, SUM(visite_uniche_desktop_qta) AS deskUni, SUM(visite_uniche_mobile_qta) AS mobUni"), 'history_visit.id_market', 'history_visit.id_volantino','elenco_market.nome')
@@ -83,6 +88,8 @@ class HomeController extends Controller
         $riepilogoVisualizzazioni = Pagina::groupBy('id_market')
             ->where(['id_promo' => $promo->id])
             ->where(['id_parent' => $promo->id_canale])
+            ->where(['data_promo_start'=> $promo->date_start])
+            ->where(['data_promo_end'=> $promo->date_end])
             // ->select(DB::raw("SUM(pagina_desktop_qta) + SUM(pagina_mobile_qta) AS totali, SUM(pagina_unica_qta) AS uniche "), 'id_market')
             ->select(DB::raw('data_visita, SUM(pagina_qta) AS qta, SUM(pagina_unica_qta) AS uniche, SUM(pagina_desktop_qta) AS pdq, SUM(pagina_mobile_qta) AS pmq, SUM(pagina_desktop_unica_qta) AS pduq, SUM(pagina_mobile_unica_qta) AS pmuq'), 'id_market')
               
@@ -101,6 +108,7 @@ class HomeController extends Controller
         $riepilogoInterattivi= Interattivi::groupBy('id_market', )
             ->where(['id_promo' => $promo->id])
             ->where(['id_parent' => $promo->id_canale])
+            
             ->select(DB::raw("SUM(CASE WHEN tipo = 'ricetta' THEN qta ELSE 0 END) AS totaliR,SUM(CASE WHEN tipo = 'video' THEN qta ELSE 0 END) AS totaliV,SUM(CASE WHEN tipo = 'prodotto' THEN qta ELSE 0 END) AS totaliP,SUM(CASE WHEN tipo = 'curiosita' THEN qta ELSE 0 END) AS totaliCu,SUM(CASE WHEN tipo = 'collegamento' THEN qta ELSE 0 END) AS totaliC"),'id_market','id_parent' )
             ->groupBy(DB::raw("id_parent"))
             ->orderBy('id_market', 'ASC')
@@ -111,6 +119,9 @@ class HomeController extends Controller
         ///////////////////   GRAFICI PARTE CONNESSIONI //////////////////////
         $visits = Visite::where(['id_promo' => $promo->id])
         // ->groupBy('data_visita')
+        ->where(['data_promo_start'=> $promo->date_start])
+        ->where(['data_promo_end'=> $promo->date_end])
+        ->where(['id_parent'=> $promo->id_canale])
         ->select(DB::raw('data_visita, SUM(visite_qta) AS qta, SUM(visite_uniche_qta) AS uniche, SUM(visite_desktop_qta) AS vdq, SUM(visite_mobile_qta) AS vmq, SUM(visite_uniche_desktop_qta) AS vudq, SUM(visite_uniche_mobile_qta) AS vumq'))
         ->groupBy(DB::raw('data_visita'))
         ->orderBy('data_visita', 'ASC')
@@ -139,6 +150,9 @@ class HomeController extends Controller
 
         $datiGrafico = Geo::groupBy('place')
         ->where(['id_promo' => $promo->id])
+        ->where(['data_promo_start'=> $promo->date_start])
+        ->where(['data_promo_end'=> $promo->date_end])
+        ->where(['id_parent'=> $promo->id_canale])
         ->select(DB::raw("SUM(visite_region_qta) AS somma, SUM(visite_uniche_region_qta) AS uniche"), 'place')
         ->orderBy('somma', 'DESC')
         ->get();
@@ -159,6 +173,9 @@ class HomeController extends Controller
 
        ////////////////// GRAFICI PAGINE ///////////////////
        $pagine = Pagina::where(['id_promo' => $promo->id])
+       ->where(['data_promo_start'=> $promo->date_start])
+       ->where(['data_promo_end'=> $promo->date_end])
+       ->where(['id_parent'=> $promo->id_canale])
        ->select(DB::raw('data_visita, SUM(pagina_qta) AS qta, SUM(pagina_unica_qta) AS uniche, SUM(pagina_desktop_qta) AS pdq, SUM(pagina_mobile_qta) AS pmq, SUM(pagina_desktop_unica_qta) AS pduq, SUM(pagina_mobile_unica_qta) AS pmuq'))
        ->groupBy(DB::raw('data_visita'))
        ->orderBy('data_visita', 'ASC')
@@ -195,6 +212,9 @@ class HomeController extends Controller
 
        $interattivo = Interattivi::groupBy('tipo' ,'id_prodotto', )
         ->where(['id_promo' => $promo->id])
+        ->where(['data_promo_start'=> $promo->date_start])
+        ->where(['data_promo_end'=> $promo->date_end])
+        ->where(['id_parent'=> $promo->id_canale])
         ->select(DB::raw("SUM(qta) AS somma"), 'tipo' ,'id_prodotto',)
         ->orderBy('id_prodotto', 'ASC')
         ->get();
@@ -242,12 +262,18 @@ class HomeController extends Controller
 
         $interattivo2 = Interattivi::groupBy('data_visita', 'tipo')
             ->where(['id_promo' => $promo->id])
+            ->where(['data_promo_start'=> $promo->date_start])
+            ->where(['data_promo_end'=> $promo->date_end])
+            ->where(['id_parent'=> $promo->id_canale])
             ->select(DB::raw("SUM(qta) AS somma"),'data_visita', 'tipo')
             ->orderBy('data_visita', 'ASC')
             ->get();
         //dd($interattivo2);
         $interattivoDay = Interattivi::groupBy('data_visita',)
             ->where(['id_promo' => $promo->id])
+            ->where(['data_promo_start'=> $promo->date_start])
+            ->where(['data_promo_end'=> $promo->date_end])
+            ->where(['id_parent'=> $promo->id_canale])
             ->select(DB::raw("SUM(qta) AS somma"),'data_visita')
             ->orderBy('data_visita', 'ASC')
             ->get();
@@ -315,6 +341,9 @@ class HomeController extends Controller
             // dd($prodotti);
             $finale = DB::table('history_interattivi')
                 ->where(['id_promo' => $promo->id])
+                ->where(['history_interattivi.data_promo_start'=> $promo->date_start])
+                ->where(['history_interattivi.data_promo_end'=> $promo->date_end])
+                ->where(['history_interattivi.id_parent'=> $promo->id_canale])
                 ->where('history_interattivi.tipo', '!=', "prodotto" )
                 ->where('history_interattivi.tipo', '!=', "ecommerce" )
                 ->where('history_interattivi.tipo', '!=', "vai_a" )
@@ -337,6 +366,9 @@ class HomeController extends Controller
                 //////INIZIO PRODOTTI||||||||||||||||
                  $products = DB::table('history_interattivi')
                     ->where(['id_promo' => $promo->id])
+                    ->where(['history_interattivi.data_promo_start'=> $promo->date_start])
+                    ->where(['history_interattivi.data_promo_end'=> $promo->date_end])
+                    ->where(['history_interattivi.id_parent'=> $promo->id_canale])
                     ->where(['tipo' => "prodotto"])
                     ->where('prodotti.descrizione', '!=', "")
                     ->join('prodotti', 'prodotti.seriale', '=', 'history_interattivi.seriale')
