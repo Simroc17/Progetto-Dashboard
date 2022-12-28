@@ -685,32 +685,36 @@ class HomeController extends Controller
             ->where('history_interattivi.tipo', '!=', "prodotto" )
             ->where('history_interattivi.tipo', '!=', "ecommerce" )
             ->where('history_interattivi.tipo', '!=', "vai_a" )
-            ->join('prodotti', 'prodotti.seriale', '=', 'history_interattivi.seriale')
+            ->join('prodotti', function ($join) {
+                $join->on('history_interattivi.id_volantino', '=', 'prodotti.id_volantino')
+                     ->on('history_interattivi.seriale', '=', 'prodotti.seriale');
+            })            
             ->join('prodotti_interattivi', 'prodotti_interattivi.seriale', '=', 'history_interattivi.seriale')
             ->groupBy('seriale','tipo', 'descrizione', 'descrizione_estesa', 'titolo')
-            ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','history_interattivi.tipo','prodotti.descrizione', 'prodotti.descrizione_estesa', 'prodotti_interattivi.titolo','history_interattivi.id_prodotto')
-            // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa')
+            ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','history_interattivi.tipo','prodotti.descrizione', 'prodotti.descrizione_estesa', 'prodotti_interattivi.titolo','history_interattivi.id_prodotto','history_interattivi.id_volantino')
             ->orderBy('sommaQta', 'DESC')  
             ->get();
+            //dd($finale);
         $arrTot =[];
         for($i=0; $i<count($finale); $i++){
-            $arrTot[$i] = $finale[$i]->sommaUnici; 
+            $arrTot[$i] = $finale[$i]->sommaUnici + $finale[$i]->sommaQta; 
         }
         $sommaInter = array_sum($arrTot);
         $products = DB::table('history_interattivi')
             ->where(['history_interattivi.id_volantino' =>$volantino[0]->id_volantino])
             ->where(['tipo' => "prodotto"])
             ->where('prodotti.descrizione', '!=', "")
-            ->join('prodotti', 'prodotti.seriale', '=', 'history_interattivi.seriale')
-            //->join('prodotti_interattivi', 'prodotti_interattivi.seriale', '=', 'history_interattivi.seriale')
+            ->join('prodotti', function ($join) {
+                $join->on('history_interattivi.id_volantino', '=', 'prodotti.id_volantino')
+                     ->on('history_interattivi.seriale', '=', 'prodotti.seriale');
+            })            
             ->groupBy('seriale', 'descrizione', 'descrizione_estesa','pagina')
             ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'pagina','prodotti.seriale','prodotti.descrizione', 'prodotti.descrizione_estesa','prodotti.id_prodotti')
-            // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa')
             ->orderBy('sommaQta', 'DESC')  
             ->get();
         $arrTotale =[];
         for($i=0; $i<count($products); $i++){
-                $arrTotale[$i] = $products[$i]->sommaUnici; 
+                $arrTotale[$i] = $products[$i]->sommaUnici + $products[$i]->sommaUnici; 
             }
         $sommaPr = array_sum($arrTotale);
         return view('/datatables/datatables_basic', compact('sommaPr','products','sommaInter','finale','interattivo3','arrayVai_a','arrayRicette','arrayVideo','arrayLink','arrayEcommerce','arrayprodotti','arrayGiorni2','interattivo2','arrRicette','arrayCuriosita','arrVideo','arrlink','arrRicette','arrVai_a' ,'sommaCuriosita','sommaCollegamenti','sommaRicette','sommaVai_a','sommaVideo','sommaEcommerce','array','interattivoRicette','interattivoVideo','interattivoCuriosita','interattivoLink','interattivoProdotti', 'volantinoId','volantino1' ,'volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));

@@ -635,7 +635,8 @@
                                         <h1 style="font-family:verdana; font-size: 1.2rem;">{{$fin->descrizione}}</h1>
                                     </div>
                                     <div class="col-12 p-1">
-                                        <img style="height:200px;"src="https://resources.volantinopiu.it/flyer/{{$array[0]}}/{{$array[1]}}/{{$array[2]}}/{{$array[3]}}/{{$array[4]}}/screenshot/{{$fin->id_prodotto}}.jpg" class="img-prod zoom">
+                                        @php $array = str_split($fin->id_volantino); @endphp
+                                        @if(file_exists('https://resources.volantinopiu.it/flyer/{{$array[0]}}/{{$array[1]}}/{{$array[2]}}/{{$array[3]}}/{{$array[4]}}/screenshot/{{$fin->id_prodotto}}.jpg'))<img style="height:200px;"src="https://resources.volantinopiu.it/flyer/{{$array[0]}}/{{$array[1]}}/{{$array[2]}}/{{$array[3]}}/{{$array[4]}}/screenshot/{{$fin->id_prodotto}}.jpg" class="img-prod zoom m-b-2">@else<img src="https://www.volantinopiu.it/img/nofoto.jpg" class="img-prod" style="height:200px;">@endif
                                     </div>
                                     <div class="col-12 p-1">
                                         <div class="float-left">
@@ -1360,43 +1361,43 @@
             labels: data,
             datasets: [{
                     label: "Curiosita",
-                    backgroundColor: color.primary._300,
-                    borderColor: color.primary._500,
+                    backgroundColor: color.success._300,
+                    borderColor: color.success._500,
                     borderWidth: 1,
                     data: arrCu,
                 },
                 {
                     label: "Ecommerce",
-                    backgroundColor: color.danger._300,
-                    borderColor: color.danger._500,
+                    backgroundColor: color.info._900,
+                    borderColor: color.info._900,
                     borderWidth: 1,
                     data: arrEcomm,
                 },
                 {
                     label: "Link",
-                    backgroundColor: color.warning._300,
-                    borderColor: color.warning._500,
+                    backgroundColor: color.primary._800,
+                    borderColor: color.primary._900,
                     borderWidth: 1,
                     data: arrLink,
                 },
                 {
                     label: "Video",
-                    backgroundColor: color.success._300,
-                    borderColor: color.success._500,
+                    backgroundColor: color.danger._300,
+                    borderColor: color.danger._500,
                     borderWidth: 1,
                     data: arrVid,
                 },
                 {
                     label: "Ricette",
-                    backgroundColor: color.warning._700,
-                    borderColor: color.warning._500,
+                    backgroundColor: color.warning._900,
+                    borderColor: color.warning._800,
                     borderWidth: 1,
                     data: arrRic,
                 },
                 {
                     label: "Vai_a",
-                    backgroundColor: color.success._1000,
-                    borderColor: color.success._00,
+                    backgroundColor: color.primary._300,
+                    borderColor: color.primary._500,
                     borderWidth: 1,
                     data: arrVai,
                 }
