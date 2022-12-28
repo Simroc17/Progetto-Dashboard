@@ -28,13 +28,13 @@
         <div style="font-size: 20px;" class="col-6"> <i class="fa-solid fa-bomb"></i> {{$promo->nome}}: {{$promo->descrizione}}</div>
         <div class="col-6">
             @if ($promo->id_canale==75)
-            <img src="{{asset('img/decoNuova.png')}}" alt="" style="width: 100px;margin-left: 70px; float:right; border-radius:5px;">
+            <img src="{{asset('img/decoNuova.png')}}" class="zoom" alt="" style="width: 100px;margin-left: 70px; float:right; border-radius:5px;">
             @elseif ($promo->id_canale==92)
-            <img src="{{asset('img\sebonNuova.png')}}" alt="" style="width:100px; margin-left: 70px; float:right; border-radius:5px;">
+            <img src="{{asset('img\sebonNuova.png')}}" class="zoom" alt="" style="width:100px; margin-left: 70px; float:right; border-radius:5px;">
             @elseif ($promo->id_canale==141)
-            <img src="{{asset('img\ayokaNuova.png')}}" alt="" style="width:100px;margin-left: 70px; float:right; border-radius:5px;">
+            <img src="{{asset('img\ayokaNuova.png')}}" class="zoom"alt="" style="width:100px;margin-left: 70px; float:right; border-radius:5px;">
             @else($promo->id_canale==143)
-            <img src="{{asset('img\dodeca.png')}}" alt="" style="width:100px;margin-left: 70px; float:right; border-radius:5px;">
+            <img src="{{asset('img\dodeca.png')}}" class="zoom" alt="" style="width:100px;margin-left: 70px; float:right; border-radius:5px;">
             @endif
         </div>
     </div>
