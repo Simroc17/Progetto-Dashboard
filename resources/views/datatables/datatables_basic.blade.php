@@ -205,7 +205,7 @@
     <div class="row mb-2">
         <div class="col-lg-3 col-6" style="border-radius:25px;">
             <div class="box text-center" style=" background-color: #17a2b8; border-radius:5px;">
-                <h3 class="fw-500 text-white"><i class="ion ion-stats-bars"></i> Connessioni</h3>
+                <h3 class="fw-500 text-white"> Connessioni</h3>
                 <hr style=" border-bottom-style: solid;">
                 <div class="row">
                     <div class="col-sm-6 border-right">
@@ -225,7 +225,7 @@
         </div>
         <div class="col-lg-3 col-6" style="border-radius:25px;">
             <div class="box text-center" style=" background-color: #dc3545; border-radius:5px;">
-                <h3 class="fw-500 text-white"><i class="ion ion-stats-bars"></i> Pagine</h3>
+                <h3 class="fw-500 text-white"> Pagine</h3>
                 <hr style=" border-bottom-style: solid;">
                 <div class="row">
                     <div class="col-sm-6 border-right">
@@ -245,7 +245,7 @@
         </div>
         <div class="col-lg-3 col-6" style="border-radius:25px;">
             <div class="box text-center" style=" background-color: #ffc107; border-radius:5px;">
-                <h3 class="fw-500 text-white"><i class="ion ion-stats-bars"></i> Interattivi</h3>
+                <h3 class="fw-500 text-white">Interattivi</h3>
                 <hr style=" border-bottom-style: solid;">
                 <div class="row">
                     <div class="col-sm-6 border-right">
@@ -265,7 +265,7 @@
         </div>
         <div class="col-lg-3 col-6" style="border-radius:25px;">
             <div class="box text-center" style=" background-color: #28a745; border-radius:5px;">
-                <h3 class="fw-500 text-white"><i class="ion ion-stats-bars"></i> Prodotti</h3>
+                <h3 class="fw-500 text-white">Prodotti</h3>
                 <hr style=" border-bottom-style: solid;">
                 <div class="row">
                     <div class="col-sm-6 border-right">

@@ -113,8 +113,12 @@ class HomeController extends Controller
             ->groupBy(DB::raw("id_parent"))
             ->orderBy('id_market', 'ASC')
             ->get();
-            //dd($riepilogoInterattivi);
-        
+        $totalProduct = [];
+        for($i = 0; $i <count($riepilogoInterattivi); $i++){
+            $totalProduct = array_merge($totalProduct, array($riepilogoInterattivi[$i]->totaliP));
+        }
+        $totalSumProduct = array_sum($totalProduct);
+        //dd($totalSumProduct);
     
         ///////////////////   GRAFICI PARTE CONNESSIONI //////////////////////
         $visits = Visite::where(['id_promo' => $promo->id])
@@ -376,11 +380,13 @@ class HomeController extends Controller
                     ->join('prodotti', function ($join) {
                         $join->on('history_interattivi.id_volantino', '=', 'prodotti.id_volantino')
                              ->on('history_interattivi.seriale', '=', 'prodotti.seriale');
-                    })                    ->groupBy('seriale', 'descrizione', 'descrizione_estesa')
+                    })                    
+                    
                     ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','prodotti.descrizione', 'prodotti.descrizione_estesa','prodotti.id_prodotti','history_interattivi.id_volantino')
+                    ->groupBy('seriale', 'descrizione', 'descrizione_estesa')
                     ->orderBy('sommaQta', 'DESC')  
                     ->get();
-           //dd($products);
+           dd($products);
            $arrTotale =[];
            for($i=0; $i<count($products); $i++){
                    $arrTotale[$i] = $products[$i]->sommaUnici + $products[$i]->sommaQta; 
@@ -388,7 +394,7 @@ class HomeController extends Controller
            $sommaPr = array_sum($arrTotale);
           //dd($arrTotale);
        
-        return view('/statistics/statistics_chartjs', compact('sommaProdotti', 'sumD', 'sumM', 'sumDu', 'sumMu', 'sumVtot', 'sumVuni','riepilogoInterattivi','riepilogoVisualizzazioni' ,'riepilogoConnessioni' ,'sommaPr','sommaInter' ,'products','finale'  ,'interattivo2','arrayVai_a','arrayRicette','arrayLink' ,'arrayVideo' ,'arrayEcommerce' ,'arrayCuriosita','arrayGiorni2','arrayprodotti','sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
+        return view('/statistics/statistics_chartjs', compact('totalSumProduct','sommaProdotti', 'sumD', 'sumM', 'sumDu', 'sumMu', 'sumVtot', 'sumVuni','riepilogoInterattivi','riepilogoVisualizzazioni' ,'riepilogoConnessioni' ,'sommaPr','sommaInter' ,'products','finale'  ,'interattivo2','arrayVai_a','arrayRicette','arrayLink' ,'arrayVideo' ,'arrayEcommerce' ,'arrayCuriosita','arrayGiorni2','arrayprodotti','sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag', 'negozi', 'markets','id','arrayPromo','marketsAll','promozioni', 'promo', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile',));
     }
 
       /**
