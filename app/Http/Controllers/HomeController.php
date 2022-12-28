@@ -347,11 +347,13 @@ class HomeController extends Controller
                 ->where('history_interattivi.tipo', '!=', "prodotto" )
                 ->where('history_interattivi.tipo', '!=', "ecommerce" )
                 ->where('history_interattivi.tipo', '!=', "vai_a" )
-                ->join('prodotti', 'prodotti.seriale', '=', 'history_interattivi.seriale')
+                ->join('prodotti', function ($join) {
+                    $join->on('history_interattivi.id_volantino', '=', 'prodotti.id_volantino')
+                         ->on('history_interattivi.seriale', '=', 'prodotti.seriale');
+                })
                 ->join('prodotti_interattivi', 'prodotti_interattivi.seriale', '=', 'history_interattivi.seriale')
                 ->groupBy('seriale','tipo', 'descrizione', 'descrizione_estesa', 'titolo')
-                ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','history_interattivi.tipo','prodotti.descrizione', 'prodotti.descrizione_estesa', 'prodotti_interattivi.titolo', 'history_interattivi.id_prodotto','history_interattivi.id_volantino')
-                // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa')
+                ->select(DB::raw("SUM(history_interattivi.qta) AS sommaQta ,SUM(history_interattivi.qta_unici) AS sommaUnici" ),'prodotti.seriale','history_interattivi.tipo','prodotti.descrizione', 'prodotti.descrizione_estesa', 'prodotti_interattivi.titolo', 'history_interattivi.id_prodotto','history_interattivi.id_volantino')
                 ->orderBy('sommaQta', 'DESC') 
                 ->get();
             //dd($finale);
@@ -371,11 +373,11 @@ class HomeController extends Controller
                     ->where(['history_interattivi.id_parent'=> $promo->id_canale])
                     ->where(['tipo' => "prodotto"])
                     ->where('prodotti.descrizione', '!=', "")
-                    ->join('prodotti', 'prodotti.seriale', '=', 'history_interattivi.seriale')
-                    //->join('prodotti_interattivi', 'prodotti_interattivi.seriale', '=', 'history_interattivi.seriale')
-                    ->groupBy('seriale', 'descrizione', 'descrizione_estesa')
-                    ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','prodotti.descrizione', 'prodotti.descrizione_estesa','prodotti.id_prodotti')
-                    // ->select('history_interattivi.qta','prodotti.descrizione', 'prodotti.descrizione_estesa')
+                    ->join('prodotti', function ($join) {
+                        $join->on('history_interattivi.id_volantino', '=', 'prodotti.id_volantino')
+                             ->on('history_interattivi.seriale', '=', 'prodotti.seriale');
+                    })                    ->groupBy('seriale', 'descrizione', 'descrizione_estesa')
+                    ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','prodotti.descrizione', 'prodotti.descrizione_estesa','prodotti.id_prodotti','history_interattivi.id_volantino')
                     ->orderBy('sommaQta', 'DESC')  
                     ->get();
            //dd($products);
