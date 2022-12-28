@@ -491,7 +491,7 @@
                                         </div>
                                         <div class="col-12 p-1">
                                         @php $array = str_split($fin->id_volantino); @endphp
-                                        <img style="height:200px;"src="https://resources.volantinopiu.it/flyer/{{$array[0]}}/{{$array[1]}}/{{$array[2]}}/{{$array[3]}}/{{$array[4]}}/screenshot/{{$fin->id_prodotto}}.jpg" class="img-prod zoom m-b-2">
+                                        @if(file_exists('https://resources.volantinopiu.it/flyer/{{$array[0]}}/{{$array[1]}}/{{$array[2]}}/{{$array[3]}}/{{$array[4]}}/screenshot/{{$fin->id_prodotto}}.jpg'))<img style="height:200px;"src="https://resources.volantinopiu.it/flyer/{{$array[0]}}/{{$array[1]}}/{{$array[2]}}/{{$array[3]}}/{{$array[4]}}/screenshot/{{$fin->id_prodotto}}.jpg" class="img-prod zoom m-b-2">@else<img src="https://www.volantinopiu.it/img/nofoto.jpg" class="img-prod" style="height:200px;">@endif
                                         </div>
                                         <div class="col-12 p-1">
                                             <div class="float-left">
