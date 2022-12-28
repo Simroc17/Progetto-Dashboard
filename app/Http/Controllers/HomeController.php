@@ -386,7 +386,7 @@ class HomeController extends Controller
                     ->groupBy('seriale', 'descrizione', 'descrizione_estesa')
                     ->orderBy('sommaQta', 'DESC')  
                     ->get();
-           dd($products);
+           //dd($products);
            $arrTotale =[];
            for($i=0; $i<count($products); $i++){
                    $arrTotale[$i] = $products[$i]->sommaUnici + $products[$i]->sommaQta; 
