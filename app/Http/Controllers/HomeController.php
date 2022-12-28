@@ -380,10 +380,10 @@ class HomeController extends Controller
                     ->select(DB::raw("SUM(qta) AS sommaQta ,SUM(qta_unici) AS sommaUnici" ),'prodotti.seriale','prodotti.descrizione', 'prodotti.descrizione_estesa','prodotti.id_prodotti','history_interattivi.id_volantino')
                     ->orderBy('sommaQta', 'DESC')  
                     ->get();
-           //dd($products);
+           dd($products);
            $arrTotale =[];
            for($i=0; $i<count($products); $i++){
-                   $arrTotale[$i] = $products[$i]->sommaUnici; 
+                   $arrTotale[$i] = $products[$i]->sommaUnici + $products[$i]->sommaQta; 
                }
            $sommaPr = array_sum($arrTotale);
           //dd($arrTotale);
