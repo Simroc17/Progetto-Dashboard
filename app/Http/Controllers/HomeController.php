@@ -1040,9 +1040,11 @@ class HomeController extends Controller
         $arrayMobileUnicPag=[];
         for($i = 0; $i <count($array10); $i++){
             $volantino[$i]=Volantino::where(['id_canale' => $array10[$i]])
-            // ->whereMonth('data_inizio', '=', 10) 
-            ->whereMonth('data_inizio', '=', 9)
-            ->whereYear('data_inizio', $currentYear)
+            // ->whereMonth('data_inizio', '=', 10)
+            ->whereYear('data_inizio', $currentYear) 
+            // ->whereMonth('data_inizio', '=', 9)
+            ->where('data_inizio','<' ,"2022-09-31")
+            ->where('data_fine', '>' ,"2022-09-01")
             ->count();
             $pagine[$i] = Pagina::where(['id_parent' => $array10[$i]])
             ->whereMonth('data_visita', '=', 9)
@@ -1066,7 +1068,7 @@ class HomeController extends Controller
                 $sommaDesktopUnicPag=array_sum($arrayDesktopUnicPag);
                 $sommaMobilePag=array_sum($arrayMobilePag);
         }    
-        //dd($arrayTotPag);
+        dd($volantino);
         //dd($id_vol[0]->id_volantino);
         $volantinoSum=array_sum($volantino);
         $arrayGiorniPag = array_unique($arrayGiorniPag);
