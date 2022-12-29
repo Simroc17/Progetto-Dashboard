@@ -1043,15 +1043,15 @@ class HomeController extends Controller
             // ->whereMonth('data_inizio', '=', 10)
             ->whereYear('data_inizio', $currentYear) 
             // ->whereMonth('data_inizio', '=', 9)
-            ->where('data_inizio','<' ,"2022-09-31")
-            ->where('data_fine', '>' ,"2022-09-01")
+            ->where('data_inizio','<=' ,'2022-09-31')
+            ->where('data_fine', '>=' ,'2022-09-01')
             ->count();
             $pagine[$i] = Pagina::where(['id_parent' => $array10[$i]])
             ->whereMonth('data_visita', '=', 9)
             ->whereYear('data_visita', $currentYear)
             ->select(DB::raw("data_visita, CAST(SUM(pagina_qta) AS UNSIGNED) AS sommaP, CAST(SUM(pagina_unica_qta) AS UNSIGNED) AS unicheP, SUM(pagina_desktop_qta) AS pDq, SUM(pagina_mobile_qta) AS pMq, SUM(pagina_desktop_unica_qta) AS pDuQ, SUM(pagina_mobile_unica_qta) AS pMuQ, MONTH(data_visita) AS mese"))
             ->groupBy('data_visita')
-            // ->orderBy('data_visita', 'ASC')
+            ->orderBy('id_volantino', 'ASC')
             ->get();
             //dd($pagine);
             for( $j=0; $j<count($pagine[$i]); $j++ ){
@@ -1067,8 +1067,8 @@ class HomeController extends Controller
                 $sommaDesktopPag=array_sum($arrayDesktopPag);
                 $sommaDesktopUnicPag=array_sum($arrayDesktopUnicPag);
                 $sommaMobilePag=array_sum($arrayMobilePag);
-        }    
-        dd($volantino);
+        }   
+        //dd($volantino);
         //dd($id_vol[0]->id_volantino);
         $volantinoSum=array_sum($volantino);
         $arrayGiorniPag = array_unique($arrayGiorniPag);
