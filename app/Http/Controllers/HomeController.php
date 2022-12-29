@@ -821,9 +821,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function mostraDati1(Request $request, )
-    {
+    {   
+        //dd($value);
         $array10 = ['92','75','141', '143'];
         $mutable = Carbon::now()->month;
+        $currentYear = date('Y');
         //dd($mutable);
         $arrayD =[];
         $arrayM =[];
@@ -832,7 +834,8 @@ class HomeController extends Controller
         for($i = 0; $i <count($array10); $i++){
             $riepilogoConnessioni[$i] = Visite::groupBy('id_market','id_parent',)         //////////// FARE DELLE SOMME TOTALI DI TUTTI I MARKET //////////
                 // ->whereMonth('data_visita', '=', $request->dataInizio)  
-                ->whereMonth('data_visita', '=', 9)                                      //////////// DEVO DARGLI ANCHE L'ID PARENT //////FARE UN ALTRO FOR SU UN ARRAY SUI GENITORI /////////
+                ->whereMonth('data_visita', '=', 9)
+                ->whereYear('data_visita', $currentYear)                                      //////////// DEVO DARGLI ANCHE L'ID PARENT //////FARE UN ALTRO FOR SU UN ARRAY SUI GENITORI /////////
                 ->where(['history_visit.id_parent' => $array10[$i]])
                 ->join('elenco_market', 'elenco_market.id', '=', 'history_visit.id_market')
                 ->join('users', 'users.id', '=', 'elenco_market.id_parent')
@@ -859,6 +862,7 @@ class HomeController extends Controller
             $riepilogoVisualizzazioni[$i] = Pagina::groupBy('id_market', 'id_parent')    //////////////////////// BISOGNERA FARE UN ALTRO FOREACH NEL BLADE !!!!!!!!!!! ///////////////
                 // ->whereMonth('data_visita', '=', $request->dataInizio)
                 ->whereMonth('data_visita', '=', 9)
+                ->whereYear('data_visita', $currentYear)
                 ->where(['history_pagine.id_parent' => $array10[$i]])
                 ->join('elenco_market', 'elenco_market.id', '=', 'history_pagine.id_market')
                 ->join('users', 'users.id', '=', 'elenco_market.id_parent')
@@ -877,6 +881,7 @@ class HomeController extends Controller
         for($i = 0; $i <count($array10); $i++){
         $riepilogoInterattivi[$i]= Interattivi::groupBy('id_market', )
             ->whereMonth('data_visita', '=', 9)
+            ->whereYear('data_visita', $currentYear)
             ->where(['id_parent' => $array10[$i]])
             // ->groupBy(DB::raw("tipo"))
             ->select(DB::raw("SUM(CASE WHEN tipo = 'ricetta' THEN qta ELSE 0 END) AS totaliR,SUM(CASE WHEN tipo = 'video' THEN qta ELSE 0 END) AS totaliV,SUM(CASE WHEN tipo = 'prodotto' THEN qta ELSE 0 END) AS totaliP,SUM(CASE WHEN tipo = 'curiosita' THEN qta ELSE 0 END) AS totaliCu,SUM(CASE WHEN tipo = 'collegamento' THEN qta ELSE 0 END) AS totaliC"),'id_market','id_parent' )
@@ -887,6 +892,7 @@ class HomeController extends Controller
         for($i=0;$i<count($array10); $i++) {
         $interattivoProdotti[$i] =Interattivi::groupBy('id_market', 'tipo')   
             ->whereMonth('data_visita', '=', 9)
+            ->whereYear('data_visita', $currentYear)
             ->where(['id_parent' => $array10[$i]])
             ->where(['tipo' => "prodotto"])
             ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
@@ -897,6 +903,7 @@ class HomeController extends Controller
         for($i=0;$i<count($array10); $i++) {
         $interattivoRicette[$i] =Interattivi::groupBy('id_market', 'tipo')
             ->whereMonth('data_visita', '=', 10)
+            ->whereYear('data_visita', $currentYear)
             ->where(['id_parent' => $array10[$i]])
             ->where(['tipo' => "ricetta"])
             ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
@@ -907,6 +914,7 @@ class HomeController extends Controller
         for($i=0;$i<count($array10); $i++) {
         $interattivoVideo[$i] =Interattivi::groupBy('id_market', 'tipo')
             ->whereMonth('data_visita', '=', 9)
+            ->whereYear('data_visita', $currentYear)
             ->where(['id_parent' => $array10[$i]])
             ->where(['tipo' => "video"])
             ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
@@ -917,6 +925,7 @@ class HomeController extends Controller
         for($i=0;$i<count($array10); $i++) {
         $interattivoCuriosita[$i] =Interattivi::groupBy('id_market', 'tipo')
             ->whereMonth('data_visita', '=', 9)
+            ->whereYear('data_visita', $currentYear)
             ->where(['id_parent' => $array10[$i]])
             ->where(['tipo' => "curiosita"])
             ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
@@ -927,6 +936,7 @@ class HomeController extends Controller
         for($i=0;$i<count($array10); $i++) {
         $interattivoLink[$i] =Interattivi::groupBy('id_market', 'tipo')
             ->whereMonth('data_visita', '=', 9)
+            ->whereYear('data_visita', $currentYear)
             ->where(['id_parent' => $array10[$i]])
             ->where(['tipo' => "collegamento"])
             ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
@@ -946,6 +956,7 @@ class HomeController extends Controller
         for($i = 0; $i <count($array10); $i++){
             $visits[$i] = Visite::where(['id_parent' => $array10[$i]])
             ->whereMonth('data_visita', '=', 9)
+            ->whereYear('data_visita', $currentYear)
             ->select(DB::raw("data_visita, CAST(SUM(visite_qta) AS UNSIGNED) AS sommaV, CAST(SUM(visite_uniche_qta) AS UNSIGNED) AS unicheV, SUM(visite_desktop_qta) AS vDq, SUM(visite_mobile_qta) AS vMq, SUM(visite_uniche_desktop_qta) AS vDuQ, SUM(visite_uniche_mobile_qta) AS vMuQ, MONTH(data_visita) AS mese"))
             ->groupBy(DB::raw('data_visita'))
             //->orderBy('data_visita', 'ASC')
@@ -991,6 +1002,7 @@ class HomeController extends Controller
             $datiGrafico[$i] = Geo::groupBy('place')
             ->where(['id_parent' => $array10[$i]])
             ->whereMonth('data_visita', '=', 9)
+            ->whereYear('data_visita', $currentYear)
             // ->whereMonth('data_visita', '=', $request->dataInizio)
             ->select(DB::raw("CAST(SUM(visite_region_qta) AS UNSIGNED) AS somma, SUM(visite_uniche_region_qta) AS uniche"), 'place')
             ->orderBy('somma', 'DESC')
@@ -1030,9 +1042,11 @@ class HomeController extends Controller
             $volantino[$i]=Volantino::where(['id_canale' => $array10[$i]])
             // ->whereMonth('data_inizio', '=', 10) 
             ->whereMonth('data_inizio', '=', 9)
+            ->whereYear('data_inizio', $currentYear)
             ->count();
             $pagine[$i] = Pagina::where(['id_parent' => $array10[$i]])
             ->whereMonth('data_visita', '=', 9)
+            ->whereYear('data_visita', $currentYear)
             ->select(DB::raw("data_visita, CAST(SUM(pagina_qta) AS UNSIGNED) AS sommaP, CAST(SUM(pagina_unica_qta) AS UNSIGNED) AS unicheP, SUM(pagina_desktop_qta) AS pDq, SUM(pagina_mobile_qta) AS pMq, SUM(pagina_desktop_unica_qta) AS pDuQ, SUM(pagina_mobile_unica_qta) AS pMuQ, MONTH(data_visita) AS mese"))
             ->groupBy('data_visita')
             // ->orderBy('data_visita', 'ASC')
@@ -1086,6 +1100,7 @@ class HomeController extends Controller
             $interattivo[$i] = Interattivi::groupBy('tipo' ,'id_prodotto', )
                 ->where(['id_parent' => $array10[$i]])
                 ->whereMonth('data_visita', '=', 9)
+                ->whereYear('data_visita', $currentYear)
                 ->select(DB::raw("SUM(qta) AS somma"), 'tipo' ,'id_prodotto',)
                 ->orderBy('id_prodotto', 'ASC')
                 ->get();
@@ -1138,6 +1153,7 @@ class HomeController extends Controller
             $interattivoDay[$i] = Interattivi::groupBy('data_visita',)
             ->where(['id_parent' => $array10[$i]])
             ->whereMonth('data_visita', '=', 9)
+            ->whereYear('data_visita', $currentYear)
             ->select(DB::raw("SUM(qta) AS somma"),'data_visita')
             ->orderBy('data_visita', 'ASC')
             ->get();
@@ -1148,6 +1164,7 @@ class HomeController extends Controller
             $interattivo2[$i] = Interattivi::groupBy('data_visita', 'tipo')
                 ->where(['id_parent' => $array10[$i]])
                 ->whereMonth('data_visita', '=', 9)
+                ->whereYear('data_visita', $currentYear)
                 ->select(DB::raw("SUM(qta) AS somma"),'data_visita', 'tipo')
                 ->orderBy('data_visita', 'ASC')
                 ->get();
@@ -1281,6 +1298,7 @@ class HomeController extends Controller
             $finale[$i] = DB::table('history_interattivi')
                 ->where(['id_parent' => $array10[$i]])
                 ->whereMonth('data_visita', '=', 9)
+                ->whereYear('data_visita', $currentYear)
                 ->where('history_interattivi.tipo', '!=', "prodotto" )
                 ->where('history_interattivi.tipo', '!=', "ecommerce" )
                 ->where('history_interattivi.tipo', '!=', "vai_a" )
@@ -1307,6 +1325,7 @@ class HomeController extends Controller
             $products[$i] = DB::table('history_interattivi')
                 // ->whereMonth('data_visita', '=', $request->dataInizio)
                 ->whereMonth('data_visita', '=', 9)
+                ->whereYear('data_visita', $currentYear)
                 ->where(['id_parent' => $array10[$i]])
                 ->where(['tipo' => "prodotto"])
                 ->where('prodotti.descrizione', '!=', "")
