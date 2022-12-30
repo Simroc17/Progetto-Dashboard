@@ -654,10 +654,10 @@
                                                                             <td colspan="1" class="tot">{{$v->totali}}</td>
                                                                             <td></td>
                                                                             <td class="pr">{{$i->totaliP}}</td>
-                                                                            <td class="pr">{{$i->totaliR}}</td>
-                                                                            <td class="pr">{{$i->totaliV}}</td>
-                                                                            <td class="pr">{{$i->totaliCu}}</td>
-                                                                            <td class="pr">{{$i->totaliC}}</td>
+                                                                            <td class="ri">{{$i->totaliR}}</td>
+                                                                            <td class="vi">{{$i->totaliV}}</td>
+                                                                            <td class="cu">{{$i->totaliCu}}</td>
+                                                                            <td class="li">{{$i->totaliC}}</td>
                                                                             <td></td>
                                                                             <td colspan="1" class="lis">0</td>
                                                                             <td colspan="1" class="imp">0</td>
@@ -775,7 +775,7 @@
         };
        
         var userList2 = new List('users3', options);
-        
+        var userList = new List('users5', options);
         // Prova Pagination
         var monkeyList = new List('test-list', {
             valueNames: ['i','d','m','t','de','mo','un','uni','tot','pr','ri','vi','cu','li','lis','imp','med','regione', 'click_unici', 'click_totali','tipo1','titolo1','prodotto1','unici1','totali1','tipoPr','titoloPr','uniciPr','totaliPr'],

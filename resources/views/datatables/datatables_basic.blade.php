@@ -944,22 +944,22 @@
                                 <td class="pr">{{$interattivoProdotti[0]->totali}}</td>
                                 @endif
                                 @if($interattivoRicette == '[]')
-                                <td class="pr">0</td>
+                                <td class="ri">0</td>
                                 @else
                                 <td class="ri">{{$interattivoRicette[0]->totali}}</td>
                                 @endif
                                 @if($interattivoVideo == '[]')
-                                <td class="pr">0</td>
+                                <td class="vi">0</td>
                                 @else
                                 <td class="vi">{{$interattivoVideo[0]->totali}}</td>
                                 @endif
                                 @if($interattivoCuriosita == '[]')
-                                <td class="pr">0</td>
+                                <td class="cu">0</td>
                                 @else
                                 <td class="cu">{{$interattivoCuriosita[0]->totali}}</td>
                                 @endif
                                 @if($interattivoLink == '[]')
-                                <td class="pr">0</td>
+                                <td class="li">0</td>
                                 @else
                                 <td class="li">{{$interattivoLink[0]->totali}}</td>
                                 @endif

@@ -798,10 +798,10 @@
                                                                 <td colspan="1" class="tot">{{$visualizzazione->pdq + $visualizzazione->pmq}}</td>
                                                                 <td></td>
                                                                 <td class="pr">{{$interattivi->totaliP}}</td>
-                                                                <td class="pr">{{$interattivi->totaliR}}</td>
-                                                                <td class="pr">{{$interattivi->totaliV}}</td>
-                                                                <td class="pr">{{$interattivi->totaliCu}}</td>
-                                                                <td class="pr">{{$interattivi->totaliC}}</td>
+                                                                <td class="ri">{{$interattivi->totaliR}}</td>
+                                                                <td class="vi">{{$interattivi->totaliV}}</td>
+                                                                <td class="cu">{{$interattivi->totaliCu}}</td>
+                                                                <td class="li">{{$interattivi->totaliC}}</td>
                                                                 <td></td>
                                                                 <td colspan="1" class="lis">0</td>
                                                                 <td colspan="1" class="imp">0</td>
