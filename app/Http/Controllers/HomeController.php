@@ -832,14 +832,22 @@ class HomeController extends Controller
         $arrayM =[];
         $arrayDu =[];
         $arrayMu =[];
-        for($i = 0; $i <count($array10); $i++){
-            $riepilogoConnessioni[$i] = Visite::groupBy('id_market','id_parent',)        
+        
+            ////////////////////////////////// SI PUO FARE TUTTO CON IL WHEREIN !!!!!!!!!! ///////////////////////////
+            ////////////////////////////////// SI PUO FARE TUTTO CON IL WHEREIN !!!!!!!!!! ///////////////////////////
+            ////////////////////////////////// SI PUO FARE TUTTO CON IL WHEREIN !!!!!!!!!! ///////////////////////////
+            ////////////////////////////////// SI PUO FARE TUTTO CON IL WHEREIN !!!!!!!!!! ///////////////////////////
+            ////////////////////////////////// SI PUO FARE TUTTO CON IL WHEREIN !!!!!!!!!! ///////////////////////////
+            ////////////////////////////////// SI PUO FARE TUTTO CON IL WHEREIN !!!!!!!!!! ///////////////////////////
+            ////////////////////////////////// SI PUO FARE TUTTO CON IL WHEREIN !!!!!!!!!! ///////////////////////////
+            ////////////////////////////////// SI PUO FARE TUTTO CON IL WHEREIN !!!!!!!!!! ///////////////////////////
+            $riepilogoConnessioni = Visite::groupBy('id_market','id_parent',)        
                 // ->whereMonth('data_visita', '=', $request->dataInizio)  
                 ->whereMonth('data_visita', '=', 9)
                 ->whereYear('data_visita', $currentYear) 
                 ->where('data_promo_start','<=' ,'2022-09-31')
                 ->where('data_promo_end', '>=' ,'2022-09-01')                                    
-                ->where(['history_visit.id_parent' => $array10[$i]])
+                ->whereIn('history_visit.id_parent' ,$array10)
                 ->join('elenco_market', function ($join) {
                     $join->on('history_visit.id_market', '=', 'elenco_market.id')
                          ->on('history_visit.id_parent', '=', 'elenco_market.id_parent');
@@ -849,29 +857,29 @@ class HomeController extends Controller
                 ->orderBy('id_market', 'ASC')
                 ->get();
                 //dd($riepilogoConnessioni);
-                for($j=0; $j<count($riepilogoConnessioni[$i]); $j++) {
+                for($j=0; $j<count($riepilogoConnessioni); $j++) {
                     
                         ///////////////////////////// PROVARE A FARE LE SOMME NEL BLADE ////////////////////////////
-                    $arrayD =  array_merge($arrayD, array( $riepilogoConnessioni[$i][$j]->desktop));
-                    $arrayM =  array_merge($arrayM, array($riepilogoConnessioni[$i][$j]->mobile));
-                    $arrayDu =  array_merge($arrayDu, array($riepilogoConnessioni[$i][$j]->deskUni));
-                    $arrayMu =  array_merge($arrayMu, array($riepilogoConnessioni[$i][$j]->mobUni));
+                    $arrayD =  array_merge($arrayD, array( $riepilogoConnessioni[$j]->desktop));
+                    $arrayM =  array_merge($arrayM, array($riepilogoConnessioni[$j]->mobile));
+                    $arrayDu =  array_merge($arrayDu, array($riepilogoConnessioni[$j]->deskUni));
+                    $arrayMu =  array_merge($arrayMu, array($riepilogoConnessioni[$j]->mobUni));
                 }
             $sumD = array_sum($arrayD);     
             $sumM = array_sum($arrayM);
             $sumDu = array_sum($arrayDu);
             $sumMu = array_sum($arrayMu);
-        }  //dd($riepilogoConnessioni);
+          //dd($riepilogoConnessioni);
         $arrVtot =[];
         $arrVuni =[];
-        for($i = 0; $i <count($array10); $i++){
-            $riepilogoVisualizzazioni[$i] = Pagina::groupBy('id_market', 'id_parent')    //////////////////////// BISOGNERA FARE UN ALTRO FOREACH NEL BLADE !!!!!!!!!!! ///////////////
+       
+            $riepilogoVisualizzazioni = Pagina::groupBy('id_market', 'id_parent')    //////////////////////// BISOGNERA FARE UN ALTRO FOREACH NEL BLADE !!!!!!!!!!! ///////////////
                 // ->whereMonth('data_visita', '=', $request->dataInizio)
                 ->whereMonth('data_visita', '=', 9)
                 ->whereYear('data_visita', $currentYear)
                 ->where('data_promo_start','<=' ,'2022-09-31')
                 ->where('data_promo_end', '>=' ,'2022-09-01')
-                ->where(['history_pagine.id_parent' => $array10[$i]])
+                ->whereIn('history_pagine.id_parent' ,$array10)
                 ->join('elenco_market', function ($join) {
                     $join->on('history_pagine.id_market', '=', 'elenco_market.id')
                          ->on('history_pagine.id_parent', '=', 'elenco_market.id_parent');
@@ -883,91 +891,27 @@ class HomeController extends Controller
                 ->get();
                 //dd($riepilogoVisualizzazioni);
             
-            for ($j=0; $j<count($riepilogoVisualizzazioni[$i]); $j++ ){
-                $arrVtot = array_merge($arrVtot, array($riepilogoVisualizzazioni[$i][$j]->totali));
-                $arrVuni = array_merge($arrVuni, array($riepilogoVisualizzazioni[$i][$j]->uniche));
+            for ($j=0; $j<count($riepilogoVisualizzazioni); $j++ ){
+                $arrVtot = array_merge($arrVtot, array($riepilogoVisualizzazioni[$j]->totali));
+                $arrVuni = array_merge($arrVuni, array($riepilogoVisualizzazioni[$j]->uniche));
             }
             $sumVtot = array_sum($arrVtot);
             $sumVuni = array_sum($arrVuni);
-        }//dd($riepilogoVisualizzazioni);
-        for($i = 0; $i <count($array10); $i++){
-        $riepilogoInterattivi[$i]= Interattivi::groupBy('id_market', )
+        //dd($riepilogoVisualizzazioni);
+       
+        $riepilogoInterattivi= Interattivi::groupBy('id_market', )
             ->whereMonth('data_visita', '=', 9)
             ->whereYear('data_visita', $currentYear)
             ->where('data_promo_start','<=' ,'2022-09-31')
             ->where('data_promo_end', '>=' ,'2022-09-01')
-            ->where(['id_parent' => $array10[$i]])
+            ->whereIn('id_parent', $array10)
             // ->groupBy(DB::raw("tipo"))
             ->select(DB::raw("SUM(CASE WHEN tipo = 'ricetta' THEN qta ELSE 0 END) AS totaliR,SUM(CASE WHEN tipo = 'video' THEN qta ELSE 0 END) AS totaliV,SUM(CASE WHEN tipo = 'prodotto' THEN qta ELSE 0 END) AS totaliP,SUM(CASE WHEN tipo = 'curiosita' THEN qta ELSE 0 END) AS totaliCu,SUM(CASE WHEN tipo = 'collegamento' THEN qta ELSE 0 END) AS totaliC"),'id_market','id_parent' )
             ->groupBy(DB::raw("id_parent"))
             ->orderBy('id_market', 'ASC')
             ->get();
-        }//dd($riepilogoInterattivi);                                  /////////////////////////// UTILIZZARE QUESTO E NON I VARI "INTERATTIVI" //////////////
-        for($i=0;$i<count($array10); $i++) {
-        $interattivoProdotti[$i] =Interattivi::groupBy('id_market', 'tipo')   
-            ->whereMonth('data_visita', '=', 9)
-            ->whereYear('data_visita', $currentYear)
-            ->where('data_promo_start','<=' ,'2022-09-31')
-            ->where('data_promo_end', '>=' ,'2022-09-01')
-            ->where(['id_parent' => $array10[$i]])
-            ->where(['tipo' => "prodotto"])
-            ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
-            ->orderBy('id_market', 'ASC')
-            ->get();
-            
-        }//dd($interattivoProdotti);
-        for($i=0;$i<count($array10); $i++) {
-        $interattivoRicette[$i] =Interattivi::groupBy('id_market', 'tipo')
-            ->whereMonth('data_visita', '=', 10)
-            ->whereYear('data_visita', $currentYear)
-            ->where('data_promo_start','<=' ,'2022-09-31')
-            ->where('data_promo_end', '>=' ,'2022-09-01')
-            ->where(['id_parent' => $array10[$i]])
-            ->where(['tipo' => "ricetta"])
-            ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
-            ->orderBy('id_market', 'ASC')
-            ->get();
-            
-        }//dd($interattivoRicette);
-        for($i=0;$i<count($array10); $i++) {
-        $interattivoVideo[$i] =Interattivi::groupBy('id_market', 'tipo')
-            ->whereMonth('data_visita', '=', 9)
-            ->whereYear('data_visita', $currentYear)
-            ->where('data_promo_start','<=' ,'2022-09-31')
-            ->where('data_promo_end', '>=' ,'2022-09-01')
-            ->where(['id_parent' => $array10[$i]])
-            ->where(['tipo' => "video"])
-            ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
-            ->orderBy('id_market', 'ASC')
-            ->get();
-            //dd($interattivoVideo);
-        }
-        for($i=0;$i<count($array10); $i++) {
-        $interattivoCuriosita[$i] =Interattivi::groupBy('id_market', 'tipo')
-            ->whereMonth('data_visita', '=', 9)
-            ->whereYear('data_visita', $currentYear)
-            ->where('data_promo_start','<=' ,'2022-09-31')
-            ->where('data_promo_end', '>=' ,'2022-09-01')
-            ->where(['id_parent' => $array10[$i]])
-            ->where(['tipo' => "curiosita"])
-            ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
-            ->orderBy('id_market', 'ASC')
-            ->get();
-            //dd($interattivoCuriosita);
-        }
-        for($i=0;$i<count($array10); $i++) {
-        $interattivoLink[$i] =Interattivi::groupBy('id_market', 'tipo')
-            ->whereMonth('data_visita', '=', 9)
-            ->whereYear('data_visita', $currentYear)
-            ->where('data_promo_start','<=' ,'2022-09-31')
-            ->where('data_promo_end', '>=' ,'2022-09-01')
-            ->where(['id_parent' => $array10[$i]])
-            ->where(['tipo' => "collegamento"])
-            ->select(DB::raw("SUM(qta) AS totali"), 'id_market', 'tipo')
-            ->orderBy('id_market', 'ASC')
-            ->get();
-            //dd($interattivoLink);
-        }
+        //dd($riepilogoInterattivi);                                  /////////////////////////// UTILIZZARE QUESTO E NON I VARI "INTERATTIVI" //////////////
+        
         ///////////////////   GRAFICI PARTE CONNESSIONI //////////////////////
         $arrayTot = [];
         $arrayUniq = [];
@@ -1384,7 +1328,7 @@ class HomeController extends Controller
             // dd(count($arrTotale));
         }
         $sommaPr = array_sum($arrTotale);
-        return view('/dashboard/intel_marketing_dashboard', compact('datiGrafico','pagine','arrayMesi','visits','arrayDesktop','arrayMobile','arrTotale','volantinoSum','sommaProdotti', 'sumD', 'sumM', 'sumDu', 'sumMu', 'sumVtot', 'sumVuni','riepilogoInterattivi','interattivoProdotti','interattivoRicette','interattivoVideo','interattivoCuriosita','interattivoLink' ,'riepilogoVisualizzazioni' ,'riepilogoConnessioni' ,'sommaPr','sommaInter' ,'products','finale' ,'interattivo2','arrayVai_a','arrayRicette','arrayLink' ,'arrayVideo' ,'arrayEcommerce' ,'arrayCuriosita','arrayGiorni2','arrayprodotti','sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag','arrMark','negozi', 'markets','id', 'promozioni','arrayPromo','marketsAll','nome', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile'));
+        return view('/dashboard/intel_marketing_dashboard', compact('datiGrafico','pagine','arrayMesi','visits','arrayDesktop','arrayMobile','arrTotale','volantinoSum','sommaProdotti', 'sumD', 'sumM', 'sumDu', 'sumMu', 'sumVtot', 'sumVuni','riepilogoInterattivi' ,'riepilogoVisualizzazioni' ,'riepilogoConnessioni' ,'sommaPr','sommaInter' ,'products','finale' ,'interattivo2','arrayVai_a','arrayRicette','arrayLink' ,'arrayVideo' ,'arrayEcommerce' ,'arrayCuriosita','arrayGiorni2','arrayprodotti','sommaEcommerce','sommaVideo','sommaVai_a','sommaRicette','sommaCollegamenti', 'sommaCuriosita','volantino' ,'datiGrafico' ,'arrUniche' ,'arrTotali' ,'arrRegioni' ,'sommaMobileUnicPag','sommaDesktopUnicPag' ,'sommaMobilePag','sommaDesktopPag','arrayTotPag','arrayUnicPag','arrayGiorniPag','arrMark','negozi', 'markets','id', 'promozioni','arrayPromo','marketsAll','nome', 'arrayTot','arrayUniq', 'arrayGiorni','sommaDesktop','sommaMobile','sommaUnicaDesktop','sommaUnicaMobile'));
     }
 
 
@@ -1410,10 +1354,10 @@ class HomeController extends Controller
         $arrayDu =[];
         $arrayMu =[];
         
-        for($i = 0; $i <count($array10); $i++){
-            $riepilogoConnessioni[$i] = Visite::groupBy('id_market','id_parent',)                           
+       
+            $riepilogoConnessioni = Visite::groupBy('id_market','id_parent',)                           
                 ->whereBetween('data_visita', [$data1, $data2])                           
-                ->where(['history_visit.id_market' => $array10[$i]])
+                ->whereIn('history_visit.id_market',$array10)
                 ->whereIn('history_visit.id_parent',  $arrayG)
                 ->join('elenco_market', function ($join) {
                     $join->on('history_visit.id_market', '=', 'elenco_market.id')
@@ -1425,13 +1369,13 @@ class HomeController extends Controller
                 ->get();
                 //dd($riepilogoConnessioni);
                 
-                for($j=0; $j<count($riepilogoConnessioni[$i]); $j++) {
+                for($j=0; $j<count($riepilogoConnessioni); $j++) {
                     
                         ///////////////////////////// PROVARE A FARE LE SOMME NEL BLADE ////////////////////////////
-                            $arrayD =  array_merge($arrayD, array( $riepilogoConnessioni[$i][$j]->desktop));
-                            $arrayM =  array_merge($arrayM, array($riepilogoConnessioni[$i][$j]->mobile));
-                            $arrayDu =  array_merge($arrayDu, array($riepilogoConnessioni[$i][$j]->deskUni));
-                            $arrayMu =  array_merge($arrayMu, array($riepilogoConnessioni[$i][$j]->mobUni));
+                            $arrayD =  array_merge($arrayD, array( $riepilogoConnessioni[$j]->desktop));
+                            $arrayM =  array_merge($arrayM, array($riepilogoConnessioni[$j]->mobile));
+                            $arrayDu =  array_merge($arrayDu, array($riepilogoConnessioni[$j]->deskUni));
+                            $arrayMu =  array_merge($arrayMu, array($riepilogoConnessioni[$j]->mobUni));
                         
                     
                 }
@@ -1439,16 +1383,16 @@ class HomeController extends Controller
             $sumM = array_sum($arrayM);
             $sumDu = array_sum($arrayDu);
             $sumMu = array_sum($arrayMu);
-        }
+        
         //dd($arrayD);
         //dd($riepilogoConnessioni);
         $arrVtot =[];
         $arrVuni =[];
-        for($i = 0; $i <count($array10); $i++){
-            $riepilogoVisualizzazioni[$i] = Pagina::groupBy('id_market', 'id_parent')    //////////////////////// BISOGNERA FARE UN ALTRO FOREACH NEL BLADE !!!!!!!!!!! ///////////////
+       
+            $riepilogoVisualizzazioni = Pagina::groupBy('id_market', 'id_parent')    //////////////////////// BISOGNERA FARE UN ALTRO FOREACH NEL BLADE !!!!!!!!!!! ///////////////
                 // ->whereMonth('data_visita', '=', $request->dataInizio)
                 ->whereBetween('data_visita', [$data1, $data2])
-                ->where(['history_pagine.id_market' => $array10[$i]])
+                ->whereIn('history_pagine.id_market', $array10)
                 ->whereIn('history_pagine.id_parent',  $arrayG)
                 ->join('elenco_market', function ($join) {
                     $join->on('history_pagine.id_market', '=', 'elenco_market.id')
@@ -1460,24 +1404,24 @@ class HomeController extends Controller
                 ->get();
                 //dd($riepilogoVisualizzazioni);
             
-            for ($j=0; $j<count($riepilogoVisualizzazioni[$i]); $j++ ){
-                $arrVtot = array_merge($arrVtot, array($riepilogoVisualizzazioni[$i][$j]->totali));
-                $arrVuni = array_merge($arrVuni, array($riepilogoVisualizzazioni[$i][$j]->uniche));
+            for ($j=0; $j<count($riepilogoVisualizzazioni); $j++ ){
+                $arrVtot = array_merge($arrVtot, array($riepilogoVisualizzazioni[$j]->totali));
+                $arrVuni = array_merge($arrVuni, array($riepilogoVisualizzazioni[$j]->uniche));
             }
             $sumVtot = array_sum($arrVtot);
             $sumVuni = array_sum($arrVuni);
-        }//dd($riepilogoVisualizzazioni);
-        for($i = 0; $i <count($array10); $i++){
-            $riepilogoInterattivi[$i]= Interattivi::groupBy('id_market', )
+        //dd($riepilogoVisualizzazioni);
+        
+            $riepilogoInterattivi= Interattivi::groupBy('id_market', )
             ->whereBetween('data_visita', [$data1, $data2])
-            ->where(['id_market' => $array10[$i]])
+            ->whereIn('id_market', $array10)
             ->whereIn('history_interattivi.id_parent',  $arrayG)
             // ->groupBy(DB::raw("tipo"))
             ->select(DB::raw("SUM(CASE WHEN tipo = 'ricetta' THEN qta ELSE 0 END) AS totaliR,SUM(CASE WHEN tipo = 'video' THEN qta ELSE 0 END) AS totaliV,SUM(CASE WHEN tipo = 'prodotto' THEN qta ELSE 0 END) AS totaliP,SUM(CASE WHEN tipo = 'curiosita' THEN qta ELSE 0 END) AS totaliCu,SUM(CASE WHEN tipo = 'collegamento' THEN qta ELSE 0 END) AS totaliC"),'id_market','id_parent' )
             ->groupBy(DB::raw("id_parent"))
             ->orderBy('id_market', 'ASC')
             ->get();
-        }//dd($riepilogoInterattivi);
+        //dd($riepilogoInterattivi);
        
         ///////////////////   GRAFICI PARTE CONNESSIONI //////////////////////
         $arrayTot = [];

@@ -634,42 +634,42 @@
                                     </thead>
                                     <tbody id="tbody" class="list">
                                         @foreach($riepilogoConnessioni as $connessione)
-                                            @foreach($connessione as $c)
+                                            
                                                 @foreach($riepilogoVisualizzazioni as $visualizzazione)
-                                                    @foreach($visualizzazione as $v)
-                                                        @if($c->id_market==$v->id_market)
+                                                   
+                                                        @if($connessione->id_market==$visualizzazione->id_market)
                                                             @foreach($riepilogoInterattivi as $interattivi)
-                                                                @foreach($interattivi as $i) 
-                                                                    @if($v->id_market==$i->id_market)
+                                                                
+                                                                    @if($visualizzazione->id_market==$interattivi->id_market)
                                                                         <tr role="row">
-                                                                            <td colspan="2" class="i"><a href="{{ route('volantino', $c->id_volantino)}}" style="color: #17a2b8;">{{$c->nome}} - {{$c->nomeMarket}}</a></td>
-                                                                            <td colspan="1" class="d">{{$c->desktop}}</td>
-                                                                            <td colspan="1" class="m">{{$c->mobile}}</td>
-                                                                            <td colspan="1" class="t">{{$c->desktop + $c->mobile}}</td>
-                                                                            <td colspan="1" class="de">{{$c->deskUni}}</td>
-                                                                            <td colspan="1" class="mo">{{$c->mobUni}}</td>
-                                                                            <td colspan="1" class="un">{{$c->deskUni + $c->mobUni}}</td>
+                                                                            <td colspan="2" class="i"><a href="{{ route('volantino', $connessione->id_volantino)}}" style="color: #17a2b8;">{{$connessione->nome}} - {{$connessione->nomeMarket}}</a></td>
+                                                                            <td colspan="1" class="d">{{$connessione->desktop}}</td>
+                                                                            <td colspan="1" class="m">{{$connessione->mobile}}</td>
+                                                                            <td colspan="1" class="t">{{$connessione->desktop + $connessione->mobile}}</td>
+                                                                            <td colspan="1" class="de">{{$connessione->deskUni}}</td>
+                                                                            <td colspan="1" class="mo">{{$connessione->mobUni}}</td>
+                                                                            <td colspan="1" class="un">{{$connessione->deskUni + $connessione->mobUni}}</td>
                                                                             <td></td>
-                                                                            <td colspan="1" class="uni">{{$v->uniche}}</td>
-                                                                            <td colspan="1" class="tot">{{$v->totali}}</td>
+                                                                            <td colspan="1" class="uni">{{$visualizzazione->uniche}}</td>
+                                                                            <td colspan="1" class="tot">{{$visualizzazione->totali}}</td>
                                                                             <td></td>
-                                                                            <td class="pr">{{$i->totaliP}}</td>
-                                                                            <td class="ri">{{$i->totaliR}}</td>
-                                                                            <td class="vi">{{$i->totaliV}}</td>
-                                                                            <td class="cu">{{$i->totaliCu}}</td>
-                                                                            <td class="li">{{$i->totaliC}}</td>
+                                                                            <td class="pr">{{$interattivi->totaliP}}</td>
+                                                                            <td class="ri">{{$interattivi->totaliR}}</td>
+                                                                            <td class="vi">{{$interattivi->totaliV}}</td>
+                                                                            <td class="cu">{{$interattivi->totaliCu}}</td>
+                                                                            <td class="li">{{$interattivi->totaliC}}</td>
                                                                             <td></td>
                                                                             <td colspan="1" class="lis">0</td>
                                                                             <td colspan="1" class="imp">0</td>
                                                                             <td colspan="1" class="med">0</td>
                                                                         </tr>
                                                                     @endif
-                                                                @endforeach
+                                                                
                                                             @endforeach
                                                         @endif
-                                                    @endforeach
+                                                   
                                                 @endforeach
-                                            @endforeach
+                                            
                                         @endforeach
                                     </tbody>
                                     <tfoot>
