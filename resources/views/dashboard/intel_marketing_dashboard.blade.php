@@ -836,8 +836,8 @@
     // var rT = []
     //console.log(grafico)
     var resultG = [];
-    for (var i = 0; i < grafico.length; i++){
-        grafico[i].reduce(function(res, value) {
+    
+        grafico.reduce(function(res, value) {
         if (!res[value.place]) {
             res[value.place] = { place: value.place, somma: 0 };
             resultG.push(res[value.place])
@@ -845,10 +845,10 @@
         res[value.place].somma += value.somma;
         return res;
         }, {});
-    }
+    
     var resultGU = [];
-    for (var i = 0; i < grafico.length; i++){
-        grafico[i].reduce(function(resU, value) {
+    
+        grafico.reduce(function(resU, value) {
         if (!resU[value.place]) {
             resU[value.place] = { place: value.place, uniche: 0 };
             resultGU.push(resU[value.place])
@@ -856,7 +856,7 @@
         resU[value.place].uniche += value.uniche;
         return resU;
         }, {});
-    }
+    
     //console.log(resultGU)
     var resultFinaleG = [];
     resultG.reduce(function(res, value) {
@@ -1059,8 +1059,8 @@
     var giorniM1 = Object.values(giorniM);
     console.log(connessioni)     
     var result = [];
-    for (var i = 0; i < connessioni.length; i++){
-        connessioni[i].reduce(function(res, value) {
+    
+        connessioni.reduce(function(res, value) {
         if (!res[value.mese]) {
             res[value.mese] = { mese: value.mese, sommaV: 0 };
             result.push(res[value.mese])
@@ -1068,10 +1068,10 @@
         res[value.mese].sommaV += value.sommaV;
         return res;
         }, {});
-    }
+    
     var resultU = [];
-    for (var i = 0; i < connessioni.length; i++){
-        connessioni[i].reduce(function(resU, value) {
+    
+        connessioni.reduce(function(resU, value) {
         if (!resU[value.mese]) {
             resU[value.mese] = { mese: value.mese, unicheV: 0 };
             resultU.push(resU[value.mese])
@@ -1079,7 +1079,7 @@
         resU[value.mese].unicheV += value.unicheV;
         return resU;
         }, {});
-    }
+    
     //console.log(resultU)
     var resultFinale = [];
         result.reduce(function(res, value) {
@@ -1275,8 +1275,8 @@
     var giorniM1 = Object.values(giorniM);
     // console.log(giorniM1)     
     var resultPag = [];
-    for (var i = 0; i < pagine.length; i++){
-        pagine[i].reduce(function(res, value) {
+    
+        pagine.reduce(function(res, value) {
         if (!res[value.mese]) {
             res[value.mese] = { mese: value.mese, sommaP: 0 };
             resultPag.push(res[value.mese])
@@ -1284,10 +1284,10 @@
         res[value.mese].sommaP += value.sommaP;
         return res;
         }, {});
-    }
+    
     var resultPagU = [];
-    for (var i = 0; i < pagine.length; i++){
-        pagine[i].reduce(function(resU, value) {
+    
+        pagine.reduce(function(resU, value) {
         if (!resU[value.mese]) {
             resU[value.mese] = { mese: value.mese, unicheP: 0 };
             resultPagU.push(resU[value.mese])
@@ -1295,7 +1295,7 @@
         resU[value.mese].unicheP += value.unicheP;
         return resU;
         }, {});
-    }
+    
     //console.log(resultU)
     var resultFinalePag = [];
         resultPag.reduce(function(res, value) {

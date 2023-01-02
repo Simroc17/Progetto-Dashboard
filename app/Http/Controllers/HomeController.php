@@ -921,8 +921,8 @@ class HomeController extends Controller
         $arrayDesktopUniq=[];
         $arrayMobileUniq=[];
         $arrayMesi =[];
-        for($i = 0; $i <count($array10); $i++){
-            $visits[$i] = Visite::where(['id_parent' => $array10[$i]])
+        
+            $visits = Visite::whereIn('id_parent', $array10)
             ->whereMonth('data_visita', '=', 9)
             ->whereYear('data_visita', 2022)
             ->where('data_promo_start','<=' ,'2022-09-31')
@@ -932,21 +932,21 @@ class HomeController extends Controller
             //->orderBy('data_visita', 'ASC')
             ->get();
             //dd($visit); //Visite
-            for( $j=0; $j<count($visits[$i]); $j++ ){
-                $arrayTot = array_merge($arrayTot, array($visits[$i][$j]->sommaV));
-                $arrayUniq = array_merge($arrayUniq, array($visits[$i][$j]->unicheV));
-                $arrayGiorni = array_merge($arrayGiorni,array($visits[$i][$j]->data_visita));
-                $arrayMesi = array_merge($arrayMesi,array($visits[$i][$j]->mese));
-                $arrayDesktop = array_merge($arrayDesktop,array($visits[$i][$j]->vDq));
-                $arrayMobile = array_merge($arrayMobile,array($visits[$i][$j]->vMq));
-                $arrayDesktopUniq = array_merge($arrayDesktopUniq,array($visits[$i][$j]->vDuQ));
-                $arrayMobileUniq = array_merge($arrayMobileUniq,array($visits[$i][$j]->vMuQ));
+            for( $j=0; $j<count($visits); $j++ ){
+                $arrayTot = array_merge($arrayTot, array($visits[$j]->sommaV));
+                $arrayUniq = array_merge($arrayUniq, array($visits[$j]->unicheV));
+                $arrayGiorni = array_merge($arrayGiorni,array($visits[$j]->data_visita));
+                $arrayMesi = array_merge($arrayMesi,array($visits[$j]->mese));
+                $arrayDesktop = array_merge($arrayDesktop,array($visits[$j]->vDq));
+                $arrayMobile = array_merge($arrayMobile,array($visits[$j]->vMq));
+                $arrayDesktopUniq = array_merge($arrayDesktopUniq,array($visits[$j]->vDuQ));
+                $arrayMobileUniq = array_merge($arrayMobileUniq,array($visits[$j]->vMuQ));
             }
             $sommaMobile=array_sum($arrayMobile);
             $sommaDesktop=array_sum($arrayDesktop);
             $sommaUnicaDesktop=array_sum($arrayDesktopUniq);
             $sommaUnicaMobile=array_sum($arrayMobileUniq);
-        }
+        //dd($visits);
         $arrayGiorni = array_unique($arrayGiorni);
         $arrayMesi = array_unique($arrayMesi);
         $index = count($arrayGiorni);
@@ -968,9 +968,9 @@ class HomeController extends Controller
         $arrUniche=[];
         $arrTotali=[];
         $arrRegioni=[];
-        for($i = 0; $i <count($array10); $i++){
-            $datiGrafico[$i] = Geo::groupBy('place')
-            ->where(['id_parent' => $array10[$i]])
+        
+            $datiGrafico = Geo::groupBy('place')
+            ->whereIn('id_parent', $array10)
             ->whereMonth('data_visita', '=', 9)
             ->whereYear('data_visita', 2022)
             ->where('data_promo_start','<=' ,'2022-09-31')
@@ -981,12 +981,12 @@ class HomeController extends Controller
             ->get();
             //dd($datiGrafico);
             
-            for ($j = 0; $j < count($datiGrafico[$i]); $j++ ){
-                $arrUniche= array_merge($arrUniche, array($datiGrafico[$i][$j]->uniche));
-                $arrTotali= array_merge($arrTotali, array($datiGrafico[$i][$j]->somma));
-                $arrRegioni= array_merge($arrRegioni, array($datiGrafico[$i][$j]->place));
+            for ($j = 0; $j < count($datiGrafico); $j++ ){
+                $arrUniche= array_merge($arrUniche, array($datiGrafico[$j]->uniche));
+                $arrTotali= array_merge($arrTotali, array($datiGrafico[$j]->somma));
+                $arrRegioni= array_merge($arrRegioni, array($datiGrafico[$j]->place));
             }
-        }
+        
         //dd($arrUniche);     ///////////////////// PROVARE A FARE COME CON IL GRAFICO DEI MESI, MA SULLE REGIONI, DIRETTAMENTE NEL JAVASCRIPT ////////////////
         //dd($arrUniche);
         $arrRegioni = array_unique($arrRegioni);
@@ -1010,8 +1010,8 @@ class HomeController extends Controller
         $arrayMobilePag=[];
         $arrayDesktopUnicPag=[];
         $arrayMobileUnicPag=[];
-        for($i = 0; $i <count($array10); $i++){
-            $pagine[$i] = Pagina::where(['id_parent' => $array10[$i]])
+        
+            $pagine = Pagina::whereIn('id_parent', $array10)
             ->whereMonth('data_visita', '=', 9)
             ->whereYear('data_visita', 2022)
             ->where('data_promo_start','<=' ,'2022-09-31')
@@ -1021,20 +1021,20 @@ class HomeController extends Controller
             ->orderBy('id_volantino', 'ASC')
             ->get();
             //dd($pagine);
-            for( $j=0; $j<count($pagine[$i]); $j++ ){
-                $arrayTotPag = array_merge($arrayTotPag, array( $pagine[$i][$j]->sommaP));
-                $arrayUnicPag = array_merge($arrayUnicPag, array($pagine[$i][$j]->unicheP));
-                $arrayGiorniPag = array_merge($arrayGiorniPag, array($pagine[$i][$j]->data_visita));
-                $arrayDesktopPag = array_merge($arrayDesktopPag, array($pagine[$i][$j]->pDq));
-                $arrayMobilePag = array_merge($arrayMobilePag, array($pagine[$i][$j]->pMq));
-                $arrayDesktopUnicPag = array_merge($arrayDesktopUnicPag, array($pagine[$i][$j]->pDuQ));
-                $arrayMobileUnicPag = array_merge($arrayMobileUnicPag, array($pagine[$i][$j]->pMuQ));
+            for( $j=0; $j<count($pagine); $j++ ){
+                $arrayTotPag = array_merge($arrayTotPag, array( $pagine[$j]->sommaP));
+                $arrayUnicPag = array_merge($arrayUnicPag, array($pagine[$j]->unicheP));
+                $arrayGiorniPag = array_merge($arrayGiorniPag, array($pagine[$j]->data_visita));
+                $arrayDesktopPag = array_merge($arrayDesktopPag, array($pagine[$j]->pDq));
+                $arrayMobilePag = array_merge($arrayMobilePag, array($pagine[$j]->pMq));
+                $arrayDesktopUnicPag = array_merge($arrayDesktopUnicPag, array($pagine[$j]->pDuQ));
+                $arrayMobileUnicPag = array_merge($arrayMobileUnicPag, array($pagine[$j]->pMuQ));
             }
                 $sommaMobileUnicPag = array_sum($arrayMobileUnicPag);
                 $sommaDesktopPag=array_sum($arrayDesktopPag);
                 $sommaDesktopUnicPag=array_sum($arrayDesktopUnicPag);
                 $sommaMobilePag=array_sum($arrayMobilePag);
-        }
+        
         $volantino=Volantino::whereIn('id_canale', $array10)
         ->whereYear('data_inizio', 2022) 
         ->where('data_inizio','<=' ,'2022-09-31')
@@ -1433,8 +1433,8 @@ class HomeController extends Controller
         $arrayDesktopUniq=[];
         $arrayMobileUniq=[];
         // GRAFICO ANDAMENTO GIORNALIERO
-        for($i = 0; $i <count($array10); $i++){
-            $visits[$i] = Visite::where(['id_market' => $array10[$i]])
+        
+            $visits = Visite::whereIn('id_market', $array10)
             ->whereIn('id_parent',  $arrayG)
             ->whereBetween('data_visita', [$data1, $data2])
             ->select(DB::raw("data_visita, CAST(SUM(visite_qta) AS UNSIGNED) AS sommaV, CAST(SUM(visite_uniche_qta) AS UNSIGNED) AS unicheV, SUM(visite_desktop_qta) AS vDq, SUM(visite_mobile_qta) AS vMq, SUM(visite_uniche_desktop_qta) AS vDuQ, SUM(visite_uniche_mobile_qta) AS vMuQ, MONTH(data_visita) AS mese"))
@@ -1443,22 +1443,22 @@ class HomeController extends Controller
             ->get();
             //dd($visits); //Visite
         
-            for( $j=0; $j<count($visits[$i]); $j++ ){ //////////// PROVARE A FARE DEGLI IF PER SOMMARE PER GIORNI /////////// E PER MESI //////////
-                $arrayTot = array_merge($arrayTot, array($visits[$i][$j]->sommaV));
-                $arrayUniq = array_merge($arrayUniq, array($visits[$i][$j]->unicheV));                                 
-                $arrayGiorni = array_merge($arrayGiorni, array($visits[$i][$j]->data_visita));
-                $arrayMesi = array_merge($arrayMesi, array($visits[$i][$j]->mese));
-                $arrayDesktop = array_merge($arrayDesktop, array($visits[$i][$j]->vDq));
-                $arrayMobile = array_merge($arrayMobile, array($visits[$i][$j]->vMq));
-                $arrayDesktopUniq = array_merge($arrayDesktopUniq, array($visits[$i][$j]->vDuQ));
-                $arrayMobileUniq = array_merge($arrayMobileUniq, array($visits[$i][$j]->vMuQ));
+            for( $j=0; $j<count($visits); $j++ ){ //////////// PROVARE A FARE DEGLI IF PER SOMMARE PER GIORNI /////////// E PER MESI //////////
+                $arrayTot = array_merge($arrayTot, array($visits[$j]->sommaV));
+                $arrayUniq = array_merge($arrayUniq, array($visits[$j]->unicheV));                                 
+                $arrayGiorni = array_merge($arrayGiorni, array($visits[$j]->data_visita));
+                $arrayMesi = array_merge($arrayMesi, array($visits[$j]->mese));
+                $arrayDesktop = array_merge($arrayDesktop, array($visits[$j]->vDq));
+                $arrayMobile = array_merge($arrayMobile, array($visits[$j]->vMq));
+                $arrayDesktopUniq = array_merge($arrayDesktopUniq, array($visits[$j]->vDuQ));
+                $arrayMobileUniq = array_merge($arrayMobileUniq, array($visits[$j]->vMuQ));
             }
             //dd($arrayTot);
             $sommaMobile=array_sum($arrayMobile);            
             $sommaDesktop=array_sum($arrayDesktop);
             $sommaUnicaDesktop=array_sum($arrayDesktopUniq);
             $sommaUnicaMobile=array_sum($arrayMobileUniq);
-        }
+        
         //dd($visits);
         //dd($arrayTot);
         $arrayGiorni = array_unique($arrayGiorni);
@@ -1483,9 +1483,9 @@ class HomeController extends Controller
         $arrUniche=[];
         $arrTotali=[];
         $arrRegioni=[];
-        for($i = 0; $i <count($array10); $i++){
-            $datiGrafico[$i] = Geo::groupBy('place')
-            ->where(['id_market' => $array10[$i]])
+        
+            $datiGrafico = Geo::groupBy('place')
+            ->whereIn('id_market', $array10)
             ->whereIn('id_parent',  $arrayG)
             ->whereBetween('data_visita', [$data1, $data2])
             ->select(DB::raw("CAST(SUM(visite_region_qta) AS UNSIGNED) AS somma, SUM(visite_uniche_region_qta) AS uniche"), 'place')
@@ -1493,12 +1493,12 @@ class HomeController extends Controller
             ->get();
             //dd($datiGrafico);
             
-            for ($j = 0; $j < count($datiGrafico[$i]); $j++ ){
-                $arrUniche= array_merge($arrUniche, array($datiGrafico[$i][$j]->uniche));
-                $arrTotali= array_merge($arrTotali, array($datiGrafico[$i][$j]->somma));
-                $arrRegioni= array_merge($arrRegioni, array($datiGrafico[$i][$j]->place));
+            for ($j = 0; $j < count($datiGrafico); $j++ ){
+                $arrUniche= array_merge($arrUniche, array($datiGrafico[$j]->uniche));
+                $arrTotali= array_merge($arrTotali, array($datiGrafico[$j]->somma));
+                $arrRegioni= array_merge($arrRegioni, array($datiGrafico[$j]->place));
             }
-        }
+        
         //dd($datiGrafico);
         //dd($arrUniche);
         $arrRegioni = array_unique($arrRegioni);
@@ -1523,8 +1523,8 @@ class HomeController extends Controller
         $arrayMobilePag=[];
         $arrayDesktopUnicPag=[];
         $arrayMobileUnicPag=[];
-        for($i = 0; $i <count($array10); $i++){
-            $pagine[$i] = Pagina::where(['id_market' => $array10[$i]])
+    
+            $pagine = Pagina::whereIn('id_market', $array10)
             ->whereIn('id_parent',  $arrayG)
             ->whereBetween('data_visita', [$data1, $data2])
             ->select(DB::raw("data_visita, CAST(SUM(pagina_qta) AS UNSIGNED) AS sommaP, CAST(SUM(pagina_unica_qta) AS UNSIGNED) AS unicheP, SUM(pagina_desktop_qta) AS pDq, SUM(pagina_mobile_qta) AS pMq, SUM(pagina_desktop_unica_qta) AS pDuQ, SUM(pagina_mobile_unica_qta) AS pMuQ, MONTH(data_visita) AS mese"))
@@ -1532,21 +1532,21 @@ class HomeController extends Controller
             // ->orderBy('data_visita', 'ASC')
             ->get();
             //dd($volantino);
-            for( $j=0; $j<count($pagine[$i]); $j++ ){
-                $arrayTotPag = array_merge($arrayTotPag, array( $pagine[$i][$j]->sommaP));
-                $arrayUnicPag = array_merge($arrayUnicPag, array($pagine[$i][$j]->unicheP));
-                $arrayGiorniPag = array_merge($arrayGiorniPag, array($pagine[$i][$j]->data_visita));
-                $arrayDesktopPag = array_merge($arrayDesktopPag, array($pagine[$i][$j]->pDq));
-                $arrayMobilePag = array_merge($arrayMobilePag, array($pagine[$i][$j]->pMq));
-                $arrayDesktopUnicPag = array_merge($arrayDesktopUnicPag, array($pagine[$i][$j]->pDuQ));
-                $arrayMobileUnicPag = array_merge($arrayMobileUnicPag, array($pagine[$i][$j]->pMuQ));
+            for( $j=0; $j<count($pagine); $j++ ){
+                $arrayTotPag = array_merge($arrayTotPag, array( $pagine[$j]->sommaP));
+                $arrayUnicPag = array_merge($arrayUnicPag, array($pagine[$j]->unicheP));
+                $arrayGiorniPag = array_merge($arrayGiorniPag, array($pagine[$j]->data_visita));
+                $arrayDesktopPag = array_merge($arrayDesktopPag, array($pagine[$j]->pDq));
+                $arrayMobilePag = array_merge($arrayMobilePag, array($pagine[$j]->pMq));
+                $arrayDesktopUnicPag = array_merge($arrayDesktopUnicPag, array($pagine[$j]->pDuQ));
+                $arrayMobileUnicPag = array_merge($arrayMobileUnicPag, array($pagine[$j]->pMuQ));
             }
             //dd($arrayTotPag);
                 $sommaMobileUnicPag = array_sum($arrayMobileUnicPag);
                 $sommaDesktopPag=array_sum($arrayDesktopPag);
                 $sommaDesktopUnicPag=array_sum($arrayDesktopUnicPag);
                 $sommaMobilePag=array_sum($arrayMobilePag);
-        }
+        
         $volantino=Volantino::whereIn('id_subcanale', $array10)
         ->whereIn('id_canale',  $arrayG)
         ->where('data_inizio','<=' ,$data2)
