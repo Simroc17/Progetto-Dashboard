@@ -135,7 +135,7 @@
                 <div class="row">
                     <div class="col-sm-6 border-right">
                         <div class="description-block">
-                            <h5 class="description-header text-white">{{$volantinoSum}}</h5>
+                            <h5 class="description-header text-white">{{$volantino}}</h5>
                             <span class="description-text text-white">N.VOLANTINI</span>
                         </div>
                     </div>
