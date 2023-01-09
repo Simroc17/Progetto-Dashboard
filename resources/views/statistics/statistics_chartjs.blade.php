@@ -125,7 +125,7 @@
     </div>
 
     <!-- ////////////////////////// LISTA UL ////////////////////// -->
-    <ul class="nav nav-tabs mb-2">
+    <!-- <ul class="nav nav-tabs mb-2">
         <li class="nav-item">
             <a class="nav-link active" href="#" aria-current="page" id="connessioni">Connessioni</a>
         </li>
@@ -141,9 +141,12 @@
         <li class="nav-item">
             <a class="nav-link " href="#" id="riepilogo">Riepilogo</a>
         </li>
-    </ul>
+    </ul> -->
 
     <!--/////////// DIV CONNESSIONI //////////-->
+    <div class="title_tab_riepilogo">
+        <h6 class="bg-secondary text-center text-white"><b><i>CONNESSIONI</i></b></h6>
+    </div>
     <div class="row" id="pagina1">
         <div class="col-xl-12">
             <div class="row">
@@ -331,7 +334,10 @@
     </div>
 
     <!--//////// DIV PAGINE ////////////-->
-    <div id="pagina2" class="row" style="display: none;">
+    <div class="title_tab_riepilogo">
+        <h6 class="bg-secondary text-center text-white"><b><i>PAGINE</i></b></h6>
+    </div>
+    <div id="pagina2" class="row" >
         <div class="col-xl-12">
             <div class="row">
                 <div class="col-xl-12">
@@ -417,7 +423,10 @@
     </div>
 
     <!--//////////// DIV INTERATTIVI /////////////-->
-    <div id="pagina3" class="row" style="display: none;">
+    <div class="title_tab_riepilogo">
+        <h6 class="bg-secondary text-center text-white"><b><i>INTERATTIVI</i></b></h6>
+    </div>
+    <div id="pagina3" class="row" >
         <div class="col-xl-12">
             <div class="row">
                 <div class="col-xl-12">
@@ -613,7 +622,10 @@
         </div>
     </div>
     <!-- ////DIV PRODOTTI////////////// -->
-    <div id="pagina4" class="row" style="display:none;" >
+    
+    <div class="title_tab_riepilogo">
+        <h6 class="bg-secondary text-center text-white"><b><i>PRODOTTI</i></b></h6>
+    </div><div id="pagina4" class="row" >
             <div class="col-xl-12">
                 <div class="row">
                     <div class="col-xl-12">
@@ -728,8 +740,10 @@
     </div>
 
      <!-- ////DIV RIEPILOGO////////////// -->
-
-    <div id="pagina5" class="row" style="display:none;">
+     <div class="title_tab_riepilogo">
+        <h6 class="bg-secondary text-center text-white"><b><i>RIEPILOGO</i></b></h6>
+    </div>
+    <div id="pagina5" class="row" >
 
         <div class="col-xl-12 mb-3">
                     
